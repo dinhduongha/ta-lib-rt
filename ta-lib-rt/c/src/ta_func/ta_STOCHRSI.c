@@ -442,7 +442,7 @@ TA_RetCode retCode;
    /* insert state init code here. */
   retCode = FUNCTION_CALL_STATE_INIT(RSI)( (struct TA_RSI_State**) &STATE_P.stateRSI, optInTimePeriod );
   if (retCode != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return retCode;
-  retCode = FUNCTION_CALL_STATE_INIT(STOCHF)( (struct TA_STOCHF_State**) &STATE_P.stateSTOCHF, optInFastK_Period, optInFastD_Period, optInFastD_MAType );
+  retCode = FUNCTION_CALL_STATE_INIT(STOCH)( (struct TA_STOCH_State**) &STATE_P.stateSTOCH, optInTimePeriod, optInFastK_Period, optInFastD_MAType, optInFastD_Period, optInFastD_MAType );
   if (retCode != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return retCode;
 
 
@@ -504,7 +504,7 @@ TA_RetCode retCode;
    /* insert state based TA func code here. */
    retCode = FUNCTION_CALL_STATE(RSI)( (struct TA_RSI_State*) STATE.stateRSI, inReal, &tempReal );
    if (retCode != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return retCode;
-   retCode = FUNCTION_CALL_STATE(STOCHF)( (struct TA_STOCHF_State*) STATE.stateSTOCHF, tempReal, tempReal, tempReal, outFastK, outFastD );
+   retCode = FUNCTION_CALL_STATE(STOCH)( (struct TA_STOCH_State*) STATE.stateSTOCH, tempReal, tempReal, tempReal, outFastK, outFastD );
    if (retCode != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return retCode;
 
    return ENUM_VALUE(RetCode,TA_SUCCESS,Success);
@@ -618,7 +618,7 @@ TA_RetCode retCode;
         TA_RetCode retCode;
         retCode = FUNCTION_CALL_STATE_FREE(RSI)( (struct TA_RSI_State**) &STATE_P.stateRSI );
         if (retCode != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return retCode;
-        retCode = FUNCTION_CALL_STATE_FREE(STOCHF)( (struct TA_STOCHF_State**) &STATE_P.stateSTOCHF );
+        retCode = FUNCTION_CALL_STATE_FREE(STOCH)( (struct TA_STOCH_State**) &STATE_P.stateSTOCH );
         if (retCode != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return retCode;
 
 /**** START GENCODE SECTION 10 - DO NOT DELETE THIS LINE ****/
@@ -695,7 +695,7 @@ TA_RetCode retCode;
    /* insert state save code here. */   
                 retCode = FUNCTION_CALL_STATE_SAVE(RSI)( (struct TA_RSI_State*) STATE.stateRSI, _file );
                 if (retCode != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return retCode;
-                retCode = FUNCTION_CALL_STATE_SAVE(STOCHF)( (struct TA_STOCHF_State*) STATE.stateSTOCHF, _file );
+                retCode = FUNCTION_CALL_STATE_SAVE(STOCH)( (struct TA_STOCH_State*) STATE.stateSTOCH, _file );
                 if (retCode != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return retCode;
    return 0;
 }
@@ -757,7 +757,7 @@ TA_RetCode retCode;
    /* insert state load code here. */   
                 retCode = FUNCTION_CALL_STATE_LOAD(RSI)( (struct TA_RSI_State**) &STATE_P.stateRSI, _file );
                 if (retCode != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return retCode;
-                retCode = FUNCTION_CALL_STATE_LOAD(STOCHF)( (struct TA_STOCHF_State**) &STATE_P.stateSTOCHF, _file );
+                retCode = FUNCTION_CALL_STATE_LOAD(STOCH)( (struct TA_STOCH_State**) &STATE_P.stateSTOCH, _file );
                 if (retCode != ENUM_VALUE(RetCode,TA_SUCCESS,Success)) return retCode;
    return 0;
 }

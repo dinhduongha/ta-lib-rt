@@ -52,6 +52,7 @@ extern "C" {
 #include <stdio.h>
 #include <limits.h>
 #include <float.h>
+#include <math.h>
 
 #ifndef TA_DEFS_H
    #include "ta_defs.h"

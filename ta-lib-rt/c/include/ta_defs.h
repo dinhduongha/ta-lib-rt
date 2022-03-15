@@ -86,7 +86,7 @@
            #if defined(__64BIT__)
               /* Standard LP64 model for 64 bits Unix platform. */
               typedef signed long   Int64;
-              typedef unsigned long UInt64;
+              typedef unsigned long long UInt64;
            #else
               /* Standard ILP32 model for 32 bits Unix platform. */
               typedef signed long long   Int64;

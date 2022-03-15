@@ -20535,7 +20535,7 @@ struct TA_STOCHRSI_State {
                          size_t mem_index;
                          struct TA_STOCHRSI_Data* memory;
                          void*        stateRSI;
-                         void*        stateSTOCHF;
+                         void*        stateSTOCH;
                          int           optInTimePeriod; /* From 2 to 100000 */
                          int           optInFastK_Period; /* From 1 to 100000 */
                          int           optInFastD_Period; /* From 1 to 100000 */
