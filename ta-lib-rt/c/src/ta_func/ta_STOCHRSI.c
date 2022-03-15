@@ -134,7 +134,7 @@
    /* insert lookback code here. */
    retValue = LOOKBACK_CALL(RSI)( optInTimePeriod );
    if (retValue < 0) return ENUM_VALUE(RetCode,TA_BAD_PARAM,BadParam);
-   tempInteger = LOOKBACK_CALL(STOCHF)( optInFastK_Period, optInFastD_Period, optInFastD_MAType );
+   tempInteger = LOOKBACK_CALL(STOCH)( optInTimePeriod, optInFastK_Period, optInFastD_MAType, optInFastD_Period, optInFastD_MAType );
    if (tempInteger < 0) return ENUM_VALUE(RetCode,TA_BAD_PARAM,BadParam);
 
    return retValue + tempInteger;
@@ -215,7 +215,7 @@
    ARRAY_REF(tempRSIBuffer);
 
    ENUM_DECLARATION(RetCode) retCode;
-   int lookbackTotal, lookbackSTOCHF, tempArraySize;
+   int lookbackTotal, lookbackSTOCH, tempArraySize;
    VALUE_HANDLE_INT(outBegIdx1);
    VALUE_HANDLE_INT(outBegIdx2);
    VALUE_HANDLE_INT(outNbElement1);
@@ -301,9 +301,9 @@
    VALUE_HANDLE_DEREF_TO_ZERO(outNBElement);
 
    /* Adjust startIdx to account for the lookback period. */
-   lookbackSTOCHF  = LOOKBACK_CALL(STOCHF)( optInFastK_Period, optInFastD_Period, optInFastD_MAType );
-   if (lookbackSTOCHF < 0) return ENUM_VALUE(RetCode,TA_BAD_PARAM,BadParam);
-   lookbackTotal   = LOOKBACK_CALL(RSI)( optInTimePeriod ) + lookbackSTOCHF;
+   lookbackSTOCH  = LOOKBACK_CALL(STOCH)( optInTimePeriod, optInFastK_Period, optInFastD_MAType, optInFastD_Period, optInFastD_MAType );
+   if (lookbackSTOCH < 0) return ENUM_VALUE(RetCode,TA_BAD_PARAM,BadParam);
+   lookbackTotal   = LOOKBACK_CALL(RSI)( optInTimePeriod ) + lookbackSTOCH;
    if (lookbackTotal < 0) return ENUM_VALUE(RetCode,TA_BAD_PARAM,BadParam);
 
    if( startIdx < lookbackTotal )
@@ -319,11 +319,11 @@
 
    VALUE_HANDLE_DEREF(outBegIdx) = startIdx;
 
-   tempArraySize = (endIdx - startIdx) + 1 + lookbackSTOCHF;
+   tempArraySize = (endIdx - startIdx) + 1 + lookbackSTOCH;
 
    ARRAY_ALLOC( tempRSIBuffer, tempArraySize );
 
-   retCode = FUNCTION_CALL(RSI)(startIdx-lookbackSTOCHF, 
+   retCode = FUNCTION_CALL(RSI)(startIdx-lookbackSTOCH,
                                 endIdx, 
                                 inReal, 
                                 optInTimePeriod, 
@@ -339,12 +339,14 @@
       return retCode;
    }
    
-   retCode = FUNCTION_CALL_DOUBLE(STOCHF)(0,
+   retCode = FUNCTION_CALL_DOUBLE(STOCH)(0,
                                           tempArraySize-1,
                                           tempRSIBuffer,
                                           tempRSIBuffer,
                                           tempRSIBuffer,
+                                          optInTimePeriod,
                                           optInFastK_Period,
+                                          optInFastD_MAType,
                                           optInFastD_Period,
                                           optInFastD_MAType,
                                           VALUE_HANDLE_OUT(outBegIdx2),
@@ -686,7 +688,7 @@ TA_RetCode retCode;
 /* Generated */    io_res = fwrite(&STATE.optInFastD_MAType,sizeof(STATE.optInFastD_MAType),1,_file);
 /* Generated */    if (io_res < 1) return ENUM_VALUE(RetCode,TA_IO_FAILED,IOFailed);
 /* Generated */    // Warning: STATE.stateRSI must be saved manually!
-/* Generated */    // Warning: STATE.stateSTOCHF must be saved manually!
+/* Generated */    // Warning: STATE.stateSTOCH must be saved manually!
 /* Generated */ 
 /* Generated */ #endif /* TA_FUNC_NO_RANGE_CHECK */
 /* Generated */ 
@@ -748,7 +750,7 @@ TA_RetCode retCode;
 /* Generated */    io_res = fread(&STATE_P.optInFastD_MAType,sizeof(STATE_P.optInFastD_MAType),1,_file);
 /* Generated */    if (io_res < 1) return ENUM_VALUE(RetCode,TA_IO_FAILED,IOFailed);
 /* Generated */    // Warning: STATE_P.stateRSI must be loaded manually!
-/* Generated */    // Warning: STATE_P.stateSTOCHF must be loaded manually!
+/* Generated */    // Warning: STATE_P.stateSTOCH must be loaded manually!
 /* Generated */ 
 /* Generated */ #endif /* TA_FUNC_NO_RANGE_CHECK */
 /* Generated */ 
@@ -820,7 +822,7 @@ TA_RetCode retCode;
 /* Generated */ {
 /* Generated */    ARRAY_REF(tempRSIBuffer);
 /* Generated */    ENUM_DECLARATION(RetCode) retCode;
-/* Generated */    int lookbackTotal, lookbackSTOCHF, tempArraySize;
+/* Generated */    int lookbackTotal, lookbackSTOCH, tempArraySize;
 /* Generated */    VALUE_HANDLE_INT(outBegIdx1);
 /* Generated */    VALUE_HANDLE_INT(outBegIdx2);
 /* Generated */    VALUE_HANDLE_INT(outNbElement1);
@@ -859,8 +861,8 @@ TA_RetCode retCode;
 /* Generated */  #endif 
 /* Generated */    VALUE_HANDLE_DEREF_TO_ZERO(outBegIdx);
 /* Generated */    VALUE_HANDLE_DEREF_TO_ZERO(outNBElement);
-/* Generated */    lookbackSTOCHF  = LOOKBACK_CALL(STOCHF)( optInFastK_Period, optInFastD_Period, optInFastD_MAType );
-/* Generated */    lookbackTotal   = LOOKBACK_CALL(RSI)( optInTimePeriod ) + lookbackSTOCHF;
+/* Generated */    lookbackSTOCH  = LOOKBACK_CALL(STOCH)( optInFastK_Period, optInFastK_Period, optInFastD_MAType, optInFastD_Period, optInFastD_MAType );
+/* Generated */    lookbackTotal   = LOOKBACK_CALL(RSI)( optInTimePeriod ) + lookbackSTOCH;
 /* Generated */    if( startIdx < lookbackTotal )
 /* Generated */       startIdx = lookbackTotal;
 /* Generated */    if( startIdx > endIdx )
@@ -870,9 +872,9 @@ TA_RetCode retCode;
 /* Generated */       return ENUM_VALUE(RetCode,TA_SUCCESS,Success);
 /* Generated */    }
 /* Generated */    VALUE_HANDLE_DEREF(outBegIdx) = startIdx;
-/* Generated */    tempArraySize = (endIdx - startIdx) + 1 + lookbackSTOCHF;
+/* Generated */    tempArraySize = (endIdx - startIdx) + 1 + lookbackSTOCH;
 /* Generated */    ARRAY_ALLOC( tempRSIBuffer, tempArraySize );
-/* Generated */    retCode = FUNCTION_CALL(RSI)(startIdx-lookbackSTOCHF, 
+/* Generated */    retCode = FUNCTION_CALL(RSI)(startIdx-lookbackSTOCH,
 /* Generated */                                 endIdx, 
 /* Generated */                                 inReal, 
 /* Generated */                                 optInTimePeriod, 
@@ -886,13 +888,15 @@ TA_RetCode retCode;
 /* Generated */       VALUE_HANDLE_DEREF_TO_ZERO(outNBElement);
 /* Generated */       return retCode;
 /* Generated */    }
-/* Generated */    retCode = FUNCTION_CALL_DOUBLE(STOCHF)(0,
+/* Generated */    retCode = FUNCTION_CALL_DOUBLE(STOCH)(0,
 /* Generated */                                           tempArraySize-1,
 /* Generated */                                           tempRSIBuffer,
 /* Generated */                                           tempRSIBuffer,
 /* Generated */                                           tempRSIBuffer,
+                                                          optInTimePeriod,
 /* Generated */                                           optInFastK_Period,
-/* Generated */                                           optInFastD_Period,
+/* Generated */                                           optInFastD_MAType,
+                                                          optInFastD_Period,
 /* Generated */                                           optInFastD_MAType,
 /* Generated */                                           VALUE_HANDLE_OUT(outBegIdx2),
 /* Generated */                                           outNBElement,
