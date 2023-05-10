@@ -60,6 +60,7 @@
 
 /**** External functions declarations. ****/
 /* None */
+void setInputBufferReverseOrder( unsigned int i, const TA_Real *data, unsigned int nbElement );
 
 /**** External variables declarations. ****/
 /* None */

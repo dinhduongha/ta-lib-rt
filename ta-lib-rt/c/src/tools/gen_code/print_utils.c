@@ -1,7 +1,7 @@
 #include "print_utils.h"
 #include <stdio.h>
 #include <ctype.h>
-
+#include <string.h>
 char gTempDoubleToStr[200];
 
 const char *doubleToStr( double value )

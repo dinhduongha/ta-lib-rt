@@ -110,7 +110,7 @@ int main( int argc, char **argv )
 #ifdef TEST_SAVE_LOAD_STATE
    _tmp_state_file = tmpfile();
    if (_tmp_state_file == NULL)
-   return;
+   return 0;
 #endif
 
    ErrorNumber retValue;
