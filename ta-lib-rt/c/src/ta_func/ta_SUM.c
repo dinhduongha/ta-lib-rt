@@ -360,7 +360,8 @@
        _state->tempSum -= POP_FROM_MEM(inReal);
        _state->tempSum += inReal;
        PUSH_TO_MEM(inReal,inReal);
-       VALUE_HANDLE_DEREF(outReal) = inReal;
+       //VALUE_HANDLE_DEREF(outReal) = inReal;
+       VALUE_HANDLE_DEREF(outReal) = _state->tempSum;
        return ENUM_VALUE(RetCode,TA_SUCCESS,Success);
    }
 
