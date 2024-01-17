@@ -33,6 +33,7 @@ typedef enum
   TA_REGTEST_HISTORYALLOC_19          = 24,
   TA_REGTEST_ADDDSOURCE_FAILED        = 25,
   TA_REGTEST_OPTIMIZATION_REF_ERROR   = 26,
+  TA_REGTEST_RESULT_IS_NOT_SUCCESS    = 27,
 
   /* Error code for test in test_util.c */
   TA_TESTUTIL_INIT_FAILED             = 101,
@@ -293,6 +294,7 @@ typedef enum
   TA_TEST_FAIL_BUG1359452_5  = 2005,
 
   TA_TEST_ERROR_IN_STATE_FUNC = 3001,
+  TA_TEST_CANT_OPEN_TEMP_FILE = 3002,
 
   TA_LAST_VALID_ERROR = 0xFFFF
 } ErrorNumber;
