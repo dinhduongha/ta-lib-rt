@@ -7,7 +7,14 @@ TARGET = ta_regtest
 
 
 #link static libs
-win32:LIBS = ./../../../../../lib/libta_libc.lib
+#win32:LIBS = ./../../../../../lib/libta_libc.lib
+win32:{
+    mingw:{
+        LIBS =  ./../../../../../lib/libta_libc.a
+    } else {
+        LIBS = ./../../../../../lib/libta_libc.lib
+    }
+}
 unix:LIBS =  ./../../../../../lib/libta_libc.a
 
 

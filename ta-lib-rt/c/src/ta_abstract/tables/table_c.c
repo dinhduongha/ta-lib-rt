@@ -3162,6 +3162,96 @@ DEF_FUNCTION( CDLXSIDEGAP3METHODS,                         /* name */
 DEF_MATH_UNARY_OPERATOR( CEIL, "Vector Ceil", "Ceil" )
 /* CEIL END */
 
+/* CKSP BEGIN */
+static const TA_RealRange TA_DEF_CKSP_Value =
+{
+   TA_REAL_MIN, /* min */
+   TA_REAL_MAX, /* max */
+   4,     /* precision */
+   0, /* suggested start */
+   0, /* suggested end   */
+   0  /* suggested increment */
+};
+
+static const TA_OptInputParameterInfo TA_DEF_UI_CKSP_Scalar =
+{
+   TA_OptInput_RealRange, /* type */
+   "optInScalar", /* paramName */
+   0,                  /* flags */
+
+   "Scalar",          /* displayName */
+   (const void *)&TA_DEF_CKSP_Value, /* dataSet */
+   1.0, /* defaultValue */
+   "scalar", /* hint */
+   NULL /* CamelCase name */
+};
+
+static const TA_OptInputParameterInfo TA_DEF_UI_CKSP_Period =
+{
+   TA_OptInput_IntegerRange, /* type */
+   "optInCkspPeriod", /* paramName */
+   0,                  /* flags */
+
+   "Cksp Period",          /* displayName */
+   (const void *)&TA_DEF_TimePeriod_Positive, /* dataSet */
+   9, /* defaultValue */
+   "Cksp Period", /* hint */
+   NULL /* CamelCase name */
+};
+
+static const TA_InputParameterInfo *TA_CKSP_Inputs[] =
+{
+  &TA_DEF_UI_Input_Price_HLC,
+  NULL
+};
+
+const TA_OutputParameterInfo TA_DEF_UI_Output_Real_CKSP_Long_Stop =
+                               { TA_Output_Real, "outLongStop", TA_OUT_LINE };
+
+const TA_OutputParameterInfo TA_DEF_UI_Output_Real_CKSP_Short_Stop =
+                               { TA_Output_Real, "outShortStop", TA_OUT_LINE };
+
+
+static const TA_OutputParameterInfo *TA_CKSP_Outputs[] =
+{
+  &TA_DEF_UI_Output_Real_CKSP_Long_Stop,
+  &TA_DEF_UI_Output_Real_CKSP_Short_Stop,
+  NULL
+};
+
+static const TA_OptInputParameterInfo *TA_CKSP_OptInputs[] = { 
+  &TA_DEF_UI_TimePeriod_10,
+  &TA_DEF_UI_CKSP_Scalar,
+  &TA_DEF_UI_CKSP_Period,
+  NULL };
+
+const TA_InputParameterInfo TA_CKSP_DEF_UI_STRUCT_PARAM_1 =
+                                  { TA_Input_Pointer, "StateATR", 0 };
+
+const TA_InputParameterInfo TA_CKSP_DEF_UI_STRUCT_PARAM_2 =
+                                  { TA_Input_Pointer, "StateMINMAX", 0 };
+
+const TA_InputParameterInfo TA_CKSP_DEF_UI_STRUCT_PARAM_3 =
+                                  { TA_Input_Real, "x", 1.0 };
+
+const TA_InputParameterInfo TA_CKSP_DEF_UI_STRUCT_PARAM_4 =
+                                  { TA_Input_Integer, "q", 9 };
+
+static const TA_InputParameterInfo *TA_CKSP_StructParams[] = {
+  &TA_CKSP_DEF_UI_STRUCT_PARAM_1,
+  &TA_CKSP_DEF_UI_STRUCT_PARAM_2,
+  &TA_CKSP_DEF_UI_STRUCT_PARAM_3,
+  &TA_CKSP_DEF_UI_STRUCT_PARAM_4,
+  NULL };
+
+DEF_FUNCTION( CKSP,                     /* name */
+              TA_GroupId_VolatilityIndicators, /* groupId */
+              "Chande Kroll Stop",        /* hint */
+              "Cksp",                         /* CamelCase name */
+              0                              /* flags */
+             );
+/* CKSP END */
+
 /* CMO BEGIN */
 static const TA_InputParameterInfo    *TA_CMO_Inputs[]    =
 {
@@ -3329,6 +3419,7 @@ const TA_FuncDef *TA_DEF_TableC[] =
    ADD_TO_TABLE(CDLUPSIDEGAP2CROWS), 
    ADD_TO_TABLE(CDLXSIDEGAP3METHODS), 
    ADD_TO_TABLE(CEIL),
+   ADD_TO_TABLE(CKSP),
    ADD_TO_TABLE(CMO),
    ADD_TO_TABLE(CORREL),
    ADD_TO_TABLE(COS),

@@ -501,6 +501,40 @@ DEF_FUNCTION( ATR,                         /* name */
              );
 /* ATR END */
 
+/* ATRP BEGIN */
+// ATRP = (Average True Range / Close) * 100
+static const TA_InputParameterInfo *TA_ATRP_Inputs[] =
+{
+  &TA_DEF_UI_Input_Price_HLC,
+  NULL
+};
+
+static const TA_OutputParameterInfo *TA_ATRP_Outputs[]   =
+{
+  &TA_DEF_UI_Output_Real,
+  NULL
+};
+
+static const TA_OptInputParameterInfo *TA_ATRP_OptInputs[] =
+{ &TA_DEF_UI_TimePeriod_10,
+  NULL
+};
+
+const TA_InputParameterInfo TA_ATRP_DEF_UI_STRUCT_PARAM_1 =
+                                  { TA_Input_Pointer, "StateATR", 0 };
+
+static const TA_InputParameterInfo *TA_ATRP_StructParams[] = {
+  &TA_ATRP_DEF_UI_STRUCT_PARAM_1,
+  NULL };
+
+DEF_FUNCTION( ATRP,                     /* name */
+              TA_GroupId_VolatilityIndicators, /* groupId */
+              "Average True Range Percent", /* hint */
+              "Atrp",                         /* CamelCase name */
+              TA_FUNC_FLG_UNST_PER            /* flags */
+             );
+/* ATRP END */
+
 /* AVGPRICE BEGIN */
 static const TA_InputParameterInfo    *TA_AVGPRICE_Inputs[]    =
 {
@@ -580,6 +614,7 @@ const TA_FuncDef *TA_DEF_TableA[] =
    ADD_TO_TABLE(ASIN),
    ADD_TO_TABLE(ATAN),
    ADD_TO_TABLE(ATR),
+   ADD_TO_TABLE(ATRP),
    ADD_TO_TABLE(AVGPRICE),
    ADD_TO_TABLE(AVGDEV),
    NULL

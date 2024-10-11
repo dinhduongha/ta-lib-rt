@@ -6,7 +6,15 @@ CONFIG -= qt
 TARGET = gen_code
 
 #link static libs
-win32:LIBS = ./../../../../../lib/libta_common.lib
+#win32:LIBS =  ./../../../../../lib/libta_common.lib
+win32:{
+    mingw:{
+        LIBS =  ./../../../../../lib/libta_common.a
+    } else {
+        LIBS = ./../../../../../lib/libta_common.lib
+    }
+}
+
 unix:LIBS =  ./../../../../../lib/libta_common.a
 
 unix:LIBS += -ldl

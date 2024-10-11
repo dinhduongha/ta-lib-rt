@@ -450,6 +450,67 @@ DEF_FUNCTION( SUM,                     /* name */
              );
 /* SUM END */
 
+/* SUPERTREND BEGIN */
+static const TA_OptInputParameterInfo TA_DEF_UI_SuperTrend_Modifier =
+{
+   TA_OptInput_RealRange, /* type */
+   "optInModifier", /* paramName */
+   0,                  /* flags */
+
+   "Modifier",          /* displayName */
+   (const void *)&TA_DEF_RealPositive, /* dataSet */
+   3.0, /* defaultValue */
+   "SuperTrend Modifier", /* hint */
+   NULL /* CamelCase name */
+};
+
+static const TA_InputParameterInfo *TA_SUPERTREND_Inputs[] =
+{
+  &TA_DEF_UI_Input_Price_HLC,
+  NULL
+};
+
+const TA_OutputParameterInfo TA_DEF_UI_Output_Real_SUPERTREND_Trend =
+                               { TA_Output_Integer, "outTrend", TA_OUT_LINE };
+
+const TA_OutputParameterInfo TA_DEF_UI_Output_Real_SUPERTREND_Upper =
+                               { TA_Output_Real, "outRealUpperBand", TA_OUT_LINE };
+
+const TA_OutputParameterInfo TA_DEF_UI_Output_Real_SUPERTREND_Lower =
+                                { TA_Output_Real, "outRealLowerBand", TA_OUT_LINE };
+
+static const TA_OutputParameterInfo *TA_SUPERTREND_Outputs[]   =
+{
+  &TA_DEF_UI_Output_Real_SUPERTREND_Trend,
+  &TA_DEF_UI_Output_Real_SUPERTREND_Upper,
+  &TA_DEF_UI_Output_Real_SUPERTREND_Lower,
+  NULL
+};
+
+static const TA_OptInputParameterInfo *TA_SUPERTREND_OptInputs[] = {
+   &TA_DEF_UI_TimePeriod_10,
+   &TA_DEF_UI_SuperTrend_Modifier,
+   NULL };
+
+const TA_InputParameterInfo TA_SUPERTREND_DEF_UI_STRUCT_PARAM_1 =
+                                  { TA_Input_Pointer, "StateATR", 0 };
+
+const TA_InputParameterInfo TA_SUPERTREND_DEF_UI_STRUCT_PARAM_2 =
+                                  { TA_Input_Real, "multiplier", 3.0 };
+
+static const TA_InputParameterInfo *TA_SUPERTREND_StructParams[] = {
+   &TA_SUPERTREND_DEF_UI_STRUCT_PARAM_1,
+   &TA_SUPERTREND_DEF_UI_STRUCT_PARAM_2,
+   NULL };
+
+DEF_FUNCTION( SUPERTREND,                     /* name */
+              TA_GroupId_OverlapStudies, /* groupId */
+              "Supertrend", /* hint */
+              "SuperTrend",                         /* CamelCase name */
+              0                              /* flags */
+             );
+/* SUPERTREND END */
+
 /* STDDEV BEGIN */
 static const TA_InputParameterInfo    *TA_STDDEV_Inputs[]    =
 {
@@ -752,6 +813,7 @@ const TA_FuncDef *TA_DEF_TableS[] =
    ADD_TO_TABLE(STOCHRSI),
    ADD_TO_TABLE(SUB),
    ADD_TO_TABLE(SUM),
+   ADD_TO_TABLE(SUPERTREND),
    NULL
 };
 
