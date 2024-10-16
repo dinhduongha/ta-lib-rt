@@ -119,7 +119,7 @@ SOURCES += \
     ../../../../../src/ta_func/ta_EXP.c \
     ../../../../../src/ta_func/ta_FLOOR.c \
     ../../../../../src/ta_func/ta_HA.c \
-    ../../../../../src/ta_func/ta_HASMO.c \
+    ../../../../../src/ta_func/ta_HA_SMO.c \
     ../../../../../src/ta_func/ta_HT_DCPERIOD.c \
     ../../../../../src/ta_func/ta_HT_DCPHASE.c \
     ../../../../../src/ta_func/ta_HT_PHASOR.c \
