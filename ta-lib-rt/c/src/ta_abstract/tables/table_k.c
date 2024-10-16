@@ -134,7 +134,7 @@ static const TA_OutputParameterInfo *TA_KVO_Outputs[]   =
 static const TA_OptInputParameterInfo *TA_KVO_OptInputs[] =
 { &TA_DEF_UI_Fast_Period,
   &TA_DEF_UI_Slow_Period,
-  &TA_DEF_UI_Input_Periods,
+  &TA_DEF_UI_TimePeriod_10,
   &TA_DEF_UI_MA_Method,
   NULL
 };

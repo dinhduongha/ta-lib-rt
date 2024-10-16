@@ -40,6 +40,7 @@ SOURCES += \
     ../../../../../src/ta_func/ta_ASIN.c \
     ../../../../../src/ta_func/ta_ATAN.c \
     ../../../../../src/ta_func/ta_ATR.c \
+    ../../../../../src/ta_func/ta_ATRP.c \
     ../../../../../src/ta_func/ta_AVGPRICE.c \
     ../../../../../src/ta_func/ta_AVGDEV.c \
     ../../../../../src/ta_func/ta_BBANDS.c \
@@ -108,6 +109,8 @@ SOURCES += \
     ../../../../../src/ta_func/ta_CDLUPSIDEGAP2CROWS.c \
     ../../../../../src/ta_func/ta_CDLXSIDEGAP3METHODS.c \
     ../../../../../src/ta_func/ta_CEIL.c \
+    ../../../../../src/ta_func/ta_CKSP.c \
+    ../../../../../src/ta_func/ta_CMF.c \
     ../../../../../src/ta_func/ta_CMO.c \
     ../../../../../src/ta_func/ta_CORREL.c \
     ../../../../../src/ta_func/ta_COS.c \
@@ -116,16 +119,21 @@ SOURCES += \
     ../../../../../src/ta_func/ta_DIV.c \
     ../../../../../src/ta_func/ta_DX.c \
     ../../../../../src/ta_func/ta_EMA.c \
+    ../../../../../src/ta_func/ta_EOM.c \
     ../../../../../src/ta_func/ta_WLMA.c \
     ../../../../../src/ta_func/ta_EXP.c \
     ../../../../../src/ta_func/ta_FLOOR.c \
+    ../../../../../src/ta_func/ta_HA.c \
+    ../../../../../src/ta_func/ta_HA_SMO.c \
     ../../../../../src/ta_func/ta_HT_DCPERIOD.c \
     ../../../../../src/ta_func/ta_HT_DCPHASE.c \
     ../../../../../src/ta_func/ta_HT_PHASOR.c \
     ../../../../../src/ta_func/ta_HT_SINE.c \
     ../../../../../src/ta_func/ta_HT_TRENDLINE.c \
     ../../../../../src/ta_func/ta_HT_TRENDMODE.c \
+    ../../../../../src/ta_func/ta_ICHIMOKU.c \
     ../../../../../src/ta_func/ta_IMI.c \
+    ../../../../../src/ta_func/ta_KVO.c \
     ../../../../../src/ta_func/ta_KAMA.c \
     ../../../../../src/ta_func/ta_LINEARREG.c \
     ../../../../../src/ta_func/ta_LINEARREG_ANGLE.c \
@@ -161,6 +169,7 @@ SOURCES += \
     ../../../../../src/ta_func/ta_PPO.c \
     ../../../../../src/ta_func/ta_PVI.c \
     ../../../../../src/ta_func/ta_PVT.c \
+    ../../../../../src/ta_func/ta_REDK_EVEREX.c \
     ../../../../../src/ta_func/ta_ROC.c \
     ../../../../../src/ta_func/ta_ROCP.c \
     ../../../../../src/ta_func/ta_ROCR.c \
@@ -178,6 +187,7 @@ SOURCES += \
     ../../../../../src/ta_func/ta_STOCHRSI.c \
     ../../../../../src/ta_func/ta_SUB.c \
     ../../../../../src/ta_func/ta_SUM.c \
+    ../../../../../src/ta_func/ta_SUPERTREND.c \
     ../../../../../src/ta_func/ta_T3.c \
     ../../../../../src/ta_func/ta_TAN.c \
     ../../../../../src/ta_func/ta_TANH.c \
@@ -189,6 +199,10 @@ SOURCES += \
     ../../../../../src/ta_func/ta_TYPPRICE.c \
     ../../../../../src/ta_func/ta_ULTOSC.c \
     ../../../../../src/ta_func/ta_VAR.c \
+    ../../../../../src/ta_func/ta_VP.c \
+    ../../../../../src/ta_func/ta_VROC.c \
+    ../../../../../src/ta_func/ta_VWAP.c \
+    ../../../../../src/ta_func/ta_VWMA.c \
     ../../../../../src/ta_func/ta_WCLPRICE.c \
     ../../../../../src/ta_func/ta_WILLR.c \
     ../../../../../src/ta_func/ta_WMA.c \

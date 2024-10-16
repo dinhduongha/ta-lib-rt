@@ -100,74 +100,75 @@ DEF_FUNCTION( HA,                     /* name */
              );
 /* HA END */
 
-/* HASMO BEGIN */
-static const TA_InputParameterInfo *TA_HASMO_Inputs[] =
+/* HA_SMO BEGIN */
+static const TA_InputParameterInfo *TA_HA_SMO_Inputs[] =
 {
   &TA_DEF_UI_Input_Price_OHLC,
   NULL
 };
 
-const TA_OutputParameterInfo TA_DEF_UI_Output_Real_HASMO_Open =
-                               { TA_Output_Real, "outHaSmoOpen", TA_OUT_LINE };
+const TA_OutputParameterInfo TA_DEF_UI_Output_Real_HA_SMO_Open =
+                               { TA_Output_Real, "outRealOpen", TA_OUT_LINE };
 
-const TA_OutputParameterInfo TA_DEF_UI_Output_Real_HASMO_High =
-                               { TA_Output_Real, "outHaSmoHigh", TA_OUT_LINE };
+const TA_OutputParameterInfo TA_DEF_UI_Output_Real_HA_SMO_High =
+                               { TA_Output_Real, "outRealHigh", TA_OUT_LINE };
 
-const TA_OutputParameterInfo TA_DEF_UI_Output_Real_HASMO_Low =
-                               { TA_Output_Real, "outHaSmoLow", TA_OUT_LINE };
+const TA_OutputParameterInfo TA_DEF_UI_Output_Real_HA_SMO_Low =
+                               { TA_Output_Real, "outRealLow", TA_OUT_LINE };
 
-const TA_OutputParameterInfo TA_DEF_UI_Output_Real_HASMO_Close =
-                               { TA_Output_Real, "outHaSmoClose", TA_OUT_LINE };
+const TA_OutputParameterInfo TA_DEF_UI_Output_Real_HA_SMO_Close =
+                               { TA_Output_Real, "outRealClose", TA_OUT_LINE };
 
-static const TA_OutputParameterInfo *TA_HASMO_Outputs[]   =
+static const TA_OutputParameterInfo *TA_HA_SMO_Outputs[]   =
 {
-  &TA_DEF_UI_Output_Real_HASMO_Open,
-  &TA_DEF_UI_Output_Real_HASMO_High,
-  &TA_DEF_UI_Output_Real_HASMO_Low,
-  &TA_DEF_UI_Output_Real_HASMO_Close,
+  &TA_DEF_UI_Output_Real_HA_SMO_Open,
+  &TA_DEF_UI_Output_Real_HA_SMO_High,
+  &TA_DEF_UI_Output_Real_HA_SMO_Low,
+  &TA_DEF_UI_Output_Real_HA_SMO_Close,
   NULL
 };
 
-static const TA_OptInputParameterInfo *TA_HASMO_OptInputs[] =
-{ &TA_DEF_UI_Input_Periods,
+static const TA_OptInputParameterInfo *TA_HA_SMO_OptInputs[] =
+{ 
+  &TA_DEF_UI_TimePeriod_10,
   &TA_DEF_UI_MA_Method,
   NULL
 };
 
-const TA_InputParameterInfo TA_HASMO_DEF_UI_STRUCT_PARAM_1 =
-                                  { TA_Input_Pointer, "StateMAOpen", 0 };
+const TA_InputParameterInfo TA_HA_SMO_DEF_UI_STRUCT_PARAM_1 =
+                                  { TA_Input_Pointer, "stateMAOpen", 0 };
 
-const TA_InputParameterInfo TA_HASMO_DEF_UI_STRUCT_PARAM_2 =
-                                  { TA_Input_Pointer, "StateMAHigh", 0 };
+const TA_InputParameterInfo TA_HA_SMO_DEF_UI_STRUCT_PARAM_2 =
+                                  { TA_Input_Pointer, "stateMAHigh", 0 };
 
-const TA_InputParameterInfo TA_HASMO_DEF_UI_STRUCT_PARAM_3 =
-                                  { TA_Input_Pointer, "StateMALow", 0 };
+const TA_InputParameterInfo TA_HA_SMO_DEF_UI_STRUCT_PARAM_3 =
+                                  { TA_Input_Pointer, "stateMALow", 0 };
 
-const TA_InputParameterInfo TA_HASMO_DEF_UI_STRUCT_PARAM_4 =
-                                  { TA_Input_Pointer, "StateMAClose", 0 };
+const TA_InputParameterInfo TA_HA_SMO_DEF_UI_STRUCT_PARAM_4 =
+                                  { TA_Input_Pointer, "stateMAClose", 0 };
 
-const TA_InputParameterInfo TA_HASMO_DEF_UI_STRUCT_PARAM_5 =
+const TA_InputParameterInfo TA_HA_SMO_DEF_UI_STRUCT_PARAM_5 =
                                   { TA_Input_Real, "prevOpen", 0 };
 
-const TA_InputParameterInfo TA_HASMO_DEF_UI_STRUCT_PARAM_6 =
+const TA_InputParameterInfo TA_HA_SMO_DEF_UI_STRUCT_PARAM_6 =
                                   { TA_Input_Real, "prevClose", 0 };
 
-static const TA_InputParameterInfo *TA_HASMO_StructParams[] = {
-  &TA_HASMO_DEF_UI_STRUCT_PARAM_1,
-  &TA_HASMO_DEF_UI_STRUCT_PARAM_2,
-  &TA_HASMO_DEF_UI_STRUCT_PARAM_3,
-  &TA_HASMO_DEF_UI_STRUCT_PARAM_4,
-  &TA_HASMO_DEF_UI_STRUCT_PARAM_5,
-  &TA_HASMO_DEF_UI_STRUCT_PARAM_6,
+static const TA_InputParameterInfo *TA_HA_SMO_StructParams[] = {
+  &TA_HA_SMO_DEF_UI_STRUCT_PARAM_1,
+  &TA_HA_SMO_DEF_UI_STRUCT_PARAM_2,
+  &TA_HA_SMO_DEF_UI_STRUCT_PARAM_3,
+  &TA_HA_SMO_DEF_UI_STRUCT_PARAM_4,
+  &TA_HA_SMO_DEF_UI_STRUCT_PARAM_5,
+  &TA_HA_SMO_DEF_UI_STRUCT_PARAM_6,
   NULL };
 
-DEF_FUNCTION( HASMO,                     /* name */
+DEF_FUNCTION( HA_SMO,                     /* name */
               TA_GroupId_VolatilityIndicators, /* groupId */
               "Heikin Ashi Smooth", /* hint */
               "HaSmo",                         /* CamelCase name */
               TA_FUNC_FLG_UNST_PER            /* flags */
              );
-/* HASMO END */
+/* HA_SMO END */
 
 /* HT_DCPERIOD */
 static const TA_InputParameterInfo    *TA_HT_DCPERIOD_Inputs[]    =
@@ -823,7 +824,7 @@ DEF_FUNCTION( HT_TRENDMODE,                         /* name */
 const TA_FuncDef *TA_DEF_TableH[] =
 {
    ADD_TO_TABLE(HA),
-   ADD_TO_TABLE(HASMO),
+   ADD_TO_TABLE(HA_SMO),
    ADD_TO_TABLE(HT_DCPERIOD),
    ADD_TO_TABLE(HT_DCPHASE),
    ADD_TO_TABLE(HT_PHASOR),

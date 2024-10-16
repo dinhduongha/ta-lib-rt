@@ -16,6 +16,7 @@ libta_func_la_SOURCES = ta_utility.c \
 	ta_ASIN.c /
 	ta_ATAN.c /
 	ta_ATR.c /
+	ta_ATRP.c /
 	ta_AVGPRICE.c /
 	ta_AVGDEV.c /
 	ta_BBANDS.c /
@@ -84,6 +85,8 @@ libta_func_la_SOURCES = ta_utility.c \
 	ta_CDLUPSIDEGAP2CROWS.c /
 	ta_CDLXSIDEGAP3METHODS.c /
 	ta_CEIL.c /
+	ta_CKSP.c /
+	ta_CMF.c /
 	ta_CMO.c /
 	ta_CORREL.c /
 	ta_COS.c /
@@ -92,8 +95,11 @@ libta_func_la_SOURCES = ta_utility.c \
 	ta_DIV.c /
 	ta_DX.c /
 	ta_EMA.c /
+	ta_EOM.c /
 	ta_EXP.c /
 	ta_FLOOR.c /
+	ta_HA.c /
+	ta_HA_SMO.c /
 	ta_HT_DCPERIOD.c /
 	ta_HT_DCPHASE.c /
 	ta_HT_PHASOR.c /
@@ -101,6 +107,7 @@ libta_func_la_SOURCES = ta_utility.c \
 	ta_HT_TRENDLINE.c /
 	ta_HT_TRENDMODE.c /
 	ta_IMI.c /
+	ta_KVO.c /
 	ta_KAMA.c /
 	ta_LINEARREG.c /
 	ta_LINEARREG_ANGLE.c /
@@ -136,6 +143,7 @@ libta_func_la_SOURCES = ta_utility.c \
 	ta_PPO.c /
 	ta_PVI.c /
 	ta_PVT.c /
+	ta_REDK_EVEREX.c /
 	ta_ROC.c /
 	ta_ROCP.c /
 	ta_ROCR.c /
@@ -153,6 +161,7 @@ libta_func_la_SOURCES = ta_utility.c \
 	ta_STOCHRSI.c /
 	ta_SUB.c /
 	ta_SUM.c /
+	ta_SUPERTREND.c /
 	ta_T3.c /
 	ta_TAN.c /
 	ta_TANH.c /
@@ -164,6 +173,10 @@ libta_func_la_SOURCES = ta_utility.c \
 	ta_TYPPRICE.c /
 	ta_ULTOSC.c /
 	ta_VAR.c /
+	ta_VP.c /
+	ta_VROC.c /
+	ta_VWAP.c /
+	ta_VWMA.c /
 	ta_WCLPRICE.c /
 	ta_WILLR.c /
 	ta_WLMA.c /

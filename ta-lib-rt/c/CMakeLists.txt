@@ -43,6 +43,7 @@ SET(ta-lib-rt_CSOURCES
 	${ta-lib-rt_SOURCE_DIR}/c/src/ta_func/ta_MAVP.c
 	${ta-lib-rt_SOURCE_DIR}/c/src/ta_func/ta_CDLCONCEALBABYSWALL.c
 	${ta-lib-rt_SOURCE_DIR}/c/src/ta_func/ta_HT_TRENDMODE.c
+	${ta-lib-rt_SOURCE_DIR}/c/src/ta_func/ta_ICHIMOKU.c
 	${ta-lib-rt_SOURCE_DIR}/c/src/ta_func/ta_IMI.c
 	${ta-lib-rt_SOURCE_DIR}/c/src/ta_func/ta_CDLADVANCEBLOCK.c
 	${ta-lib-rt_SOURCE_DIR}/c/src/ta_func/ta_AROONOSC.c
@@ -87,8 +88,10 @@ SET(ta-lib-rt_CSOURCES
 	${ta-lib-rt_SOURCE_DIR}/c/src/ta_func/ta_CDLPIERCING.c
 	${ta-lib-rt_SOURCE_DIR}/c/src/ta_func/ta_ASIN.c
 	${ta-lib-rt_SOURCE_DIR}/c/src/ta_func/ta_MACD.c
+	${ta-lib-rt_SOURCE_DIR}/c/src/ta_func/ta_KVO.c
 	${ta-lib-rt_SOURCE_DIR}/c/src/ta_func/ta_KAMA.c
 	${ta-lib-rt_SOURCE_DIR}/c/src/ta_func/ta_ATR.c
+	${ta-lib-rt_SOURCE_DIR}/c/src/ta_func/ta_ATRP.c
 	${ta-lib-rt_SOURCE_DIR}/c/src/ta_func/ta_ADXR.c
 	${ta-lib-rt_SOURCE_DIR}/c/src/ta_func/ta_CDLCLOSINGMARUBOZU.c
 	${ta-lib-rt_SOURCE_DIR}/c/src/ta_func/ta_CDLDARKCLOUDCOVER.c
@@ -102,6 +105,8 @@ SET(ta-lib-rt_CSOURCES
 	${ta-lib-rt_SOURCE_DIR}/c/src/ta_func/ta_SIN.c
 	${ta-lib-rt_SOURCE_DIR}/c/src/ta_func/ta_TSF.c
 	${ta-lib-rt_SOURCE_DIR}/c/src/ta_func/ta_STOCHF.c
+	${ta-lib-rt_SOURCE_DIR}/c/src/ta_func/ta_CKSP.c
+	${ta-lib-rt_SOURCE_DIR}/c/src/ta_func/ta_CMF.c
 	${ta-lib-rt_SOURCE_DIR}/c/src/ta_func/ta_CMO.c
 	${ta-lib-rt_SOURCE_DIR}/c/src/ta_func/ta_CDL3STARSINSOUTH.c
 	${ta-lib-rt_SOURCE_DIR}/c/src/ta_func/ta_AROON.c
@@ -111,6 +116,8 @@ SET(ta-lib-rt_CSOURCES
 	${ta-lib-rt_SOURCE_DIR}/c/src/ta_func/ta_TYPPRICE.c
 	${ta-lib-rt_SOURCE_DIR}/c/src/ta_func/ta_NATR.c
 	${ta-lib-rt_SOURCE_DIR}/c/src/ta_func/ta_CDL3BLACKCROWS.c
+	${ta-lib-rt_SOURCE_DIR}/c/src/ta_func/ta_HA.c
+        ${ta-lib-rt_SOURCE_DIR}/c/src/ta_func/ta_HA_SMO.c
 	${ta-lib-rt_SOURCE_DIR}/c/src/ta_func/ta_HT_DCPERIOD.c
 	${ta-lib-rt_SOURCE_DIR}/c/src/ta_func/ta_CDLBREAKAWAY.c
 	${ta-lib-rt_SOURCE_DIR}/c/src/ta_func/ta_PLUS_DI.c
@@ -153,7 +160,8 @@ SET(ta-lib-rt_CSOURCES
 	${ta-lib-rt_SOURCE_DIR}/c/src/ta_func/ta_CDLDOJISTAR.c
 	${ta-lib-rt_SOURCE_DIR}/c/src/ta_func/ta_CDLHOMINGPIGEON.c
 	${ta-lib-rt_SOURCE_DIR}/c/src/ta_func/ta_EMA.c
-        ${ta-lib-rt_SOURCE_DIR}/c/src/ta_func/ta_WLMA.c
+	${ta-lib-rt_SOURCE_DIR}/c/src/ta_func/ta_EOM.c
+	${ta-lib-rt_SOURCE_DIR}/c/src/ta_func/ta_WLMA.c
 	${ta-lib-rt_SOURCE_DIR}/c/src/ta_func/ta_COS.c
 	${ta-lib-rt_SOURCE_DIR}/c/src/ta_func/ta_SAREXT.c
 	${ta-lib-rt_SOURCE_DIR}/c/src/ta_func/ta_LN.c
@@ -173,6 +181,7 @@ SET(ta-lib-rt_CSOURCES
 	${ta-lib-rt_SOURCE_DIR}/c/src/ta_func/ta_MEDPRICE.c
 	${ta-lib-rt_SOURCE_DIR}/c/src/ta_func/ta_CDLMATCHINGLOW.c
 	${ta-lib-rt_SOURCE_DIR}/c/src/ta_func/ta_ROCR.c
+	${ta-lib-rt_SOURCE_DIR}/c/src/ta_func/ta_REDK_EVEREX.c
 	${ta-lib-rt_SOURCE_DIR}/c/src/ta_func/ta_CDLBELTHOLD.c
 	${ta-lib-rt_SOURCE_DIR}/c/src/ta_func/ta_CDLTAKURI.c
 	${ta-lib-rt_SOURCE_DIR}/c/src/ta_func/ta_CDLTRISTAR.c
@@ -183,6 +192,10 @@ SET(ta-lib-rt_CSOURCES
 	${ta-lib-rt_SOURCE_DIR}/c/src/ta_func/ta_CDLHIGHWAVE.c
 	${ta-lib-rt_SOURCE_DIR}/c/src/ta_func/ta_CDLSTALLEDPATTERN.c
 	${ta-lib-rt_SOURCE_DIR}/c/src/ta_func/ta_VAR.c
+	${ta-lib-rt_SOURCE_DIR}/c/src/ta_func/ta_VP.c
+	${ta-lib-rt_SOURCE_DIR}/c/src/ta_func/ta_VROC.c
+	${ta-lib-rt_SOURCE_DIR}/c/src/ta_func/ta_VWAP.c
+	${ta-lib-rt_SOURCE_DIR}/c/src/ta_func/ta_VWMA.c
 	${ta-lib-rt_SOURCE_DIR}/c/src/ta_func/ta_CDLEVENINGSTAR.c
 	${ta-lib-rt_SOURCE_DIR}/c/src/ta_func/ta_MAMA.c
 	${ta-lib-rt_SOURCE_DIR}/c/src/ta_func/ta_CDL3LINESTRIKE.c

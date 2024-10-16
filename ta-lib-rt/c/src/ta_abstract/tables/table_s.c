@@ -780,7 +780,7 @@ static const TA_OptInputParameterInfo *TA_STOCHRSI_OptInputs[] =
 const TA_InputParameterInfo TA_STOCHRSI_DEF_UI_STRUCT_PARAM_1 =
                                   { TA_Input_Pointer, "stateRSI", 0 };
 const TA_InputParameterInfo TA_STOCHRSI_DEF_UI_STRUCT_PARAM_2 =
-                                  { TA_Input_Pointer, "stateSTOCHF", 0 };
+                                  { TA_Input_Pointer, "stateSTOCH", 0 };
 static const TA_InputParameterInfo *TA_STOCHRSI_StructParams[] = {
     &TA_STOCHRSI_DEF_UI_STRUCT_PARAM_1,
     &TA_STOCHRSI_DEF_UI_STRUCT_PARAM_2,
