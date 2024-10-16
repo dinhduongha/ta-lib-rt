@@ -90,6 +90,70 @@ DEF_FUNCTION( KAMA,                     /* name */
              );
 /* KAMA END */
 
+/* KDJ BEGIN */
+
+static const TA_OptInputParameterInfo TA_DEF_UI_KDJ_Signal_Period =
+{
+   TA_OptInput_IntegerRange, /* type */
+   "optInSignalPeriod", /* paramName */
+   0,                  /* flags */
+
+   "Signal Period",          /* displayName */
+   (const void *)&TA_DEF_TimePeriod_Positive, /* dataSet */
+   3, /* defaultValue */
+   "Signal Period", /* hint */
+   NULL /* CamelCase name */
+};
+static const TA_InputParameterInfo *TA_KDJ_Inputs[] =
+{
+  &TA_DEF_UI_Input_Price_HLC,
+  NULL
+};
+
+const TA_OutputParameterInfo TA_DEF_UI_Output_Real_KDJ_K =
+                               { TA_Output_Real, "outK", TA_OUT_LINE };
+
+const TA_OutputParameterInfo TA_DEF_UI_Output_Real_KDJ_D =
+                               { TA_Output_Real, "outD", TA_OUT_LINE };
+
+const TA_OutputParameterInfo TA_DEF_UI_Output_Real_KDJ_J =
+                               { TA_Output_Real, "outJ", TA_OUT_LINE };
+
+static const TA_OutputParameterInfo *TA_KDJ_Outputs[]   =
+{
+  &TA_DEF_UI_Output_Real_KDJ_K,
+  &TA_DEF_UI_Output_Real_KDJ_D,
+  &TA_DEF_UI_Output_Real_KDJ_J,
+  NULL
+};
+
+static const TA_OptInputParameterInfo *TA_KDJ_OptInputs[] =
+{ &TA_DEF_UI_TimePeriod_30,
+  &TA_DEF_UI_KDJ_Signal_Period,
+  &TA_DEF_UI_MA_Method,
+  NULL
+};
+
+const TA_InputParameterInfo TA_KDJ_DEF_UI_STRUCT_PARAM_1 =
+                                  { TA_Input_Pointer, "stateMAFastK", 0 };
+
+const TA_InputParameterInfo TA_KDJ_DEF_UI_STRUCT_PARAM_2 =
+                                  { TA_Input_Pointer, "stateMASlowD", 0 };
+
+
+static const TA_InputParameterInfo *TA_KDJ_StructParams[] = {
+  &TA_KDJ_DEF_UI_STRUCT_PARAM_1,
+  &TA_KDJ_DEF_UI_STRUCT_PARAM_2,
+  NULL };
+
+DEF_FUNCTION( KDJ,                     /* name */
+              TA_GroupId_VolatilityIndicators, /* groupId */
+              "KDJ indicator", /* hint */
+              "Kdj",                         /* CamelCase name */
+              TA_FUNC_FLG_UNST_PER            /* flags */
+             );
+/* KDJ END */
+
 /* KVO BEGIN */
 static const TA_RealRange TA_DEF_KVO_Value =
 {
@@ -168,8 +232,9 @@ DEF_FUNCTION( KVO,                     /* name */
  ****************************************************************************/
 const TA_FuncDef *TA_DEF_TableK[] =
 {
-   ADD_TO_TABLE(KVO),
    ADD_TO_TABLE(KAMA),
+   ADD_TO_TABLE(KDJ),
+   ADD_TO_TABLE(KVO),
    NULL
 };
 

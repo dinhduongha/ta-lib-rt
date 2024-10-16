@@ -88,6 +88,7 @@ SET(ta-lib-rt_CSOURCES
 	${ta-lib-rt_SOURCE_DIR}/c/src/ta_func/ta_CDLPIERCING.c
 	${ta-lib-rt_SOURCE_DIR}/c/src/ta_func/ta_ASIN.c
 	${ta-lib-rt_SOURCE_DIR}/c/src/ta_func/ta_MACD.c
+	${ta-lib-rt_SOURCE_DIR}/c/src/ta_func/ta_KDJ.c
 	${ta-lib-rt_SOURCE_DIR}/c/src/ta_func/ta_KVO.c
 	${ta-lib-rt_SOURCE_DIR}/c/src/ta_func/ta_KAMA.c
 	${ta-lib-rt_SOURCE_DIR}/c/src/ta_func/ta_ATR.c
@@ -117,7 +118,7 @@ SET(ta-lib-rt_CSOURCES
 	${ta-lib-rt_SOURCE_DIR}/c/src/ta_func/ta_NATR.c
 	${ta-lib-rt_SOURCE_DIR}/c/src/ta_func/ta_CDL3BLACKCROWS.c
 	${ta-lib-rt_SOURCE_DIR}/c/src/ta_func/ta_HA.c
-        ${ta-lib-rt_SOURCE_DIR}/c/src/ta_func/ta_HA_SMO.c
+	${ta-lib-rt_SOURCE_DIR}/c/src/ta_func/ta_HA_SMO.c
 	${ta-lib-rt_SOURCE_DIR}/c/src/ta_func/ta_HT_DCPERIOD.c
 	${ta-lib-rt_SOURCE_DIR}/c/src/ta_func/ta_CDLBREAKAWAY.c
 	${ta-lib-rt_SOURCE_DIR}/c/src/ta_func/ta_PLUS_DI.c

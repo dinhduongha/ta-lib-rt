@@ -128,6 +128,7 @@ SOURCES += \
     ../../../../../src/ta_func/ta_HT_TRENDMODE.c \
     ../../../../../src/ta_func/ta_ICHIMOKU.c \
     ../../../../../src/ta_func/ta_IMI.c \
+    ../../../../../src/ta_func/ta_KDJ.c \
     ../../../../../src/ta_func/ta_KVO.c \
     ../../../../../src/ta_func/ta_KAMA.c \
     ../../../../../src/ta_func/ta_LINEARREG.c \
