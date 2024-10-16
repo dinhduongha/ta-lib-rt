@@ -90,6 +90,77 @@ DEF_FUNCTION( KAMA,                     /* name */
              );
 /* KAMA END */
 
+/* KVO BEGIN */
+static const TA_RealRange TA_DEF_KVO_Value =
+{
+   TA_REAL_MIN, /* min */
+   TA_REAL_MAX, /* max */
+   4,     /* precision */
+   0, /* suggested start */
+   0, /* suggested end   */
+   0  /* suggested increment */
+};
+static const TA_OptInputParameterInfo TA_DEF_UI_KVO_Modifier =
+{
+   TA_OptInput_RealRange, /* type */
+   "optInModifier", /* paramName */
+   0,                  /* flags */
+
+   "Modifier",          /* displayName */
+   (const void *)&TA_DEF_KVO_Value, /* dataSet */
+   1.0, /* defaultValue */
+   "Modifier", /* hint */
+   NULL /* CamelCase name */
+};
+static const TA_InputParameterInfo *TA_KVO_Inputs[] =
+{
+  &TA_DEF_UI_Input_Price_HLCV,
+  NULL
+};
+
+const TA_OutputParameterInfo TA_DEF_UI_Output_Real_KVO =
+                               { TA_Output_Real, "outKVO", TA_OUT_LINE };
+
+const TA_OutputParameterInfo TA_DEF_UI_Output_Real_KVO_Signal =
+                               { TA_Output_Real, "outKVOSignal", TA_OUT_LINE };
+
+static const TA_OutputParameterInfo *TA_KVO_Outputs[]   =
+{
+  &TA_DEF_UI_Output_Real_KVO,
+  &TA_DEF_UI_Output_Real_KVO_Signal,
+  NULL
+};
+
+static const TA_OptInputParameterInfo *TA_KVO_OptInputs[] =
+{ &TA_DEF_UI_Fast_Period,
+  &TA_DEF_UI_Slow_Period,
+  &TA_DEF_UI_Input_Periods,
+  &TA_DEF_UI_MA_Method,
+  NULL
+};
+
+const TA_InputParameterInfo TA_KVO_DEF_UI_STRUCT_PARAM_1 =
+                                  { TA_Input_Pointer, "StateMAFast", 0 };
+
+const TA_InputParameterInfo TA_KVO_DEF_UI_STRUCT_PARAM_2 =
+                                  { TA_Input_Pointer, "StateMASlow", 0 };
+
+const TA_InputParameterInfo TA_KVO_DEF_UI_STRUCT_PARAM_3 =
+                                  { TA_Input_Pointer, "StateMASignal", 0 };
+
+static const TA_InputParameterInfo *TA_KVO_StructParams[] = {
+  &TA_KVO_DEF_UI_STRUCT_PARAM_1,
+  &TA_KVO_DEF_UI_STRUCT_PARAM_2,
+  &TA_KVO_DEF_UI_STRUCT_PARAM_3,
+  NULL };
+
+DEF_FUNCTION( KVO,                     /* name */
+              TA_GroupId_VolatilityIndicators, /* groupId */
+              "Klinger Volume Oscillator", /* hint */
+              "Kvo",                         /* CamelCase name */
+              TA_FUNC_FLG_UNST_PER            /* flags */
+             );
+/* KVO END */
 
 /****************************************************************************
  * Step 2 - Add your TA function to the table.

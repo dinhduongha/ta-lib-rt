@@ -419,6 +419,24 @@ const TA_InputParameterInfo TA_REDK_EVEREX_DEF_UI_STRUCT_PARAM_12 =
 const TA_InputParameterInfo TA_REDK_EVEREX_DEF_UI_STRUCT_PARAM_13 =
                                   { TA_Input_Pointer, "StateBearSmoothWMA", 0 }; // Bear avg smooth
 
+const TA_InputParameterInfo TA_REDK_EVEREX_DEF_UI_STRUCT_PARAM_14 =
+                                  { TA_Input_Pointer, "StateBullMax", 0 }; // 
+
+const TA_InputParameterInfo TA_REDK_EVEREX_DEF_UI_STRUCT_PARAM_15 =
+                                  { TA_Input_Pointer, "StateBearMin", 0 }; // 
+
+const TA_InputParameterInfo TA_REDK_EVEREX_DEF_UI_STRUCT_PARAM_16 =
+                                  { TA_Input_Pointer, "StateMinPriceN", 0 }; // 
+
+const TA_InputParameterInfo TA_REDK_EVEREX_DEF_UI_STRUCT_PARAM_17 =
+                                  { TA_Input_Pointer, "StateMaxNPrice", 0 }; // 
+
+const TA_InputParameterInfo TA_REDK_EVEREX_DEF_UI_STRUCT_PARAM_18 =
+                                  { TA_Input_Pointer, "StateMinVolN", 0 }; // Min Volume Normalized
+
+const TA_InputParameterInfo TA_REDK_EVEREX_DEF_UI_STRUCT_PARAM_19 =
+                                  { TA_Input_Pointer, "StateMaxNVol", 0 }; // Bear avg smooth
+
 
 static const TA_InputParameterInfo *TA_REDK_EVEREX_StructParams[] = {
   &TA_REDK_EVEREX_DEF_UI_STRUCT_PARAM_1,
@@ -434,6 +452,12 @@ static const TA_InputParameterInfo *TA_REDK_EVEREX_StructParams[] = {
   &TA_REDK_EVEREX_DEF_UI_STRUCT_PARAM_11,
   &TA_REDK_EVEREX_DEF_UI_STRUCT_PARAM_12,
   &TA_REDK_EVEREX_DEF_UI_STRUCT_PARAM_13,
+  &TA_REDK_EVEREX_DEF_UI_STRUCT_PARAM_14,
+  &TA_REDK_EVEREX_DEF_UI_STRUCT_PARAM_15,
+  &TA_REDK_EVEREX_DEF_UI_STRUCT_PARAM_16,
+  &TA_REDK_EVEREX_DEF_UI_STRUCT_PARAM_17,
+  &TA_REDK_EVEREX_DEF_UI_STRUCT_PARAM_18,
+  &TA_REDK_EVEREX_DEF_UI_STRUCT_PARAM_19,
   NULL };
 
 DEF_FUNCTION( REDK_EVEREX,                     /* name */

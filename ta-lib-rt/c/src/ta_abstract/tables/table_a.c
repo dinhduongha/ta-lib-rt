@@ -516,7 +516,7 @@ static const TA_OutputParameterInfo *TA_ATRP_Outputs[]   =
 };
 
 static const TA_OptInputParameterInfo *TA_ATRP_OptInputs[] =
-{ &TA_DEF_UI_TimePeriod_10,
+{ &TA_DEF_UI_TimePeriod_14,
   NULL
 };
 

@@ -93,6 +93,62 @@ DEF_FUNCTION( EMA,                         /* name */
              );
 /* EMA END */
 
+/* EOM BEGIN */
+static const TA_OptInputParameterInfo TA_DEF_UI_EOM_Divisor =
+{
+   TA_OptInput_IntegerRange, /* type */
+   "optInDivisor", /* paramName */
+   0,                  /* flags */
+
+   "Divisor",          /* displayName */
+   (const void *)&TA_DEF_TimePeriod_Positive, /* dataSet */
+   10000, /* defaultValue */
+   "Divisor", /* hint */
+   NULL /* CamelCase name */
+};
+
+static const TA_InputParameterInfo *TA_EOM_Inputs[] =
+{
+  &TA_DEF_UI_Input_Price_HLCV,
+  NULL
+};
+
+static const TA_OutputParameterInfo *TA_EOM_Outputs[]   =
+{
+  &TA_DEF_UI_Output_Real,
+  NULL
+};
+
+static const TA_OptInputParameterInfo *TA_EOM_OptInputs[] =
+{ &TA_DEF_UI_TimePeriod_14, // Period
+  &TA_DEF_UI_MA_Method,
+  &TA_DEF_UI_EOM_Divisor,
+  NULL
+};
+
+const TA_InputParameterInfo TA_EOM_DEF_UI_STRUCT_PARAM_1 =
+                                  { TA_Input_Pointer, "StateSMA", 0 };
+
+const TA_InputParameterInfo TA_EOM_DEF_UI_STRUCT_PARAM_2 =
+                                  { TA_Input_Real, "prevHigh", 0 };
+
+const TA_InputParameterInfo TA_EOM_DEF_UI_STRUCT_PARAM_3 =
+                                  { TA_Input_Real, "prevLow", 0 };                                                                    
+
+static const TA_InputParameterInfo *TA_EOM_StructParams[] = {
+  &TA_EOM_DEF_UI_STRUCT_PARAM_1,
+  &TA_EOM_DEF_UI_STRUCT_PARAM_2,
+  &TA_EOM_DEF_UI_STRUCT_PARAM_3,
+  NULL };
+
+DEF_FUNCTION( EOM,                     /* name */
+              TA_GroupId_VolatilityIndicators, /* groupId */
+              "Ease of Movement", /* hint */
+              "Emv",                         /* CamelCase name */
+              TA_FUNC_FLG_UNST_PER            /* flags */
+             );
+/* EOM END */
+
 /* EXP BEGIN */
 DEF_MATH_UNARY_OPERATOR( EXP, "Vector Arithmetic Exp", "Exp" )
 /* EXP END */
@@ -104,6 +160,7 @@ DEF_MATH_UNARY_OPERATOR( EXP, "Vector Arithmetic Exp", "Exp" )
 const TA_FuncDef *TA_DEF_TableE[] =
 {
    ADD_TO_TABLE(EMA),
+   ADD_TO_TABLE(EOM),
    ADD_TO_TABLE(EXP),
    NULL
 };

@@ -3163,6 +3163,8 @@ DEF_MATH_UNARY_OPERATOR( CEIL, "Vector Ceil", "Ceil" )
 /* CEIL END */
 
 /* CKSP BEGIN */
+//https://www.wallstreetmojo.com/chande-kroll-stop/
+//https://github.com/nardew/talipp/blob/main/talipp/indicators/ChandeKrollStop.py
 static const TA_RealRange TA_DEF_CKSP_Value =
 {
    TA_REAL_MIN, /* min */
@@ -3178,7 +3180,6 @@ static const TA_OptInputParameterInfo TA_DEF_UI_CKSP_Scalar =
    TA_OptInput_RealRange, /* type */
    "optInScalar", /* paramName */
    0,                  /* flags */
-
    "Scalar",          /* displayName */
    (const void *)&TA_DEF_CKSP_Value, /* dataSet */
    1.0, /* defaultValue */
@@ -3195,7 +3196,7 @@ static const TA_OptInputParameterInfo TA_DEF_UI_CKSP_Period =
    "Cksp Period",          /* displayName */
    (const void *)&TA_DEF_TimePeriod_Positive, /* dataSet */
    9, /* defaultValue */
-   "Cksp Period", /* hint */
+   "Cksp Sampling Period", /* hint */
    NULL /* CamelCase name */
 };
 
@@ -3220,9 +3221,9 @@ static const TA_OutputParameterInfo *TA_CKSP_Outputs[] =
 };
 
 static const TA_OptInputParameterInfo *TA_CKSP_OptInputs[] = { 
-  &TA_DEF_UI_TimePeriod_10,
-  &TA_DEF_UI_CKSP_Scalar,
-  &TA_DEF_UI_CKSP_Period,
+  &TA_DEF_UI_TimePeriod_14, // ATR Period
+  &TA_DEF_UI_CKSP_Period,   // Sampling Period
+  &TA_DEF_UI_CKSP_Scalar,   // Modifier
   NULL };
 
 const TA_InputParameterInfo TA_CKSP_DEF_UI_STRUCT_PARAM_1 =
@@ -3231,17 +3232,9 @@ const TA_InputParameterInfo TA_CKSP_DEF_UI_STRUCT_PARAM_1 =
 const TA_InputParameterInfo TA_CKSP_DEF_UI_STRUCT_PARAM_2 =
                                   { TA_Input_Pointer, "StateMINMAX", 0 };
 
-const TA_InputParameterInfo TA_CKSP_DEF_UI_STRUCT_PARAM_3 =
-                                  { TA_Input_Real, "x", 1.0 };
-
-const TA_InputParameterInfo TA_CKSP_DEF_UI_STRUCT_PARAM_4 =
-                                  { TA_Input_Integer, "q", 9 };
-
 static const TA_InputParameterInfo *TA_CKSP_StructParams[] = {
   &TA_CKSP_DEF_UI_STRUCT_PARAM_1,
-  &TA_CKSP_DEF_UI_STRUCT_PARAM_2,
-  &TA_CKSP_DEF_UI_STRUCT_PARAM_3,
-  &TA_CKSP_DEF_UI_STRUCT_PARAM_4,
+  &TA_CKSP_DEF_UI_STRUCT_PARAM_2,  
   NULL };
 
 DEF_FUNCTION( CKSP,                     /* name */
@@ -3251,6 +3244,48 @@ DEF_FUNCTION( CKSP,                     /* name */
               0                              /* flags */
              );
 /* CKSP END */
+
+/* CMF BEGIN */
+// https://www.tradingview.com/support/solutions/43000501974-chaikin-money-flow-cmf/
+static const TA_InputParameterInfo *TA_CMF_Inputs[] =
+{
+  &TA_DEF_UI_Input_Price_HLCV,
+  NULL
+};
+
+static const TA_OutputParameterInfo *TA_CMF_Outputs[]   =
+{
+  &TA_DEF_UI_Output_Real,
+  NULL
+};
+
+static const TA_OptInputParameterInfo *TA_CMF_OptInputs[] =
+{ &TA_DEF_UI_TimePeriod_30,
+  NULL
+};
+
+const TA_InputParameterInfo TA_CMF_DEF_UI_STRUCT_PARAM_1 =
+                                   { TA_Input_Pointer, "StateADL", 0 };
+
+const TA_InputParameterInfo TA_CMF_DEF_UI_STRUCT_PARAM_2 =
+                                  { TA_Input_Pointer, "StateSumMFV", 0 };
+
+const TA_InputParameterInfo TA_CMF_DEF_UI_STRUCT_PARAM_3 =
+                                  { TA_Input_Pointer, "StateSumVol", 0 };
+
+static const TA_InputParameterInfo *TA_CMF_StructParams[] = {
+  &TA_CMF_DEF_UI_STRUCT_PARAM_1,
+  &TA_CMF_DEF_UI_STRUCT_PARAM_2,
+  &TA_CMF_DEF_UI_STRUCT_PARAM_3,
+  NULL };
+
+DEF_FUNCTION( CMF,                     /* name */
+              TA_GroupId_VolatilityIndicators, /* groupId */
+              "Chaikin Money Flow", /* hint */
+              "Cmf",                         /* CamelCase name */
+              TA_FUNC_FLG_UNST_PER            /* flags */
+             );
+/* CMF END */
 
 /* CMO BEGIN */
 static const TA_InputParameterInfo    *TA_CMO_Inputs[]    =
@@ -3420,7 +3455,8 @@ const TA_FuncDef *TA_DEF_TableC[] =
    ADD_TO_TABLE(CDLXSIDEGAP3METHODS), 
    ADD_TO_TABLE(CEIL),
    ADD_TO_TABLE(CKSP),
-   ADD_TO_TABLE(CMO),
+   ADD_TO_TABLE(CMF),
+   ADD_TO_TABLE(CMO),   
    ADD_TO_TABLE(CORREL),
    ADD_TO_TABLE(COS),
    ADD_TO_TABLE(COSH),

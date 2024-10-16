@@ -474,10 +474,10 @@ const TA_OutputParameterInfo TA_DEF_UI_Output_Real_SUPERTREND_Trend =
                                { TA_Output_Integer, "outTrend", TA_OUT_LINE };
 
 const TA_OutputParameterInfo TA_DEF_UI_Output_Real_SUPERTREND_Upper =
-                               { TA_Output_Real, "outRealUpperBand", TA_OUT_LINE };
+                               { TA_Output_Real, "outUpperBand", TA_OUT_LINE };
 
 const TA_OutputParameterInfo TA_DEF_UI_Output_Real_SUPERTREND_Lower =
-                                { TA_Output_Real, "outRealLowerBand", TA_OUT_LINE };
+                                { TA_Output_Real, "outLowerBand", TA_OUT_LINE };
 
 static const TA_OutputParameterInfo *TA_SUPERTREND_Outputs[]   =
 {
@@ -488,7 +488,7 @@ static const TA_OutputParameterInfo *TA_SUPERTREND_Outputs[]   =
 };
 
 static const TA_OptInputParameterInfo *TA_SUPERTREND_OptInputs[] = {
-   &TA_DEF_UI_TimePeriod_10,
+   &TA_DEF_UI_TimePeriod_14,
    &TA_DEF_UI_SuperTrend_Modifier,
    NULL };
 

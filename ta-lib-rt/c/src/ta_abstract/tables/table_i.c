@@ -212,8 +212,8 @@ DEF_FUNCTION( IMI,                         /* name */
  ****************************************************************************/
 const TA_FuncDef *TA_DEF_TableI[] =
 {
-   ADD_TO_TABLE(IMI),
    ADD_TO_TABLE(ICHIMOKU),
+   ADD_TO_TABLE(IMI),   
    NULL
 };
 

@@ -85,6 +85,80 @@ DEF_FUNCTION( VAR,                         /* name */
              );
 /* VAR END */
 
+/* VP BEGIN */
+// https://www.quantconnect.com/forum/discussion/10590/volume-profile-indicator-implementation-in-c/
+static const TA_OptInputParameterInfo TA_DEF_UI_VP_Width =
+{
+   TA_OptInput_IntegerRange, /* type */
+   "optInVpWidth", /* paramName */
+   0,                  /* flags */
+
+   "Width",          /* displayName */
+   (const void *)&TA_DEF_TimePeriod_Positive, /* dataSet */
+   10, /* defaultValue */
+   "Width", /* hint */
+   NULL /* CamelCase name */
+};
+
+
+static const TA_InputParameterInfo *TA_VP_Inputs[] =
+{
+  &TA_DEF_UI_Input_Price_CV,
+  NULL
+};
+
+const TA_OutputParameterInfo TA_DEF_UI_Output_Real_VP_Poc =
+                               { TA_Output_Real, "outPoc", TA_OUT_LINE };
+
+const TA_OutputParameterInfo TA_DEF_UI_Output_Real_VP_ValueAreaHigh =
+                               { TA_Output_Real, "outValueAreaHigh", TA_OUT_LINE };
+
+const TA_OutputParameterInfo TA_DEF_UI_Output_Real_VP_ValueAreaLow =
+                               { TA_Output_Real, "outValueAreaLow", TA_OUT_LINE };
+
+static const TA_OutputParameterInfo *TA_VP_Outputs[]   =
+{
+  &TA_DEF_UI_Output_Real_VP_Poc,
+  &TA_DEF_UI_Output_Real_VP_ValueAreaHigh,
+  &TA_DEF_UI_Output_Real_VP_ValueAreaLow,
+  &TA_DEF_UI_Output_Real,
+  &TA_DEF_UI_Output_Integer,
+  NULL
+};
+
+static const TA_OptInputParameterInfo *TA_VP_OptInputs[] =
+{ &TA_DEF_UI_TimePeriod_30, // Lookback
+  &TA_DEF_UI_VP_Width,
+  NULL
+};
+
+const TA_InputParameterInfo TA_VP_DEF_UI_STRUCT_PARAM_1 =
+                                  { TA_Input_Pointer, "stateMINMAX", 0 };
+
+const TA_InputParameterInfo TA_VP_DEF_UI_STRUCT_PARAM_2 =
+                                  { TA_Input_Pointer, "stateSumVolume", 0 };
+
+const TA_InputParameterInfo TA_VP_DEF_UI_STRUCT_PARAM_3 =
+                                  { TA_Input_Pointer, "stateSumUpVolume", 0 };
+
+const TA_InputParameterInfo TA_VP_DEF_UI_STRUCT_PARAM_4 =
+                                  { TA_Input_Pointer, "stateSumDownVolume", 0 };
+
+static const TA_InputParameterInfo *TA_VP_StructParams[] = {
+  &TA_VP_DEF_UI_STRUCT_PARAM_1,
+  &TA_VP_DEF_UI_STRUCT_PARAM_2,
+  &TA_VP_DEF_UI_STRUCT_PARAM_3,
+  &TA_VP_DEF_UI_STRUCT_PARAM_4,
+  NULL };
+
+DEF_FUNCTION( VP,                     /* name */
+              TA_GroupId_VolumeIndicators, /* groupId */
+              "Volume Profile", /* hint */
+              "Vp",                         /* CamelCase name */
+              0                              /* flags */
+             );
+/* VP END */
+
 /* VROC BEGIN */
 static const TA_InputParameterInfo *TA_VROC_Inputs[] =
 {
@@ -113,77 +187,6 @@ DEF_FUNCTION( VROC,                     /* name */
              );
 /* VROC END */
 
-/* VP BEGIN */
-// https://www.quantconnect.com/forum/discussion/10590/volume-profile-indicator-implementation-in-c/
-static const TA_OptInputParameterInfo TA_DEF_UI_VP_Width =
-{
-   TA_OptInput_IntegerRange, /* type */
-   "optInVpWidth", /* paramName */
-   0,                  /* flags */
-
-   "Width",          /* displayName */
-   (const void *)&TA_DEF_TimePeriod_Positive, /* dataSet */
-   10, /* defaultValue */
-   "Width", /* hint */
-   NULL /* CamelCase name */
-};
-
-
-static const TA_InputParameterInfo *TA_VP_Inputs[] =
-{
-  &TA_DEF_UI_Input_Price_CV,
-  NULL
-};
-
-const TA_OutputParameterInfo TA_DEF_UI_Output_Real_VP_Poc =
-                               { TA_Output_Real, "outPoc", TA_OUT_LINE };
-
-const TA_OutputParameterInfo TA_DEF_UI_Output_Real_VP_Vah =
-                               { TA_Output_Real, "outVaHigh", TA_OUT_LINE };
-
-const TA_OutputParameterInfo TA_DEF_UI_Output_Real_VP_Val =
-                               { TA_Output_Real, "outVaLow", TA_OUT_LINE };
-
-static const TA_OutputParameterInfo *TA_VP_Outputs[]   =
-{
-  &TA_DEF_UI_Output_Real_VP_Poc,
-  &TA_DEF_UI_Output_Real_VP_Vah,
-  &TA_DEF_UI_Output_Real_VP_Val,
-  &TA_DEF_UI_Output_Real,
-  &TA_DEF_UI_Output_Integer,
-  NULL
-};
-
-static const TA_OptInputParameterInfo *TA_VP_OptInputs[] =
-{ &TA_DEF_UI_TimePeriod_30, // Lookback
-  &TA_DEF_UI_VP_Width,
-  NULL
-};
-
-const TA_InputParameterInfo TA_VP_DEF_UI_STRUCT_PARAM_1 =
-                                  { TA_Input_Pointer, "stateMINMAX", 0 };
-
-const TA_InputParameterInfo TA_VP_DEF_UI_STRUCT_PARAM_2 =
-                                  { TA_Input_Pointer, "stateSumVolume", 0 };
-
-const TA_InputParameterInfo TA_VP_DEF_UI_STRUCT_PARAM_3 =
-                                  { TA_Input_Pointer, "stateSumUpVolume", 0 };
-
-const TA_InputParameterInfo TA_VP_DEF_UI_STRUCT_PARAM_4 =
-                                  { TA_Input_Pointer, "stateSumDownVolume", 0 };
-
-static const TA_InputParameterInfo *TA_VP_StructParams[] = {
-  &TA_VP_DEF_UI_STRUCT_PARAM_1,
-  NULL };
-
-DEF_FUNCTION( VP,                     /* name */
-              TA_GroupId_VolumeIndicators, /* groupId */
-              "Volume Profile", /* hint */
-              "Vp",                         /* CamelCase name */
-              0                              /* flags */
-             );
-/* VP END */
-
 /* VWAP BEGIN */
 static const TA_InputParameterInfo *TA_VWAP_Inputs[] =
 {
@@ -208,7 +211,10 @@ const TA_InputParameterInfo TA_VWAP_DEF_UI_STRUCT_PARAM_1 =
 const TA_InputParameterInfo TA_VWAP_DEF_UI_STRUCT_PARAM_2 =
                                   { TA_Input_Pointer, "StateSumVolume", 0 };
 
-static const TA_InputParameterInfo *TA_VWAP_StructParams[] = { NULL };
+static const TA_InputParameterInfo *TA_VWAP_StructParams[] = {
+  &TA_VWAP_DEF_UI_STRUCT_PARAM_1,
+  &TA_VWAP_DEF_UI_STRUCT_PARAM_2,
+  NULL };
 
 DEF_FUNCTION( VWAP,                     /* name */
               TA_GroupId_VolumeIndicators, /* groupId */
@@ -264,8 +270,8 @@ DEF_FUNCTION( VWMA,                     /* name */
 const TA_FuncDef *TA_DEF_TableV[] =
 {
    ADD_TO_TABLE(VAR),
-   ADD_TO_TABLE(VROC),
    ADD_TO_TABLE(VP),
+   ADD_TO_TABLE(VROC),   
    ADD_TO_TABLE(VWAP),
    ADD_TO_TABLE(VWMA),
    NULL
