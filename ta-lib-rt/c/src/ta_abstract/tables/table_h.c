@@ -100,7 +100,7 @@ DEF_FUNCTION( HA,                     /* name */
              );
 /* HA END */
 
-/* HA SMOOTH BEGIN */
+/* HASMO BEGIN */
 static const TA_InputParameterInfo *TA_HASMO_Inputs[] =
 {
   &TA_DEF_UI_Input_Price_OHLC,
@@ -108,16 +108,16 @@ static const TA_InputParameterInfo *TA_HASMO_Inputs[] =
 };
 
 const TA_OutputParameterInfo TA_DEF_UI_Output_Real_HASMO_Open =
-                               { TA_Output_Real, "outOpen", TA_OUT_LINE };
+                               { TA_Output_Real, "outHaSmoOpen", TA_OUT_LINE };
 
 const TA_OutputParameterInfo TA_DEF_UI_Output_Real_HASMO_High =
-                               { TA_Output_Real, "outHigh", TA_OUT_LINE };
+                               { TA_Output_Real, "outHaSmoHigh", TA_OUT_LINE };
 
 const TA_OutputParameterInfo TA_DEF_UI_Output_Real_HASMO_Low =
-                               { TA_Output_Real, "outLow", TA_OUT_LINE };
+                               { TA_Output_Real, "outHaSmoLow", TA_OUT_LINE };
 
 const TA_OutputParameterInfo TA_DEF_UI_Output_Real_HASMO_Close =
-                               { TA_Output_Real, "outClose", TA_OUT_LINE };
+                               { TA_Output_Real, "outHaSmoClose", TA_OUT_LINE };
 
 static const TA_OutputParameterInfo *TA_HASMO_Outputs[]   =
 {
@@ -147,10 +147,10 @@ const TA_InputParameterInfo TA_HASMO_DEF_UI_STRUCT_PARAM_4 =
                                   { TA_Input_Pointer, "StateMAClose", 0 };
 
 const TA_InputParameterInfo TA_HASMO_DEF_UI_STRUCT_PARAM_5 =
-                                  { TA_Input_Real, " prevOpen", 0 };
+                                  { TA_Input_Real, "prevOpen", 0 };
 
 const TA_InputParameterInfo TA_HASMO_DEF_UI_STRUCT_PARAM_6 =
-                                  { TA_Input_Real, " prevClose", 0 };
+                                  { TA_Input_Real, "prevClose", 0 };
 
 static const TA_InputParameterInfo *TA_HASMO_StructParams[] = {
   &TA_HASMO_DEF_UI_STRUCT_PARAM_1,
@@ -164,7 +164,7 @@ static const TA_InputParameterInfo *TA_HASMO_StructParams[] = {
 DEF_FUNCTION( HASMO,                     /* name */
               TA_GroupId_VolatilityIndicators, /* groupId */
               "Heikin Ashi Smooth", /* hint */
-              "HaSmooth",                         /* CamelCase name */
+              "HaSmo",                         /* CamelCase name */
               TA_FUNC_FLG_UNST_PER            /* flags */
              );
 /* HASMO END */

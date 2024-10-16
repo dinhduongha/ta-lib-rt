@@ -168,6 +168,7 @@ DEF_FUNCTION( KVO,                     /* name */
  ****************************************************************************/
 const TA_FuncDef *TA_DEF_TableK[] =
 {
+   ADD_TO_TABLE(KVO),
    ADD_TO_TABLE(KAMA),
    NULL
 };
