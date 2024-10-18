@@ -909,6 +909,70 @@
 /* Generated */                     outNBElement, 
 /* Generated */                     params->out[0].data.outReal /*  outReal */ );
 /* Generated */ }
+/* Generated */ TA_RetCode TA_ATRP_FramePP( const TA_ParamHolderPriv *params,
+/* Generated */                           int            startIdx,
+/* Generated */                           int            endIdx,
+/* Generated */                           int           *outBegIdx,
+/* Generated */                           int           *outNBElement )
+/* Generated */ {
+/* Generated */    return TA_ATRP(/* Generated */              startIdx,
+/* Generated */              endIdx,
+/* Generated */              params->in[0].data.inPrice.high, /* inHigh */
+/* Generated */              params->in[0].data.inPrice.low, /* inLow */
+/* Generated */              params->in[0].data.inPrice.close, /* inClose */
+/* Generated */              params->optIn[0].data.optInInteger, /* optInTimePeriod*/
+/* Generated */              outBegIdx, 
+/* Generated */              outNBElement, 
+/* Generated */              params->out[0].data.outReal /*  outReal */ );
+/* Generated */ }
+/* Generated */ unsigned int TA_ATRP_FramePPLB( const TA_ParamHolderPriv *params )
+/* Generated */ {
+/* Generated */    return TA_ATRP_Lookback(params->optIn[0].data.optInInteger /* optInTimePeriod*/ );
+/* Generated */ }
+/* Generated */ unsigned int TA_ATRP_FramePPSI( const TA_ParamHolderPriv *params )
+/* Generated */ {
+/* Generated */    return TA_ATRP_StateInit( (struct TA_ATRP_State**) &params->_state,
+/* Generated */                      params->optIn[0].data.optInInteger /* optInTimePeriod*/ );
+/* Generated */ }
+/* Generated */ unsigned int TA_ATRP_FramePPS( const TA_ParamHolderPriv *params )
+/* Generated */ {
+/* Generated */    return TA_ATRP_State( *(struct TA_ATRP_State**) &params->_state,
+/* Generated */                      *params->in[0].data.inPrice.high, /* inHigh */
+/* Generated */                      *params->in[0].data.inPrice.low, /* inLow */
+/* Generated */                      *params->in[0].data.inPrice.close, /* inClose */
+/* Generated */                      params->out[0].data.outReal /*  *outReal */ );
+/* Generated */ }
+/* Generated */ unsigned int TA_ATRP_FramePPSF( const TA_ParamHolderPriv *params )
+/* Generated */ {
+/* Generated */    return TA_ATRP_StateFree( (struct TA_ATRP_State**) &params->_state
+ );
+/* Generated */ }
+/* Generated */ unsigned int TA_ATRP_FramePPSS( const TA_ParamHolderPriv *params, FILE* _file )
+/* Generated */ {
+/* Generated */    return TA_ATRP_StateSave( *(struct TA_ATRP_State**) &params->_state,
+/* Generated */                       _file );
+/* Generated */ }
+/* Generated */ unsigned int TA_ATRP_FramePPSL( const TA_ParamHolderPriv *params, FILE* _file )
+/* Generated */ {
+/* Generated */    return TA_ATRP_StateLoad( (struct TA_ATRP_State**) &params->_state,
+/* Generated */                       _file );
+/* Generated */ }
+/* Generated */ unsigned int TA_ATRP_FramePPBS( const TA_ParamHolderPriv *params,
+/* Generated */                           int            startIdx,
+/* Generated */                           int            endIdx,
+/* Generated */                           int           *outBegIdx,
+/* Generated */                           int           *outNBElement )
+/* Generated */ {
+/* Generated */    return TA_ATRP_BatchState( *(struct TA_ATRP_State**) &params->_state,
+/* Generated */                      startIdx,
+/* Generated */                      endIdx,
+/* Generated */                      params->in[0].data.inPrice.high, /* inHigh */
+/* Generated */                      params->in[0].data.inPrice.low, /* inLow */
+/* Generated */                      params->in[0].data.inPrice.close, /* inClose */
+/* Generated */                      outBegIdx, 
+/* Generated */                      outNBElement, 
+/* Generated */                      params->out[0].data.outReal /*  outReal */ );
+/* Generated */ }
 /* Generated */ TA_RetCode TA_AVGPRICE_FramePP( const TA_ParamHolderPriv *params,
 /* Generated */                           int            startIdx,
 /* Generated */                           int            endIdx,
@@ -5786,6 +5850,146 @@
 /* Generated */                      outNBElement, 
 /* Generated */                      params->out[0].data.outReal /*  outReal */ );
 /* Generated */ }
+/* Generated */ TA_RetCode TA_CKSP_FramePP( const TA_ParamHolderPriv *params,
+/* Generated */                           int            startIdx,
+/* Generated */                           int            endIdx,
+/* Generated */                           int           *outBegIdx,
+/* Generated */                           int           *outNBElement )
+/* Generated */ {
+/* Generated */    return TA_CKSP(/* Generated */              startIdx,
+/* Generated */              endIdx,
+/* Generated */              params->in[0].data.inPrice.high, /* inHigh */
+/* Generated */              params->in[0].data.inPrice.low, /* inLow */
+/* Generated */              params->in[0].data.inPrice.close, /* inClose */
+/* Generated */              params->optIn[0].data.optInInteger, /* optInTimePeriod*/
+/* Generated */              params->optIn[1].data.optInInteger, /* optInCkspPeriod*/
+/* Generated */              params->optIn[2].data.optInReal, /* optInScalar*/
+/* Generated */              outBegIdx, 
+/* Generated */              outNBElement, 
+/* Generated */              params->out[0].data.outReal, /*  outLongStop */
+/* Generated */              params->out[1].data.outReal /*  outShortStop */ );
+/* Generated */ }
+/* Generated */ unsigned int TA_CKSP_FramePPLB( const TA_ParamHolderPriv *params )
+/* Generated */ {
+/* Generated */    return TA_CKSP_Lookback(params->optIn[0].data.optInInteger, /* optInTimePeriod*/
+/* Generated */                      params->optIn[1].data.optInInteger, /* optInCkspPeriod*/
+/* Generated */                      params->optIn[2].data.optInReal /* optInScalar*/ );
+/* Generated */ }
+/* Generated */ unsigned int TA_CKSP_FramePPSI( const TA_ParamHolderPriv *params )
+/* Generated */ {
+/* Generated */    return TA_CKSP_StateInit( (struct TA_CKSP_State**) &params->_state,
+/* Generated */                      params->optIn[0].data.optInInteger, /* optInTimePeriod*/
+/* Generated */                      params->optIn[1].data.optInInteger, /* optInCkspPeriod*/
+/* Generated */                      params->optIn[2].data.optInReal /* optInScalar*/ );
+/* Generated */ }
+/* Generated */ unsigned int TA_CKSP_FramePPS( const TA_ParamHolderPriv *params )
+/* Generated */ {
+/* Generated */    return TA_CKSP_State( *(struct TA_CKSP_State**) &params->_state,
+/* Generated */                      *params->in[0].data.inPrice.high, /* inHigh */
+/* Generated */                      *params->in[0].data.inPrice.low, /* inLow */
+/* Generated */                      *params->in[0].data.inPrice.close, /* inClose */
+/* Generated */                      params->out[0].data.outReal, /*  *outLongStop */
+/* Generated */                      params->out[1].data.outReal /*  *outShortStop */ );
+/* Generated */ }
+/* Generated */ unsigned int TA_CKSP_FramePPSF( const TA_ParamHolderPriv *params )
+/* Generated */ {
+/* Generated */    return TA_CKSP_StateFree( (struct TA_CKSP_State**) &params->_state
+ );
+/* Generated */ }
+/* Generated */ unsigned int TA_CKSP_FramePPSS( const TA_ParamHolderPriv *params, FILE* _file )
+/* Generated */ {
+/* Generated */    return TA_CKSP_StateSave( *(struct TA_CKSP_State**) &params->_state,
+/* Generated */                       _file );
+/* Generated */ }
+/* Generated */ unsigned int TA_CKSP_FramePPSL( const TA_ParamHolderPriv *params, FILE* _file )
+/* Generated */ {
+/* Generated */    return TA_CKSP_StateLoad( (struct TA_CKSP_State**) &params->_state,
+/* Generated */                       _file );
+/* Generated */ }
+/* Generated */ unsigned int TA_CKSP_FramePPBS( const TA_ParamHolderPriv *params,
+/* Generated */                           int            startIdx,
+/* Generated */                           int            endIdx,
+/* Generated */                           int           *outBegIdx,
+/* Generated */                           int           *outNBElement )
+/* Generated */ {
+/* Generated */    return TA_CKSP_BatchState( *(struct TA_CKSP_State**) &params->_state,
+/* Generated */                      startIdx,
+/* Generated */                      endIdx,
+/* Generated */                      params->in[0].data.inPrice.high, /* inHigh */
+/* Generated */                      params->in[0].data.inPrice.low, /* inLow */
+/* Generated */                      params->in[0].data.inPrice.close, /* inClose */
+/* Generated */                      outBegIdx, 
+/* Generated */                      outNBElement, 
+/* Generated */                      params->out[0].data.outReal, /*  outLongStop */
+/* Generated */                      params->out[1].data.outReal /*  outShortStop */ );
+/* Generated */ }
+/* Generated */ TA_RetCode TA_CMF_FramePP( const TA_ParamHolderPriv *params,
+/* Generated */                           int            startIdx,
+/* Generated */                           int            endIdx,
+/* Generated */                           int           *outBegIdx,
+/* Generated */                           int           *outNBElement )
+/* Generated */ {
+/* Generated */    return TA_CMF(/* Generated */             startIdx,
+/* Generated */             endIdx,
+/* Generated */             params->in[0].data.inPrice.high, /* inHigh */
+/* Generated */             params->in[0].data.inPrice.low, /* inLow */
+/* Generated */             params->in[0].data.inPrice.close, /* inClose */
+/* Generated */             params->in[0].data.inPrice.volume, /* inVolume */
+/* Generated */             params->optIn[0].data.optInInteger, /* optInTimePeriod*/
+/* Generated */             outBegIdx, 
+/* Generated */             outNBElement, 
+/* Generated */             params->out[0].data.outReal /*  outReal */ );
+/* Generated */ }
+/* Generated */ unsigned int TA_CMF_FramePPLB( const TA_ParamHolderPriv *params )
+/* Generated */ {
+/* Generated */    return TA_CMF_Lookback(params->optIn[0].data.optInInteger /* optInTimePeriod*/ );
+/* Generated */ }
+/* Generated */ unsigned int TA_CMF_FramePPSI( const TA_ParamHolderPriv *params )
+/* Generated */ {
+/* Generated */    return TA_CMF_StateInit( (struct TA_CMF_State**) &params->_state,
+/* Generated */                     params->optIn[0].data.optInInteger /* optInTimePeriod*/ );
+/* Generated */ }
+/* Generated */ unsigned int TA_CMF_FramePPS( const TA_ParamHolderPriv *params )
+/* Generated */ {
+/* Generated */    return TA_CMF_State( *(struct TA_CMF_State**) &params->_state,
+/* Generated */                     *params->in[0].data.inPrice.high, /* inHigh */
+/* Generated */                     *params->in[0].data.inPrice.low, /* inLow */
+/* Generated */                     *params->in[0].data.inPrice.close, /* inClose */
+/* Generated */                     *params->in[0].data.inPrice.volume, /* inVolume */
+/* Generated */                     params->out[0].data.outReal /*  *outReal */ );
+/* Generated */ }
+/* Generated */ unsigned int TA_CMF_FramePPSF( const TA_ParamHolderPriv *params )
+/* Generated */ {
+/* Generated */    return TA_CMF_StateFree( (struct TA_CMF_State**) &params->_state
+ );
+/* Generated */ }
+/* Generated */ unsigned int TA_CMF_FramePPSS( const TA_ParamHolderPriv *params, FILE* _file )
+/* Generated */ {
+/* Generated */    return TA_CMF_StateSave( *(struct TA_CMF_State**) &params->_state,
+/* Generated */                      _file );
+/* Generated */ }
+/* Generated */ unsigned int TA_CMF_FramePPSL( const TA_ParamHolderPriv *params, FILE* _file )
+/* Generated */ {
+/* Generated */    return TA_CMF_StateLoad( (struct TA_CMF_State**) &params->_state,
+/* Generated */                      _file );
+/* Generated */ }
+/* Generated */ unsigned int TA_CMF_FramePPBS( const TA_ParamHolderPriv *params,
+/* Generated */                           int            startIdx,
+/* Generated */                           int            endIdx,
+/* Generated */                           int           *outBegIdx,
+/* Generated */                           int           *outNBElement )
+/* Generated */ {
+/* Generated */    return TA_CMF_BatchState( *(struct TA_CMF_State**) &params->_state,
+/* Generated */                     startIdx,
+/* Generated */                     endIdx,
+/* Generated */                     params->in[0].data.inPrice.high, /* inHigh */
+/* Generated */                     params->in[0].data.inPrice.low, /* inLow */
+/* Generated */                     params->in[0].data.inPrice.close, /* inClose */
+/* Generated */                     params->in[0].data.inPrice.volume, /* inVolume */
+/* Generated */                     outBegIdx, 
+/* Generated */                     outNBElement, 
+/* Generated */                     params->out[0].data.outReal /*  outReal */ );
+/* Generated */ }
 /* Generated */ TA_RetCode TA_CMO_FramePP( const TA_ParamHolderPriv *params,
 /* Generated */                           int            startIdx,
 /* Generated */                           int            endIdx,
@@ -6280,6 +6484,79 @@
 /* Generated */                     outNBElement, 
 /* Generated */                     params->out[0].data.outReal /*  outReal */ );
 /* Generated */ }
+/* Generated */ TA_RetCode TA_EOM_FramePP( const TA_ParamHolderPriv *params,
+/* Generated */                           int            startIdx,
+/* Generated */                           int            endIdx,
+/* Generated */                           int           *outBegIdx,
+/* Generated */                           int           *outNBElement )
+/* Generated */ {
+/* Generated */    return TA_EOM(/* Generated */             startIdx,
+/* Generated */             endIdx,
+/* Generated */             params->in[0].data.inPrice.high, /* inHigh */
+/* Generated */             params->in[0].data.inPrice.low, /* inLow */
+/* Generated */             params->in[0].data.inPrice.close, /* inClose */
+/* Generated */             params->in[0].data.inPrice.volume, /* inVolume */
+/* Generated */             params->optIn[0].data.optInInteger, /* optInTimePeriod*/
+/* Generated */             (TA_MAType)params->optIn[1].data.optInInteger, /* optInMAType*/
+/* Generated */             params->optIn[2].data.optInInteger, /* optInDivisor*/
+/* Generated */             outBegIdx, 
+/* Generated */             outNBElement, 
+/* Generated */             params->out[0].data.outReal /*  outReal */ );
+/* Generated */ }
+/* Generated */ unsigned int TA_EOM_FramePPLB( const TA_ParamHolderPriv *params )
+/* Generated */ {
+/* Generated */    return TA_EOM_Lookback(params->optIn[0].data.optInInteger, /* optInTimePeriod*/
+/* Generated */                     (TA_MAType)params->optIn[1].data.optInInteger, /* optInMAType*/
+/* Generated */                     params->optIn[2].data.optInInteger /* optInDivisor*/ );
+/* Generated */ }
+/* Generated */ unsigned int TA_EOM_FramePPSI( const TA_ParamHolderPriv *params )
+/* Generated */ {
+/* Generated */    return TA_EOM_StateInit( (struct TA_EOM_State**) &params->_state,
+/* Generated */                     params->optIn[0].data.optInInteger, /* optInTimePeriod*/
+/* Generated */                     (TA_MAType)params->optIn[1].data.optInInteger, /* optInMAType*/
+/* Generated */                     params->optIn[2].data.optInInteger /* optInDivisor*/ );
+/* Generated */ }
+/* Generated */ unsigned int TA_EOM_FramePPS( const TA_ParamHolderPriv *params )
+/* Generated */ {
+/* Generated */    return TA_EOM_State( *(struct TA_EOM_State**) &params->_state,
+/* Generated */                     *params->in[0].data.inPrice.high, /* inHigh */
+/* Generated */                     *params->in[0].data.inPrice.low, /* inLow */
+/* Generated */                     *params->in[0].data.inPrice.close, /* inClose */
+/* Generated */                     *params->in[0].data.inPrice.volume, /* inVolume */
+/* Generated */                     params->out[0].data.outReal /*  *outReal */ );
+/* Generated */ }
+/* Generated */ unsigned int TA_EOM_FramePPSF( const TA_ParamHolderPriv *params )
+/* Generated */ {
+/* Generated */    return TA_EOM_StateFree( (struct TA_EOM_State**) &params->_state
+ );
+/* Generated */ }
+/* Generated */ unsigned int TA_EOM_FramePPSS( const TA_ParamHolderPriv *params, FILE* _file )
+/* Generated */ {
+/* Generated */    return TA_EOM_StateSave( *(struct TA_EOM_State**) &params->_state,
+/* Generated */                      _file );
+/* Generated */ }
+/* Generated */ unsigned int TA_EOM_FramePPSL( const TA_ParamHolderPriv *params, FILE* _file )
+/* Generated */ {
+/* Generated */    return TA_EOM_StateLoad( (struct TA_EOM_State**) &params->_state,
+/* Generated */                      _file );
+/* Generated */ }
+/* Generated */ unsigned int TA_EOM_FramePPBS( const TA_ParamHolderPriv *params,
+/* Generated */                           int            startIdx,
+/* Generated */                           int            endIdx,
+/* Generated */                           int           *outBegIdx,
+/* Generated */                           int           *outNBElement )
+/* Generated */ {
+/* Generated */    return TA_EOM_BatchState( *(struct TA_EOM_State**) &params->_state,
+/* Generated */                     startIdx,
+/* Generated */                     endIdx,
+/* Generated */                     params->in[0].data.inPrice.high, /* inHigh */
+/* Generated */                     params->in[0].data.inPrice.low, /* inLow */
+/* Generated */                     params->in[0].data.inPrice.close, /* inClose */
+/* Generated */                     params->in[0].data.inPrice.volume, /* inVolume */
+/* Generated */                     outBegIdx, 
+/* Generated */                     outNBElement, 
+/* Generated */                     params->out[0].data.outReal /*  outReal */ );
+/* Generated */ }
 /* Generated */ TA_RetCode TA_EXP_FramePP( const TA_ParamHolderPriv *params,
 /* Generated */                           int            startIdx,
 /* Generated */                           int            endIdx,
@@ -6407,6 +6684,161 @@
 /* Generated */                       outBegIdx, 
 /* Generated */                       outNBElement, 
 /* Generated */                       params->out[0].data.outReal /*  outReal */ );
+/* Generated */ }
+/* Generated */ TA_RetCode TA_HA_FramePP( const TA_ParamHolderPriv *params,
+/* Generated */                           int            startIdx,
+/* Generated */                           int            endIdx,
+/* Generated */                           int           *outBegIdx,
+/* Generated */                           int           *outNBElement )
+/* Generated */ {
+/* Generated */    return TA_HA(/* Generated */            startIdx,
+/* Generated */            endIdx,
+/* Generated */            params->in[0].data.inPrice.open, /* inOpen */
+/* Generated */            params->in[0].data.inPrice.high, /* inHigh */
+/* Generated */            params->in[0].data.inPrice.low, /* inLow */
+/* Generated */            params->in[0].data.inPrice.close, /* inClose */
+/* Generated */            params->optIn[0].data.optInInteger, /* optInTimePeriod*/
+/* Generated */            outBegIdx, 
+/* Generated */            outNBElement, 
+/* Generated */            params->out[0].data.outReal, /*  outOpen */
+/* Generated */            params->out[1].data.outReal, /*  outHigh */
+/* Generated */            params->out[2].data.outReal, /*  outLow */
+/* Generated */            params->out[3].data.outReal /*  outClose */ );
+/* Generated */ }
+/* Generated */ unsigned int TA_HA_FramePPLB( const TA_ParamHolderPriv *params )
+/* Generated */ {
+/* Generated */    return TA_HA_Lookback(params->optIn[0].data.optInInteger /* optInTimePeriod*/ );
+/* Generated */ }
+/* Generated */ unsigned int TA_HA_FramePPSI( const TA_ParamHolderPriv *params )
+/* Generated */ {
+/* Generated */    return TA_HA_StateInit( (struct TA_HA_State**) &params->_state,
+/* Generated */                    params->optIn[0].data.optInInteger /* optInTimePeriod*/ );
+/* Generated */ }
+/* Generated */ unsigned int TA_HA_FramePPS( const TA_ParamHolderPriv *params )
+/* Generated */ {
+/* Generated */    return TA_HA_State( *(struct TA_HA_State**) &params->_state,
+/* Generated */                    *params->in[0].data.inPrice.open, /* inOpen */
+/* Generated */                    *params->in[0].data.inPrice.high, /* inHigh */
+/* Generated */                    *params->in[0].data.inPrice.low, /* inLow */
+/* Generated */                    *params->in[0].data.inPrice.close, /* inClose */
+/* Generated */                    params->out[0].data.outReal, /*  *outOpen */
+/* Generated */                    params->out[1].data.outReal, /*  *outHigh */
+/* Generated */                    params->out[2].data.outReal, /*  *outLow */
+/* Generated */                    params->out[3].data.outReal /*  *outClose */ );
+/* Generated */ }
+/* Generated */ unsigned int TA_HA_FramePPSF( const TA_ParamHolderPriv *params )
+/* Generated */ {
+/* Generated */    return TA_HA_StateFree( (struct TA_HA_State**) &params->_state
+ );
+/* Generated */ }
+/* Generated */ unsigned int TA_HA_FramePPSS( const TA_ParamHolderPriv *params, FILE* _file )
+/* Generated */ {
+/* Generated */    return TA_HA_StateSave( *(struct TA_HA_State**) &params->_state,
+/* Generated */                     _file );
+/* Generated */ }
+/* Generated */ unsigned int TA_HA_FramePPSL( const TA_ParamHolderPriv *params, FILE* _file )
+/* Generated */ {
+/* Generated */    return TA_HA_StateLoad( (struct TA_HA_State**) &params->_state,
+/* Generated */                     _file );
+/* Generated */ }
+/* Generated */ unsigned int TA_HA_FramePPBS( const TA_ParamHolderPriv *params,
+/* Generated */                           int            startIdx,
+/* Generated */                           int            endIdx,
+/* Generated */                           int           *outBegIdx,
+/* Generated */                           int           *outNBElement )
+/* Generated */ {
+/* Generated */    return TA_HA_BatchState( *(struct TA_HA_State**) &params->_state,
+/* Generated */                    startIdx,
+/* Generated */                    endIdx,
+/* Generated */                    params->in[0].data.inPrice.open, /* inOpen */
+/* Generated */                    params->in[0].data.inPrice.high, /* inHigh */
+/* Generated */                    params->in[0].data.inPrice.low, /* inLow */
+/* Generated */                    params->in[0].data.inPrice.close, /* inClose */
+/* Generated */                    outBegIdx, 
+/* Generated */                    outNBElement, 
+/* Generated */                    params->out[0].data.outReal, /*  outOpen */
+/* Generated */                    params->out[1].data.outReal, /*  outHigh */
+/* Generated */                    params->out[2].data.outReal, /*  outLow */
+/* Generated */                    params->out[3].data.outReal /*  outClose */ );
+/* Generated */ }
+/* Generated */ TA_RetCode TA_HA_SMO_FramePP( const TA_ParamHolderPriv *params,
+/* Generated */                           int            startIdx,
+/* Generated */                           int            endIdx,
+/* Generated */                           int           *outBegIdx,
+/* Generated */                           int           *outNBElement )
+/* Generated */ {
+/* Generated */    return TA_HA_SMO(/* Generated */                startIdx,
+/* Generated */                endIdx,
+/* Generated */                params->in[0].data.inPrice.open, /* inOpen */
+/* Generated */                params->in[0].data.inPrice.high, /* inHigh */
+/* Generated */                params->in[0].data.inPrice.low, /* inLow */
+/* Generated */                params->in[0].data.inPrice.close, /* inClose */
+/* Generated */                params->optIn[0].data.optInInteger, /* optInTimePeriod*/
+/* Generated */                (TA_MAType)params->optIn[1].data.optInInteger, /* optInMAType*/
+/* Generated */                outBegIdx, 
+/* Generated */                outNBElement, 
+/* Generated */                params->out[0].data.outReal, /*  outRealOpen */
+/* Generated */                params->out[1].data.outReal, /*  outRealHigh */
+/* Generated */                params->out[2].data.outReal, /*  outRealLow */
+/* Generated */                params->out[3].data.outReal /*  outRealClose */ );
+/* Generated */ }
+/* Generated */ unsigned int TA_HA_SMO_FramePPLB( const TA_ParamHolderPriv *params )
+/* Generated */ {
+/* Generated */    return TA_HA_SMO_Lookback(params->optIn[0].data.optInInteger, /* optInTimePeriod*/
+/* Generated */                        (TA_MAType)params->optIn[1].data.optInInteger /* optInMAType*/ );
+/* Generated */ }
+/* Generated */ unsigned int TA_HA_SMO_FramePPSI( const TA_ParamHolderPriv *params )
+/* Generated */ {
+/* Generated */    return TA_HA_SMO_StateInit( (struct TA_HA_SMO_State**) &params->_state,
+/* Generated */                        params->optIn[0].data.optInInteger, /* optInTimePeriod*/
+/* Generated */                        (TA_MAType)params->optIn[1].data.optInInteger /* optInMAType*/ );
+/* Generated */ }
+/* Generated */ unsigned int TA_HA_SMO_FramePPS( const TA_ParamHolderPriv *params )
+/* Generated */ {
+/* Generated */    return TA_HA_SMO_State( *(struct TA_HA_SMO_State**) &params->_state,
+/* Generated */                        *params->in[0].data.inPrice.open, /* inOpen */
+/* Generated */                        *params->in[0].data.inPrice.high, /* inHigh */
+/* Generated */                        *params->in[0].data.inPrice.low, /* inLow */
+/* Generated */                        *params->in[0].data.inPrice.close, /* inClose */
+/* Generated */                        params->out[0].data.outReal, /*  *outRealOpen */
+/* Generated */                        params->out[1].data.outReal, /*  *outRealHigh */
+/* Generated */                        params->out[2].data.outReal, /*  *outRealLow */
+/* Generated */                        params->out[3].data.outReal /*  *outRealClose */ );
+/* Generated */ }
+/* Generated */ unsigned int TA_HA_SMO_FramePPSF( const TA_ParamHolderPriv *params )
+/* Generated */ {
+/* Generated */    return TA_HA_SMO_StateFree( (struct TA_HA_SMO_State**) &params->_state
+ );
+/* Generated */ }
+/* Generated */ unsigned int TA_HA_SMO_FramePPSS( const TA_ParamHolderPriv *params, FILE* _file )
+/* Generated */ {
+/* Generated */    return TA_HA_SMO_StateSave( *(struct TA_HA_SMO_State**) &params->_state,
+/* Generated */                         _file );
+/* Generated */ }
+/* Generated */ unsigned int TA_HA_SMO_FramePPSL( const TA_ParamHolderPriv *params, FILE* _file )
+/* Generated */ {
+/* Generated */    return TA_HA_SMO_StateLoad( (struct TA_HA_SMO_State**) &params->_state,
+/* Generated */                         _file );
+/* Generated */ }
+/* Generated */ unsigned int TA_HA_SMO_FramePPBS( const TA_ParamHolderPriv *params,
+/* Generated */                           int            startIdx,
+/* Generated */                           int            endIdx,
+/* Generated */                           int           *outBegIdx,
+/* Generated */                           int           *outNBElement )
+/* Generated */ {
+/* Generated */    return TA_HA_SMO_BatchState( *(struct TA_HA_SMO_State**) &params->_state,
+/* Generated */                        startIdx,
+/* Generated */                        endIdx,
+/* Generated */                        params->in[0].data.inPrice.open, /* inOpen */
+/* Generated */                        params->in[0].data.inPrice.high, /* inHigh */
+/* Generated */                        params->in[0].data.inPrice.low, /* inLow */
+/* Generated */                        params->in[0].data.inPrice.close, /* inClose */
+/* Generated */                        outBegIdx, 
+/* Generated */                        outNBElement, 
+/* Generated */                        params->out[0].data.outReal, /*  outRealOpen */
+/* Generated */                        params->out[1].data.outReal, /*  outRealHigh */
+/* Generated */                        params->out[2].data.outReal, /*  outRealLow */
+/* Generated */                        params->out[3].data.outReal /*  outRealClose */ );
 /* Generated */ }
 /* Generated */ TA_RetCode TA_HT_DCPERIOD_FramePP( const TA_ParamHolderPriv *params,
 /* Generated */                           int            startIdx,
@@ -6798,6 +7230,91 @@
 /* Generated */                              outNBElement, 
 /* Generated */                              params->out[0].data.outInteger /*  outInteger */ );
 /* Generated */ }
+/* Generated */ TA_RetCode TA_ICHIMOKU_FramePP( const TA_ParamHolderPriv *params,
+/* Generated */                           int            startIdx,
+/* Generated */                           int            endIdx,
+/* Generated */                           int           *outBegIdx,
+/* Generated */                           int           *outNBElement )
+/* Generated */ {
+/* Generated */    return TA_ICHIMOKU(/* Generated */                  startIdx,
+/* Generated */                  endIdx,
+/* Generated */                  params->in[0].data.inPrice.high, /* inHigh */
+/* Generated */                  params->in[0].data.inPrice.low, /* inLow */
+/* Generated */                  params->in[0].data.inPrice.close, /* inClose */
+/* Generated */                  params->optIn[0].data.optInInteger, /* optInConversionPeriod*/
+/* Generated */                  params->optIn[1].data.optInInteger, /* optInBasePeriod*/
+/* Generated */                  params->optIn[2].data.optInInteger, /* optInSpanPeriod*/
+/* Generated */                  params->optIn[3].data.optInInteger, /* optInChikouPeriod*/
+/* Generated */                  outBegIdx, 
+/* Generated */                  outNBElement, 
+/* Generated */                  params->out[0].data.outReal, /*  outTenkan */
+/* Generated */                  params->out[1].data.outReal, /*  outKijun */
+/* Generated */                  params->out[2].data.outReal, /*  outSenkouSpanA */
+/* Generated */                  params->out[3].data.outReal, /*  outSenkouSpanB */
+/* Generated */                  params->out[4].data.outReal /*  outChikouSpan */ );
+/* Generated */ }
+/* Generated */ unsigned int TA_ICHIMOKU_FramePPLB( const TA_ParamHolderPriv *params )
+/* Generated */ {
+/* Generated */    return TA_ICHIMOKU_Lookback(params->optIn[0].data.optInInteger, /* optInConversionPeriod*/
+/* Generated */                          params->optIn[1].data.optInInteger, /* optInBasePeriod*/
+/* Generated */                          params->optIn[2].data.optInInteger, /* optInSpanPeriod*/
+/* Generated */                          params->optIn[3].data.optInInteger /* optInChikouPeriod*/ );
+/* Generated */ }
+/* Generated */ unsigned int TA_ICHIMOKU_FramePPSI( const TA_ParamHolderPriv *params )
+/* Generated */ {
+/* Generated */    return TA_ICHIMOKU_StateInit( (struct TA_ICHIMOKU_State**) &params->_state,
+/* Generated */                          params->optIn[0].data.optInInteger, /* optInConversionPeriod*/
+/* Generated */                          params->optIn[1].data.optInInteger, /* optInBasePeriod*/
+/* Generated */                          params->optIn[2].data.optInInteger, /* optInSpanPeriod*/
+/* Generated */                          params->optIn[3].data.optInInteger /* optInChikouPeriod*/ );
+/* Generated */ }
+/* Generated */ unsigned int TA_ICHIMOKU_FramePPS( const TA_ParamHolderPriv *params )
+/* Generated */ {
+/* Generated */    return TA_ICHIMOKU_State( *(struct TA_ICHIMOKU_State**) &params->_state,
+/* Generated */                          *params->in[0].data.inPrice.high, /* inHigh */
+/* Generated */                          *params->in[0].data.inPrice.low, /* inLow */
+/* Generated */                          *params->in[0].data.inPrice.close, /* inClose */
+/* Generated */                          params->out[0].data.outReal, /*  *outTenkan */
+/* Generated */                          params->out[1].data.outReal, /*  *outKijun */
+/* Generated */                          params->out[2].data.outReal, /*  *outSenkouSpanA */
+/* Generated */                          params->out[3].data.outReal, /*  *outSenkouSpanB */
+/* Generated */                          params->out[4].data.outReal /*  *outChikouSpan */ );
+/* Generated */ }
+/* Generated */ unsigned int TA_ICHIMOKU_FramePPSF( const TA_ParamHolderPriv *params )
+/* Generated */ {
+/* Generated */    return TA_ICHIMOKU_StateFree( (struct TA_ICHIMOKU_State**) &params->_state
+ );
+/* Generated */ }
+/* Generated */ unsigned int TA_ICHIMOKU_FramePPSS( const TA_ParamHolderPriv *params, FILE* _file )
+/* Generated */ {
+/* Generated */    return TA_ICHIMOKU_StateSave( *(struct TA_ICHIMOKU_State**) &params->_state,
+/* Generated */                           _file );
+/* Generated */ }
+/* Generated */ unsigned int TA_ICHIMOKU_FramePPSL( const TA_ParamHolderPriv *params, FILE* _file )
+/* Generated */ {
+/* Generated */    return TA_ICHIMOKU_StateLoad( (struct TA_ICHIMOKU_State**) &params->_state,
+/* Generated */                           _file );
+/* Generated */ }
+/* Generated */ unsigned int TA_ICHIMOKU_FramePPBS( const TA_ParamHolderPriv *params,
+/* Generated */                           int            startIdx,
+/* Generated */                           int            endIdx,
+/* Generated */                           int           *outBegIdx,
+/* Generated */                           int           *outNBElement )
+/* Generated */ {
+/* Generated */    return TA_ICHIMOKU_BatchState( *(struct TA_ICHIMOKU_State**) &params->_state,
+/* Generated */                          startIdx,
+/* Generated */                          endIdx,
+/* Generated */                          params->in[0].data.inPrice.high, /* inHigh */
+/* Generated */                          params->in[0].data.inPrice.low, /* inLow */
+/* Generated */                          params->in[0].data.inPrice.close, /* inClose */
+/* Generated */                          outBegIdx, 
+/* Generated */                          outNBElement, 
+/* Generated */                          params->out[0].data.outReal, /*  outTenkan */
+/* Generated */                          params->out[1].data.outReal, /*  outKijun */
+/* Generated */                          params->out[2].data.outReal, /*  outSenkouSpanA */
+/* Generated */                          params->out[3].data.outReal, /*  outSenkouSpanB */
+/* Generated */                          params->out[4].data.outReal /*  outChikouSpan */ );
+/* Generated */ }
 /* Generated */ TA_RetCode TA_IMI_FramePP( const TA_ParamHolderPriv *params,
 /* Generated */                           int            startIdx,
 /* Generated */                           int            endIdx,
@@ -6916,6 +7433,161 @@
 /* Generated */                      outBegIdx, 
 /* Generated */                      outNBElement, 
 /* Generated */                      params->out[0].data.outReal /*  outReal */ );
+/* Generated */ }
+/* Generated */ TA_RetCode TA_KDJ_FramePP( const TA_ParamHolderPriv *params,
+/* Generated */                           int            startIdx,
+/* Generated */                           int            endIdx,
+/* Generated */                           int           *outBegIdx,
+/* Generated */                           int           *outNBElement )
+/* Generated */ {
+/* Generated */    return TA_KDJ(/* Generated */             startIdx,
+/* Generated */             endIdx,
+/* Generated */             params->in[0].data.inPrice.high, /* inHigh */
+/* Generated */             params->in[0].data.inPrice.low, /* inLow */
+/* Generated */             params->in[0].data.inPrice.close, /* inClose */
+/* Generated */             params->optIn[0].data.optInInteger, /* optInTimePeriod*/
+/* Generated */             params->optIn[1].data.optInInteger, /* optInSignalPeriod*/
+/* Generated */             (TA_MAType)params->optIn[2].data.optInInteger, /* optInMAType*/
+/* Generated */             outBegIdx, 
+/* Generated */             outNBElement, 
+/* Generated */             params->out[0].data.outReal, /*  outK */
+/* Generated */             params->out[1].data.outReal, /*  outD */
+/* Generated */             params->out[2].data.outReal /*  outJ */ );
+/* Generated */ }
+/* Generated */ unsigned int TA_KDJ_FramePPLB( const TA_ParamHolderPriv *params )
+/* Generated */ {
+/* Generated */    return TA_KDJ_Lookback(params->optIn[0].data.optInInteger, /* optInTimePeriod*/
+/* Generated */                     params->optIn[1].data.optInInteger, /* optInSignalPeriod*/
+/* Generated */                     (TA_MAType)params->optIn[2].data.optInInteger /* optInMAType*/ );
+/* Generated */ }
+/* Generated */ unsigned int TA_KDJ_FramePPSI( const TA_ParamHolderPriv *params )
+/* Generated */ {
+/* Generated */    return TA_KDJ_StateInit( (struct TA_KDJ_State**) &params->_state,
+/* Generated */                     params->optIn[0].data.optInInteger, /* optInTimePeriod*/
+/* Generated */                     params->optIn[1].data.optInInteger, /* optInSignalPeriod*/
+/* Generated */                     (TA_MAType)params->optIn[2].data.optInInteger /* optInMAType*/ );
+/* Generated */ }
+/* Generated */ unsigned int TA_KDJ_FramePPS( const TA_ParamHolderPriv *params )
+/* Generated */ {
+/* Generated */    return TA_KDJ_State( *(struct TA_KDJ_State**) &params->_state,
+/* Generated */                     *params->in[0].data.inPrice.high, /* inHigh */
+/* Generated */                     *params->in[0].data.inPrice.low, /* inLow */
+/* Generated */                     *params->in[0].data.inPrice.close, /* inClose */
+/* Generated */                     params->out[0].data.outReal, /*  *outK */
+/* Generated */                     params->out[1].data.outReal, /*  *outD */
+/* Generated */                     params->out[2].data.outReal /*  *outJ */ );
+/* Generated */ }
+/* Generated */ unsigned int TA_KDJ_FramePPSF( const TA_ParamHolderPriv *params )
+/* Generated */ {
+/* Generated */    return TA_KDJ_StateFree( (struct TA_KDJ_State**) &params->_state
+ );
+/* Generated */ }
+/* Generated */ unsigned int TA_KDJ_FramePPSS( const TA_ParamHolderPriv *params, FILE* _file )
+/* Generated */ {
+/* Generated */    return TA_KDJ_StateSave( *(struct TA_KDJ_State**) &params->_state,
+/* Generated */                      _file );
+/* Generated */ }
+/* Generated */ unsigned int TA_KDJ_FramePPSL( const TA_ParamHolderPriv *params, FILE* _file )
+/* Generated */ {
+/* Generated */    return TA_KDJ_StateLoad( (struct TA_KDJ_State**) &params->_state,
+/* Generated */                      _file );
+/* Generated */ }
+/* Generated */ unsigned int TA_KDJ_FramePPBS( const TA_ParamHolderPriv *params,
+/* Generated */                           int            startIdx,
+/* Generated */                           int            endIdx,
+/* Generated */                           int           *outBegIdx,
+/* Generated */                           int           *outNBElement )
+/* Generated */ {
+/* Generated */    return TA_KDJ_BatchState( *(struct TA_KDJ_State**) &params->_state,
+/* Generated */                     startIdx,
+/* Generated */                     endIdx,
+/* Generated */                     params->in[0].data.inPrice.high, /* inHigh */
+/* Generated */                     params->in[0].data.inPrice.low, /* inLow */
+/* Generated */                     params->in[0].data.inPrice.close, /* inClose */
+/* Generated */                     outBegIdx, 
+/* Generated */                     outNBElement, 
+/* Generated */                     params->out[0].data.outReal, /*  outK */
+/* Generated */                     params->out[1].data.outReal, /*  outD */
+/* Generated */                     params->out[2].data.outReal /*  outJ */ );
+/* Generated */ }
+/* Generated */ TA_RetCode TA_KVO_FramePP( const TA_ParamHolderPriv *params,
+/* Generated */                           int            startIdx,
+/* Generated */                           int            endIdx,
+/* Generated */                           int           *outBegIdx,
+/* Generated */                           int           *outNBElement )
+/* Generated */ {
+/* Generated */    return TA_KVO(/* Generated */             startIdx,
+/* Generated */             endIdx,
+/* Generated */             params->in[0].data.inPrice.high, /* inHigh */
+/* Generated */             params->in[0].data.inPrice.low, /* inLow */
+/* Generated */             params->in[0].data.inPrice.close, /* inClose */
+/* Generated */             params->in[0].data.inPrice.volume, /* inVolume */
+/* Generated */             params->optIn[0].data.optInInteger, /* optInFastPeriod*/
+/* Generated */             params->optIn[1].data.optInInteger, /* optInSlowPeriod*/
+/* Generated */             params->optIn[2].data.optInInteger, /* optInTimePeriod*/
+/* Generated */             (TA_MAType)params->optIn[3].data.optInInteger, /* optInMAType*/
+/* Generated */             outBegIdx, 
+/* Generated */             outNBElement, 
+/* Generated */             params->out[0].data.outReal, /*  outKVO */
+/* Generated */             params->out[1].data.outReal /*  outKVOSignal */ );
+/* Generated */ }
+/* Generated */ unsigned int TA_KVO_FramePPLB( const TA_ParamHolderPriv *params )
+/* Generated */ {
+/* Generated */    return TA_KVO_Lookback(params->optIn[0].data.optInInteger, /* optInFastPeriod*/
+/* Generated */                     params->optIn[1].data.optInInteger, /* optInSlowPeriod*/
+/* Generated */                     params->optIn[2].data.optInInteger, /* optInTimePeriod*/
+/* Generated */                     (TA_MAType)params->optIn[3].data.optInInteger /* optInMAType*/ );
+/* Generated */ }
+/* Generated */ unsigned int TA_KVO_FramePPSI( const TA_ParamHolderPriv *params )
+/* Generated */ {
+/* Generated */    return TA_KVO_StateInit( (struct TA_KVO_State**) &params->_state,
+/* Generated */                     params->optIn[0].data.optInInteger, /* optInFastPeriod*/
+/* Generated */                     params->optIn[1].data.optInInteger, /* optInSlowPeriod*/
+/* Generated */                     params->optIn[2].data.optInInteger, /* optInTimePeriod*/
+/* Generated */                     (TA_MAType)params->optIn[3].data.optInInteger /* optInMAType*/ );
+/* Generated */ }
+/* Generated */ unsigned int TA_KVO_FramePPS( const TA_ParamHolderPriv *params )
+/* Generated */ {
+/* Generated */    return TA_KVO_State( *(struct TA_KVO_State**) &params->_state,
+/* Generated */                     *params->in[0].data.inPrice.high, /* inHigh */
+/* Generated */                     *params->in[0].data.inPrice.low, /* inLow */
+/* Generated */                     *params->in[0].data.inPrice.close, /* inClose */
+/* Generated */                     *params->in[0].data.inPrice.volume, /* inVolume */
+/* Generated */                     params->out[0].data.outReal, /*  *outKVO */
+/* Generated */                     params->out[1].data.outReal /*  *outKVOSignal */ );
+/* Generated */ }
+/* Generated */ unsigned int TA_KVO_FramePPSF( const TA_ParamHolderPriv *params )
+/* Generated */ {
+/* Generated */    return TA_KVO_StateFree( (struct TA_KVO_State**) &params->_state
+ );
+/* Generated */ }
+/* Generated */ unsigned int TA_KVO_FramePPSS( const TA_ParamHolderPriv *params, FILE* _file )
+/* Generated */ {
+/* Generated */    return TA_KVO_StateSave( *(struct TA_KVO_State**) &params->_state,
+/* Generated */                      _file );
+/* Generated */ }
+/* Generated */ unsigned int TA_KVO_FramePPSL( const TA_ParamHolderPriv *params, FILE* _file )
+/* Generated */ {
+/* Generated */    return TA_KVO_StateLoad( (struct TA_KVO_State**) &params->_state,
+/* Generated */                      _file );
+/* Generated */ }
+/* Generated */ unsigned int TA_KVO_FramePPBS( const TA_ParamHolderPriv *params,
+/* Generated */                           int            startIdx,
+/* Generated */                           int            endIdx,
+/* Generated */                           int           *outBegIdx,
+/* Generated */                           int           *outNBElement )
+/* Generated */ {
+/* Generated */    return TA_KVO_BatchState( *(struct TA_KVO_State**) &params->_state,
+/* Generated */                     startIdx,
+/* Generated */                     endIdx,
+/* Generated */                     params->in[0].data.inPrice.high, /* inHigh */
+/* Generated */                     params->in[0].data.inPrice.low, /* inLow */
+/* Generated */                     params->in[0].data.inPrice.close, /* inClose */
+/* Generated */                     params->in[0].data.inPrice.volume, /* inVolume */
+/* Generated */                     outBegIdx, 
+/* Generated */                     outNBElement, 
+/* Generated */                     params->out[0].data.outReal, /*  outKVO */
+/* Generated */                     params->out[1].data.outReal /*  outKVOSignal */ );
 /* Generated */ }
 /* Generated */ TA_RetCode TA_LINEARREG_FramePP( const TA_ParamHolderPriv *params,
 /* Generated */                           int            startIdx,
@@ -9060,6 +9732,133 @@
 /* Generated */                     outNBElement, 
 /* Generated */                     params->out[0].data.outReal /*  outReal */ );
 /* Generated */ }
+/* Generated */ TA_RetCode TA_REDK_EVEREX_FramePP( const TA_ParamHolderPriv *params,
+/* Generated */                           int            startIdx,
+/* Generated */                           int            endIdx,
+/* Generated */                           int           *outBegIdx,
+/* Generated */                           int           *outNBElement )
+/* Generated */ {
+/* Generated */    return TA_REDK_EVEREX(/* Generated */                     startIdx,
+/* Generated */                     endIdx,
+/* Generated */                     params->in[0].data.inPrice.open, /* inOpen */
+/* Generated */                     params->in[0].data.inPrice.high, /* inHigh */
+/* Generated */                     params->in[0].data.inPrice.low, /* inLow */
+/* Generated */                     params->in[0].data.inPrice.close, /* inClose */
+/* Generated */                     params->in[0].data.inPrice.volume, /* inVolume */
+/* Generated */                     params->optIn[0].data.optInInteger, /* optInTimePeriod*/
+/* Generated */                     (TA_MAType)params->optIn[1].data.optInInteger, /* optInMAType*/
+/* Generated */                     params->optIn[2].data.optInInteger, /* optInRofPeriod*/
+/* Generated */                     (TA_MAType)params->optIn[3].data.optInInteger, /* optInRofMAType*/
+/* Generated */                     params->optIn[4].data.optInReal, /* optInRofSmooth*/
+/* Generated */                     params->optIn[5].data.optInInteger, /* optInSignalPeriod*/
+/* Generated */                     (TA_MAType)params->optIn[6].data.optInInteger, /* optInSignalMAType*/
+/* Generated */                     params->optIn[7].data.optInInteger, /* optInBiasPeriod*/
+/* Generated */                     (TA_MAType)params->optIn[8].data.optInInteger, /* optInBiasMAType*/
+/* Generated */                     outBegIdx, 
+/* Generated */                     outNBElement, 
+/* Generated */                     params->out[0].data.outReal, /*  outVolNorm */
+/* Generated */                     params->out[1].data.outReal, /*  outPriceNorm */
+/* Generated */                     params->out[2].data.outReal, /*  outFlow */
+/* Generated */                     params->out[3].data.outReal, /*  outBullAvg */
+/* Generated */                     params->out[4].data.outReal, /*  outBearAvg */
+/* Generated */                     params->out[5].data.outReal, /*  outRROF */
+/* Generated */                     params->out[6].data.outReal, /*  outRROFSmooth */
+/* Generated */                     params->out[7].data.outReal, /*  outSignal */
+/* Generated */                     params->out[8].data.outReal, /*  outBiasSentiment */
+/* Generated */                     params->out[9].data.outReal, /*  outBiasSentimentSmooth */
+/* Generated */                     params->out[10].data.outReal, /*  outEvRatio */
+/* Generated */                     params->out[11].data.outInteger /*  outFlowUp */ );
+/* Generated */ }
+/* Generated */ unsigned int TA_REDK_EVEREX_FramePPLB( const TA_ParamHolderPriv *params )
+/* Generated */ {
+/* Generated */    return TA_REDK_EVEREX_Lookback(params->optIn[0].data.optInInteger, /* optInTimePeriod*/
+/* Generated */                             (TA_MAType)params->optIn[1].data.optInInteger, /* optInMAType*/
+/* Generated */                             params->optIn[2].data.optInInteger, /* optInRofPeriod*/
+/* Generated */                             (TA_MAType)params->optIn[3].data.optInInteger, /* optInRofMAType*/
+/* Generated */                             params->optIn[4].data.optInReal, /* optInRofSmooth*/
+/* Generated */                             params->optIn[5].data.optInInteger, /* optInSignalPeriod*/
+/* Generated */                             (TA_MAType)params->optIn[6].data.optInInteger, /* optInSignalMAType*/
+/* Generated */                             params->optIn[7].data.optInInteger, /* optInBiasPeriod*/
+/* Generated */                             (TA_MAType)params->optIn[8].data.optInInteger /* optInBiasMAType*/ );
+/* Generated */ }
+/* Generated */ unsigned int TA_REDK_EVEREX_FramePPSI( const TA_ParamHolderPriv *params )
+/* Generated */ {
+/* Generated */    return TA_REDK_EVEREX_StateInit( (struct TA_REDK_EVEREX_State**) &params->_state,
+/* Generated */                             params->optIn[0].data.optInInteger, /* optInTimePeriod*/
+/* Generated */                             (TA_MAType)params->optIn[1].data.optInInteger, /* optInMAType*/
+/* Generated */                             params->optIn[2].data.optInInteger, /* optInRofPeriod*/
+/* Generated */                             (TA_MAType)params->optIn[3].data.optInInteger, /* optInRofMAType*/
+/* Generated */                             params->optIn[4].data.optInReal, /* optInRofSmooth*/
+/* Generated */                             params->optIn[5].data.optInInteger, /* optInSignalPeriod*/
+/* Generated */                             (TA_MAType)params->optIn[6].data.optInInteger, /* optInSignalMAType*/
+/* Generated */                             params->optIn[7].data.optInInteger, /* optInBiasPeriod*/
+/* Generated */                             (TA_MAType)params->optIn[8].data.optInInteger /* optInBiasMAType*/ );
+/* Generated */ }
+/* Generated */ unsigned int TA_REDK_EVEREX_FramePPS( const TA_ParamHolderPriv *params )
+/* Generated */ {
+/* Generated */    return TA_REDK_EVEREX_State( *(struct TA_REDK_EVEREX_State**) &params->_state,
+/* Generated */                             *params->in[0].data.inPrice.open, /* inOpen */
+/* Generated */                             *params->in[0].data.inPrice.high, /* inHigh */
+/* Generated */                             *params->in[0].data.inPrice.low, /* inLow */
+/* Generated */                             *params->in[0].data.inPrice.close, /* inClose */
+/* Generated */                             *params->in[0].data.inPrice.volume, /* inVolume */
+/* Generated */                             params->out[0].data.outReal, /*  *outVolNorm */
+/* Generated */                             params->out[1].data.outReal, /*  *outPriceNorm */
+/* Generated */                             params->out[2].data.outReal, /*  *outFlow */
+/* Generated */                             params->out[3].data.outReal, /*  *outBullAvg */
+/* Generated */                             params->out[4].data.outReal, /*  *outBearAvg */
+/* Generated */                             params->out[5].data.outReal, /*  *outRROF */
+/* Generated */                             params->out[6].data.outReal, /*  *outRROFSmooth */
+/* Generated */                             params->out[7].data.outReal, /*  *outSignal */
+/* Generated */                             params->out[8].data.outReal, /*  *outBiasSentiment */
+/* Generated */                             params->out[9].data.outReal, /*  *outBiasSentimentSmooth */
+/* Generated */                             params->out[10].data.outReal, /*  *outEvRatio */
+/* Generated */                             params->out[11].data.outInteger /*  *outFlowUp */ );
+/* Generated */ }
+/* Generated */ unsigned int TA_REDK_EVEREX_FramePPSF( const TA_ParamHolderPriv *params )
+/* Generated */ {
+/* Generated */    return TA_REDK_EVEREX_StateFree( (struct TA_REDK_EVEREX_State**) &params->_state
+ );
+/* Generated */ }
+/* Generated */ unsigned int TA_REDK_EVEREX_FramePPSS( const TA_ParamHolderPriv *params, FILE* _file )
+/* Generated */ {
+/* Generated */    return TA_REDK_EVEREX_StateSave( *(struct TA_REDK_EVEREX_State**) &params->_state,
+/* Generated */                              _file );
+/* Generated */ }
+/* Generated */ unsigned int TA_REDK_EVEREX_FramePPSL( const TA_ParamHolderPriv *params, FILE* _file )
+/* Generated */ {
+/* Generated */    return TA_REDK_EVEREX_StateLoad( (struct TA_REDK_EVEREX_State**) &params->_state,
+/* Generated */                              _file );
+/* Generated */ }
+/* Generated */ unsigned int TA_REDK_EVEREX_FramePPBS( const TA_ParamHolderPriv *params,
+/* Generated */                           int            startIdx,
+/* Generated */                           int            endIdx,
+/* Generated */                           int           *outBegIdx,
+/* Generated */                           int           *outNBElement )
+/* Generated */ {
+/* Generated */    return TA_REDK_EVEREX_BatchState( *(struct TA_REDK_EVEREX_State**) &params->_state,
+/* Generated */                             startIdx,
+/* Generated */                             endIdx,
+/* Generated */                             params->in[0].data.inPrice.open, /* inOpen */
+/* Generated */                             params->in[0].data.inPrice.high, /* inHigh */
+/* Generated */                             params->in[0].data.inPrice.low, /* inLow */
+/* Generated */                             params->in[0].data.inPrice.close, /* inClose */
+/* Generated */                             params->in[0].data.inPrice.volume, /* inVolume */
+/* Generated */                             outBegIdx, 
+/* Generated */                             outNBElement, 
+/* Generated */                             params->out[0].data.outReal, /*  outVolNorm */
+/* Generated */                             params->out[1].data.outReal, /*  outPriceNorm */
+/* Generated */                             params->out[2].data.outReal, /*  outFlow */
+/* Generated */                             params->out[3].data.outReal, /*  outBullAvg */
+/* Generated */                             params->out[4].data.outReal, /*  outBearAvg */
+/* Generated */                             params->out[5].data.outReal, /*  outRROF */
+/* Generated */                             params->out[6].data.outReal, /*  outRROFSmooth */
+/* Generated */                             params->out[7].data.outReal, /*  outSignal */
+/* Generated */                             params->out[8].data.outReal, /*  outBiasSentiment */
+/* Generated */                             params->out[9].data.outReal, /*  outBiasSentimentSmooth */
+/* Generated */                             params->out[10].data.outReal, /*  outEvRatio */
+/* Generated */                             params->out[11].data.outInteger /*  outFlowUp */ );
+/* Generated */ }
 /* Generated */ TA_RetCode TA_ROC_FramePP( const TA_ParamHolderPriv *params,
 /* Generated */                           int            startIdx,
 /* Generated */                           int            endIdx,
@@ -10154,6 +10953,79 @@
 /* Generated */                     outNBElement, 
 /* Generated */                     params->out[0].data.outReal /*  outReal */ );
 /* Generated */ }
+/* Generated */ TA_RetCode TA_SUPERTREND_FramePP( const TA_ParamHolderPriv *params,
+/* Generated */                           int            startIdx,
+/* Generated */                           int            endIdx,
+/* Generated */                           int           *outBegIdx,
+/* Generated */                           int           *outNBElement )
+/* Generated */ {
+/* Generated */    return TA_SUPERTREND(/* Generated */                    startIdx,
+/* Generated */                    endIdx,
+/* Generated */                    params->in[0].data.inPrice.high, /* inHigh */
+/* Generated */                    params->in[0].data.inPrice.low, /* inLow */
+/* Generated */                    params->in[0].data.inPrice.close, /* inClose */
+/* Generated */                    params->optIn[0].data.optInInteger, /* optInTimePeriod*/
+/* Generated */                    params->optIn[1].data.optInReal, /* optInModifier*/
+/* Generated */                    outBegIdx, 
+/* Generated */                    outNBElement, 
+/* Generated */                    params->out[0].data.outInteger, /*  outTrend */
+/* Generated */                    params->out[1].data.outReal, /*  outUpperBand */
+/* Generated */                    params->out[2].data.outReal /*  outLowerBand */ );
+/* Generated */ }
+/* Generated */ unsigned int TA_SUPERTREND_FramePPLB( const TA_ParamHolderPriv *params )
+/* Generated */ {
+/* Generated */    return TA_SUPERTREND_Lookback(params->optIn[0].data.optInInteger, /* optInTimePeriod*/
+/* Generated */                            params->optIn[1].data.optInReal /* optInModifier*/ );
+/* Generated */ }
+/* Generated */ unsigned int TA_SUPERTREND_FramePPSI( const TA_ParamHolderPriv *params )
+/* Generated */ {
+/* Generated */    return TA_SUPERTREND_StateInit( (struct TA_SUPERTREND_State**) &params->_state,
+/* Generated */                            params->optIn[0].data.optInInteger, /* optInTimePeriod*/
+/* Generated */                            params->optIn[1].data.optInReal /* optInModifier*/ );
+/* Generated */ }
+/* Generated */ unsigned int TA_SUPERTREND_FramePPS( const TA_ParamHolderPriv *params )
+/* Generated */ {
+/* Generated */    return TA_SUPERTREND_State( *(struct TA_SUPERTREND_State**) &params->_state,
+/* Generated */                            *params->in[0].data.inPrice.high, /* inHigh */
+/* Generated */                            *params->in[0].data.inPrice.low, /* inLow */
+/* Generated */                            *params->in[0].data.inPrice.close, /* inClose */
+/* Generated */                            params->out[0].data.outInteger, /*  *outTrend */
+/* Generated */                            params->out[1].data.outReal, /*  *outUpperBand */
+/* Generated */                            params->out[2].data.outReal /*  *outLowerBand */ );
+/* Generated */ }
+/* Generated */ unsigned int TA_SUPERTREND_FramePPSF( const TA_ParamHolderPriv *params )
+/* Generated */ {
+/* Generated */    return TA_SUPERTREND_StateFree( (struct TA_SUPERTREND_State**) &params->_state
+ );
+/* Generated */ }
+/* Generated */ unsigned int TA_SUPERTREND_FramePPSS( const TA_ParamHolderPriv *params, FILE* _file )
+/* Generated */ {
+/* Generated */    return TA_SUPERTREND_StateSave( *(struct TA_SUPERTREND_State**) &params->_state,
+/* Generated */                             _file );
+/* Generated */ }
+/* Generated */ unsigned int TA_SUPERTREND_FramePPSL( const TA_ParamHolderPriv *params, FILE* _file )
+/* Generated */ {
+/* Generated */    return TA_SUPERTREND_StateLoad( (struct TA_SUPERTREND_State**) &params->_state,
+/* Generated */                             _file );
+/* Generated */ }
+/* Generated */ unsigned int TA_SUPERTREND_FramePPBS( const TA_ParamHolderPriv *params,
+/* Generated */                           int            startIdx,
+/* Generated */                           int            endIdx,
+/* Generated */                           int           *outBegIdx,
+/* Generated */                           int           *outNBElement )
+/* Generated */ {
+/* Generated */    return TA_SUPERTREND_BatchState( *(struct TA_SUPERTREND_State**) &params->_state,
+/* Generated */                            startIdx,
+/* Generated */                            endIdx,
+/* Generated */                            params->in[0].data.inPrice.high, /* inHigh */
+/* Generated */                            params->in[0].data.inPrice.low, /* inLow */
+/* Generated */                            params->in[0].data.inPrice.close, /* inClose */
+/* Generated */                            outBegIdx, 
+/* Generated */                            outNBElement, 
+/* Generated */                            params->out[0].data.outInteger, /*  outTrend */
+/* Generated */                            params->out[1].data.outReal, /*  outUpperBand */
+/* Generated */                            params->out[2].data.outReal /*  outLowerBand */ );
+/* Generated */ }
 /* Generated */ TA_RetCode TA_T3_FramePP( const TA_ParamHolderPriv *params,
 /* Generated */                           int            startIdx,
 /* Generated */                           int            endIdx,
@@ -10845,6 +11717,265 @@
 /* Generated */                     outBegIdx, 
 /* Generated */                     outNBElement, 
 /* Generated */                     params->out[0].data.outReal /*  outReal */ );
+/* Generated */ }
+/* Generated */ TA_RetCode TA_VP_FramePP( const TA_ParamHolderPriv *params,
+/* Generated */                           int            startIdx,
+/* Generated */                           int            endIdx,
+/* Generated */                           int           *outBegIdx,
+/* Generated */                           int           *outNBElement )
+/* Generated */ {
+/* Generated */    return TA_VP(/* Generated */            startIdx,
+/* Generated */            endIdx,
+/* Generated */            params->in[0].data.inPrice.close, /* inClose */
+/* Generated */            params->in[0].data.inPrice.volume, /* inVolume */
+/* Generated */            params->optIn[0].data.optInInteger, /* optInTimePeriod*/
+/* Generated */            params->optIn[1].data.optInInteger, /* optInVpWidth*/
+/* Generated */            outBegIdx, 
+/* Generated */            outNBElement, 
+/* Generated */            params->out[0].data.outReal, /*  outPoc */
+/* Generated */            params->out[1].data.outReal, /*  outValueAreaHigh */
+/* Generated */            params->out[2].data.outReal, /*  outValueAreaLow */
+/* Generated */            params->out[3].data.outReal, /*  outReal */
+/* Generated */            params->out[4].data.outInteger /*  outInteger */ );
+/* Generated */ }
+/* Generated */ unsigned int TA_VP_FramePPLB( const TA_ParamHolderPriv *params )
+/* Generated */ {
+/* Generated */    return TA_VP_Lookback(params->optIn[0].data.optInInteger, /* optInTimePeriod*/
+/* Generated */                    params->optIn[1].data.optInInteger /* optInVpWidth*/ );
+/* Generated */ }
+/* Generated */ unsigned int TA_VP_FramePPSI( const TA_ParamHolderPriv *params )
+/* Generated */ {
+/* Generated */    return TA_VP_StateInit( (struct TA_VP_State**) &params->_state,
+/* Generated */                    params->optIn[0].data.optInInteger, /* optInTimePeriod*/
+/* Generated */                    params->optIn[1].data.optInInteger /* optInVpWidth*/ );
+/* Generated */ }
+/* Generated */ unsigned int TA_VP_FramePPS( const TA_ParamHolderPriv *params )
+/* Generated */ {
+/* Generated */    return TA_VP_State( *(struct TA_VP_State**) &params->_state,
+/* Generated */                    *params->in[0].data.inPrice.close, /* inClose */
+/* Generated */                    *params->in[0].data.inPrice.volume, /* inVolume */
+/* Generated */                    params->out[0].data.outReal, /*  *outPoc */
+/* Generated */                    params->out[1].data.outReal, /*  *outValueAreaHigh */
+/* Generated */                    params->out[2].data.outReal, /*  *outValueAreaLow */
+/* Generated */                    params->out[3].data.outReal, /*  *outReal */
+/* Generated */                    params->out[4].data.outInteger /*  *outInteger */ );
+/* Generated */ }
+/* Generated */ unsigned int TA_VP_FramePPSF( const TA_ParamHolderPriv *params )
+/* Generated */ {
+/* Generated */    return TA_VP_StateFree( (struct TA_VP_State**) &params->_state
+ );
+/* Generated */ }
+/* Generated */ unsigned int TA_VP_FramePPSS( const TA_ParamHolderPriv *params, FILE* _file )
+/* Generated */ {
+/* Generated */    return TA_VP_StateSave( *(struct TA_VP_State**) &params->_state,
+/* Generated */                     _file );
+/* Generated */ }
+/* Generated */ unsigned int TA_VP_FramePPSL( const TA_ParamHolderPriv *params, FILE* _file )
+/* Generated */ {
+/* Generated */    return TA_VP_StateLoad( (struct TA_VP_State**) &params->_state,
+/* Generated */                     _file );
+/* Generated */ }
+/* Generated */ unsigned int TA_VP_FramePPBS( const TA_ParamHolderPriv *params,
+/* Generated */                           int            startIdx,
+/* Generated */                           int            endIdx,
+/* Generated */                           int           *outBegIdx,
+/* Generated */                           int           *outNBElement )
+/* Generated */ {
+/* Generated */    return TA_VP_BatchState( *(struct TA_VP_State**) &params->_state,
+/* Generated */                    startIdx,
+/* Generated */                    endIdx,
+/* Generated */                    params->in[0].data.inPrice.close, /* inClose */
+/* Generated */                    params->in[0].data.inPrice.volume, /* inVolume */
+/* Generated */                    outBegIdx, 
+/* Generated */                    outNBElement, 
+/* Generated */                    params->out[0].data.outReal, /*  outPoc */
+/* Generated */                    params->out[1].data.outReal, /*  outValueAreaHigh */
+/* Generated */                    params->out[2].data.outReal, /*  outValueAreaLow */
+/* Generated */                    params->out[3].data.outReal, /*  outReal */
+/* Generated */                    params->out[4].data.outInteger /*  outInteger */ );
+/* Generated */ }
+/* Generated */ TA_RetCode TA_VROC_FramePP( const TA_ParamHolderPriv *params,
+/* Generated */                           int            startIdx,
+/* Generated */                           int            endIdx,
+/* Generated */                           int           *outBegIdx,
+/* Generated */                           int           *outNBElement )
+/* Generated */ {
+/* Generated */    return TA_VROC(/* Generated */              startIdx,
+/* Generated */              endIdx,
+/* Generated */              params->in[0].data.inReal, /* inReal */
+/* Generated */              params->optIn[0].data.optInInteger, /* optInTimePeriod*/
+/* Generated */              outBegIdx, 
+/* Generated */              outNBElement, 
+/* Generated */              params->out[0].data.outReal /*  outReal */ );
+/* Generated */ }
+/* Generated */ unsigned int TA_VROC_FramePPLB( const TA_ParamHolderPriv *params )
+/* Generated */ {
+/* Generated */    return TA_VROC_Lookback(params->optIn[0].data.optInInteger /* optInTimePeriod*/ );
+/* Generated */ }
+/* Generated */ unsigned int TA_VROC_FramePPSI( const TA_ParamHolderPriv *params )
+/* Generated */ {
+/* Generated */    return TA_VROC_StateInit( (struct TA_VROC_State**) &params->_state,
+/* Generated */                      params->optIn[0].data.optInInteger /* optInTimePeriod*/ );
+/* Generated */ }
+/* Generated */ unsigned int TA_VROC_FramePPS( const TA_ParamHolderPriv *params )
+/* Generated */ {
+/* Generated */    return TA_VROC_State( *(struct TA_VROC_State**) &params->_state,
+/* Generated */                      *params->in[0].data.inReal, /* inReal */
+/* Generated */                      params->out[0].data.outReal /*  *outReal */ );
+/* Generated */ }
+/* Generated */ unsigned int TA_VROC_FramePPSF( const TA_ParamHolderPriv *params )
+/* Generated */ {
+/* Generated */    return TA_VROC_StateFree( (struct TA_VROC_State**) &params->_state
+ );
+/* Generated */ }
+/* Generated */ unsigned int TA_VROC_FramePPSS( const TA_ParamHolderPriv *params, FILE* _file )
+/* Generated */ {
+/* Generated */    return TA_VROC_StateSave( *(struct TA_VROC_State**) &params->_state,
+/* Generated */                       _file );
+/* Generated */ }
+/* Generated */ unsigned int TA_VROC_FramePPSL( const TA_ParamHolderPriv *params, FILE* _file )
+/* Generated */ {
+/* Generated */    return TA_VROC_StateLoad( (struct TA_VROC_State**) &params->_state,
+/* Generated */                       _file );
+/* Generated */ }
+/* Generated */ unsigned int TA_VROC_FramePPBS( const TA_ParamHolderPriv *params,
+/* Generated */                           int            startIdx,
+/* Generated */                           int            endIdx,
+/* Generated */                           int           *outBegIdx,
+/* Generated */                           int           *outNBElement )
+/* Generated */ {
+/* Generated */    return TA_VROC_BatchState( *(struct TA_VROC_State**) &params->_state,
+/* Generated */                      startIdx,
+/* Generated */                      endIdx,
+/* Generated */                      params->in[0].data.inReal, /* inReal */
+/* Generated */                      outBegIdx, 
+/* Generated */                      outNBElement, 
+/* Generated */                      params->out[0].data.outReal /*  outReal */ );
+/* Generated */ }
+/* Generated */ TA_RetCode TA_VWAP_FramePP( const TA_ParamHolderPriv *params,
+/* Generated */                           int            startIdx,
+/* Generated */                           int            endIdx,
+/* Generated */                           int           *outBegIdx,
+/* Generated */                           int           *outNBElement )
+/* Generated */ {
+/* Generated */    return TA_VWAP(/* Generated */              startIdx,
+/* Generated */              endIdx,
+/* Generated */              params->in[0].data.inPrice.high, /* inHigh */
+/* Generated */              params->in[0].data.inPrice.low, /* inLow */
+/* Generated */              params->in[0].data.inPrice.close, /* inClose */
+/* Generated */              params->in[0].data.inPrice.volume, /* inVolume */
+/* Generated */              params->optIn[0].data.optInInteger, /* optInTimePeriod*/
+/* Generated */              outBegIdx, 
+/* Generated */              outNBElement, 
+/* Generated */              params->out[0].data.outReal /*  outReal */ );
+/* Generated */ }
+/* Generated */ unsigned int TA_VWAP_FramePPLB( const TA_ParamHolderPriv *params )
+/* Generated */ {
+/* Generated */    return TA_VWAP_Lookback(params->optIn[0].data.optInInteger /* optInTimePeriod*/ );
+/* Generated */ }
+/* Generated */ unsigned int TA_VWAP_FramePPSI( const TA_ParamHolderPriv *params )
+/* Generated */ {
+/* Generated */    return TA_VWAP_StateInit( (struct TA_VWAP_State**) &params->_state,
+/* Generated */                      params->optIn[0].data.optInInteger /* optInTimePeriod*/ );
+/* Generated */ }
+/* Generated */ unsigned int TA_VWAP_FramePPS( const TA_ParamHolderPriv *params )
+/* Generated */ {
+/* Generated */    return TA_VWAP_State( *(struct TA_VWAP_State**) &params->_state,
+/* Generated */                      *params->in[0].data.inPrice.high, /* inHigh */
+/* Generated */                      *params->in[0].data.inPrice.low, /* inLow */
+/* Generated */                      *params->in[0].data.inPrice.close, /* inClose */
+/* Generated */                      *params->in[0].data.inPrice.volume, /* inVolume */
+/* Generated */                      params->out[0].data.outReal /*  *outReal */ );
+/* Generated */ }
+/* Generated */ unsigned int TA_VWAP_FramePPSF( const TA_ParamHolderPriv *params )
+/* Generated */ {
+/* Generated */    return TA_VWAP_StateFree( (struct TA_VWAP_State**) &params->_state
+ );
+/* Generated */ }
+/* Generated */ unsigned int TA_VWAP_FramePPSS( const TA_ParamHolderPriv *params, FILE* _file )
+/* Generated */ {
+/* Generated */    return TA_VWAP_StateSave( *(struct TA_VWAP_State**) &params->_state,
+/* Generated */                       _file );
+/* Generated */ }
+/* Generated */ unsigned int TA_VWAP_FramePPSL( const TA_ParamHolderPriv *params, FILE* _file )
+/* Generated */ {
+/* Generated */    return TA_VWAP_StateLoad( (struct TA_VWAP_State**) &params->_state,
+/* Generated */                       _file );
+/* Generated */ }
+/* Generated */ unsigned int TA_VWAP_FramePPBS( const TA_ParamHolderPriv *params,
+/* Generated */                           int            startIdx,
+/* Generated */                           int            endIdx,
+/* Generated */                           int           *outBegIdx,
+/* Generated */                           int           *outNBElement )
+/* Generated */ {
+/* Generated */    return TA_VWAP_BatchState( *(struct TA_VWAP_State**) &params->_state,
+/* Generated */                      startIdx,
+/* Generated */                      endIdx,
+/* Generated */                      params->in[0].data.inPrice.high, /* inHigh */
+/* Generated */                      params->in[0].data.inPrice.low, /* inLow */
+/* Generated */                      params->in[0].data.inPrice.close, /* inClose */
+/* Generated */                      params->in[0].data.inPrice.volume, /* inVolume */
+/* Generated */                      outBegIdx, 
+/* Generated */                      outNBElement, 
+/* Generated */                      params->out[0].data.outReal /*  outReal */ );
+/* Generated */ }
+/* Generated */ TA_RetCode TA_VWMA_FramePP( const TA_ParamHolderPriv *params,
+/* Generated */                           int            startIdx,
+/* Generated */                           int            endIdx,
+/* Generated */                           int           *outBegIdx,
+/* Generated */                           int           *outNBElement )
+/* Generated */ {
+/* Generated */    return TA_VWMA(/* Generated */              startIdx,
+/* Generated */              endIdx,
+/* Generated */              params->in[0].data.inReal, /* inReal */
+/* Generated */              params->optIn[0].data.optInInteger, /* optInTimePeriod*/
+/* Generated */              outBegIdx, 
+/* Generated */              outNBElement, 
+/* Generated */              params->out[0].data.outReal /*  outReal */ );
+/* Generated */ }
+/* Generated */ unsigned int TA_VWMA_FramePPLB( const TA_ParamHolderPriv *params )
+/* Generated */ {
+/* Generated */    return TA_VWMA_Lookback(params->optIn[0].data.optInInteger /* optInTimePeriod*/ );
+/* Generated */ }
+/* Generated */ unsigned int TA_VWMA_FramePPSI( const TA_ParamHolderPriv *params )
+/* Generated */ {
+/* Generated */    return TA_VWMA_StateInit( (struct TA_VWMA_State**) &params->_state,
+/* Generated */                      params->optIn[0].data.optInInteger /* optInTimePeriod*/ );
+/* Generated */ }
+/* Generated */ unsigned int TA_VWMA_FramePPS( const TA_ParamHolderPriv *params )
+/* Generated */ {
+/* Generated */    return TA_VWMA_State( *(struct TA_VWMA_State**) &params->_state,
+/* Generated */                      *params->in[0].data.inReal, /* inReal */
+/* Generated */                      params->out[0].data.outReal /*  *outReal */ );
+/* Generated */ }
+/* Generated */ unsigned int TA_VWMA_FramePPSF( const TA_ParamHolderPriv *params )
+/* Generated */ {
+/* Generated */    return TA_VWMA_StateFree( (struct TA_VWMA_State**) &params->_state
+ );
+/* Generated */ }
+/* Generated */ unsigned int TA_VWMA_FramePPSS( const TA_ParamHolderPriv *params, FILE* _file )
+/* Generated */ {
+/* Generated */    return TA_VWMA_StateSave( *(struct TA_VWMA_State**) &params->_state,
+/* Generated */                       _file );
+/* Generated */ }
+/* Generated */ unsigned int TA_VWMA_FramePPSL( const TA_ParamHolderPriv *params, FILE* _file )
+/* Generated */ {
+/* Generated */    return TA_VWMA_StateLoad( (struct TA_VWMA_State**) &params->_state,
+/* Generated */                       _file );
+/* Generated */ }
+/* Generated */ unsigned int TA_VWMA_FramePPBS( const TA_ParamHolderPriv *params,
+/* Generated */                           int            startIdx,
+/* Generated */                           int            endIdx,
+/* Generated */                           int           *outBegIdx,
+/* Generated */                           int           *outNBElement )
+/* Generated */ {
+/* Generated */    return TA_VWMA_BatchState( *(struct TA_VWMA_State**) &params->_state,
+/* Generated */                      startIdx,
+/* Generated */                      endIdx,
+/* Generated */                      params->in[0].data.inReal, /* inReal */
+/* Generated */                      outBegIdx, 
+/* Generated */                      outNBElement, 
+/* Generated */                      params->out[0].data.outReal /*  outReal */ );
 /* Generated */ }
 /* Generated */ TA_RetCode TA_WCLPRICE_FramePP( const TA_ParamHolderPriv *params,
 /* Generated */                           int            startIdx,

@@ -11,6 +11,7 @@ AROONOSC            Aroon Oscillator
 ASIN                Vector Trigonometric ASin
 ATAN                Vector Trigonometric ATan
 ATR                 Average True Range
+ATRP                Average True Range Percent
 AVGPRICE            Average Price
 AVGDEV              Average Deviation
 BBANDS              Bollinger Bands
@@ -79,6 +80,8 @@ CDLUNIQUE3RIVER     Unique 3 River
 CDLUPSIDEGAP2CROWS  Upside Gap Two Crows
 CDLXSIDEGAP3METHODS Upside/Downside Gap Three Methods
 CEIL                Vector Ceil
+CKSP                Chande Kroll Stop
+CMF                 Chaikin Money Flow
 CMO                 Chande Momentum Oscillator
 CORREL              Pearson's Correlation Coefficient (r)
 COS                 Vector Trigonometric Cos
@@ -87,16 +90,22 @@ DEMA                Double Exponential Moving Average
 DIV                 Vector Arithmetic Div
 DX                  Directional Movement Index
 EMA                 Exponential Moving Average
+EOM                 Ease of Movement
 EXP                 Vector Arithmetic Exp
 FLOOR               Vector Floor
+HA                  Heikin Ashi
+HA_SMO              Heikin Ashi Smooth
 HT_DCPERIOD         Hilbert Transform - Dominant Cycle Period
 HT_DCPHASE          Hilbert Transform - Dominant Cycle Phase
 HT_PHASOR           Hilbert Transform - Phasor Components
 HT_SINE             Hilbert Transform - SineWave
 HT_TRENDLINE        Hilbert Transform - Instantaneous Trendline
 HT_TRENDMODE        Hilbert Transform - Trend vs Cycle Mode
+ICHIMOKU            Ichimoku Cloud
 IMI                 Intraday Momentum Index
 KAMA                Kaufman Adaptive Moving Average
+KDJ                 KDJ indicator
+KVO                 Klinger Volume Oscillator
 LINEARREG           Linear Regression
 LINEARREG_ANGLE     Linear Regression Angle
 LINEARREG_INTERCEPT Linear Regression Intercept
@@ -131,6 +140,7 @@ PLUS_DM             Plus Directional Movement
 PPO                 Percentage Price Oscillator
 PVI                 Positive Volume Index
 PVT                 Price Volume Trend
+REDK_EVEREX         RedK EVEREX - Effort Versus Results Explorer
 ROC                 Rate of change : ((price/prevPrice)-1)*100
 ROCP                Rate of change Percentage: (price-prevPrice)/prevPrice
 ROCR                Rate of change ratio: (price/prevPrice)
@@ -148,6 +158,7 @@ STOCHF              Stochastic Fast
 STOCHRSI            Stochastic Relative Strength Index
 SUB                 Vector Arithmetic Substraction
 SUM                 Summation
+SUPERTREND          Supertrend
 T3                  Triple Exponential Moving Average (T3)
 TAN                 Vector Trigonometric Tan
 TANH                Vector Trigonometric Tanh
@@ -159,6 +170,10 @@ TSF                 Time Series Forecast
 TYPPRICE            Typical Price
 ULTOSC              Ultimate Oscillator
 VAR                 Variance
+VP                  Volume Profile
+VROC                Volume Rate of Change
+VWAP                Volume Weighted Average Price
+VWMA                Volume Weighted Moving Average
 WCLPRICE            Weighted Close Price
 WILLR               Williams' %R
 WLMA                Wilders Moving Average

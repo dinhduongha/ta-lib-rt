@@ -854,6 +854,69 @@ public RetCode atr(
 ); }
 
 
+public int atrpLookback(
+        int optInTimePeriod) {
+    return super.atrpLookback(
+        optInTimePeriod); }
+
+@FuncInfo(
+        name  = "ATRP",
+        group = "Volatility Indicators",
+        flags = 134217728,
+        nbInput    = 1,
+        nbOptInput = 1,
+        nbOutput   = 1
+)
+public RetCode atrp(
+            int startIdx,
+            int endIdx,
+            @InputParameterInfo(
+                paramName = "inPriceHLC",
+                flags     = 14,
+                type = InputParameterType.TA_Input_Price
+            )
+            double inHigh [],
+            double inLow [],
+            double inClose [],
+            @OptInputParameterInfo(
+                paramName    = "optInTimePeriod",
+                displayName  = "Time Period",
+                flags        = 0,
+                type    = OptInputParameterType.TA_OptInput_IntegerRange,
+                dataSet = com.tictactec.ta.lib.meta.annotation.IntegerRange.class
+            )
+            @IntegerRange(
+                    paramName    = "optInTimePeriod",
+                    defaultValue = 14,
+                    min          = 1,
+                    max          = 100000,
+                    suggested_start     = 1,
+                    suggested_end       = 200,
+                    suggested_increment = 1
+            )
+            int optInTimePeriod,
+            MInteger     outBegIdx,
+            MInteger     outNBElement,
+            @OutputParameterInfo(
+                paramName = "outReal",
+                flags     = 1,
+                type = OutputParameterType.TA_Output_Real
+            )
+            double outReal[]
+) {
+    return super.atrp (
+        startIdx,
+        endIdx,
+        inHigh ,
+        inLow ,
+        inClose ,
+        optInTimePeriod,
+        outBegIdx,
+        outNBElement,
+        outReal
+); }
+
+
 public int avgPriceLookback(
 ) {
     return super.avgPriceLookback(
@@ -4370,6 +4433,182 @@ public RetCode ceil(
 ); }
 
 
+public int ckspLookback(
+        int optInTimePeriod,
+        int optInCkspPeriod,
+        double optInScalar) {
+    return super.ckspLookback(
+        optInTimePeriod,
+        optInCkspPeriod,
+        optInScalar); }
+
+@FuncInfo(
+        name  = "CKSP",
+        group = "Volatility Indicators",
+        flags = 0,
+        nbInput    = 1,
+        nbOptInput = 3,
+        nbOutput   = 2
+)
+public RetCode cksp(
+            int startIdx,
+            int endIdx,
+            @InputParameterInfo(
+                paramName = "inPriceHLC",
+                flags     = 14,
+                type = InputParameterType.TA_Input_Price
+            )
+            double inHigh [],
+            double inLow [],
+            double inClose [],
+            @OptInputParameterInfo(
+                paramName    = "optInTimePeriod",
+                displayName  = "Time Period",
+                flags        = 0,
+                type    = OptInputParameterType.TA_OptInput_IntegerRange,
+                dataSet = com.tictactec.ta.lib.meta.annotation.IntegerRange.class
+            )
+            @IntegerRange(
+                    paramName    = "optInTimePeriod",
+                    defaultValue = 14,
+                    min          = 1,
+                    max          = 100000,
+                    suggested_start     = 1,
+                    suggested_end       = 200,
+                    suggested_increment = 1
+            )
+            int optInTimePeriod,
+            @OptInputParameterInfo(
+                paramName    = "optInCkspPeriod",
+                displayName  = "Cksp Period",
+                flags        = 0,
+                type    = OptInputParameterType.TA_OptInput_IntegerRange,
+                dataSet = com.tictactec.ta.lib.meta.annotation.IntegerRange.class
+            )
+            @IntegerRange(
+                    paramName    = "optInCkspPeriod",
+                    defaultValue = 9,
+                    min          = 1,
+                    max          = 100000,
+                    suggested_start     = 1,
+                    suggested_end       = 200,
+                    suggested_increment = 1
+            )
+            int optInCkspPeriod,
+            @OptInputParameterInfo(
+                paramName    = "optInScalar",
+                displayName  = "Scalar",
+                flags        = 0,
+                type    = OptInputParameterType.TA_OptInput_RealRange,
+                dataSet = com.tictactec.ta.lib.meta.annotation.RealRange.class
+            )
+            @RealRange(
+                    paramName    = "optInScalar",
+                    defaultValue = 1.00000,
+                    min          = -30000000000000002158062836758597337088.00000,
+                    max          = 30000000000000002158062836758597337088.00000,
+                    precision    = 4,
+                    suggested_start     = 0.00000,
+                    suggested_end       = 0.00000,
+                    suggested_increment = 0.00000
+            )
+            double optInScalar,
+            MInteger     outBegIdx,
+            MInteger     outNBElement,
+            @OutputParameterInfo(
+                paramName = "outLongStop",
+                flags     = 1,
+                type = OutputParameterType.TA_Output_Real
+            )
+            double outLongStop[],
+            @OutputParameterInfo(
+                paramName = "outShortStop",
+                flags     = 1,
+                type = OutputParameterType.TA_Output_Real
+            )
+            double outShortStop[]
+) {
+    return super.cksp (
+        startIdx,
+        endIdx,
+        inHigh ,
+        inLow ,
+        inClose ,
+        optInTimePeriod,
+        optInCkspPeriod,
+        optInScalar,
+        outBegIdx,
+        outNBElement,
+        outLongStop,
+        outShortStop
+); }
+
+
+public int cmfLookback(
+        int optInTimePeriod) {
+    return super.cmfLookback(
+        optInTimePeriod); }
+
+@FuncInfo(
+        name  = "CMF",
+        group = "Volatility Indicators",
+        flags = 134217728,
+        nbInput    = 1,
+        nbOptInput = 1,
+        nbOutput   = 1
+)
+public RetCode cmf(
+            int startIdx,
+            int endIdx,
+            @InputParameterInfo(
+                paramName = "inPriceHLCV",
+                flags     = 30,
+                type = InputParameterType.TA_Input_Price
+            )
+            double inHigh [],
+            double inLow [],
+            double inClose [],
+            double inVolume [],
+            @OptInputParameterInfo(
+                paramName    = "optInTimePeriod",
+                displayName  = "Time Period",
+                flags        = 0,
+                type    = OptInputParameterType.TA_OptInput_IntegerRange,
+                dataSet = com.tictactec.ta.lib.meta.annotation.IntegerRange.class
+            )
+            @IntegerRange(
+                    paramName    = "optInTimePeriod",
+                    defaultValue = 30,
+                    min          = 1,
+                    max          = 100000,
+                    suggested_start     = 1,
+                    suggested_end       = 200,
+                    suggested_increment = 1
+            )
+            int optInTimePeriod,
+            MInteger     outBegIdx,
+            MInteger     outNBElement,
+            @OutputParameterInfo(
+                paramName = "outReal",
+                flags     = 1,
+                type = OutputParameterType.TA_Output_Real
+            )
+            double outReal[]
+) {
+    return super.cmf (
+        startIdx,
+        endIdx,
+        inHigh ,
+        inLow ,
+        inClose ,
+        inVolume ,
+        optInTimePeriod,
+        outBegIdx,
+        outNBElement,
+        outReal
+); }
+
+
 public int cmoLookback(
         int optInTimePeriod) {
     return super.cmoLookback(
@@ -4806,6 +5045,108 @@ public RetCode ema(
 ); }
 
 
+public int emvLookback(
+        int optInTimePeriod,
+        MAType optInMAType,
+        int optInDivisor) {
+    return super.emvLookback(
+        optInTimePeriod,
+        optInMAType,
+        optInDivisor); }
+
+@FuncInfo(
+        name  = "EOM",
+        group = "Volatility Indicators",
+        flags = 134217728,
+        nbInput    = 1,
+        nbOptInput = 3,
+        nbOutput   = 1
+)
+public RetCode emv(
+            int startIdx,
+            int endIdx,
+            @InputParameterInfo(
+                paramName = "inPriceHLCV",
+                flags     = 30,
+                type = InputParameterType.TA_Input_Price
+            )
+            double inHigh [],
+            double inLow [],
+            double inClose [],
+            double inVolume [],
+            @OptInputParameterInfo(
+                paramName    = "optInTimePeriod",
+                displayName  = "Time Period",
+                flags        = 0,
+                type    = OptInputParameterType.TA_OptInput_IntegerRange,
+                dataSet = com.tictactec.ta.lib.meta.annotation.IntegerRange.class
+            )
+            @IntegerRange(
+                    paramName    = "optInTimePeriod",
+                    defaultValue = 14,
+                    min          = 1,
+                    max          = 100000,
+                    suggested_start     = 1,
+                    suggested_end       = 200,
+                    suggested_increment = 1
+            )
+            int optInTimePeriod,
+            @OptInputParameterInfo(
+                paramName    = "optInMAType",
+                displayName  = "MA Type",
+                flags        = 0,
+                type    = OptInputParameterType.TA_OptInput_IntegerList,
+                dataSet = com.tictactec.ta.lib.meta.annotation.IntegerList.class
+            )
+            @IntegerList(
+                    paramName    = "optInMAType",
+                    defaultValue = 0,
+                    value  = { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 },
+                    string = { "SMA", "EMA", "WMA", "DEMA", "TEMA", "TRIMA", "KAMA", "MAMA", "T3", "WLMA" }
+            )
+            MAType optInMAType,
+            @OptInputParameterInfo(
+                paramName    = "optInDivisor",
+                displayName  = "Divisor",
+                flags        = 0,
+                type    = OptInputParameterType.TA_OptInput_IntegerRange,
+                dataSet = com.tictactec.ta.lib.meta.annotation.IntegerRange.class
+            )
+            @IntegerRange(
+                    paramName    = "optInDivisor",
+                    defaultValue = 10000,
+                    min          = 1,
+                    max          = 100000,
+                    suggested_start     = 1,
+                    suggested_end       = 200,
+                    suggested_increment = 1
+            )
+            int optInDivisor,
+            MInteger     outBegIdx,
+            MInteger     outNBElement,
+            @OutputParameterInfo(
+                paramName = "outReal",
+                flags     = 1,
+                type = OutputParameterType.TA_Output_Real
+            )
+            double outReal[]
+) {
+    return super.emv (
+        startIdx,
+        endIdx,
+        inHigh ,
+        inLow ,
+        inClose ,
+        inVolume ,
+        optInTimePeriod,
+        optInMAType,
+        optInDivisor,
+        outBegIdx,
+        outNBElement,
+        outReal
+); }
+
+
 public int expLookback(
 ) {
     return super.expLookback(
@@ -4885,6 +5226,195 @@ public RetCode floor(
         outBegIdx,
         outNBElement,
         outReal
+); }
+
+
+public int haLookback(
+        int optInTimePeriod) {
+    return super.haLookback(
+        optInTimePeriod); }
+
+@FuncInfo(
+        name  = "HA",
+        group = "Volatility Indicators",
+        flags = 134217728,
+        nbInput    = 1,
+        nbOptInput = 1,
+        nbOutput   = 4
+)
+public RetCode ha(
+            int startIdx,
+            int endIdx,
+            @InputParameterInfo(
+                paramName = "inPriceOHLC",
+                flags     = 15,
+                type = InputParameterType.TA_Input_Price
+            )
+            double inOpen [],
+            double inHigh [],
+            double inLow [],
+            double inClose [],
+            @OptInputParameterInfo(
+                paramName    = "optInTimePeriod",
+                displayName  = "Time Period",
+                flags        = 0,
+                type    = OptInputParameterType.TA_OptInput_IntegerRange,
+                dataSet = com.tictactec.ta.lib.meta.annotation.IntegerRange.class
+            )
+            @IntegerRange(
+                    paramName    = "optInTimePeriod",
+                    defaultValue = 10,
+                    min          = 1,
+                    max          = 100000,
+                    suggested_start     = 1,
+                    suggested_end       = 200,
+                    suggested_increment = 1
+            )
+            int optInTimePeriod,
+            MInteger     outBegIdx,
+            MInteger     outNBElement,
+            @OutputParameterInfo(
+                paramName = "outOpen",
+                flags     = 1,
+                type = OutputParameterType.TA_Output_Real
+            )
+            double outOpen[],
+            @OutputParameterInfo(
+                paramName = "outHigh",
+                flags     = 1,
+                type = OutputParameterType.TA_Output_Real
+            )
+            double outHigh[],
+            @OutputParameterInfo(
+                paramName = "outLow",
+                flags     = 1,
+                type = OutputParameterType.TA_Output_Real
+            )
+            double outLow[],
+            @OutputParameterInfo(
+                paramName = "outClose",
+                flags     = 1,
+                type = OutputParameterType.TA_Output_Real
+            )
+            double outClose[]
+) {
+    return super.ha (
+        startIdx,
+        endIdx,
+        inOpen ,
+        inHigh ,
+        inLow ,
+        inClose ,
+        optInTimePeriod,
+        outBegIdx,
+        outNBElement,
+        outOpen,
+        outHigh,
+        outLow,
+        outClose
+); }
+
+
+public int haSmoLookback(
+        int optInTimePeriod,
+        MAType optInMAType) {
+    return super.haSmoLookback(
+        optInTimePeriod,
+        optInMAType); }
+
+@FuncInfo(
+        name  = "HA_SMO",
+        group = "Volatility Indicators",
+        flags = 134217728,
+        nbInput    = 1,
+        nbOptInput = 2,
+        nbOutput   = 4
+)
+public RetCode haSmo(
+            int startIdx,
+            int endIdx,
+            @InputParameterInfo(
+                paramName = "inPriceOHLC",
+                flags     = 15,
+                type = InputParameterType.TA_Input_Price
+            )
+            double inOpen [],
+            double inHigh [],
+            double inLow [],
+            double inClose [],
+            @OptInputParameterInfo(
+                paramName    = "optInTimePeriod",
+                displayName  = "Time Period",
+                flags        = 0,
+                type    = OptInputParameterType.TA_OptInput_IntegerRange,
+                dataSet = com.tictactec.ta.lib.meta.annotation.IntegerRange.class
+            )
+            @IntegerRange(
+                    paramName    = "optInTimePeriod",
+                    defaultValue = 10,
+                    min          = 1,
+                    max          = 100000,
+                    suggested_start     = 1,
+                    suggested_end       = 200,
+                    suggested_increment = 1
+            )
+            int optInTimePeriod,
+            @OptInputParameterInfo(
+                paramName    = "optInMAType",
+                displayName  = "MA Type",
+                flags        = 0,
+                type    = OptInputParameterType.TA_OptInput_IntegerList,
+                dataSet = com.tictactec.ta.lib.meta.annotation.IntegerList.class
+            )
+            @IntegerList(
+                    paramName    = "optInMAType",
+                    defaultValue = 0,
+                    value  = { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 },
+                    string = { "SMA", "EMA", "WMA", "DEMA", "TEMA", "TRIMA", "KAMA", "MAMA", "T3", "WLMA" }
+            )
+            MAType optInMAType,
+            MInteger     outBegIdx,
+            MInteger     outNBElement,
+            @OutputParameterInfo(
+                paramName = "outRealOpen",
+                flags     = 1,
+                type = OutputParameterType.TA_Output_Real
+            )
+            double outRealOpen[],
+            @OutputParameterInfo(
+                paramName = "outRealHigh",
+                flags     = 1,
+                type = OutputParameterType.TA_Output_Real
+            )
+            double outRealHigh[],
+            @OutputParameterInfo(
+                paramName = "outRealLow",
+                flags     = 1,
+                type = OutputParameterType.TA_Output_Real
+            )
+            double outRealLow[],
+            @OutputParameterInfo(
+                paramName = "outRealClose",
+                flags     = 1,
+                type = OutputParameterType.TA_Output_Real
+            )
+            double outRealClose[]
+) {
+    return super.haSmo (
+        startIdx,
+        endIdx,
+        inOpen ,
+        inHigh ,
+        inLow ,
+        inClose ,
+        optInTimePeriod,
+        optInMAType,
+        outBegIdx,
+        outNBElement,
+        outRealOpen,
+        outRealHigh,
+        outRealLow,
+        outRealClose
 ); }
 
 
@@ -5149,6 +5679,157 @@ public RetCode htTrendMode(
 ); }
 
 
+public int ichimokuLookback(
+        int optInConversionPeriod,
+        int optInBasePeriod,
+        int optInSpanPeriod,
+        int optInChikouPeriod) {
+    return super.ichimokuLookback(
+        optInConversionPeriod,
+        optInBasePeriod,
+        optInSpanPeriod,
+        optInChikouPeriod); }
+
+@FuncInfo(
+        name  = "ICHIMOKU",
+        group = "Overlap Studies",
+        flags = 0,
+        nbInput    = 1,
+        nbOptInput = 4,
+        nbOutput   = 5
+)
+public RetCode ichimoku(
+            int startIdx,
+            int endIdx,
+            @InputParameterInfo(
+                paramName = "inPriceHLC",
+                flags     = 14,
+                type = InputParameterType.TA_Input_Price
+            )
+            double inHigh [],
+            double inLow [],
+            double inClose [],
+            @OptInputParameterInfo(
+                paramName    = "optInConversionPeriod",
+                displayName  = "Conversion Tenkan Period",
+                flags        = 0,
+                type    = OptInputParameterType.TA_OptInput_IntegerRange,
+                dataSet = com.tictactec.ta.lib.meta.annotation.IntegerRange.class
+            )
+            @IntegerRange(
+                    paramName    = "optInConversionPeriod",
+                    defaultValue = 9,
+                    min          = 1,
+                    max          = 100000,
+                    suggested_start     = 1,
+                    suggested_end       = 200,
+                    suggested_increment = 1
+            )
+            int optInConversionPeriod,
+            @OptInputParameterInfo(
+                paramName    = "optInBasePeriod",
+                displayName  = "Base Period",
+                flags        = 0,
+                type    = OptInputParameterType.TA_OptInput_IntegerRange,
+                dataSet = com.tictactec.ta.lib.meta.annotation.IntegerRange.class
+            )
+            @IntegerRange(
+                    paramName    = "optInBasePeriod",
+                    defaultValue = 26,
+                    min          = 1,
+                    max          = 100000,
+                    suggested_start     = 1,
+                    suggested_end       = 200,
+                    suggested_increment = 1
+            )
+            int optInBasePeriod,
+            @OptInputParameterInfo(
+                paramName    = "optInSpanPeriod",
+                displayName  = "Span Period",
+                flags        = 0,
+                type    = OptInputParameterType.TA_OptInput_IntegerRange,
+                dataSet = com.tictactec.ta.lib.meta.annotation.IntegerRange.class
+            )
+            @IntegerRange(
+                    paramName    = "optInSpanPeriod",
+                    defaultValue = 52,
+                    min          = 1,
+                    max          = 100000,
+                    suggested_start     = 1,
+                    suggested_end       = 200,
+                    suggested_increment = 1
+            )
+            int optInSpanPeriod,
+            @OptInputParameterInfo(
+                paramName    = "optInChikouPeriod",
+                displayName  = "Chikou Period",
+                flags        = 0,
+                type    = OptInputParameterType.TA_OptInput_IntegerRange,
+                dataSet = com.tictactec.ta.lib.meta.annotation.IntegerRange.class
+            )
+            @IntegerRange(
+                    paramName    = "optInChikouPeriod",
+                    defaultValue = 26,
+                    min          = 1,
+                    max          = 100000,
+                    suggested_start     = 1,
+                    suggested_end       = 200,
+                    suggested_increment = 1
+            )
+            int optInChikouPeriod,
+            MInteger     outBegIdx,
+            MInteger     outNBElement,
+            @OutputParameterInfo(
+                paramName = "outTenkan",
+                flags     = 1,
+                type = OutputParameterType.TA_Output_Real
+            )
+            double outTenkan[],
+            @OutputParameterInfo(
+                paramName = "outKijun",
+                flags     = 1,
+                type = OutputParameterType.TA_Output_Real
+            )
+            double outKijun[],
+            @OutputParameterInfo(
+                paramName = "outSenkouSpanA",
+                flags     = 1,
+                type = OutputParameterType.TA_Output_Real
+            )
+            double outSenkouSpanA[],
+            @OutputParameterInfo(
+                paramName = "outSenkouSpanB",
+                flags     = 1,
+                type = OutputParameterType.TA_Output_Real
+            )
+            double outSenkouSpanB[],
+            @OutputParameterInfo(
+                paramName = "outChikouSpan",
+                flags     = 1,
+                type = OutputParameterType.TA_Output_Real
+            )
+            double outChikouSpan[]
+) {
+    return super.ichimoku (
+        startIdx,
+        endIdx,
+        inHigh ,
+        inLow ,
+        inClose ,
+        optInConversionPeriod,
+        optInBasePeriod,
+        optInSpanPeriod,
+        optInChikouPeriod,
+        outBegIdx,
+        outNBElement,
+        outTenkan,
+        outKijun,
+        outSenkouSpanA,
+        outSenkouSpanB,
+        outChikouSpan
+); }
+
+
 public int imiLookback(
         int optInTimePeriod) {
     return super.imiLookback(
@@ -5266,6 +5947,249 @@ public RetCode kama(
         outBegIdx,
         outNBElement,
         outReal
+); }
+
+
+public int kdjLookback(
+        int optInTimePeriod,
+        int optInSignalPeriod,
+        MAType optInMAType) {
+    return super.kdjLookback(
+        optInTimePeriod,
+        optInSignalPeriod,
+        optInMAType); }
+
+@FuncInfo(
+        name  = "KDJ",
+        group = "Volatility Indicators",
+        flags = 134217728,
+        nbInput    = 1,
+        nbOptInput = 3,
+        nbOutput   = 3
+)
+public RetCode kdj(
+            int startIdx,
+            int endIdx,
+            @InputParameterInfo(
+                paramName = "inPriceHLC",
+                flags     = 14,
+                type = InputParameterType.TA_Input_Price
+            )
+            double inHigh [],
+            double inLow [],
+            double inClose [],
+            @OptInputParameterInfo(
+                paramName    = "optInTimePeriod",
+                displayName  = "Time Period",
+                flags        = 0,
+                type    = OptInputParameterType.TA_OptInput_IntegerRange,
+                dataSet = com.tictactec.ta.lib.meta.annotation.IntegerRange.class
+            )
+            @IntegerRange(
+                    paramName    = "optInTimePeriod",
+                    defaultValue = 30,
+                    min          = 1,
+                    max          = 100000,
+                    suggested_start     = 1,
+                    suggested_end       = 200,
+                    suggested_increment = 1
+            )
+            int optInTimePeriod,
+            @OptInputParameterInfo(
+                paramName    = "optInSignalPeriod",
+                displayName  = "Signal Period",
+                flags        = 0,
+                type    = OptInputParameterType.TA_OptInput_IntegerRange,
+                dataSet = com.tictactec.ta.lib.meta.annotation.IntegerRange.class
+            )
+            @IntegerRange(
+                    paramName    = "optInSignalPeriod",
+                    defaultValue = 3,
+                    min          = 1,
+                    max          = 100000,
+                    suggested_start     = 1,
+                    suggested_end       = 200,
+                    suggested_increment = 1
+            )
+            int optInSignalPeriod,
+            @OptInputParameterInfo(
+                paramName    = "optInMAType",
+                displayName  = "MA Type",
+                flags        = 0,
+                type    = OptInputParameterType.TA_OptInput_IntegerList,
+                dataSet = com.tictactec.ta.lib.meta.annotation.IntegerList.class
+            )
+            @IntegerList(
+                    paramName    = "optInMAType",
+                    defaultValue = 0,
+                    value  = { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 },
+                    string = { "SMA", "EMA", "WMA", "DEMA", "TEMA", "TRIMA", "KAMA", "MAMA", "T3", "WLMA" }
+            )
+            MAType optInMAType,
+            MInteger     outBegIdx,
+            MInteger     outNBElement,
+            @OutputParameterInfo(
+                paramName = "outK",
+                flags     = 1,
+                type = OutputParameterType.TA_Output_Real
+            )
+            double outK[],
+            @OutputParameterInfo(
+                paramName = "outD",
+                flags     = 1,
+                type = OutputParameterType.TA_Output_Real
+            )
+            double outD[],
+            @OutputParameterInfo(
+                paramName = "outJ",
+                flags     = 1,
+                type = OutputParameterType.TA_Output_Real
+            )
+            double outJ[]
+) {
+    return super.kdj (
+        startIdx,
+        endIdx,
+        inHigh ,
+        inLow ,
+        inClose ,
+        optInTimePeriod,
+        optInSignalPeriod,
+        optInMAType,
+        outBegIdx,
+        outNBElement,
+        outK,
+        outD,
+        outJ
+); }
+
+
+public int kvoLookback(
+        int optInFastPeriod,
+        int optInSlowPeriod,
+        int optInTimePeriod,
+        MAType optInMAType) {
+    return super.kvoLookback(
+        optInFastPeriod,
+        optInSlowPeriod,
+        optInTimePeriod,
+        optInMAType); }
+
+@FuncInfo(
+        name  = "KVO",
+        group = "Volatility Indicators",
+        flags = 134217728,
+        nbInput    = 1,
+        nbOptInput = 4,
+        nbOutput   = 2
+)
+public RetCode kvo(
+            int startIdx,
+            int endIdx,
+            @InputParameterInfo(
+                paramName = "inPriceHLCV",
+                flags     = 30,
+                type = InputParameterType.TA_Input_Price
+            )
+            double inHigh [],
+            double inLow [],
+            double inClose [],
+            double inVolume [],
+            @OptInputParameterInfo(
+                paramName    = "optInFastPeriod",
+                displayName  = "Fast Period",
+                flags        = 0,
+                type    = OptInputParameterType.TA_OptInput_IntegerRange,
+                dataSet = com.tictactec.ta.lib.meta.annotation.IntegerRange.class
+            )
+            @IntegerRange(
+                    paramName    = "optInFastPeriod",
+                    defaultValue = 12,
+                    min          = 2,
+                    max          = 100000,
+                    suggested_start     = 4,
+                    suggested_end       = 200,
+                    suggested_increment = 1
+            )
+            int optInFastPeriod,
+            @OptInputParameterInfo(
+                paramName    = "optInSlowPeriod",
+                displayName  = "Slow Period",
+                flags        = 0,
+                type    = OptInputParameterType.TA_OptInput_IntegerRange,
+                dataSet = com.tictactec.ta.lib.meta.annotation.IntegerRange.class
+            )
+            @IntegerRange(
+                    paramName    = "optInSlowPeriod",
+                    defaultValue = 26,
+                    min          = 2,
+                    max          = 100000,
+                    suggested_start     = 4,
+                    suggested_end       = 200,
+                    suggested_increment = 1
+            )
+            int optInSlowPeriod,
+            @OptInputParameterInfo(
+                paramName    = "optInTimePeriod",
+                displayName  = "Time Period",
+                flags        = 0,
+                type    = OptInputParameterType.TA_OptInput_IntegerRange,
+                dataSet = com.tictactec.ta.lib.meta.annotation.IntegerRange.class
+            )
+            @IntegerRange(
+                    paramName    = "optInTimePeriod",
+                    defaultValue = 10,
+                    min          = 1,
+                    max          = 100000,
+                    suggested_start     = 1,
+                    suggested_end       = 200,
+                    suggested_increment = 1
+            )
+            int optInTimePeriod,
+            @OptInputParameterInfo(
+                paramName    = "optInMAType",
+                displayName  = "MA Type",
+                flags        = 0,
+                type    = OptInputParameterType.TA_OptInput_IntegerList,
+                dataSet = com.tictactec.ta.lib.meta.annotation.IntegerList.class
+            )
+            @IntegerList(
+                    paramName    = "optInMAType",
+                    defaultValue = 0,
+                    value  = { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 },
+                    string = { "SMA", "EMA", "WMA", "DEMA", "TEMA", "TRIMA", "KAMA", "MAMA", "T3", "WLMA" }
+            )
+            MAType optInMAType,
+            MInteger     outBegIdx,
+            MInteger     outNBElement,
+            @OutputParameterInfo(
+                paramName = "outKVO",
+                flags     = 1,
+                type = OutputParameterType.TA_Output_Real
+            )
+            double outKVO[],
+            @OutputParameterInfo(
+                paramName = "outKVOSignal",
+                flags     = 1,
+                type = OutputParameterType.TA_Output_Real
+            )
+            double outKVOSignal[]
+) {
+    return super.kvo (
+        startIdx,
+        endIdx,
+        inHigh ,
+        inLow ,
+        inClose ,
+        inVolume ,
+        optInFastPeriod,
+        optInSlowPeriod,
+        optInTimePeriod,
+        optInMAType,
+        outBegIdx,
+        outNBElement,
+        outKVO,
+        outKVOSignal
 ); }
 
 
@@ -7490,6 +8414,300 @@ public RetCode pvt(
 ); }
 
 
+public int redkEverexLookback(
+        int optInTimePeriod,
+        MAType optInMAType,
+        int optInRofPeriod,
+        MAType optInRofMAType,
+        double optInRofSmooth,
+        int optInSignalPeriod,
+        MAType optInSignalMAType,
+        int optInBiasPeriod,
+        MAType optInBiasMAType) {
+    return super.redkEverexLookback(
+        optInTimePeriod,
+        optInMAType,
+        optInRofPeriod,
+        optInRofMAType,
+        optInRofSmooth,
+        optInSignalPeriod,
+        optInSignalMAType,
+        optInBiasPeriod,
+        optInBiasMAType); }
+
+@FuncInfo(
+        name  = "REDK_EVEREX",
+        group = "Overlap Studies",
+        flags = 0,
+        nbInput    = 1,
+        nbOptInput = 9,
+        nbOutput   = 12
+)
+public RetCode redkEverex(
+            int startIdx,
+            int endIdx,
+            @InputParameterInfo(
+                paramName = "inPriceOHLCV",
+                flags     = 31,
+                type = InputParameterType.TA_Input_Price
+            )
+            double inOpen [],
+            double inHigh [],
+            double inLow [],
+            double inClose [],
+            double inVolume [],
+            @OptInputParameterInfo(
+                paramName    = "optInTimePeriod",
+                displayName  = "Time Period",
+                flags        = 0,
+                type    = OptInputParameterType.TA_OptInput_IntegerRange,
+                dataSet = com.tictactec.ta.lib.meta.annotation.IntegerRange.class
+            )
+            @IntegerRange(
+                    paramName    = "optInTimePeriod",
+                    defaultValue = 30,
+                    min          = 1,
+                    max          = 100000,
+                    suggested_start     = 1,
+                    suggested_end       = 200,
+                    suggested_increment = 1
+            )
+            int optInTimePeriod,
+            @OptInputParameterInfo(
+                paramName    = "optInMAType",
+                displayName  = "MA Type",
+                flags        = 0,
+                type    = OptInputParameterType.TA_OptInput_IntegerList,
+                dataSet = com.tictactec.ta.lib.meta.annotation.IntegerList.class
+            )
+            @IntegerList(
+                    paramName    = "optInMAType",
+                    defaultValue = 0,
+                    value  = { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 },
+                    string = { "SMA", "EMA", "WMA", "DEMA", "TEMA", "TRIMA", "KAMA", "MAMA", "T3", "WLMA" }
+            )
+            MAType optInMAType,
+            @OptInputParameterInfo(
+                paramName    = "optInRofPeriod",
+                displayName  = "Rate of Flow Period",
+                flags        = 0,
+                type    = OptInputParameterType.TA_OptInput_IntegerRange,
+                dataSet = com.tictactec.ta.lib.meta.annotation.IntegerRange.class
+            )
+            @IntegerRange(
+                    paramName    = "optInRofPeriod",
+                    defaultValue = 10,
+                    min          = 1,
+                    max          = 100000,
+                    suggested_start     = 1,
+                    suggested_end       = 200,
+                    suggested_increment = 1
+            )
+            int optInRofPeriod,
+            @OptInputParameterInfo(
+                paramName    = "optInRofMAType",
+                displayName  = "ROF MA Type",
+                flags        = 0,
+                type    = OptInputParameterType.TA_OptInput_IntegerList,
+                dataSet = com.tictactec.ta.lib.meta.annotation.IntegerList.class
+            )
+            @IntegerList(
+                    paramName    = "optInRofMAType",
+                    defaultValue = 2,
+                    value  = { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 },
+                    string = { "SMA", "EMA", "WMA", "DEMA", "TEMA", "TRIMA", "KAMA", "MAMA", "T3", "WLMA" }
+            )
+            MAType optInRofMAType,
+            @OptInputParameterInfo(
+                paramName    = "optInRofSmooth",
+                displayName  = "Rate of Flow Period",
+                flags        = 0,
+                type    = OptInputParameterType.TA_OptInput_RealRange,
+                dataSet = com.tictactec.ta.lib.meta.annotation.RealRange.class
+            )
+            @RealRange(
+                    paramName    = "optInRofSmooth",
+                    defaultValue = 3.00000,
+                    min          = 0.00000,
+                    max          = 30000000000000002158062836758597337088.00000,
+                    precision    = 0,
+                    suggested_start     = 0.00000,
+                    suggested_end       = 0.00000,
+                    suggested_increment = 0.00000
+            )
+            double optInRofSmooth,
+            @OptInputParameterInfo(
+                paramName    = "optInSignalPeriod",
+                displayName  = "Signal Period",
+                flags        = 0,
+                type    = OptInputParameterType.TA_OptInput_IntegerRange,
+                dataSet = com.tictactec.ta.lib.meta.annotation.IntegerRange.class
+            )
+            @IntegerRange(
+                    paramName    = "optInSignalPeriod",
+                    defaultValue = 5,
+                    min          = 1,
+                    max          = 100000,
+                    suggested_start     = 1,
+                    suggested_end       = 200,
+                    suggested_increment = 1
+            )
+            int optInSignalPeriod,
+            @OptInputParameterInfo(
+                paramName    = "optInSignalMAType",
+                displayName  = "Signal MA Type",
+                flags        = 0,
+                type    = OptInputParameterType.TA_OptInput_IntegerList,
+                dataSet = com.tictactec.ta.lib.meta.annotation.IntegerList.class
+            )
+            @IntegerList(
+                    paramName    = "optInSignalMAType",
+                    defaultValue = 2,
+                    value  = { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 },
+                    string = { "SMA", "EMA", "WMA", "DEMA", "TEMA", "TRIMA", "KAMA", "MAMA", "T3", "WLMA" }
+            )
+            MAType optInSignalMAType,
+            @OptInputParameterInfo(
+                paramName    = "optInBiasPeriod",
+                displayName  = "Bias Period",
+                flags        = 0,
+                type    = OptInputParameterType.TA_OptInput_IntegerRange,
+                dataSet = com.tictactec.ta.lib.meta.annotation.IntegerRange.class
+            )
+            @IntegerRange(
+                    paramName    = "optInBiasPeriod",
+                    defaultValue = 30,
+                    min          = 1,
+                    max          = 100000,
+                    suggested_start     = 1,
+                    suggested_end       = 200,
+                    suggested_increment = 1
+            )
+            int optInBiasPeriod,
+            @OptInputParameterInfo(
+                paramName    = "optInBiasMAType",
+                displayName  = "Bias MA Type",
+                flags        = 0,
+                type    = OptInputParameterType.TA_OptInput_IntegerList,
+                dataSet = com.tictactec.ta.lib.meta.annotation.IntegerList.class
+            )
+            @IntegerList(
+                    paramName    = "optInBiasMAType",
+                    defaultValue = 2,
+                    value  = { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 },
+                    string = { "SMA", "EMA", "WMA", "DEMA", "TEMA", "TRIMA", "KAMA", "MAMA", "T3", "WLMA" }
+            )
+            MAType optInBiasMAType,
+            MInteger     outBegIdx,
+            MInteger     outNBElement,
+            @OutputParameterInfo(
+                paramName = "outVolNorm",
+                flags     = 1,
+                type = OutputParameterType.TA_Output_Real
+            )
+            double outVolNorm[],
+            @OutputParameterInfo(
+                paramName = "outPriceNorm",
+                flags     = 1,
+                type = OutputParameterType.TA_Output_Real
+            )
+            double outPriceNorm[],
+            @OutputParameterInfo(
+                paramName = "outFlow",
+                flags     = 1,
+                type = OutputParameterType.TA_Output_Real
+            )
+            double outFlow[],
+            @OutputParameterInfo(
+                paramName = "outBullAvg",
+                flags     = 1,
+                type = OutputParameterType.TA_Output_Real
+            )
+            double outBullAvg[],
+            @OutputParameterInfo(
+                paramName = "outBearAvg",
+                flags     = 1,
+                type = OutputParameterType.TA_Output_Real
+            )
+            double outBearAvg[],
+            @OutputParameterInfo(
+                paramName = "outRROF",
+                flags     = 1,
+                type = OutputParameterType.TA_Output_Real
+            )
+            double outRROF[],
+            @OutputParameterInfo(
+                paramName = "outRROFSmooth",
+                flags     = 1,
+                type = OutputParameterType.TA_Output_Real
+            )
+            double outRROFSmooth[],
+            @OutputParameterInfo(
+                paramName = "outSignal",
+                flags     = 1,
+                type = OutputParameterType.TA_Output_Real
+            )
+            double outSignal[],
+            @OutputParameterInfo(
+                paramName = "outBiasSentiment",
+                flags     = 1,
+                type = OutputParameterType.TA_Output_Real
+            )
+            double outBiasSentiment[],
+            @OutputParameterInfo(
+                paramName = "outBiasSentimentSmooth",
+                flags     = 1,
+                type = OutputParameterType.TA_Output_Real
+            )
+            double outBiasSentimentSmooth[],
+            @OutputParameterInfo(
+                paramName = "outEvRatio",
+                flags     = 1,
+                type = OutputParameterType.TA_Output_Real
+            )
+            double outEvRatio[],
+            @OutputParameterInfo(
+                paramName = "outFlowUp",
+                flags     = 1,
+                type = OutputParameterType.TA_Output_Integer
+            )
+            int outFlowUp[]
+
+) {
+    return super.redkEverex (
+        startIdx,
+        endIdx,
+        inOpen ,
+        inHigh ,
+        inLow ,
+        inClose ,
+        inVolume ,
+        optInTimePeriod,
+        optInMAType,
+        optInRofPeriod,
+        optInRofMAType,
+        optInRofSmooth,
+        optInSignalPeriod,
+        optInSignalMAType,
+        optInBiasPeriod,
+        optInBiasMAType,
+        outBegIdx,
+        outNBElement,
+        outVolNorm,
+        outPriceNorm,
+        outFlow,
+        outBullAvg,
+        outBearAvg,
+        outRROF,
+        outRROFSmooth,
+        outSignal,
+        outBiasSentiment,
+        outBiasSentimentSmooth,
+        outEvRatio,
+        outFlowUp
+); }
+
+
 public int rocLookback(
         int optInTimePeriod) {
     return super.rocLookback(
@@ -8820,6 +10038,105 @@ public RetCode sum(
 ); }
 
 
+public int superTrendLookback(
+        int optInTimePeriod,
+        double optInModifier) {
+    return super.superTrendLookback(
+        optInTimePeriod,
+        optInModifier); }
+
+@FuncInfo(
+        name  = "SUPERTREND",
+        group = "Overlap Studies",
+        flags = 0,
+        nbInput    = 1,
+        nbOptInput = 2,
+        nbOutput   = 3
+)
+public RetCode superTrend(
+            int startIdx,
+            int endIdx,
+            @InputParameterInfo(
+                paramName = "inPriceHLC",
+                flags     = 14,
+                type = InputParameterType.TA_Input_Price
+            )
+            double inHigh [],
+            double inLow [],
+            double inClose [],
+            @OptInputParameterInfo(
+                paramName    = "optInTimePeriod",
+                displayName  = "Time Period",
+                flags        = 0,
+                type    = OptInputParameterType.TA_OptInput_IntegerRange,
+                dataSet = com.tictactec.ta.lib.meta.annotation.IntegerRange.class
+            )
+            @IntegerRange(
+                    paramName    = "optInTimePeriod",
+                    defaultValue = 14,
+                    min          = 1,
+                    max          = 100000,
+                    suggested_start     = 1,
+                    suggested_end       = 200,
+                    suggested_increment = 1
+            )
+            int optInTimePeriod,
+            @OptInputParameterInfo(
+                paramName    = "optInModifier",
+                displayName  = "Modifier",
+                flags        = 0,
+                type    = OptInputParameterType.TA_OptInput_RealRange,
+                dataSet = com.tictactec.ta.lib.meta.annotation.RealRange.class
+            )
+            @RealRange(
+                    paramName    = "optInModifier",
+                    defaultValue = 3.00000,
+                    min          = 0.00000,
+                    max          = 30000000000000002158062836758597337088.00000,
+                    precision    = 0,
+                    suggested_start     = 0.00000,
+                    suggested_end       = 0.00000,
+                    suggested_increment = 0.00000
+            )
+            double optInModifier,
+            MInteger     outBegIdx,
+            MInteger     outNBElement,
+            @OutputParameterInfo(
+                paramName = "outTrend",
+                flags     = 1,
+                type = OutputParameterType.TA_Output_Integer
+            )
+            int outTrend[]
+,
+            @OutputParameterInfo(
+                paramName = "outUpperBand",
+                flags     = 1,
+                type = OutputParameterType.TA_Output_Real
+            )
+            double outUpperBand[],
+            @OutputParameterInfo(
+                paramName = "outLowerBand",
+                flags     = 1,
+                type = OutputParameterType.TA_Output_Real
+            )
+            double outLowerBand[]
+) {
+    return super.superTrend (
+        startIdx,
+        endIdx,
+        inHigh ,
+        inLow ,
+        inClose ,
+        optInTimePeriod,
+        optInModifier,
+        outBegIdx,
+        outNBElement,
+        outTrend,
+        outUpperBand,
+        outLowerBand
+); }
+
+
 public int t3Lookback(
         int optInTimePeriod,
         double optInVFactor) {
@@ -9485,6 +10802,299 @@ public RetCode variance(
         inReal,
         optInTimePeriod,
         optInNbDev,
+        outBegIdx,
+        outNBElement,
+        outReal
+); }
+
+
+public int vpLookback(
+        int optInTimePeriod,
+        int optInVpWidth) {
+    return super.vpLookback(
+        optInTimePeriod,
+        optInVpWidth); }
+
+@FuncInfo(
+        name  = "VP",
+        group = "Volume Indicators",
+        flags = 0,
+        nbInput    = 1,
+        nbOptInput = 2,
+        nbOutput   = 5
+)
+public RetCode vp(
+            int startIdx,
+            int endIdx,
+            @InputParameterInfo(
+                paramName = "inPriceCV",
+                flags     = 24,
+                type = InputParameterType.TA_Input_Price
+            )
+            double inClose [],
+            double inVolume [],
+            @OptInputParameterInfo(
+                paramName    = "optInTimePeriod",
+                displayName  = "Time Period",
+                flags        = 0,
+                type    = OptInputParameterType.TA_OptInput_IntegerRange,
+                dataSet = com.tictactec.ta.lib.meta.annotation.IntegerRange.class
+            )
+            @IntegerRange(
+                    paramName    = "optInTimePeriod",
+                    defaultValue = 30,
+                    min          = 1,
+                    max          = 100000,
+                    suggested_start     = 1,
+                    suggested_end       = 200,
+                    suggested_increment = 1
+            )
+            int optInTimePeriod,
+            @OptInputParameterInfo(
+                paramName    = "optInVpWidth",
+                displayName  = "Width",
+                flags        = 0,
+                type    = OptInputParameterType.TA_OptInput_IntegerRange,
+                dataSet = com.tictactec.ta.lib.meta.annotation.IntegerRange.class
+            )
+            @IntegerRange(
+                    paramName    = "optInVpWidth",
+                    defaultValue = 10,
+                    min          = 1,
+                    max          = 100000,
+                    suggested_start     = 1,
+                    suggested_end       = 200,
+                    suggested_increment = 1
+            )
+            int optInVpWidth,
+            MInteger     outBegIdx,
+            MInteger     outNBElement,
+            @OutputParameterInfo(
+                paramName = "outPoc",
+                flags     = 1,
+                type = OutputParameterType.TA_Output_Real
+            )
+            double outPoc[],
+            @OutputParameterInfo(
+                paramName = "outValueAreaHigh",
+                flags     = 1,
+                type = OutputParameterType.TA_Output_Real
+            )
+            double outValueAreaHigh[],
+            @OutputParameterInfo(
+                paramName = "outValueAreaLow",
+                flags     = 1,
+                type = OutputParameterType.TA_Output_Real
+            )
+            double outValueAreaLow[],
+            @OutputParameterInfo(
+                paramName = "outReal",
+                flags     = 1,
+                type = OutputParameterType.TA_Output_Real
+            )
+            double outReal[],
+            @OutputParameterInfo(
+                paramName = "outInteger",
+                flags     = 1,
+                type = OutputParameterType.TA_Output_Integer
+            )
+            int outInteger[]
+
+) {
+    return super.vp (
+        startIdx,
+        endIdx,
+        inClose ,
+        inVolume ,
+        optInTimePeriod,
+        optInVpWidth,
+        outBegIdx,
+        outNBElement,
+        outPoc,
+        outValueAreaHigh,
+        outValueAreaLow,
+        outReal,
+        outInteger
+); }
+
+
+public int vrocLookback(
+        int optInTimePeriod) {
+    return super.vrocLookback(
+        optInTimePeriod); }
+
+@FuncInfo(
+        name  = "VROC",
+        group = "Volume Indicators",
+        flags = 0,
+        nbInput    = 1,
+        nbOptInput = 1,
+        nbOutput   = 1
+)
+public RetCode vroc(
+            int startIdx,
+            int endIdx,
+            @InputParameterInfo(
+                paramName = "inReal",
+                flags     = 0,
+                type = InputParameterType.TA_Input_Real
+            )
+            double inReal[],
+            @OptInputParameterInfo(
+                paramName    = "optInTimePeriod",
+                displayName  = "Time Period",
+                flags        = 0,
+                type    = OptInputParameterType.TA_OptInput_IntegerRange,
+                dataSet = com.tictactec.ta.lib.meta.annotation.IntegerRange.class
+            )
+            @IntegerRange(
+                    paramName    = "optInTimePeriod",
+                    defaultValue = 10,
+                    min          = 1,
+                    max          = 100000,
+                    suggested_start     = 1,
+                    suggested_end       = 200,
+                    suggested_increment = 1
+            )
+            int optInTimePeriod,
+            MInteger     outBegIdx,
+            MInteger     outNBElement,
+            @OutputParameterInfo(
+                paramName = "outReal",
+                flags     = 1,
+                type = OutputParameterType.TA_Output_Real
+            )
+            double outReal[]
+) {
+    return super.vroc (
+        startIdx,
+        endIdx,
+        inReal,
+        optInTimePeriod,
+        outBegIdx,
+        outNBElement,
+        outReal
+); }
+
+
+public int vwapLookback(
+        int optInTimePeriod) {
+    return super.vwapLookback(
+        optInTimePeriod); }
+
+@FuncInfo(
+        name  = "VWAP",
+        group = "Volume Indicators",
+        flags = 0,
+        nbInput    = 1,
+        nbOptInput = 1,
+        nbOutput   = 1
+)
+public RetCode vwap(
+            int startIdx,
+            int endIdx,
+            @InputParameterInfo(
+                paramName = "inPriceHLCV",
+                flags     = 30,
+                type = InputParameterType.TA_Input_Price
+            )
+            double inHigh [],
+            double inLow [],
+            double inClose [],
+            double inVolume [],
+            @OptInputParameterInfo(
+                paramName    = "optInTimePeriod",
+                displayName  = "Time Period",
+                flags        = 0,
+                type    = OptInputParameterType.TA_OptInput_IntegerRange,
+                dataSet = com.tictactec.ta.lib.meta.annotation.IntegerRange.class
+            )
+            @IntegerRange(
+                    paramName    = "optInTimePeriod",
+                    defaultValue = 10,
+                    min          = 1,
+                    max          = 100000,
+                    suggested_start     = 1,
+                    suggested_end       = 200,
+                    suggested_increment = 1
+            )
+            int optInTimePeriod,
+            MInteger     outBegIdx,
+            MInteger     outNBElement,
+            @OutputParameterInfo(
+                paramName = "outReal",
+                flags     = 1,
+                type = OutputParameterType.TA_Output_Real
+            )
+            double outReal[]
+) {
+    return super.vwap (
+        startIdx,
+        endIdx,
+        inHigh ,
+        inLow ,
+        inClose ,
+        inVolume ,
+        optInTimePeriod,
+        outBegIdx,
+        outNBElement,
+        outReal
+); }
+
+
+public int vwmaLookback(
+        int optInTimePeriod) {
+    return super.vwmaLookback(
+        optInTimePeriod); }
+
+@FuncInfo(
+        name  = "VWMA",
+        group = "Volume Indicators",
+        flags = 0,
+        nbInput    = 1,
+        nbOptInput = 1,
+        nbOutput   = 1
+)
+public RetCode vwma(
+            int startIdx,
+            int endIdx,
+            @InputParameterInfo(
+                paramName = "inReal",
+                flags     = 0,
+                type = InputParameterType.TA_Input_Real
+            )
+            double inReal[],
+            @OptInputParameterInfo(
+                paramName    = "optInTimePeriod",
+                displayName  = "Time Period",
+                flags        = 0,
+                type    = OptInputParameterType.TA_OptInput_IntegerRange,
+                dataSet = com.tictactec.ta.lib.meta.annotation.IntegerRange.class
+            )
+            @IntegerRange(
+                    paramName    = "optInTimePeriod",
+                    defaultValue = 30,
+                    min          = 1,
+                    max          = 100000,
+                    suggested_start     = 1,
+                    suggested_end       = 200,
+                    suggested_increment = 1
+            )
+            int optInTimePeriod,
+            MInteger     outBegIdx,
+            MInteger     outNBElement,
+            @OutputParameterInfo(
+                paramName = "outReal",
+                flags     = 1,
+                type = OutputParameterType.TA_Output_Real
+            )
+            double outReal[]
+) {
+    return super.vwma (
+        startIdx,
+        endIdx,
+        inReal,
+        optInTimePeriod,
         outBegIdx,
         outNBElement,
         outReal

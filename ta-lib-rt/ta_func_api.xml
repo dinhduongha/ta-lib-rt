@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<FinancialFunctionGroups version="TA-Lib RT 0.8.1-alpha (Jan  7 2024 21:58:08)">
+<FinancialFunctionGroups version="TA-Lib RT 0.8.1-alpha (Oct 16 2024 10:37:40)">
 	<!-- ACCBANDS -->
 	<FinancialFunctionGroup>
 		<Abbreviation>ACCBANDS</Abbreviation>
@@ -3719,6 +3719,312 @@
 			</Function>
 			<Function>
 				<Name>TA_ATR_StateSave</Name>
+				<Type>StateSave</Type>
+				<ReturnValue>TA_Result</ReturnValue>
+				<SpecialInputArguments>
+					<SpecialInputArgument>
+						<Type>Pointer</Type>
+						<Name>state</Name>
+					</SpecialInputArgument>
+					<SpecialInputArgument>
+						<Type>Pointer to File</Type>
+						<Name>file</Name>
+					</SpecialInputArgument>
+				</SpecialInputArguments>
+				<OptionalInputArguments>
+					<OptionalInputArgument>
+						<Name>Time Period</Name>
+						<ShortDescription>Number of period</ShortDescription>
+						<Type>Integer</Type>
+						<Range>
+							<Minimum>1</Minimum>
+							<Maximum>100000</Maximum>
+							<SuggestedStart>100000</SuggestedStart>
+							<SuggestedEnd>100000</SuggestedEnd>
+							<SuggestedIncrement>100000</SuggestedIncrement>
+						</Range>
+						<DefaultValue>14</DefaultValue>
+					</OptionalInputArgument>
+				</OptionalInputArguments>
+			</Function>
+		</Functions>
+	</FinancialFunctionGroup>
+
+
+	<!-- ATRP -->
+	<FinancialFunctionGroup>
+		<Abbreviation>ATRP</Abbreviation>
+		<CamelCaseName>Atrp</CamelCaseName>
+		<ShortDescription>Average True Range Percent</ShortDescription>
+		<GroupId>Volatility Indicators</GroupId>
+		<Flags>
+			<Flag>Unstable Period</Flag>
+		</Flags>
+		<StateMemory>
+			<StateMemoryField>
+				<Type>Double</Type>
+				<Name>High</Name>
+			</StateMemoryField>
+			<StateMemoryField>
+				<Type>Double</Type>
+				<Name>Low</Name>
+			</StateMemoryField>
+			<StateMemoryField>
+				<Type>Double</Type>
+				<Name>Close</Name>
+			</StateMemoryField>
+		</StateMemory>
+		<State>
+			<StateField>
+				<Type>Integer</Type>
+				<Name>mem_size</Name>
+			</StateField>
+			<StateField>
+				<Type>Integer</Type>
+				<Name>mem_index</Name>
+			</StateField>
+			<StateField>
+				<Type>Pointer</Type>
+				<Name>memory</Name>
+			</StateField>
+			<StateField>
+				<Type>Pointer</Type>
+				<Name>StateATR</Name>
+			</StateField>
+		</State>
+		<Functions>
+			<Function>
+				<Name>TA_ATRP_Lookback</Name>
+				<Type>Lookback</Type>
+				<ReturnValue>Integer</ReturnValue>
+				<OptionalInputArguments>
+					<OptionalInputArgument>
+						<Name>Time Period</Name>
+						<ShortDescription>Number of period</ShortDescription>
+						<Type>Integer</Type>
+						<Range>
+							<Minimum>1</Minimum>
+							<Maximum>100000</Maximum>
+							<SuggestedStart>100000</SuggestedStart>
+							<SuggestedEnd>100000</SuggestedEnd>
+							<SuggestedIncrement>100000</SuggestedIncrement>
+						</Range>
+						<DefaultValue>14</DefaultValue>
+					</OptionalInputArgument>
+				</OptionalInputArguments>
+			</Function>
+			<Function>
+				<Name>TA_ATRP</Name>
+				<Type>Regular</Type>
+				<ReturnValue>TA_Result</ReturnValue>
+				<RequiredInputArguments>
+					<RequiredInputArgument>
+						<Type>Integer</Type>
+						<Name>startIdx</Name>
+					</RequiredInputArgument>
+					<RequiredInputArgument>
+						<Type>Integer</Type>
+						<Name>endIdx</Name>
+					</RequiredInputArgument>
+					<RequiredInputArgument>
+						<Type>Double</Type>
+						<Name>High</Name>
+					</RequiredInputArgument>
+					<RequiredInputArgument>
+						<Type>Double</Type>
+						<Name>Low</Name>
+					</RequiredInputArgument>
+					<RequiredInputArgument>
+						<Type>Double</Type>
+						<Name>Close</Name>
+					</RequiredInputArgument>
+				</RequiredInputArguments>
+				<OptionalInputArguments>
+					<OptionalInputArgument>
+						<Name>Time Period</Name>
+						<ShortDescription>Number of period</ShortDescription>
+						<Type>Integer</Type>
+						<Range>
+							<Minimum>1</Minimum>
+							<Maximum>100000</Maximum>
+							<SuggestedStart>100000</SuggestedStart>
+							<SuggestedEnd>100000</SuggestedEnd>
+							<SuggestedIncrement>100000</SuggestedIncrement>
+						</Range>
+						<DefaultValue>14</DefaultValue>
+					</OptionalInputArgument>
+				</OptionalInputArguments>
+				<OutputArguments>
+					<OutputArgument>
+						<Type>Pointer to Integer</Type>
+						<Name>outBegIdx</Name>
+					</OutputArgument>
+					<OutputArgument>
+						<Type>Pointer to Integer</Type>
+						<Name>outNBElement</Name>
+					</OutputArgument>
+					<OutputArgument>
+						<Type>Double Array</Type>
+						<Name>outReal</Name>
+						<Flags>
+							<Flag>Line</Flag>
+						</Flags>
+					</OutputArgument>
+				</OutputArguments>
+			</Function>
+			<Function>
+				<Name>TA_ATRP_StateInit</Name>
+				<Type>StateInit</Type>
+				<ReturnValue>TA_Result</ReturnValue>
+				<SpecialInputArguments>
+					<SpecialInputArgument>
+						<Type>Pointer to Pointer</Type>
+						<Name>state</Name>
+					</SpecialInputArgument>
+				</SpecialInputArguments>
+				<OptionalInputArguments>
+					<OptionalInputArgument>
+						<Name>Time Period</Name>
+						<ShortDescription>Number of period</ShortDescription>
+						<Type>Integer</Type>
+						<Range>
+							<Minimum>1</Minimum>
+							<Maximum>100000</Maximum>
+							<SuggestedStart>100000</SuggestedStart>
+							<SuggestedEnd>100000</SuggestedEnd>
+							<SuggestedIncrement>100000</SuggestedIncrement>
+						</Range>
+						<DefaultValue>14</DefaultValue>
+					</OptionalInputArgument>
+				</OptionalInputArguments>
+			</Function>
+			<Function>
+				<Name>TA_ATRP_State</Name>
+				<Type>State</Type>
+				<ReturnValue>TA_Result</ReturnValue>
+				<SpecialInputArguments>
+					<SpecialInputArgument>
+						<Type>Pointer</Type>
+						<Name>state</Name>
+					</SpecialInputArgument>
+				</SpecialInputArguments>
+				<RequiredInputArguments>
+					<RequiredInputArgument>
+						<Type>Double</Type>
+						<Name>High</Name>
+					</RequiredInputArgument>
+					<RequiredInputArgument>
+						<Type>Double</Type>
+						<Name>Low</Name>
+					</RequiredInputArgument>
+					<RequiredInputArgument>
+						<Type>Double</Type>
+						<Name>Close</Name>
+					</RequiredInputArgument>
+				</RequiredInputArguments>
+				<OutputArguments>
+					<OutputArgument>
+						<Type>Double</Type>
+						<Name>outReal</Name>
+						<Flags>
+							<Flag>Line</Flag>
+						</Flags>
+					</OutputArgument>
+				</OutputArguments>
+			</Function>
+			<Function>
+				<Name>TA_ATRP_BatchState</Name>
+				<Type>BatchState</Type>
+				<ReturnValue>TA_Result</ReturnValue>
+				<SpecialInputArguments>
+					<SpecialInputArgument>
+						<Type>Pointer</Type>
+						<Name>state</Name>
+					</SpecialInputArgument>
+				</SpecialInputArguments>
+				<RequiredInputArguments>
+					<RequiredInputArgument>
+						<Type>Integer</Type>
+						<Name>startIdx</Name>
+					</RequiredInputArgument>
+					<RequiredInputArgument>
+						<Type>Integer</Type>
+						<Name>endIdx</Name>
+					</RequiredInputArgument>
+					<RequiredInputArgument>
+						<Type>Double</Type>
+						<Name>High</Name>
+					</RequiredInputArgument>
+					<RequiredInputArgument>
+						<Type>Double</Type>
+						<Name>Low</Name>
+					</RequiredInputArgument>
+					<RequiredInputArgument>
+						<Type>Double</Type>
+						<Name>Close</Name>
+					</RequiredInputArgument>
+				</RequiredInputArguments>
+				<OutputArguments>
+					<OutputArgument>
+						<Type>Pointer to Integer</Type>
+						<Name>outBegIdx</Name>
+					</OutputArgument>
+					<OutputArgument>
+						<Type>Pointer to Integer</Type>
+						<Name>outNBElement</Name>
+					</OutputArgument>
+					<OutputArgument>
+						<Type>Double Array</Type>
+						<Name>outReal</Name>
+						<Flags>
+							<Flag>Line</Flag>
+						</Flags>
+					</OutputArgument>
+				</OutputArguments>
+			</Function>
+			<Function>
+				<Name>TA_ATRP_StateFree</Name>
+				<Type>StateFree</Type>
+				<ReturnValue>TA_Result</ReturnValue>
+				<SpecialInputArguments>
+					<SpecialInputArgument>
+						<Type>Pointer to Pointer</Type>
+						<Name>state</Name>
+					</SpecialInputArgument>
+				</SpecialInputArguments>
+			</Function>
+			<Function>
+				<Name>TA_ATRP_StateLoad</Name>
+				<Type>StateLoad</Type>
+				<ReturnValue>TA_Result</ReturnValue>
+				<SpecialInputArguments>
+					<SpecialInputArgument>
+						<Type>Pointer to Pointer</Type>
+						<Name>state</Name>
+					</SpecialInputArgument>
+					<SpecialInputArgument>
+						<Type>Pointer to File</Type>
+						<Name>file</Name>
+					</SpecialInputArgument>
+				</SpecialInputArguments>
+				<OptionalInputArguments>
+					<OptionalInputArgument>
+						<Name>Time Period</Name>
+						<ShortDescription>Number of period</ShortDescription>
+						<Type>Integer</Type>
+						<Range>
+							<Minimum>1</Minimum>
+							<Maximum>100000</Maximum>
+							<SuggestedStart>100000</SuggestedStart>
+							<SuggestedEnd>100000</SuggestedEnd>
+							<SuggestedIncrement>100000</SuggestedIncrement>
+						</Range>
+						<DefaultValue>14</DefaultValue>
+					</OptionalInputArgument>
+				</OptionalInputArguments>
+			</Function>
+			<Function>
+				<Name>TA_ATRP_StateSave</Name>
 				<Type>StateSave</Type>
 				<ReturnValue>TA_Result</ReturnValue>
 				<SpecialInputArguments>
@@ -22739,6 +23045,799 @@
 	</FinancialFunctionGroup>
 
 
+	<!-- CKSP -->
+	<FinancialFunctionGroup>
+		<Abbreviation>CKSP</Abbreviation>
+		<CamelCaseName>Cksp</CamelCaseName>
+		<ShortDescription>Chande Kroll Stop</ShortDescription>
+		<GroupId>Volatility Indicators</GroupId>
+		<StateMemory>
+			<StateMemoryField>
+				<Type>Double</Type>
+				<Name>High</Name>
+			</StateMemoryField>
+			<StateMemoryField>
+				<Type>Double</Type>
+				<Name>Low</Name>
+			</StateMemoryField>
+			<StateMemoryField>
+				<Type>Double</Type>
+				<Name>Close</Name>
+			</StateMemoryField>
+		</StateMemory>
+		<State>
+			<StateField>
+				<Type>Integer</Type>
+				<Name>mem_size</Name>
+			</StateField>
+			<StateField>
+				<Type>Integer</Type>
+				<Name>mem_index</Name>
+			</StateField>
+			<StateField>
+				<Type>Pointer</Type>
+				<Name>memory</Name>
+			</StateField>
+			<StateField>
+				<Type>Pointer</Type>
+				<Name>StateATR</Name>
+			</StateField>
+			<StateField>
+				<Type>Pointer</Type>
+				<Name>StateMINMAX</Name>
+			</StateField>
+		</State>
+		<Functions>
+			<Function>
+				<Name>TA_CKSP_Lookback</Name>
+				<Type>Lookback</Type>
+				<ReturnValue>Integer</ReturnValue>
+				<OptionalInputArguments>
+					<OptionalInputArgument>
+						<Name>Time Period</Name>
+						<ShortDescription>Number of period</ShortDescription>
+						<Type>Integer</Type>
+						<Range>
+							<Minimum>1</Minimum>
+							<Maximum>100000</Maximum>
+							<SuggestedStart>100000</SuggestedStart>
+							<SuggestedEnd>100000</SuggestedEnd>
+							<SuggestedIncrement>100000</SuggestedIncrement>
+						</Range>
+						<DefaultValue>14</DefaultValue>
+					</OptionalInputArgument>
+					<OptionalInputArgument>
+						<Name>Cksp Period</Name>
+						<ShortDescription>Cksp Sampling Period</ShortDescription>
+						<Type>Integer</Type>
+						<Range>
+							<Minimum>1</Minimum>
+							<Maximum>100000</Maximum>
+							<SuggestedStart>100000</SuggestedStart>
+							<SuggestedEnd>100000</SuggestedEnd>
+							<SuggestedIncrement>100000</SuggestedIncrement>
+						</Range>
+						<DefaultValue>9</DefaultValue>
+					</OptionalInputArgument>
+					<OptionalInputArgument>
+						<Name>Scalar</Name>
+						<ShortDescription>scalar</ShortDescription>
+						<Type>Double</Type>
+						<Range>
+							<Minimum>-3.000000e+37</Minimum>
+							<Maximum>3.000000e+37</Maximum>
+							<Precision>4</Precision>
+							<SuggestedStart>0.000000e+0</SuggestedStart>
+							<SuggestedEnd>0.000000e+0</SuggestedEnd>
+							<SuggestedIncrement>0.000000e+0</SuggestedIncrement>
+						</Range>
+						<DefaultValue>1.000000e+0</DefaultValue>
+					</OptionalInputArgument>
+				</OptionalInputArguments>
+			</Function>
+			<Function>
+				<Name>TA_CKSP</Name>
+				<Type>Regular</Type>
+				<ReturnValue>TA_Result</ReturnValue>
+				<RequiredInputArguments>
+					<RequiredInputArgument>
+						<Type>Integer</Type>
+						<Name>startIdx</Name>
+					</RequiredInputArgument>
+					<RequiredInputArgument>
+						<Type>Integer</Type>
+						<Name>endIdx</Name>
+					</RequiredInputArgument>
+					<RequiredInputArgument>
+						<Type>Double</Type>
+						<Name>High</Name>
+					</RequiredInputArgument>
+					<RequiredInputArgument>
+						<Type>Double</Type>
+						<Name>Low</Name>
+					</RequiredInputArgument>
+					<RequiredInputArgument>
+						<Type>Double</Type>
+						<Name>Close</Name>
+					</RequiredInputArgument>
+				</RequiredInputArguments>
+				<OptionalInputArguments>
+					<OptionalInputArgument>
+						<Name>Time Period</Name>
+						<ShortDescription>Number of period</ShortDescription>
+						<Type>Integer</Type>
+						<Range>
+							<Minimum>1</Minimum>
+							<Maximum>100000</Maximum>
+							<SuggestedStart>100000</SuggestedStart>
+							<SuggestedEnd>100000</SuggestedEnd>
+							<SuggestedIncrement>100000</SuggestedIncrement>
+						</Range>
+						<DefaultValue>14</DefaultValue>
+					</OptionalInputArgument>
+					<OptionalInputArgument>
+						<Name>Cksp Period</Name>
+						<ShortDescription>Cksp Sampling Period</ShortDescription>
+						<Type>Integer</Type>
+						<Range>
+							<Minimum>1</Minimum>
+							<Maximum>100000</Maximum>
+							<SuggestedStart>100000</SuggestedStart>
+							<SuggestedEnd>100000</SuggestedEnd>
+							<SuggestedIncrement>100000</SuggestedIncrement>
+						</Range>
+						<DefaultValue>9</DefaultValue>
+					</OptionalInputArgument>
+					<OptionalInputArgument>
+						<Name>Scalar</Name>
+						<ShortDescription>scalar</ShortDescription>
+						<Type>Double</Type>
+						<Range>
+							<Minimum>-3.000000e+37</Minimum>
+							<Maximum>3.000000e+37</Maximum>
+							<Precision>4</Precision>
+							<SuggestedStart>0.000000e+0</SuggestedStart>
+							<SuggestedEnd>0.000000e+0</SuggestedEnd>
+							<SuggestedIncrement>0.000000e+0</SuggestedIncrement>
+						</Range>
+						<DefaultValue>1.000000e+0</DefaultValue>
+					</OptionalInputArgument>
+				</OptionalInputArguments>
+				<OutputArguments>
+					<OutputArgument>
+						<Type>Pointer to Integer</Type>
+						<Name>outBegIdx</Name>
+					</OutputArgument>
+					<OutputArgument>
+						<Type>Pointer to Integer</Type>
+						<Name>outNBElement</Name>
+					</OutputArgument>
+					<OutputArgument>
+						<Type>Double Array</Type>
+						<Name>outLongStop</Name>
+						<Flags>
+							<Flag>Line</Flag>
+						</Flags>
+					</OutputArgument>
+					<OutputArgument>
+						<Type>Double Array</Type>
+						<Name>outShortStop</Name>
+						<Flags>
+							<Flag>Line</Flag>
+						</Flags>
+					</OutputArgument>
+				</OutputArguments>
+			</Function>
+			<Function>
+				<Name>TA_CKSP_StateInit</Name>
+				<Type>StateInit</Type>
+				<ReturnValue>TA_Result</ReturnValue>
+				<SpecialInputArguments>
+					<SpecialInputArgument>
+						<Type>Pointer to Pointer</Type>
+						<Name>state</Name>
+					</SpecialInputArgument>
+				</SpecialInputArguments>
+				<OptionalInputArguments>
+					<OptionalInputArgument>
+						<Name>Time Period</Name>
+						<ShortDescription>Number of period</ShortDescription>
+						<Type>Integer</Type>
+						<Range>
+							<Minimum>1</Minimum>
+							<Maximum>100000</Maximum>
+							<SuggestedStart>100000</SuggestedStart>
+							<SuggestedEnd>100000</SuggestedEnd>
+							<SuggestedIncrement>100000</SuggestedIncrement>
+						</Range>
+						<DefaultValue>14</DefaultValue>
+					</OptionalInputArgument>
+					<OptionalInputArgument>
+						<Name>Cksp Period</Name>
+						<ShortDescription>Cksp Sampling Period</ShortDescription>
+						<Type>Integer</Type>
+						<Range>
+							<Minimum>1</Minimum>
+							<Maximum>100000</Maximum>
+							<SuggestedStart>100000</SuggestedStart>
+							<SuggestedEnd>100000</SuggestedEnd>
+							<SuggestedIncrement>100000</SuggestedIncrement>
+						</Range>
+						<DefaultValue>9</DefaultValue>
+					</OptionalInputArgument>
+					<OptionalInputArgument>
+						<Name>Scalar</Name>
+						<ShortDescription>scalar</ShortDescription>
+						<Type>Double</Type>
+						<Range>
+							<Minimum>-3.000000e+37</Minimum>
+							<Maximum>3.000000e+37</Maximum>
+							<Precision>4</Precision>
+							<SuggestedStart>0.000000e+0</SuggestedStart>
+							<SuggestedEnd>0.000000e+0</SuggestedEnd>
+							<SuggestedIncrement>0.000000e+0</SuggestedIncrement>
+						</Range>
+						<DefaultValue>1.000000e+0</DefaultValue>
+					</OptionalInputArgument>
+				</OptionalInputArguments>
+			</Function>
+			<Function>
+				<Name>TA_CKSP_State</Name>
+				<Type>State</Type>
+				<ReturnValue>TA_Result</ReturnValue>
+				<SpecialInputArguments>
+					<SpecialInputArgument>
+						<Type>Pointer</Type>
+						<Name>state</Name>
+					</SpecialInputArgument>
+				</SpecialInputArguments>
+				<RequiredInputArguments>
+					<RequiredInputArgument>
+						<Type>Double</Type>
+						<Name>High</Name>
+					</RequiredInputArgument>
+					<RequiredInputArgument>
+						<Type>Double</Type>
+						<Name>Low</Name>
+					</RequiredInputArgument>
+					<RequiredInputArgument>
+						<Type>Double</Type>
+						<Name>Close</Name>
+					</RequiredInputArgument>
+				</RequiredInputArguments>
+				<OutputArguments>
+					<OutputArgument>
+						<Type>Double</Type>
+						<Name>outLongStop</Name>
+						<Flags>
+							<Flag>Line</Flag>
+						</Flags>
+					</OutputArgument>
+					<OutputArgument>
+						<Type>Double</Type>
+						<Name>outShortStop</Name>
+						<Flags>
+							<Flag>Line</Flag>
+						</Flags>
+					</OutputArgument>
+				</OutputArguments>
+			</Function>
+			<Function>
+				<Name>TA_CKSP_BatchState</Name>
+				<Type>BatchState</Type>
+				<ReturnValue>TA_Result</ReturnValue>
+				<SpecialInputArguments>
+					<SpecialInputArgument>
+						<Type>Pointer</Type>
+						<Name>state</Name>
+					</SpecialInputArgument>
+				</SpecialInputArguments>
+				<RequiredInputArguments>
+					<RequiredInputArgument>
+						<Type>Integer</Type>
+						<Name>startIdx</Name>
+					</RequiredInputArgument>
+					<RequiredInputArgument>
+						<Type>Integer</Type>
+						<Name>endIdx</Name>
+					</RequiredInputArgument>
+					<RequiredInputArgument>
+						<Type>Double</Type>
+						<Name>High</Name>
+					</RequiredInputArgument>
+					<RequiredInputArgument>
+						<Type>Double</Type>
+						<Name>Low</Name>
+					</RequiredInputArgument>
+					<RequiredInputArgument>
+						<Type>Double</Type>
+						<Name>Close</Name>
+					</RequiredInputArgument>
+				</RequiredInputArguments>
+				<OutputArguments>
+					<OutputArgument>
+						<Type>Pointer to Integer</Type>
+						<Name>outBegIdx</Name>
+					</OutputArgument>
+					<OutputArgument>
+						<Type>Pointer to Integer</Type>
+						<Name>outNBElement</Name>
+					</OutputArgument>
+					<OutputArgument>
+						<Type>Double Array</Type>
+						<Name>outLongStop</Name>
+						<Flags>
+							<Flag>Line</Flag>
+						</Flags>
+					</OutputArgument>
+					<OutputArgument>
+						<Type>Double Array</Type>
+						<Name>outShortStop</Name>
+						<Flags>
+							<Flag>Line</Flag>
+						</Flags>
+					</OutputArgument>
+				</OutputArguments>
+			</Function>
+			<Function>
+				<Name>TA_CKSP_StateFree</Name>
+				<Type>StateFree</Type>
+				<ReturnValue>TA_Result</ReturnValue>
+				<SpecialInputArguments>
+					<SpecialInputArgument>
+						<Type>Pointer to Pointer</Type>
+						<Name>state</Name>
+					</SpecialInputArgument>
+				</SpecialInputArguments>
+			</Function>
+			<Function>
+				<Name>TA_CKSP_StateLoad</Name>
+				<Type>StateLoad</Type>
+				<ReturnValue>TA_Result</ReturnValue>
+				<SpecialInputArguments>
+					<SpecialInputArgument>
+						<Type>Pointer to Pointer</Type>
+						<Name>state</Name>
+					</SpecialInputArgument>
+					<SpecialInputArgument>
+						<Type>Pointer to File</Type>
+						<Name>file</Name>
+					</SpecialInputArgument>
+				</SpecialInputArguments>
+				<OptionalInputArguments>
+					<OptionalInputArgument>
+						<Name>Time Period</Name>
+						<ShortDescription>Number of period</ShortDescription>
+						<Type>Integer</Type>
+						<Range>
+							<Minimum>1</Minimum>
+							<Maximum>100000</Maximum>
+							<SuggestedStart>100000</SuggestedStart>
+							<SuggestedEnd>100000</SuggestedEnd>
+							<SuggestedIncrement>100000</SuggestedIncrement>
+						</Range>
+						<DefaultValue>14</DefaultValue>
+					</OptionalInputArgument>
+					<OptionalInputArgument>
+						<Name>Cksp Period</Name>
+						<ShortDescription>Cksp Sampling Period</ShortDescription>
+						<Type>Integer</Type>
+						<Range>
+							<Minimum>1</Minimum>
+							<Maximum>100000</Maximum>
+							<SuggestedStart>100000</SuggestedStart>
+							<SuggestedEnd>100000</SuggestedEnd>
+							<SuggestedIncrement>100000</SuggestedIncrement>
+						</Range>
+						<DefaultValue>9</DefaultValue>
+					</OptionalInputArgument>
+					<OptionalInputArgument>
+						<Name>Scalar</Name>
+						<ShortDescription>scalar</ShortDescription>
+						<Type>Double</Type>
+						<Range>
+							<Minimum>-3.000000e+37</Minimum>
+							<Maximum>3.000000e+37</Maximum>
+							<Precision>4</Precision>
+							<SuggestedStart>0.000000e+0</SuggestedStart>
+							<SuggestedEnd>0.000000e+0</SuggestedEnd>
+							<SuggestedIncrement>0.000000e+0</SuggestedIncrement>
+						</Range>
+						<DefaultValue>1.000000e+0</DefaultValue>
+					</OptionalInputArgument>
+				</OptionalInputArguments>
+			</Function>
+			<Function>
+				<Name>TA_CKSP_StateSave</Name>
+				<Type>StateSave</Type>
+				<ReturnValue>TA_Result</ReturnValue>
+				<SpecialInputArguments>
+					<SpecialInputArgument>
+						<Type>Pointer</Type>
+						<Name>state</Name>
+					</SpecialInputArgument>
+					<SpecialInputArgument>
+						<Type>Pointer to File</Type>
+						<Name>file</Name>
+					</SpecialInputArgument>
+				</SpecialInputArguments>
+				<OptionalInputArguments>
+					<OptionalInputArgument>
+						<Name>Time Period</Name>
+						<ShortDescription>Number of period</ShortDescription>
+						<Type>Integer</Type>
+						<Range>
+							<Minimum>1</Minimum>
+							<Maximum>100000</Maximum>
+							<SuggestedStart>100000</SuggestedStart>
+							<SuggestedEnd>100000</SuggestedEnd>
+							<SuggestedIncrement>100000</SuggestedIncrement>
+						</Range>
+						<DefaultValue>14</DefaultValue>
+					</OptionalInputArgument>
+					<OptionalInputArgument>
+						<Name>Cksp Period</Name>
+						<ShortDescription>Cksp Sampling Period</ShortDescription>
+						<Type>Integer</Type>
+						<Range>
+							<Minimum>1</Minimum>
+							<Maximum>100000</Maximum>
+							<SuggestedStart>100000</SuggestedStart>
+							<SuggestedEnd>100000</SuggestedEnd>
+							<SuggestedIncrement>100000</SuggestedIncrement>
+						</Range>
+						<DefaultValue>9</DefaultValue>
+					</OptionalInputArgument>
+					<OptionalInputArgument>
+						<Name>Scalar</Name>
+						<ShortDescription>scalar</ShortDescription>
+						<Type>Double</Type>
+						<Range>
+							<Minimum>-3.000000e+37</Minimum>
+							<Maximum>3.000000e+37</Maximum>
+							<Precision>4</Precision>
+							<SuggestedStart>0.000000e+0</SuggestedStart>
+							<SuggestedEnd>0.000000e+0</SuggestedEnd>
+							<SuggestedIncrement>0.000000e+0</SuggestedIncrement>
+						</Range>
+						<DefaultValue>1.000000e+0</DefaultValue>
+					</OptionalInputArgument>
+				</OptionalInputArguments>
+			</Function>
+		</Functions>
+	</FinancialFunctionGroup>
+
+
+	<!-- CMF -->
+	<FinancialFunctionGroup>
+		<Abbreviation>CMF</Abbreviation>
+		<CamelCaseName>Cmf</CamelCaseName>
+		<ShortDescription>Chaikin Money Flow</ShortDescription>
+		<GroupId>Volatility Indicators</GroupId>
+		<Flags>
+			<Flag>Unstable Period</Flag>
+		</Flags>
+		<StateMemory>
+			<StateMemoryField>
+				<Type>Double</Type>
+				<Name>High</Name>
+			</StateMemoryField>
+			<StateMemoryField>
+				<Type>Double</Type>
+				<Name>Low</Name>
+			</StateMemoryField>
+			<StateMemoryField>
+				<Type>Double</Type>
+				<Name>Close</Name>
+			</StateMemoryField>
+			<StateMemoryField>
+				<Type>Double</Type>
+				<Name>Volume</Name>
+			</StateMemoryField>
+		</StateMemory>
+		<State>
+			<StateField>
+				<Type>Integer</Type>
+				<Name>mem_size</Name>
+			</StateField>
+			<StateField>
+				<Type>Integer</Type>
+				<Name>mem_index</Name>
+			</StateField>
+			<StateField>
+				<Type>Pointer</Type>
+				<Name>memory</Name>
+			</StateField>
+			<StateField>
+				<Type>Pointer</Type>
+				<Name>StateADL</Name>
+			</StateField>
+			<StateField>
+				<Type>Pointer</Type>
+				<Name>StateSumMFV</Name>
+			</StateField>
+			<StateField>
+				<Type>Pointer</Type>
+				<Name>StateSumVol</Name>
+			</StateField>
+		</State>
+		<Functions>
+			<Function>
+				<Name>TA_CMF_Lookback</Name>
+				<Type>Lookback</Type>
+				<ReturnValue>Integer</ReturnValue>
+				<OptionalInputArguments>
+					<OptionalInputArgument>
+						<Name>Time Period</Name>
+						<ShortDescription>Number of period</ShortDescription>
+						<Type>Integer</Type>
+						<Range>
+							<Minimum>1</Minimum>
+							<Maximum>100000</Maximum>
+							<SuggestedStart>100000</SuggestedStart>
+							<SuggestedEnd>100000</SuggestedEnd>
+							<SuggestedIncrement>100000</SuggestedIncrement>
+						</Range>
+						<DefaultValue>30</DefaultValue>
+					</OptionalInputArgument>
+				</OptionalInputArguments>
+			</Function>
+			<Function>
+				<Name>TA_CMF</Name>
+				<Type>Regular</Type>
+				<ReturnValue>TA_Result</ReturnValue>
+				<RequiredInputArguments>
+					<RequiredInputArgument>
+						<Type>Integer</Type>
+						<Name>startIdx</Name>
+					</RequiredInputArgument>
+					<RequiredInputArgument>
+						<Type>Integer</Type>
+						<Name>endIdx</Name>
+					</RequiredInputArgument>
+					<RequiredInputArgument>
+						<Type>Double</Type>
+						<Name>High</Name>
+					</RequiredInputArgument>
+					<RequiredInputArgument>
+						<Type>Double</Type>
+						<Name>Low</Name>
+					</RequiredInputArgument>
+					<RequiredInputArgument>
+						<Type>Double</Type>
+						<Name>Close</Name>
+					</RequiredInputArgument>
+					<RequiredInputArgument>
+						<Type>Double</Type>
+						<Name>Volume</Name>
+					</RequiredInputArgument>
+				</RequiredInputArguments>
+				<OptionalInputArguments>
+					<OptionalInputArgument>
+						<Name>Time Period</Name>
+						<ShortDescription>Number of period</ShortDescription>
+						<Type>Integer</Type>
+						<Range>
+							<Minimum>1</Minimum>
+							<Maximum>100000</Maximum>
+							<SuggestedStart>100000</SuggestedStart>
+							<SuggestedEnd>100000</SuggestedEnd>
+							<SuggestedIncrement>100000</SuggestedIncrement>
+						</Range>
+						<DefaultValue>30</DefaultValue>
+					</OptionalInputArgument>
+				</OptionalInputArguments>
+				<OutputArguments>
+					<OutputArgument>
+						<Type>Pointer to Integer</Type>
+						<Name>outBegIdx</Name>
+					</OutputArgument>
+					<OutputArgument>
+						<Type>Pointer to Integer</Type>
+						<Name>outNBElement</Name>
+					</OutputArgument>
+					<OutputArgument>
+						<Type>Double Array</Type>
+						<Name>outReal</Name>
+						<Flags>
+							<Flag>Line</Flag>
+						</Flags>
+					</OutputArgument>
+				</OutputArguments>
+			</Function>
+			<Function>
+				<Name>TA_CMF_StateInit</Name>
+				<Type>StateInit</Type>
+				<ReturnValue>TA_Result</ReturnValue>
+				<SpecialInputArguments>
+					<SpecialInputArgument>
+						<Type>Pointer to Pointer</Type>
+						<Name>state</Name>
+					</SpecialInputArgument>
+				</SpecialInputArguments>
+				<OptionalInputArguments>
+					<OptionalInputArgument>
+						<Name>Time Period</Name>
+						<ShortDescription>Number of period</ShortDescription>
+						<Type>Integer</Type>
+						<Range>
+							<Minimum>1</Minimum>
+							<Maximum>100000</Maximum>
+							<SuggestedStart>100000</SuggestedStart>
+							<SuggestedEnd>100000</SuggestedEnd>
+							<SuggestedIncrement>100000</SuggestedIncrement>
+						</Range>
+						<DefaultValue>30</DefaultValue>
+					</OptionalInputArgument>
+				</OptionalInputArguments>
+			</Function>
+			<Function>
+				<Name>TA_CMF_State</Name>
+				<Type>State</Type>
+				<ReturnValue>TA_Result</ReturnValue>
+				<SpecialInputArguments>
+					<SpecialInputArgument>
+						<Type>Pointer</Type>
+						<Name>state</Name>
+					</SpecialInputArgument>
+				</SpecialInputArguments>
+				<RequiredInputArguments>
+					<RequiredInputArgument>
+						<Type>Double</Type>
+						<Name>High</Name>
+					</RequiredInputArgument>
+					<RequiredInputArgument>
+						<Type>Double</Type>
+						<Name>Low</Name>
+					</RequiredInputArgument>
+					<RequiredInputArgument>
+						<Type>Double</Type>
+						<Name>Close</Name>
+					</RequiredInputArgument>
+					<RequiredInputArgument>
+						<Type>Double</Type>
+						<Name>Volume</Name>
+					</RequiredInputArgument>
+				</RequiredInputArguments>
+				<OutputArguments>
+					<OutputArgument>
+						<Type>Double</Type>
+						<Name>outReal</Name>
+						<Flags>
+							<Flag>Line</Flag>
+						</Flags>
+					</OutputArgument>
+				</OutputArguments>
+			</Function>
+			<Function>
+				<Name>TA_CMF_BatchState</Name>
+				<Type>BatchState</Type>
+				<ReturnValue>TA_Result</ReturnValue>
+				<SpecialInputArguments>
+					<SpecialInputArgument>
+						<Type>Pointer</Type>
+						<Name>state</Name>
+					</SpecialInputArgument>
+				</SpecialInputArguments>
+				<RequiredInputArguments>
+					<RequiredInputArgument>
+						<Type>Integer</Type>
+						<Name>startIdx</Name>
+					</RequiredInputArgument>
+					<RequiredInputArgument>
+						<Type>Integer</Type>
+						<Name>endIdx</Name>
+					</RequiredInputArgument>
+					<RequiredInputArgument>
+						<Type>Double</Type>
+						<Name>High</Name>
+					</RequiredInputArgument>
+					<RequiredInputArgument>
+						<Type>Double</Type>
+						<Name>Low</Name>
+					</RequiredInputArgument>
+					<RequiredInputArgument>
+						<Type>Double</Type>
+						<Name>Close</Name>
+					</RequiredInputArgument>
+					<RequiredInputArgument>
+						<Type>Double</Type>
+						<Name>Volume</Name>
+					</RequiredInputArgument>
+				</RequiredInputArguments>
+				<OutputArguments>
+					<OutputArgument>
+						<Type>Pointer to Integer</Type>
+						<Name>outBegIdx</Name>
+					</OutputArgument>
+					<OutputArgument>
+						<Type>Pointer to Integer</Type>
+						<Name>outNBElement</Name>
+					</OutputArgument>
+					<OutputArgument>
+						<Type>Double Array</Type>
+						<Name>outReal</Name>
+						<Flags>
+							<Flag>Line</Flag>
+						</Flags>
+					</OutputArgument>
+				</OutputArguments>
+			</Function>
+			<Function>
+				<Name>TA_CMF_StateFree</Name>
+				<Type>StateFree</Type>
+				<ReturnValue>TA_Result</ReturnValue>
+				<SpecialInputArguments>
+					<SpecialInputArgument>
+						<Type>Pointer to Pointer</Type>
+						<Name>state</Name>
+					</SpecialInputArgument>
+				</SpecialInputArguments>
+			</Function>
+			<Function>
+				<Name>TA_CMF_StateLoad</Name>
+				<Type>StateLoad</Type>
+				<ReturnValue>TA_Result</ReturnValue>
+				<SpecialInputArguments>
+					<SpecialInputArgument>
+						<Type>Pointer to Pointer</Type>
+						<Name>state</Name>
+					</SpecialInputArgument>
+					<SpecialInputArgument>
+						<Type>Pointer to File</Type>
+						<Name>file</Name>
+					</SpecialInputArgument>
+				</SpecialInputArguments>
+				<OptionalInputArguments>
+					<OptionalInputArgument>
+						<Name>Time Period</Name>
+						<ShortDescription>Number of period</ShortDescription>
+						<Type>Integer</Type>
+						<Range>
+							<Minimum>1</Minimum>
+							<Maximum>100000</Maximum>
+							<SuggestedStart>100000</SuggestedStart>
+							<SuggestedEnd>100000</SuggestedEnd>
+							<SuggestedIncrement>100000</SuggestedIncrement>
+						</Range>
+						<DefaultValue>30</DefaultValue>
+					</OptionalInputArgument>
+				</OptionalInputArguments>
+			</Function>
+			<Function>
+				<Name>TA_CMF_StateSave</Name>
+				<Type>StateSave</Type>
+				<ReturnValue>TA_Result</ReturnValue>
+				<SpecialInputArguments>
+					<SpecialInputArgument>
+						<Type>Pointer</Type>
+						<Name>state</Name>
+					</SpecialInputArgument>
+					<SpecialInputArgument>
+						<Type>Pointer to File</Type>
+						<Name>file</Name>
+					</SpecialInputArgument>
+				</SpecialInputArguments>
+				<OptionalInputArguments>
+					<OptionalInputArgument>
+						<Name>Time Period</Name>
+						<ShortDescription>Number of period</ShortDescription>
+						<Type>Integer</Type>
+						<Range>
+							<Minimum>1</Minimum>
+							<Maximum>100000</Maximum>
+							<SuggestedStart>100000</SuggestedStart>
+							<SuggestedEnd>100000</SuggestedEnd>
+							<SuggestedIncrement>100000</SuggestedIncrement>
+						</Range>
+						<DefaultValue>30</DefaultValue>
+					</OptionalInputArgument>
+				</OptionalInputArguments>
+			</Function>
+		</Functions>
+	</FinancialFunctionGroup>
+
+
 	<!-- CMO -->
 	<FinancialFunctionGroup>
 		<Abbreviation>CMO</Abbreviation>
@@ -24815,6 +25914,431 @@
 	</FinancialFunctionGroup>
 
 
+	<!-- EOM -->
+	<FinancialFunctionGroup>
+		<Abbreviation>EOM</Abbreviation>
+		<CamelCaseName>Emv</CamelCaseName>
+		<ShortDescription>Ease of Movement</ShortDescription>
+		<GroupId>Volatility Indicators</GroupId>
+		<Flags>
+			<Flag>Unstable Period</Flag>
+		</Flags>
+		<StateMemory>
+			<StateMemoryField>
+				<Type>Double</Type>
+				<Name>High</Name>
+			</StateMemoryField>
+			<StateMemoryField>
+				<Type>Double</Type>
+				<Name>Low</Name>
+			</StateMemoryField>
+			<StateMemoryField>
+				<Type>Double</Type>
+				<Name>Close</Name>
+			</StateMemoryField>
+			<StateMemoryField>
+				<Type>Double</Type>
+				<Name>Volume</Name>
+			</StateMemoryField>
+		</StateMemory>
+		<State>
+			<StateField>
+				<Type>Integer</Type>
+				<Name>mem_size</Name>
+			</StateField>
+			<StateField>
+				<Type>Integer</Type>
+				<Name>mem_index</Name>
+			</StateField>
+			<StateField>
+				<Type>Pointer</Type>
+				<Name>memory</Name>
+			</StateField>
+			<StateField>
+				<Type>Pointer</Type>
+				<Name>StateSMA</Name>
+			</StateField>
+			<StateField>
+				<Type>Double</Type>
+				<Name>prevHigh</Name>
+			</StateField>
+			<StateField>
+				<Type>Double</Type>
+				<Name>prevLow</Name>
+			</StateField>
+		</State>
+		<Functions>
+			<Function>
+				<Name>TA_EOM_Lookback</Name>
+				<Type>Lookback</Type>
+				<ReturnValue>Integer</ReturnValue>
+				<OptionalInputArguments>
+					<OptionalInputArgument>
+						<Name>Time Period</Name>
+						<ShortDescription>Number of period</ShortDescription>
+						<Type>Integer</Type>
+						<Range>
+							<Minimum>1</Minimum>
+							<Maximum>100000</Maximum>
+							<SuggestedStart>100000</SuggestedStart>
+							<SuggestedEnd>100000</SuggestedEnd>
+							<SuggestedIncrement>100000</SuggestedIncrement>
+						</Range>
+						<DefaultValue>14</DefaultValue>
+					</OptionalInputArgument>
+					<OptionalInputArgument>
+						<Name>MA Type</Name>
+						<ShortDescription>Type of Moving Average</ShortDescription>
+						<Type>MA Type</Type>
+						<DefaultValue>0</DefaultValue>
+					</OptionalInputArgument>
+					<OptionalInputArgument>
+						<Name>Divisor</Name>
+						<ShortDescription>Divisor</ShortDescription>
+						<Type>Integer</Type>
+						<Range>
+							<Minimum>1</Minimum>
+							<Maximum>100000</Maximum>
+							<SuggestedStart>100000</SuggestedStart>
+							<SuggestedEnd>100000</SuggestedEnd>
+							<SuggestedIncrement>100000</SuggestedIncrement>
+						</Range>
+						<DefaultValue>10000</DefaultValue>
+					</OptionalInputArgument>
+				</OptionalInputArguments>
+			</Function>
+			<Function>
+				<Name>TA_EOM</Name>
+				<Type>Regular</Type>
+				<ReturnValue>TA_Result</ReturnValue>
+				<RequiredInputArguments>
+					<RequiredInputArgument>
+						<Type>Integer</Type>
+						<Name>startIdx</Name>
+					</RequiredInputArgument>
+					<RequiredInputArgument>
+						<Type>Integer</Type>
+						<Name>endIdx</Name>
+					</RequiredInputArgument>
+					<RequiredInputArgument>
+						<Type>Double</Type>
+						<Name>High</Name>
+					</RequiredInputArgument>
+					<RequiredInputArgument>
+						<Type>Double</Type>
+						<Name>Low</Name>
+					</RequiredInputArgument>
+					<RequiredInputArgument>
+						<Type>Double</Type>
+						<Name>Close</Name>
+					</RequiredInputArgument>
+					<RequiredInputArgument>
+						<Type>Double</Type>
+						<Name>Volume</Name>
+					</RequiredInputArgument>
+				</RequiredInputArguments>
+				<OptionalInputArguments>
+					<OptionalInputArgument>
+						<Name>Time Period</Name>
+						<ShortDescription>Number of period</ShortDescription>
+						<Type>Integer</Type>
+						<Range>
+							<Minimum>1</Minimum>
+							<Maximum>100000</Maximum>
+							<SuggestedStart>100000</SuggestedStart>
+							<SuggestedEnd>100000</SuggestedEnd>
+							<SuggestedIncrement>100000</SuggestedIncrement>
+						</Range>
+						<DefaultValue>14</DefaultValue>
+					</OptionalInputArgument>
+					<OptionalInputArgument>
+						<Name>MA Type</Name>
+						<ShortDescription>Type of Moving Average</ShortDescription>
+						<Type>MA Type</Type>
+						<DefaultValue>0</DefaultValue>
+					</OptionalInputArgument>
+					<OptionalInputArgument>
+						<Name>Divisor</Name>
+						<ShortDescription>Divisor</ShortDescription>
+						<Type>Integer</Type>
+						<Range>
+							<Minimum>1</Minimum>
+							<Maximum>100000</Maximum>
+							<SuggestedStart>100000</SuggestedStart>
+							<SuggestedEnd>100000</SuggestedEnd>
+							<SuggestedIncrement>100000</SuggestedIncrement>
+						</Range>
+						<DefaultValue>10000</DefaultValue>
+					</OptionalInputArgument>
+				</OptionalInputArguments>
+				<OutputArguments>
+					<OutputArgument>
+						<Type>Pointer to Integer</Type>
+						<Name>outBegIdx</Name>
+					</OutputArgument>
+					<OutputArgument>
+						<Type>Pointer to Integer</Type>
+						<Name>outNBElement</Name>
+					</OutputArgument>
+					<OutputArgument>
+						<Type>Double Array</Type>
+						<Name>outReal</Name>
+						<Flags>
+							<Flag>Line</Flag>
+						</Flags>
+					</OutputArgument>
+				</OutputArguments>
+			</Function>
+			<Function>
+				<Name>TA_EOM_StateInit</Name>
+				<Type>StateInit</Type>
+				<ReturnValue>TA_Result</ReturnValue>
+				<SpecialInputArguments>
+					<SpecialInputArgument>
+						<Type>Pointer to Pointer</Type>
+						<Name>state</Name>
+					</SpecialInputArgument>
+				</SpecialInputArguments>
+				<OptionalInputArguments>
+					<OptionalInputArgument>
+						<Name>Time Period</Name>
+						<ShortDescription>Number of period</ShortDescription>
+						<Type>Integer</Type>
+						<Range>
+							<Minimum>1</Minimum>
+							<Maximum>100000</Maximum>
+							<SuggestedStart>100000</SuggestedStart>
+							<SuggestedEnd>100000</SuggestedEnd>
+							<SuggestedIncrement>100000</SuggestedIncrement>
+						</Range>
+						<DefaultValue>14</DefaultValue>
+					</OptionalInputArgument>
+					<OptionalInputArgument>
+						<Name>MA Type</Name>
+						<ShortDescription>Type of Moving Average</ShortDescription>
+						<Type>MA Type</Type>
+						<DefaultValue>0</DefaultValue>
+					</OptionalInputArgument>
+					<OptionalInputArgument>
+						<Name>Divisor</Name>
+						<ShortDescription>Divisor</ShortDescription>
+						<Type>Integer</Type>
+						<Range>
+							<Minimum>1</Minimum>
+							<Maximum>100000</Maximum>
+							<SuggestedStart>100000</SuggestedStart>
+							<SuggestedEnd>100000</SuggestedEnd>
+							<SuggestedIncrement>100000</SuggestedIncrement>
+						</Range>
+						<DefaultValue>10000</DefaultValue>
+					</OptionalInputArgument>
+				</OptionalInputArguments>
+			</Function>
+			<Function>
+				<Name>TA_EOM_State</Name>
+				<Type>State</Type>
+				<ReturnValue>TA_Result</ReturnValue>
+				<SpecialInputArguments>
+					<SpecialInputArgument>
+						<Type>Pointer</Type>
+						<Name>state</Name>
+					</SpecialInputArgument>
+				</SpecialInputArguments>
+				<RequiredInputArguments>
+					<RequiredInputArgument>
+						<Type>Double</Type>
+						<Name>High</Name>
+					</RequiredInputArgument>
+					<RequiredInputArgument>
+						<Type>Double</Type>
+						<Name>Low</Name>
+					</RequiredInputArgument>
+					<RequiredInputArgument>
+						<Type>Double</Type>
+						<Name>Close</Name>
+					</RequiredInputArgument>
+					<RequiredInputArgument>
+						<Type>Double</Type>
+						<Name>Volume</Name>
+					</RequiredInputArgument>
+				</RequiredInputArguments>
+				<OutputArguments>
+					<OutputArgument>
+						<Type>Double</Type>
+						<Name>outReal</Name>
+						<Flags>
+							<Flag>Line</Flag>
+						</Flags>
+					</OutputArgument>
+				</OutputArguments>
+			</Function>
+			<Function>
+				<Name>TA_EOM_BatchState</Name>
+				<Type>BatchState</Type>
+				<ReturnValue>TA_Result</ReturnValue>
+				<SpecialInputArguments>
+					<SpecialInputArgument>
+						<Type>Pointer</Type>
+						<Name>state</Name>
+					</SpecialInputArgument>
+				</SpecialInputArguments>
+				<RequiredInputArguments>
+					<RequiredInputArgument>
+						<Type>Integer</Type>
+						<Name>startIdx</Name>
+					</RequiredInputArgument>
+					<RequiredInputArgument>
+						<Type>Integer</Type>
+						<Name>endIdx</Name>
+					</RequiredInputArgument>
+					<RequiredInputArgument>
+						<Type>Double</Type>
+						<Name>High</Name>
+					</RequiredInputArgument>
+					<RequiredInputArgument>
+						<Type>Double</Type>
+						<Name>Low</Name>
+					</RequiredInputArgument>
+					<RequiredInputArgument>
+						<Type>Double</Type>
+						<Name>Close</Name>
+					</RequiredInputArgument>
+					<RequiredInputArgument>
+						<Type>Double</Type>
+						<Name>Volume</Name>
+					</RequiredInputArgument>
+				</RequiredInputArguments>
+				<OutputArguments>
+					<OutputArgument>
+						<Type>Pointer to Integer</Type>
+						<Name>outBegIdx</Name>
+					</OutputArgument>
+					<OutputArgument>
+						<Type>Pointer to Integer</Type>
+						<Name>outNBElement</Name>
+					</OutputArgument>
+					<OutputArgument>
+						<Type>Double Array</Type>
+						<Name>outReal</Name>
+						<Flags>
+							<Flag>Line</Flag>
+						</Flags>
+					</OutputArgument>
+				</OutputArguments>
+			</Function>
+			<Function>
+				<Name>TA_EOM_StateFree</Name>
+				<Type>StateFree</Type>
+				<ReturnValue>TA_Result</ReturnValue>
+				<SpecialInputArguments>
+					<SpecialInputArgument>
+						<Type>Pointer to Pointer</Type>
+						<Name>state</Name>
+					</SpecialInputArgument>
+				</SpecialInputArguments>
+			</Function>
+			<Function>
+				<Name>TA_EOM_StateLoad</Name>
+				<Type>StateLoad</Type>
+				<ReturnValue>TA_Result</ReturnValue>
+				<SpecialInputArguments>
+					<SpecialInputArgument>
+						<Type>Pointer to Pointer</Type>
+						<Name>state</Name>
+					</SpecialInputArgument>
+					<SpecialInputArgument>
+						<Type>Pointer to File</Type>
+						<Name>file</Name>
+					</SpecialInputArgument>
+				</SpecialInputArguments>
+				<OptionalInputArguments>
+					<OptionalInputArgument>
+						<Name>Time Period</Name>
+						<ShortDescription>Number of period</ShortDescription>
+						<Type>Integer</Type>
+						<Range>
+							<Minimum>1</Minimum>
+							<Maximum>100000</Maximum>
+							<SuggestedStart>100000</SuggestedStart>
+							<SuggestedEnd>100000</SuggestedEnd>
+							<SuggestedIncrement>100000</SuggestedIncrement>
+						</Range>
+						<DefaultValue>14</DefaultValue>
+					</OptionalInputArgument>
+					<OptionalInputArgument>
+						<Name>MA Type</Name>
+						<ShortDescription>Type of Moving Average</ShortDescription>
+						<Type>MA Type</Type>
+						<DefaultValue>0</DefaultValue>
+					</OptionalInputArgument>
+					<OptionalInputArgument>
+						<Name>Divisor</Name>
+						<ShortDescription>Divisor</ShortDescription>
+						<Type>Integer</Type>
+						<Range>
+							<Minimum>1</Minimum>
+							<Maximum>100000</Maximum>
+							<SuggestedStart>100000</SuggestedStart>
+							<SuggestedEnd>100000</SuggestedEnd>
+							<SuggestedIncrement>100000</SuggestedIncrement>
+						</Range>
+						<DefaultValue>10000</DefaultValue>
+					</OptionalInputArgument>
+				</OptionalInputArguments>
+			</Function>
+			<Function>
+				<Name>TA_EOM_StateSave</Name>
+				<Type>StateSave</Type>
+				<ReturnValue>TA_Result</ReturnValue>
+				<SpecialInputArguments>
+					<SpecialInputArgument>
+						<Type>Pointer</Type>
+						<Name>state</Name>
+					</SpecialInputArgument>
+					<SpecialInputArgument>
+						<Type>Pointer to File</Type>
+						<Name>file</Name>
+					</SpecialInputArgument>
+				</SpecialInputArguments>
+				<OptionalInputArguments>
+					<OptionalInputArgument>
+						<Name>Time Period</Name>
+						<ShortDescription>Number of period</ShortDescription>
+						<Type>Integer</Type>
+						<Range>
+							<Minimum>1</Minimum>
+							<Maximum>100000</Maximum>
+							<SuggestedStart>100000</SuggestedStart>
+							<SuggestedEnd>100000</SuggestedEnd>
+							<SuggestedIncrement>100000</SuggestedIncrement>
+						</Range>
+						<DefaultValue>14</DefaultValue>
+					</OptionalInputArgument>
+					<OptionalInputArgument>
+						<Name>MA Type</Name>
+						<ShortDescription>Type of Moving Average</ShortDescription>
+						<Type>MA Type</Type>
+						<DefaultValue>0</DefaultValue>
+					</OptionalInputArgument>
+					<OptionalInputArgument>
+						<Name>Divisor</Name>
+						<ShortDescription>Divisor</ShortDescription>
+						<Type>Integer</Type>
+						<Range>
+							<Minimum>1</Minimum>
+							<Maximum>100000</Maximum>
+							<SuggestedStart>100000</SuggestedStart>
+							<SuggestedEnd>100000</SuggestedEnd>
+							<SuggestedIncrement>100000</SuggestedIncrement>
+						</Range>
+						<DefaultValue>10000</DefaultValue>
+					</OptionalInputArgument>
+				</OptionalInputArguments>
+			</Function>
+		</Functions>
+	</FinancialFunctionGroup>
+
+
 	<!-- EXP -->
 	<FinancialFunctionGroup>
 		<Abbreviation>EXP</Abbreviation>
@@ -25194,6 +26718,830 @@
 						<Name>file</Name>
 					</SpecialInputArgument>
 				</SpecialInputArguments>
+			</Function>
+		</Functions>
+	</FinancialFunctionGroup>
+
+
+	<!-- HA -->
+	<FinancialFunctionGroup>
+		<Abbreviation>HA</Abbreviation>
+		<CamelCaseName>Ha</CamelCaseName>
+		<ShortDescription>Heikin Ashi</ShortDescription>
+		<GroupId>Volatility Indicators</GroupId>
+		<Flags>
+			<Flag>Unstable Period</Flag>
+		</Flags>
+		<StateMemory>
+			<StateMemoryField>
+				<Type>Double</Type>
+				<Name>Open</Name>
+			</StateMemoryField>
+			<StateMemoryField>
+				<Type>Double</Type>
+				<Name>High</Name>
+			</StateMemoryField>
+			<StateMemoryField>
+				<Type>Double</Type>
+				<Name>Low</Name>
+			</StateMemoryField>
+			<StateMemoryField>
+				<Type>Double</Type>
+				<Name>Close</Name>
+			</StateMemoryField>
+		</StateMemory>
+		<State>
+			<StateField>
+				<Type>Integer</Type>
+				<Name>mem_size</Name>
+			</StateField>
+			<StateField>
+				<Type>Integer</Type>
+				<Name>mem_index</Name>
+			</StateField>
+			<StateField>
+				<Type>Pointer</Type>
+				<Name>memory</Name>
+			</StateField>
+			<StateField>
+				<Type>Double</Type>
+				<Name> prevOpen</Name>
+			</StateField>
+			<StateField>
+				<Type>Double</Type>
+				<Name> prevClose</Name>
+			</StateField>
+		</State>
+		<Functions>
+			<Function>
+				<Name>TA_HA_Lookback</Name>
+				<Type>Lookback</Type>
+				<ReturnValue>Integer</ReturnValue>
+				<OptionalInputArguments>
+					<OptionalInputArgument>
+						<Name>Time Period</Name>
+						<ShortDescription>Number of period</ShortDescription>
+						<Type>Integer</Type>
+						<Range>
+							<Minimum>1</Minimum>
+							<Maximum>100000</Maximum>
+							<SuggestedStart>100000</SuggestedStart>
+							<SuggestedEnd>100000</SuggestedEnd>
+							<SuggestedIncrement>100000</SuggestedIncrement>
+						</Range>
+						<DefaultValue>10</DefaultValue>
+					</OptionalInputArgument>
+				</OptionalInputArguments>
+			</Function>
+			<Function>
+				<Name>TA_HA</Name>
+				<Type>Regular</Type>
+				<ReturnValue>TA_Result</ReturnValue>
+				<RequiredInputArguments>
+					<RequiredInputArgument>
+						<Type>Integer</Type>
+						<Name>startIdx</Name>
+					</RequiredInputArgument>
+					<RequiredInputArgument>
+						<Type>Integer</Type>
+						<Name>endIdx</Name>
+					</RequiredInputArgument>
+					<RequiredInputArgument>
+						<Type>Double</Type>
+						<Name>Open</Name>
+					</RequiredInputArgument>
+					<RequiredInputArgument>
+						<Type>Double</Type>
+						<Name>High</Name>
+					</RequiredInputArgument>
+					<RequiredInputArgument>
+						<Type>Double</Type>
+						<Name>Low</Name>
+					</RequiredInputArgument>
+					<RequiredInputArgument>
+						<Type>Double</Type>
+						<Name>Close</Name>
+					</RequiredInputArgument>
+				</RequiredInputArguments>
+				<OptionalInputArguments>
+					<OptionalInputArgument>
+						<Name>Time Period</Name>
+						<ShortDescription>Number of period</ShortDescription>
+						<Type>Integer</Type>
+						<Range>
+							<Minimum>1</Minimum>
+							<Maximum>100000</Maximum>
+							<SuggestedStart>100000</SuggestedStart>
+							<SuggestedEnd>100000</SuggestedEnd>
+							<SuggestedIncrement>100000</SuggestedIncrement>
+						</Range>
+						<DefaultValue>10</DefaultValue>
+					</OptionalInputArgument>
+				</OptionalInputArguments>
+				<OutputArguments>
+					<OutputArgument>
+						<Type>Pointer to Integer</Type>
+						<Name>outBegIdx</Name>
+					</OutputArgument>
+					<OutputArgument>
+						<Type>Pointer to Integer</Type>
+						<Name>outNBElement</Name>
+					</OutputArgument>
+					<OutputArgument>
+						<Type>Double Array</Type>
+						<Name>outOpen</Name>
+						<Flags>
+							<Flag>Line</Flag>
+						</Flags>
+					</OutputArgument>
+					<OutputArgument>
+						<Type>Double Array</Type>
+						<Name>outHigh</Name>
+						<Flags>
+							<Flag>Line</Flag>
+						</Flags>
+					</OutputArgument>
+					<OutputArgument>
+						<Type>Double Array</Type>
+						<Name>outLow</Name>
+						<Flags>
+							<Flag>Line</Flag>
+						</Flags>
+					</OutputArgument>
+					<OutputArgument>
+						<Type>Double Array</Type>
+						<Name>outClose</Name>
+						<Flags>
+							<Flag>Line</Flag>
+						</Flags>
+					</OutputArgument>
+				</OutputArguments>
+			</Function>
+			<Function>
+				<Name>TA_HA_StateInit</Name>
+				<Type>StateInit</Type>
+				<ReturnValue>TA_Result</ReturnValue>
+				<SpecialInputArguments>
+					<SpecialInputArgument>
+						<Type>Pointer to Pointer</Type>
+						<Name>state</Name>
+					</SpecialInputArgument>
+				</SpecialInputArguments>
+				<OptionalInputArguments>
+					<OptionalInputArgument>
+						<Name>Time Period</Name>
+						<ShortDescription>Number of period</ShortDescription>
+						<Type>Integer</Type>
+						<Range>
+							<Minimum>1</Minimum>
+							<Maximum>100000</Maximum>
+							<SuggestedStart>100000</SuggestedStart>
+							<SuggestedEnd>100000</SuggestedEnd>
+							<SuggestedIncrement>100000</SuggestedIncrement>
+						</Range>
+						<DefaultValue>10</DefaultValue>
+					</OptionalInputArgument>
+				</OptionalInputArguments>
+			</Function>
+			<Function>
+				<Name>TA_HA_State</Name>
+				<Type>State</Type>
+				<ReturnValue>TA_Result</ReturnValue>
+				<SpecialInputArguments>
+					<SpecialInputArgument>
+						<Type>Pointer</Type>
+						<Name>state</Name>
+					</SpecialInputArgument>
+				</SpecialInputArguments>
+				<RequiredInputArguments>
+					<RequiredInputArgument>
+						<Type>Double</Type>
+						<Name>Open</Name>
+					</RequiredInputArgument>
+					<RequiredInputArgument>
+						<Type>Double</Type>
+						<Name>High</Name>
+					</RequiredInputArgument>
+					<RequiredInputArgument>
+						<Type>Double</Type>
+						<Name>Low</Name>
+					</RequiredInputArgument>
+					<RequiredInputArgument>
+						<Type>Double</Type>
+						<Name>Close</Name>
+					</RequiredInputArgument>
+				</RequiredInputArguments>
+				<OutputArguments>
+					<OutputArgument>
+						<Type>Double</Type>
+						<Name>outOpen</Name>
+						<Flags>
+							<Flag>Line</Flag>
+						</Flags>
+					</OutputArgument>
+					<OutputArgument>
+						<Type>Double</Type>
+						<Name>outHigh</Name>
+						<Flags>
+							<Flag>Line</Flag>
+						</Flags>
+					</OutputArgument>
+					<OutputArgument>
+						<Type>Double</Type>
+						<Name>outLow</Name>
+						<Flags>
+							<Flag>Line</Flag>
+						</Flags>
+					</OutputArgument>
+					<OutputArgument>
+						<Type>Double</Type>
+						<Name>outClose</Name>
+						<Flags>
+							<Flag>Line</Flag>
+						</Flags>
+					</OutputArgument>
+				</OutputArguments>
+			</Function>
+			<Function>
+				<Name>TA_HA_BatchState</Name>
+				<Type>BatchState</Type>
+				<ReturnValue>TA_Result</ReturnValue>
+				<SpecialInputArguments>
+					<SpecialInputArgument>
+						<Type>Pointer</Type>
+						<Name>state</Name>
+					</SpecialInputArgument>
+				</SpecialInputArguments>
+				<RequiredInputArguments>
+					<RequiredInputArgument>
+						<Type>Integer</Type>
+						<Name>startIdx</Name>
+					</RequiredInputArgument>
+					<RequiredInputArgument>
+						<Type>Integer</Type>
+						<Name>endIdx</Name>
+					</RequiredInputArgument>
+					<RequiredInputArgument>
+						<Type>Double</Type>
+						<Name>Open</Name>
+					</RequiredInputArgument>
+					<RequiredInputArgument>
+						<Type>Double</Type>
+						<Name>High</Name>
+					</RequiredInputArgument>
+					<RequiredInputArgument>
+						<Type>Double</Type>
+						<Name>Low</Name>
+					</RequiredInputArgument>
+					<RequiredInputArgument>
+						<Type>Double</Type>
+						<Name>Close</Name>
+					</RequiredInputArgument>
+				</RequiredInputArguments>
+				<OutputArguments>
+					<OutputArgument>
+						<Type>Pointer to Integer</Type>
+						<Name>outBegIdx</Name>
+					</OutputArgument>
+					<OutputArgument>
+						<Type>Pointer to Integer</Type>
+						<Name>outNBElement</Name>
+					</OutputArgument>
+					<OutputArgument>
+						<Type>Double Array</Type>
+						<Name>outOpen</Name>
+						<Flags>
+							<Flag>Line</Flag>
+						</Flags>
+					</OutputArgument>
+					<OutputArgument>
+						<Type>Double Array</Type>
+						<Name>outHigh</Name>
+						<Flags>
+							<Flag>Line</Flag>
+						</Flags>
+					</OutputArgument>
+					<OutputArgument>
+						<Type>Double Array</Type>
+						<Name>outLow</Name>
+						<Flags>
+							<Flag>Line</Flag>
+						</Flags>
+					</OutputArgument>
+					<OutputArgument>
+						<Type>Double Array</Type>
+						<Name>outClose</Name>
+						<Flags>
+							<Flag>Line</Flag>
+						</Flags>
+					</OutputArgument>
+				</OutputArguments>
+			</Function>
+			<Function>
+				<Name>TA_HA_StateFree</Name>
+				<Type>StateFree</Type>
+				<ReturnValue>TA_Result</ReturnValue>
+				<SpecialInputArguments>
+					<SpecialInputArgument>
+						<Type>Pointer to Pointer</Type>
+						<Name>state</Name>
+					</SpecialInputArgument>
+				</SpecialInputArguments>
+			</Function>
+			<Function>
+				<Name>TA_HA_StateLoad</Name>
+				<Type>StateLoad</Type>
+				<ReturnValue>TA_Result</ReturnValue>
+				<SpecialInputArguments>
+					<SpecialInputArgument>
+						<Type>Pointer to Pointer</Type>
+						<Name>state</Name>
+					</SpecialInputArgument>
+					<SpecialInputArgument>
+						<Type>Pointer to File</Type>
+						<Name>file</Name>
+					</SpecialInputArgument>
+				</SpecialInputArguments>
+				<OptionalInputArguments>
+					<OptionalInputArgument>
+						<Name>Time Period</Name>
+						<ShortDescription>Number of period</ShortDescription>
+						<Type>Integer</Type>
+						<Range>
+							<Minimum>1</Minimum>
+							<Maximum>100000</Maximum>
+							<SuggestedStart>100000</SuggestedStart>
+							<SuggestedEnd>100000</SuggestedEnd>
+							<SuggestedIncrement>100000</SuggestedIncrement>
+						</Range>
+						<DefaultValue>10</DefaultValue>
+					</OptionalInputArgument>
+				</OptionalInputArguments>
+			</Function>
+			<Function>
+				<Name>TA_HA_StateSave</Name>
+				<Type>StateSave</Type>
+				<ReturnValue>TA_Result</ReturnValue>
+				<SpecialInputArguments>
+					<SpecialInputArgument>
+						<Type>Pointer</Type>
+						<Name>state</Name>
+					</SpecialInputArgument>
+					<SpecialInputArgument>
+						<Type>Pointer to File</Type>
+						<Name>file</Name>
+					</SpecialInputArgument>
+				</SpecialInputArguments>
+				<OptionalInputArguments>
+					<OptionalInputArgument>
+						<Name>Time Period</Name>
+						<ShortDescription>Number of period</ShortDescription>
+						<Type>Integer</Type>
+						<Range>
+							<Minimum>1</Minimum>
+							<Maximum>100000</Maximum>
+							<SuggestedStart>100000</SuggestedStart>
+							<SuggestedEnd>100000</SuggestedEnd>
+							<SuggestedIncrement>100000</SuggestedIncrement>
+						</Range>
+						<DefaultValue>10</DefaultValue>
+					</OptionalInputArgument>
+				</OptionalInputArguments>
+			</Function>
+		</Functions>
+	</FinancialFunctionGroup>
+
+
+	<!-- HA_SMO -->
+	<FinancialFunctionGroup>
+		<Abbreviation>HA_SMO</Abbreviation>
+		<CamelCaseName>HaSmo</CamelCaseName>
+		<ShortDescription>Heikin Ashi Smooth</ShortDescription>
+		<GroupId>Volatility Indicators</GroupId>
+		<Flags>
+			<Flag>Unstable Period</Flag>
+		</Flags>
+		<StateMemory>
+			<StateMemoryField>
+				<Type>Double</Type>
+				<Name>Open</Name>
+			</StateMemoryField>
+			<StateMemoryField>
+				<Type>Double</Type>
+				<Name>High</Name>
+			</StateMemoryField>
+			<StateMemoryField>
+				<Type>Double</Type>
+				<Name>Low</Name>
+			</StateMemoryField>
+			<StateMemoryField>
+				<Type>Double</Type>
+				<Name>Close</Name>
+			</StateMemoryField>
+		</StateMemory>
+		<State>
+			<StateField>
+				<Type>Integer</Type>
+				<Name>mem_size</Name>
+			</StateField>
+			<StateField>
+				<Type>Integer</Type>
+				<Name>mem_index</Name>
+			</StateField>
+			<StateField>
+				<Type>Pointer</Type>
+				<Name>memory</Name>
+			</StateField>
+			<StateField>
+				<Type>Pointer</Type>
+				<Name>stateMAOpen</Name>
+			</StateField>
+			<StateField>
+				<Type>Pointer</Type>
+				<Name>stateMAHigh</Name>
+			</StateField>
+			<StateField>
+				<Type>Pointer</Type>
+				<Name>stateMALow</Name>
+			</StateField>
+			<StateField>
+				<Type>Pointer</Type>
+				<Name>stateMAClose</Name>
+			</StateField>
+			<StateField>
+				<Type>Double</Type>
+				<Name>prevOpen</Name>
+			</StateField>
+			<StateField>
+				<Type>Double</Type>
+				<Name>prevClose</Name>
+			</StateField>
+		</State>
+		<Functions>
+			<Function>
+				<Name>TA_HA_SMO_Lookback</Name>
+				<Type>Lookback</Type>
+				<ReturnValue>Integer</ReturnValue>
+				<OptionalInputArguments>
+					<OptionalInputArgument>
+						<Name>Time Period</Name>
+						<ShortDescription>Number of period</ShortDescription>
+						<Type>Integer</Type>
+						<Range>
+							<Minimum>1</Minimum>
+							<Maximum>100000</Maximum>
+							<SuggestedStart>100000</SuggestedStart>
+							<SuggestedEnd>100000</SuggestedEnd>
+							<SuggestedIncrement>100000</SuggestedIncrement>
+						</Range>
+						<DefaultValue>10</DefaultValue>
+					</OptionalInputArgument>
+					<OptionalInputArgument>
+						<Name>MA Type</Name>
+						<ShortDescription>Type of Moving Average</ShortDescription>
+						<Type>MA Type</Type>
+						<DefaultValue>0</DefaultValue>
+					</OptionalInputArgument>
+				</OptionalInputArguments>
+			</Function>
+			<Function>
+				<Name>TA_HA_SMO</Name>
+				<Type>Regular</Type>
+				<ReturnValue>TA_Result</ReturnValue>
+				<RequiredInputArguments>
+					<RequiredInputArgument>
+						<Type>Integer</Type>
+						<Name>startIdx</Name>
+					</RequiredInputArgument>
+					<RequiredInputArgument>
+						<Type>Integer</Type>
+						<Name>endIdx</Name>
+					</RequiredInputArgument>
+					<RequiredInputArgument>
+						<Type>Double</Type>
+						<Name>Open</Name>
+					</RequiredInputArgument>
+					<RequiredInputArgument>
+						<Type>Double</Type>
+						<Name>High</Name>
+					</RequiredInputArgument>
+					<RequiredInputArgument>
+						<Type>Double</Type>
+						<Name>Low</Name>
+					</RequiredInputArgument>
+					<RequiredInputArgument>
+						<Type>Double</Type>
+						<Name>Close</Name>
+					</RequiredInputArgument>
+				</RequiredInputArguments>
+				<OptionalInputArguments>
+					<OptionalInputArgument>
+						<Name>Time Period</Name>
+						<ShortDescription>Number of period</ShortDescription>
+						<Type>Integer</Type>
+						<Range>
+							<Minimum>1</Minimum>
+							<Maximum>100000</Maximum>
+							<SuggestedStart>100000</SuggestedStart>
+							<SuggestedEnd>100000</SuggestedEnd>
+							<SuggestedIncrement>100000</SuggestedIncrement>
+						</Range>
+						<DefaultValue>10</DefaultValue>
+					</OptionalInputArgument>
+					<OptionalInputArgument>
+						<Name>MA Type</Name>
+						<ShortDescription>Type of Moving Average</ShortDescription>
+						<Type>MA Type</Type>
+						<DefaultValue>0</DefaultValue>
+					</OptionalInputArgument>
+				</OptionalInputArguments>
+				<OutputArguments>
+					<OutputArgument>
+						<Type>Pointer to Integer</Type>
+						<Name>outBegIdx</Name>
+					</OutputArgument>
+					<OutputArgument>
+						<Type>Pointer to Integer</Type>
+						<Name>outNBElement</Name>
+					</OutputArgument>
+					<OutputArgument>
+						<Type>Double Array</Type>
+						<Name>outRealOpen</Name>
+						<Flags>
+							<Flag>Line</Flag>
+						</Flags>
+					</OutputArgument>
+					<OutputArgument>
+						<Type>Double Array</Type>
+						<Name>outRealHigh</Name>
+						<Flags>
+							<Flag>Line</Flag>
+						</Flags>
+					</OutputArgument>
+					<OutputArgument>
+						<Type>Double Array</Type>
+						<Name>outRealLow</Name>
+						<Flags>
+							<Flag>Line</Flag>
+						</Flags>
+					</OutputArgument>
+					<OutputArgument>
+						<Type>Double Array</Type>
+						<Name>outRealClose</Name>
+						<Flags>
+							<Flag>Line</Flag>
+						</Flags>
+					</OutputArgument>
+				</OutputArguments>
+			</Function>
+			<Function>
+				<Name>TA_HA_SMO_StateInit</Name>
+				<Type>StateInit</Type>
+				<ReturnValue>TA_Result</ReturnValue>
+				<SpecialInputArguments>
+					<SpecialInputArgument>
+						<Type>Pointer to Pointer</Type>
+						<Name>state</Name>
+					</SpecialInputArgument>
+				</SpecialInputArguments>
+				<OptionalInputArguments>
+					<OptionalInputArgument>
+						<Name>Time Period</Name>
+						<ShortDescription>Number of period</ShortDescription>
+						<Type>Integer</Type>
+						<Range>
+							<Minimum>1</Minimum>
+							<Maximum>100000</Maximum>
+							<SuggestedStart>100000</SuggestedStart>
+							<SuggestedEnd>100000</SuggestedEnd>
+							<SuggestedIncrement>100000</SuggestedIncrement>
+						</Range>
+						<DefaultValue>10</DefaultValue>
+					</OptionalInputArgument>
+					<OptionalInputArgument>
+						<Name>MA Type</Name>
+						<ShortDescription>Type of Moving Average</ShortDescription>
+						<Type>MA Type</Type>
+						<DefaultValue>0</DefaultValue>
+					</OptionalInputArgument>
+				</OptionalInputArguments>
+			</Function>
+			<Function>
+				<Name>TA_HA_SMO_State</Name>
+				<Type>State</Type>
+				<ReturnValue>TA_Result</ReturnValue>
+				<SpecialInputArguments>
+					<SpecialInputArgument>
+						<Type>Pointer</Type>
+						<Name>state</Name>
+					</SpecialInputArgument>
+				</SpecialInputArguments>
+				<RequiredInputArguments>
+					<RequiredInputArgument>
+						<Type>Double</Type>
+						<Name>Open</Name>
+					</RequiredInputArgument>
+					<RequiredInputArgument>
+						<Type>Double</Type>
+						<Name>High</Name>
+					</RequiredInputArgument>
+					<RequiredInputArgument>
+						<Type>Double</Type>
+						<Name>Low</Name>
+					</RequiredInputArgument>
+					<RequiredInputArgument>
+						<Type>Double</Type>
+						<Name>Close</Name>
+					</RequiredInputArgument>
+				</RequiredInputArguments>
+				<OutputArguments>
+					<OutputArgument>
+						<Type>Double</Type>
+						<Name>outRealOpen</Name>
+						<Flags>
+							<Flag>Line</Flag>
+						</Flags>
+					</OutputArgument>
+					<OutputArgument>
+						<Type>Double</Type>
+						<Name>outRealHigh</Name>
+						<Flags>
+							<Flag>Line</Flag>
+						</Flags>
+					</OutputArgument>
+					<OutputArgument>
+						<Type>Double</Type>
+						<Name>outRealLow</Name>
+						<Flags>
+							<Flag>Line</Flag>
+						</Flags>
+					</OutputArgument>
+					<OutputArgument>
+						<Type>Double</Type>
+						<Name>outRealClose</Name>
+						<Flags>
+							<Flag>Line</Flag>
+						</Flags>
+					</OutputArgument>
+				</OutputArguments>
+			</Function>
+			<Function>
+				<Name>TA_HA_SMO_BatchState</Name>
+				<Type>BatchState</Type>
+				<ReturnValue>TA_Result</ReturnValue>
+				<SpecialInputArguments>
+					<SpecialInputArgument>
+						<Type>Pointer</Type>
+						<Name>state</Name>
+					</SpecialInputArgument>
+				</SpecialInputArguments>
+				<RequiredInputArguments>
+					<RequiredInputArgument>
+						<Type>Integer</Type>
+						<Name>startIdx</Name>
+					</RequiredInputArgument>
+					<RequiredInputArgument>
+						<Type>Integer</Type>
+						<Name>endIdx</Name>
+					</RequiredInputArgument>
+					<RequiredInputArgument>
+						<Type>Double</Type>
+						<Name>Open</Name>
+					</RequiredInputArgument>
+					<RequiredInputArgument>
+						<Type>Double</Type>
+						<Name>High</Name>
+					</RequiredInputArgument>
+					<RequiredInputArgument>
+						<Type>Double</Type>
+						<Name>Low</Name>
+					</RequiredInputArgument>
+					<RequiredInputArgument>
+						<Type>Double</Type>
+						<Name>Close</Name>
+					</RequiredInputArgument>
+				</RequiredInputArguments>
+				<OutputArguments>
+					<OutputArgument>
+						<Type>Pointer to Integer</Type>
+						<Name>outBegIdx</Name>
+					</OutputArgument>
+					<OutputArgument>
+						<Type>Pointer to Integer</Type>
+						<Name>outNBElement</Name>
+					</OutputArgument>
+					<OutputArgument>
+						<Type>Double Array</Type>
+						<Name>outRealOpen</Name>
+						<Flags>
+							<Flag>Line</Flag>
+						</Flags>
+					</OutputArgument>
+					<OutputArgument>
+						<Type>Double Array</Type>
+						<Name>outRealHigh</Name>
+						<Flags>
+							<Flag>Line</Flag>
+						</Flags>
+					</OutputArgument>
+					<OutputArgument>
+						<Type>Double Array</Type>
+						<Name>outRealLow</Name>
+						<Flags>
+							<Flag>Line</Flag>
+						</Flags>
+					</OutputArgument>
+					<OutputArgument>
+						<Type>Double Array</Type>
+						<Name>outRealClose</Name>
+						<Flags>
+							<Flag>Line</Flag>
+						</Flags>
+					</OutputArgument>
+				</OutputArguments>
+			</Function>
+			<Function>
+				<Name>TA_HA_SMO_StateFree</Name>
+				<Type>StateFree</Type>
+				<ReturnValue>TA_Result</ReturnValue>
+				<SpecialInputArguments>
+					<SpecialInputArgument>
+						<Type>Pointer to Pointer</Type>
+						<Name>state</Name>
+					</SpecialInputArgument>
+				</SpecialInputArguments>
+			</Function>
+			<Function>
+				<Name>TA_HA_SMO_StateLoad</Name>
+				<Type>StateLoad</Type>
+				<ReturnValue>TA_Result</ReturnValue>
+				<SpecialInputArguments>
+					<SpecialInputArgument>
+						<Type>Pointer to Pointer</Type>
+						<Name>state</Name>
+					</SpecialInputArgument>
+					<SpecialInputArgument>
+						<Type>Pointer to File</Type>
+						<Name>file</Name>
+					</SpecialInputArgument>
+				</SpecialInputArguments>
+				<OptionalInputArguments>
+					<OptionalInputArgument>
+						<Name>Time Period</Name>
+						<ShortDescription>Number of period</ShortDescription>
+						<Type>Integer</Type>
+						<Range>
+							<Minimum>1</Minimum>
+							<Maximum>100000</Maximum>
+							<SuggestedStart>100000</SuggestedStart>
+							<SuggestedEnd>100000</SuggestedEnd>
+							<SuggestedIncrement>100000</SuggestedIncrement>
+						</Range>
+						<DefaultValue>10</DefaultValue>
+					</OptionalInputArgument>
+					<OptionalInputArgument>
+						<Name>MA Type</Name>
+						<ShortDescription>Type of Moving Average</ShortDescription>
+						<Type>MA Type</Type>
+						<DefaultValue>0</DefaultValue>
+					</OptionalInputArgument>
+				</OptionalInputArguments>
+			</Function>
+			<Function>
+				<Name>TA_HA_SMO_StateSave</Name>
+				<Type>StateSave</Type>
+				<ReturnValue>TA_Result</ReturnValue>
+				<SpecialInputArguments>
+					<SpecialInputArgument>
+						<Type>Pointer</Type>
+						<Name>state</Name>
+					</SpecialInputArgument>
+					<SpecialInputArgument>
+						<Type>Pointer to File</Type>
+						<Name>file</Name>
+					</SpecialInputArgument>
+				</SpecialInputArguments>
+				<OptionalInputArguments>
+					<OptionalInputArgument>
+						<Name>Time Period</Name>
+						<ShortDescription>Number of period</ShortDescription>
+						<Type>Integer</Type>
+						<Range>
+							<Minimum>1</Minimum>
+							<Maximum>100000</Maximum>
+							<SuggestedStart>100000</SuggestedStart>
+							<SuggestedEnd>100000</SuggestedEnd>
+							<SuggestedIncrement>100000</SuggestedIncrement>
+						</Range>
+						<DefaultValue>10</DefaultValue>
+					</OptionalInputArgument>
+					<OptionalInputArgument>
+						<Name>MA Type</Name>
+						<ShortDescription>Type of Moving Average</ShortDescription>
+						<Type>MA Type</Type>
+						<DefaultValue>0</DefaultValue>
+					</OptionalInputArgument>
+				</OptionalInputArguments>
 			</Function>
 		</Functions>
 	</FinancialFunctionGroup>
@@ -27000,6 +29348,600 @@
 	</FinancialFunctionGroup>
 
 
+	<!-- ICHIMOKU -->
+	<FinancialFunctionGroup>
+		<Abbreviation>ICHIMOKU</Abbreviation>
+		<CamelCaseName>Ichimoku</CamelCaseName>
+		<ShortDescription>Ichimoku Cloud</ShortDescription>
+		<GroupId>Overlap Studies</GroupId>
+		<StateMemory>
+			<StateMemoryField>
+				<Type>Double</Type>
+				<Name>High</Name>
+			</StateMemoryField>
+			<StateMemoryField>
+				<Type>Double</Type>
+				<Name>Low</Name>
+			</StateMemoryField>
+			<StateMemoryField>
+				<Type>Double</Type>
+				<Name>Close</Name>
+			</StateMemoryField>
+		</StateMemory>
+		<State>
+			<StateField>
+				<Type>Integer</Type>
+				<Name>mem_size</Name>
+			</StateField>
+			<StateField>
+				<Type>Integer</Type>
+				<Name>mem_index</Name>
+			</StateField>
+			<StateField>
+				<Type>Pointer</Type>
+				<Name>memory</Name>
+			</StateField>
+			<StateField>
+				<Type>Integer</Type>
+				<Name>conversionPeriod</Name>
+			</StateField>
+			<StateField>
+				<Type>Integer</Type>
+				<Name>basePeriod</Name>
+			</StateField>
+			<StateField>
+				<Type>Integer</Type>
+				<Name>spanPeriod</Name>
+			</StateField>
+			<StateField>
+				<Type>Integer</Type>
+				<Name>displacement</Name>
+			</StateField>
+		</State>
+		<Functions>
+			<Function>
+				<Name>TA_ICHIMOKU_Lookback</Name>
+				<Type>Lookback</Type>
+				<ReturnValue>Integer</ReturnValue>
+				<OptionalInputArguments>
+					<OptionalInputArgument>
+						<Name>Conversion Tenkan Period</Name>
+						<ShortDescription>Conversion Tenkan Period</ShortDescription>
+						<Type>Integer</Type>
+						<Range>
+							<Minimum>1</Minimum>
+							<Maximum>100000</Maximum>
+							<SuggestedStart>100000</SuggestedStart>
+							<SuggestedEnd>100000</SuggestedEnd>
+							<SuggestedIncrement>100000</SuggestedIncrement>
+						</Range>
+						<DefaultValue>9</DefaultValue>
+					</OptionalInputArgument>
+					<OptionalInputArgument>
+						<Name>Base Period</Name>
+						<ShortDescription>Base Kijun Period</ShortDescription>
+						<Type>Integer</Type>
+						<Range>
+							<Minimum>1</Minimum>
+							<Maximum>100000</Maximum>
+							<SuggestedStart>100000</SuggestedStart>
+							<SuggestedEnd>100000</SuggestedEnd>
+							<SuggestedIncrement>100000</SuggestedIncrement>
+						</Range>
+						<DefaultValue>26</DefaultValue>
+					</OptionalInputArgument>
+					<OptionalInputArgument>
+						<Name>Span Period</Name>
+						<ShortDescription>Span Senkou Period</ShortDescription>
+						<Type>Integer</Type>
+						<Range>
+							<Minimum>1</Minimum>
+							<Maximum>100000</Maximum>
+							<SuggestedStart>100000</SuggestedStart>
+							<SuggestedEnd>100000</SuggestedEnd>
+							<SuggestedIncrement>100000</SuggestedIncrement>
+						</Range>
+						<DefaultValue>52</DefaultValue>
+					</OptionalInputArgument>
+					<OptionalInputArgument>
+						<Name>Chikou Period</Name>
+						<ShortDescription>Chikou Period</ShortDescription>
+						<Type>Integer</Type>
+						<Range>
+							<Minimum>1</Minimum>
+							<Maximum>100000</Maximum>
+							<SuggestedStart>100000</SuggestedStart>
+							<SuggestedEnd>100000</SuggestedEnd>
+							<SuggestedIncrement>100000</SuggestedIncrement>
+						</Range>
+						<DefaultValue>26</DefaultValue>
+					</OptionalInputArgument>
+				</OptionalInputArguments>
+			</Function>
+			<Function>
+				<Name>TA_ICHIMOKU</Name>
+				<Type>Regular</Type>
+				<ReturnValue>TA_Result</ReturnValue>
+				<RequiredInputArguments>
+					<RequiredInputArgument>
+						<Type>Integer</Type>
+						<Name>startIdx</Name>
+					</RequiredInputArgument>
+					<RequiredInputArgument>
+						<Type>Integer</Type>
+						<Name>endIdx</Name>
+					</RequiredInputArgument>
+					<RequiredInputArgument>
+						<Type>Double</Type>
+						<Name>High</Name>
+					</RequiredInputArgument>
+					<RequiredInputArgument>
+						<Type>Double</Type>
+						<Name>Low</Name>
+					</RequiredInputArgument>
+					<RequiredInputArgument>
+						<Type>Double</Type>
+						<Name>Close</Name>
+					</RequiredInputArgument>
+				</RequiredInputArguments>
+				<OptionalInputArguments>
+					<OptionalInputArgument>
+						<Name>Conversion Tenkan Period</Name>
+						<ShortDescription>Conversion Tenkan Period</ShortDescription>
+						<Type>Integer</Type>
+						<Range>
+							<Minimum>1</Minimum>
+							<Maximum>100000</Maximum>
+							<SuggestedStart>100000</SuggestedStart>
+							<SuggestedEnd>100000</SuggestedEnd>
+							<SuggestedIncrement>100000</SuggestedIncrement>
+						</Range>
+						<DefaultValue>9</DefaultValue>
+					</OptionalInputArgument>
+					<OptionalInputArgument>
+						<Name>Base Period</Name>
+						<ShortDescription>Base Kijun Period</ShortDescription>
+						<Type>Integer</Type>
+						<Range>
+							<Minimum>1</Minimum>
+							<Maximum>100000</Maximum>
+							<SuggestedStart>100000</SuggestedStart>
+							<SuggestedEnd>100000</SuggestedEnd>
+							<SuggestedIncrement>100000</SuggestedIncrement>
+						</Range>
+						<DefaultValue>26</DefaultValue>
+					</OptionalInputArgument>
+					<OptionalInputArgument>
+						<Name>Span Period</Name>
+						<ShortDescription>Span Senkou Period</ShortDescription>
+						<Type>Integer</Type>
+						<Range>
+							<Minimum>1</Minimum>
+							<Maximum>100000</Maximum>
+							<SuggestedStart>100000</SuggestedStart>
+							<SuggestedEnd>100000</SuggestedEnd>
+							<SuggestedIncrement>100000</SuggestedIncrement>
+						</Range>
+						<DefaultValue>52</DefaultValue>
+					</OptionalInputArgument>
+					<OptionalInputArgument>
+						<Name>Chikou Period</Name>
+						<ShortDescription>Chikou Period</ShortDescription>
+						<Type>Integer</Type>
+						<Range>
+							<Minimum>1</Minimum>
+							<Maximum>100000</Maximum>
+							<SuggestedStart>100000</SuggestedStart>
+							<SuggestedEnd>100000</SuggestedEnd>
+							<SuggestedIncrement>100000</SuggestedIncrement>
+						</Range>
+						<DefaultValue>26</DefaultValue>
+					</OptionalInputArgument>
+				</OptionalInputArguments>
+				<OutputArguments>
+					<OutputArgument>
+						<Type>Pointer to Integer</Type>
+						<Name>outBegIdx</Name>
+					</OutputArgument>
+					<OutputArgument>
+						<Type>Pointer to Integer</Type>
+						<Name>outNBElement</Name>
+					</OutputArgument>
+					<OutputArgument>
+						<Type>Double Array</Type>
+						<Name>outTenkan</Name>
+						<Flags>
+							<Flag>Line</Flag>
+						</Flags>
+					</OutputArgument>
+					<OutputArgument>
+						<Type>Double Array</Type>
+						<Name>outKijun</Name>
+						<Flags>
+							<Flag>Line</Flag>
+						</Flags>
+					</OutputArgument>
+					<OutputArgument>
+						<Type>Double Array</Type>
+						<Name>outSenkouSpanA</Name>
+						<Flags>
+							<Flag>Line</Flag>
+						</Flags>
+					</OutputArgument>
+					<OutputArgument>
+						<Type>Double Array</Type>
+						<Name>outSenkouSpanB</Name>
+						<Flags>
+							<Flag>Line</Flag>
+						</Flags>
+					</OutputArgument>
+					<OutputArgument>
+						<Type>Double Array</Type>
+						<Name>outChikouSpan</Name>
+						<Flags>
+							<Flag>Line</Flag>
+						</Flags>
+					</OutputArgument>
+				</OutputArguments>
+			</Function>
+			<Function>
+				<Name>TA_ICHIMOKU_StateInit</Name>
+				<Type>StateInit</Type>
+				<ReturnValue>TA_Result</ReturnValue>
+				<SpecialInputArguments>
+					<SpecialInputArgument>
+						<Type>Pointer to Pointer</Type>
+						<Name>state</Name>
+					</SpecialInputArgument>
+				</SpecialInputArguments>
+				<OptionalInputArguments>
+					<OptionalInputArgument>
+						<Name>Conversion Tenkan Period</Name>
+						<ShortDescription>Conversion Tenkan Period</ShortDescription>
+						<Type>Integer</Type>
+						<Range>
+							<Minimum>1</Minimum>
+							<Maximum>100000</Maximum>
+							<SuggestedStart>100000</SuggestedStart>
+							<SuggestedEnd>100000</SuggestedEnd>
+							<SuggestedIncrement>100000</SuggestedIncrement>
+						</Range>
+						<DefaultValue>9</DefaultValue>
+					</OptionalInputArgument>
+					<OptionalInputArgument>
+						<Name>Base Period</Name>
+						<ShortDescription>Base Kijun Period</ShortDescription>
+						<Type>Integer</Type>
+						<Range>
+							<Minimum>1</Minimum>
+							<Maximum>100000</Maximum>
+							<SuggestedStart>100000</SuggestedStart>
+							<SuggestedEnd>100000</SuggestedEnd>
+							<SuggestedIncrement>100000</SuggestedIncrement>
+						</Range>
+						<DefaultValue>26</DefaultValue>
+					</OptionalInputArgument>
+					<OptionalInputArgument>
+						<Name>Span Period</Name>
+						<ShortDescription>Span Senkou Period</ShortDescription>
+						<Type>Integer</Type>
+						<Range>
+							<Minimum>1</Minimum>
+							<Maximum>100000</Maximum>
+							<SuggestedStart>100000</SuggestedStart>
+							<SuggestedEnd>100000</SuggestedEnd>
+							<SuggestedIncrement>100000</SuggestedIncrement>
+						</Range>
+						<DefaultValue>52</DefaultValue>
+					</OptionalInputArgument>
+					<OptionalInputArgument>
+						<Name>Chikou Period</Name>
+						<ShortDescription>Chikou Period</ShortDescription>
+						<Type>Integer</Type>
+						<Range>
+							<Minimum>1</Minimum>
+							<Maximum>100000</Maximum>
+							<SuggestedStart>100000</SuggestedStart>
+							<SuggestedEnd>100000</SuggestedEnd>
+							<SuggestedIncrement>100000</SuggestedIncrement>
+						</Range>
+						<DefaultValue>26</DefaultValue>
+					</OptionalInputArgument>
+				</OptionalInputArguments>
+			</Function>
+			<Function>
+				<Name>TA_ICHIMOKU_State</Name>
+				<Type>State</Type>
+				<ReturnValue>TA_Result</ReturnValue>
+				<SpecialInputArguments>
+					<SpecialInputArgument>
+						<Type>Pointer</Type>
+						<Name>state</Name>
+					</SpecialInputArgument>
+				</SpecialInputArguments>
+				<RequiredInputArguments>
+					<RequiredInputArgument>
+						<Type>Double</Type>
+						<Name>High</Name>
+					</RequiredInputArgument>
+					<RequiredInputArgument>
+						<Type>Double</Type>
+						<Name>Low</Name>
+					</RequiredInputArgument>
+					<RequiredInputArgument>
+						<Type>Double</Type>
+						<Name>Close</Name>
+					</RequiredInputArgument>
+				</RequiredInputArguments>
+				<OutputArguments>
+					<OutputArgument>
+						<Type>Double</Type>
+						<Name>outTenkan</Name>
+						<Flags>
+							<Flag>Line</Flag>
+						</Flags>
+					</OutputArgument>
+					<OutputArgument>
+						<Type>Double</Type>
+						<Name>outKijun</Name>
+						<Flags>
+							<Flag>Line</Flag>
+						</Flags>
+					</OutputArgument>
+					<OutputArgument>
+						<Type>Double</Type>
+						<Name>outSenkouSpanA</Name>
+						<Flags>
+							<Flag>Line</Flag>
+						</Flags>
+					</OutputArgument>
+					<OutputArgument>
+						<Type>Double</Type>
+						<Name>outSenkouSpanB</Name>
+						<Flags>
+							<Flag>Line</Flag>
+						</Flags>
+					</OutputArgument>
+					<OutputArgument>
+						<Type>Double</Type>
+						<Name>outChikouSpan</Name>
+						<Flags>
+							<Flag>Line</Flag>
+						</Flags>
+					</OutputArgument>
+				</OutputArguments>
+			</Function>
+			<Function>
+				<Name>TA_ICHIMOKU_BatchState</Name>
+				<Type>BatchState</Type>
+				<ReturnValue>TA_Result</ReturnValue>
+				<SpecialInputArguments>
+					<SpecialInputArgument>
+						<Type>Pointer</Type>
+						<Name>state</Name>
+					</SpecialInputArgument>
+				</SpecialInputArguments>
+				<RequiredInputArguments>
+					<RequiredInputArgument>
+						<Type>Integer</Type>
+						<Name>startIdx</Name>
+					</RequiredInputArgument>
+					<RequiredInputArgument>
+						<Type>Integer</Type>
+						<Name>endIdx</Name>
+					</RequiredInputArgument>
+					<RequiredInputArgument>
+						<Type>Double</Type>
+						<Name>High</Name>
+					</RequiredInputArgument>
+					<RequiredInputArgument>
+						<Type>Double</Type>
+						<Name>Low</Name>
+					</RequiredInputArgument>
+					<RequiredInputArgument>
+						<Type>Double</Type>
+						<Name>Close</Name>
+					</RequiredInputArgument>
+				</RequiredInputArguments>
+				<OutputArguments>
+					<OutputArgument>
+						<Type>Pointer to Integer</Type>
+						<Name>outBegIdx</Name>
+					</OutputArgument>
+					<OutputArgument>
+						<Type>Pointer to Integer</Type>
+						<Name>outNBElement</Name>
+					</OutputArgument>
+					<OutputArgument>
+						<Type>Double Array</Type>
+						<Name>outTenkan</Name>
+						<Flags>
+							<Flag>Line</Flag>
+						</Flags>
+					</OutputArgument>
+					<OutputArgument>
+						<Type>Double Array</Type>
+						<Name>outKijun</Name>
+						<Flags>
+							<Flag>Line</Flag>
+						</Flags>
+					</OutputArgument>
+					<OutputArgument>
+						<Type>Double Array</Type>
+						<Name>outSenkouSpanA</Name>
+						<Flags>
+							<Flag>Line</Flag>
+						</Flags>
+					</OutputArgument>
+					<OutputArgument>
+						<Type>Double Array</Type>
+						<Name>outSenkouSpanB</Name>
+						<Flags>
+							<Flag>Line</Flag>
+						</Flags>
+					</OutputArgument>
+					<OutputArgument>
+						<Type>Double Array</Type>
+						<Name>outChikouSpan</Name>
+						<Flags>
+							<Flag>Line</Flag>
+						</Flags>
+					</OutputArgument>
+				</OutputArguments>
+			</Function>
+			<Function>
+				<Name>TA_ICHIMOKU_StateFree</Name>
+				<Type>StateFree</Type>
+				<ReturnValue>TA_Result</ReturnValue>
+				<SpecialInputArguments>
+					<SpecialInputArgument>
+						<Type>Pointer to Pointer</Type>
+						<Name>state</Name>
+					</SpecialInputArgument>
+				</SpecialInputArguments>
+			</Function>
+			<Function>
+				<Name>TA_ICHIMOKU_StateLoad</Name>
+				<Type>StateLoad</Type>
+				<ReturnValue>TA_Result</ReturnValue>
+				<SpecialInputArguments>
+					<SpecialInputArgument>
+						<Type>Pointer to Pointer</Type>
+						<Name>state</Name>
+					</SpecialInputArgument>
+					<SpecialInputArgument>
+						<Type>Pointer to File</Type>
+						<Name>file</Name>
+					</SpecialInputArgument>
+				</SpecialInputArguments>
+				<OptionalInputArguments>
+					<OptionalInputArgument>
+						<Name>Conversion Tenkan Period</Name>
+						<ShortDescription>Conversion Tenkan Period</ShortDescription>
+						<Type>Integer</Type>
+						<Range>
+							<Minimum>1</Minimum>
+							<Maximum>100000</Maximum>
+							<SuggestedStart>100000</SuggestedStart>
+							<SuggestedEnd>100000</SuggestedEnd>
+							<SuggestedIncrement>100000</SuggestedIncrement>
+						</Range>
+						<DefaultValue>9</DefaultValue>
+					</OptionalInputArgument>
+					<OptionalInputArgument>
+						<Name>Base Period</Name>
+						<ShortDescription>Base Kijun Period</ShortDescription>
+						<Type>Integer</Type>
+						<Range>
+							<Minimum>1</Minimum>
+							<Maximum>100000</Maximum>
+							<SuggestedStart>100000</SuggestedStart>
+							<SuggestedEnd>100000</SuggestedEnd>
+							<SuggestedIncrement>100000</SuggestedIncrement>
+						</Range>
+						<DefaultValue>26</DefaultValue>
+					</OptionalInputArgument>
+					<OptionalInputArgument>
+						<Name>Span Period</Name>
+						<ShortDescription>Span Senkou Period</ShortDescription>
+						<Type>Integer</Type>
+						<Range>
+							<Minimum>1</Minimum>
+							<Maximum>100000</Maximum>
+							<SuggestedStart>100000</SuggestedStart>
+							<SuggestedEnd>100000</SuggestedEnd>
+							<SuggestedIncrement>100000</SuggestedIncrement>
+						</Range>
+						<DefaultValue>52</DefaultValue>
+					</OptionalInputArgument>
+					<OptionalInputArgument>
+						<Name>Chikou Period</Name>
+						<ShortDescription>Chikou Period</ShortDescription>
+						<Type>Integer</Type>
+						<Range>
+							<Minimum>1</Minimum>
+							<Maximum>100000</Maximum>
+							<SuggestedStart>100000</SuggestedStart>
+							<SuggestedEnd>100000</SuggestedEnd>
+							<SuggestedIncrement>100000</SuggestedIncrement>
+						</Range>
+						<DefaultValue>26</DefaultValue>
+					</OptionalInputArgument>
+				</OptionalInputArguments>
+			</Function>
+			<Function>
+				<Name>TA_ICHIMOKU_StateSave</Name>
+				<Type>StateSave</Type>
+				<ReturnValue>TA_Result</ReturnValue>
+				<SpecialInputArguments>
+					<SpecialInputArgument>
+						<Type>Pointer</Type>
+						<Name>state</Name>
+					</SpecialInputArgument>
+					<SpecialInputArgument>
+						<Type>Pointer to File</Type>
+						<Name>file</Name>
+					</SpecialInputArgument>
+				</SpecialInputArguments>
+				<OptionalInputArguments>
+					<OptionalInputArgument>
+						<Name>Conversion Tenkan Period</Name>
+						<ShortDescription>Conversion Tenkan Period</ShortDescription>
+						<Type>Integer</Type>
+						<Range>
+							<Minimum>1</Minimum>
+							<Maximum>100000</Maximum>
+							<SuggestedStart>100000</SuggestedStart>
+							<SuggestedEnd>100000</SuggestedEnd>
+							<SuggestedIncrement>100000</SuggestedIncrement>
+						</Range>
+						<DefaultValue>9</DefaultValue>
+					</OptionalInputArgument>
+					<OptionalInputArgument>
+						<Name>Base Period</Name>
+						<ShortDescription>Base Kijun Period</ShortDescription>
+						<Type>Integer</Type>
+						<Range>
+							<Minimum>1</Minimum>
+							<Maximum>100000</Maximum>
+							<SuggestedStart>100000</SuggestedStart>
+							<SuggestedEnd>100000</SuggestedEnd>
+							<SuggestedIncrement>100000</SuggestedIncrement>
+						</Range>
+						<DefaultValue>26</DefaultValue>
+					</OptionalInputArgument>
+					<OptionalInputArgument>
+						<Name>Span Period</Name>
+						<ShortDescription>Span Senkou Period</ShortDescription>
+						<Type>Integer</Type>
+						<Range>
+							<Minimum>1</Minimum>
+							<Maximum>100000</Maximum>
+							<SuggestedStart>100000</SuggestedStart>
+							<SuggestedEnd>100000</SuggestedEnd>
+							<SuggestedIncrement>100000</SuggestedIncrement>
+						</Range>
+						<DefaultValue>52</DefaultValue>
+					</OptionalInputArgument>
+					<OptionalInputArgument>
+						<Name>Chikou Period</Name>
+						<ShortDescription>Chikou Period</ShortDescription>
+						<Type>Integer</Type>
+						<Range>
+							<Minimum>1</Minimum>
+							<Maximum>100000</Maximum>
+							<SuggestedStart>100000</SuggestedStart>
+							<SuggestedEnd>100000</SuggestedEnd>
+							<SuggestedIncrement>100000</SuggestedIncrement>
+						</Range>
+						<DefaultValue>26</DefaultValue>
+					</OptionalInputArgument>
+				</OptionalInputArguments>
+			</Function>
+		</Functions>
+	</FinancialFunctionGroup>
+
+
 	<!-- IMI -->
 	<FinancialFunctionGroup>
 		<Abbreviation>IMI</Abbreviation>
@@ -27574,6 +30516,964 @@
 							<SuggestedIncrement>100000</SuggestedIncrement>
 						</Range>
 						<DefaultValue>30</DefaultValue>
+					</OptionalInputArgument>
+				</OptionalInputArguments>
+			</Function>
+		</Functions>
+	</FinancialFunctionGroup>
+
+
+	<!-- KDJ -->
+	<FinancialFunctionGroup>
+		<Abbreviation>KDJ</Abbreviation>
+		<CamelCaseName>Kdj</CamelCaseName>
+		<ShortDescription>KDJ indicator</ShortDescription>
+		<GroupId>Volatility Indicators</GroupId>
+		<Flags>
+			<Flag>Unstable Period</Flag>
+		</Flags>
+		<StateMemory>
+			<StateMemoryField>
+				<Type>Double</Type>
+				<Name>High</Name>
+			</StateMemoryField>
+			<StateMemoryField>
+				<Type>Double</Type>
+				<Name>Low</Name>
+			</StateMemoryField>
+			<StateMemoryField>
+				<Type>Double</Type>
+				<Name>Close</Name>
+			</StateMemoryField>
+		</StateMemory>
+		<State>
+			<StateField>
+				<Type>Integer</Type>
+				<Name>mem_size</Name>
+			</StateField>
+			<StateField>
+				<Type>Integer</Type>
+				<Name>mem_index</Name>
+			</StateField>
+			<StateField>
+				<Type>Pointer</Type>
+				<Name>memory</Name>
+			</StateField>
+			<StateField>
+				<Type>Pointer</Type>
+				<Name>stateMAFastK</Name>
+			</StateField>
+			<StateField>
+				<Type>Pointer</Type>
+				<Name>stateMASlowD</Name>
+			</StateField>
+		</State>
+		<Functions>
+			<Function>
+				<Name>TA_KDJ_Lookback</Name>
+				<Type>Lookback</Type>
+				<ReturnValue>Integer</ReturnValue>
+				<OptionalInputArguments>
+					<OptionalInputArgument>
+						<Name>Time Period</Name>
+						<ShortDescription>Number of period</ShortDescription>
+						<Type>Integer</Type>
+						<Range>
+							<Minimum>1</Minimum>
+							<Maximum>100000</Maximum>
+							<SuggestedStart>100000</SuggestedStart>
+							<SuggestedEnd>100000</SuggestedEnd>
+							<SuggestedIncrement>100000</SuggestedIncrement>
+						</Range>
+						<DefaultValue>30</DefaultValue>
+					</OptionalInputArgument>
+					<OptionalInputArgument>
+						<Name>Signal Period</Name>
+						<ShortDescription>Signal Period</ShortDescription>
+						<Type>Integer</Type>
+						<Range>
+							<Minimum>1</Minimum>
+							<Maximum>100000</Maximum>
+							<SuggestedStart>100000</SuggestedStart>
+							<SuggestedEnd>100000</SuggestedEnd>
+							<SuggestedIncrement>100000</SuggestedIncrement>
+						</Range>
+						<DefaultValue>3</DefaultValue>
+					</OptionalInputArgument>
+					<OptionalInputArgument>
+						<Name>MA Type</Name>
+						<ShortDescription>Type of Moving Average</ShortDescription>
+						<Type>MA Type</Type>
+						<DefaultValue>0</DefaultValue>
+					</OptionalInputArgument>
+				</OptionalInputArguments>
+			</Function>
+			<Function>
+				<Name>TA_KDJ</Name>
+				<Type>Regular</Type>
+				<ReturnValue>TA_Result</ReturnValue>
+				<RequiredInputArguments>
+					<RequiredInputArgument>
+						<Type>Integer</Type>
+						<Name>startIdx</Name>
+					</RequiredInputArgument>
+					<RequiredInputArgument>
+						<Type>Integer</Type>
+						<Name>endIdx</Name>
+					</RequiredInputArgument>
+					<RequiredInputArgument>
+						<Type>Double</Type>
+						<Name>High</Name>
+					</RequiredInputArgument>
+					<RequiredInputArgument>
+						<Type>Double</Type>
+						<Name>Low</Name>
+					</RequiredInputArgument>
+					<RequiredInputArgument>
+						<Type>Double</Type>
+						<Name>Close</Name>
+					</RequiredInputArgument>
+				</RequiredInputArguments>
+				<OptionalInputArguments>
+					<OptionalInputArgument>
+						<Name>Time Period</Name>
+						<ShortDescription>Number of period</ShortDescription>
+						<Type>Integer</Type>
+						<Range>
+							<Minimum>1</Minimum>
+							<Maximum>100000</Maximum>
+							<SuggestedStart>100000</SuggestedStart>
+							<SuggestedEnd>100000</SuggestedEnd>
+							<SuggestedIncrement>100000</SuggestedIncrement>
+						</Range>
+						<DefaultValue>30</DefaultValue>
+					</OptionalInputArgument>
+					<OptionalInputArgument>
+						<Name>Signal Period</Name>
+						<ShortDescription>Signal Period</ShortDescription>
+						<Type>Integer</Type>
+						<Range>
+							<Minimum>1</Minimum>
+							<Maximum>100000</Maximum>
+							<SuggestedStart>100000</SuggestedStart>
+							<SuggestedEnd>100000</SuggestedEnd>
+							<SuggestedIncrement>100000</SuggestedIncrement>
+						</Range>
+						<DefaultValue>3</DefaultValue>
+					</OptionalInputArgument>
+					<OptionalInputArgument>
+						<Name>MA Type</Name>
+						<ShortDescription>Type of Moving Average</ShortDescription>
+						<Type>MA Type</Type>
+						<DefaultValue>0</DefaultValue>
+					</OptionalInputArgument>
+				</OptionalInputArguments>
+				<OutputArguments>
+					<OutputArgument>
+						<Type>Pointer to Integer</Type>
+						<Name>outBegIdx</Name>
+					</OutputArgument>
+					<OutputArgument>
+						<Type>Pointer to Integer</Type>
+						<Name>outNBElement</Name>
+					</OutputArgument>
+					<OutputArgument>
+						<Type>Double Array</Type>
+						<Name>outK</Name>
+						<Flags>
+							<Flag>Line</Flag>
+						</Flags>
+					</OutputArgument>
+					<OutputArgument>
+						<Type>Double Array</Type>
+						<Name>outD</Name>
+						<Flags>
+							<Flag>Line</Flag>
+						</Flags>
+					</OutputArgument>
+					<OutputArgument>
+						<Type>Double Array</Type>
+						<Name>outJ</Name>
+						<Flags>
+							<Flag>Line</Flag>
+						</Flags>
+					</OutputArgument>
+				</OutputArguments>
+			</Function>
+			<Function>
+				<Name>TA_KDJ_StateInit</Name>
+				<Type>StateInit</Type>
+				<ReturnValue>TA_Result</ReturnValue>
+				<SpecialInputArguments>
+					<SpecialInputArgument>
+						<Type>Pointer to Pointer</Type>
+						<Name>state</Name>
+					</SpecialInputArgument>
+				</SpecialInputArguments>
+				<OptionalInputArguments>
+					<OptionalInputArgument>
+						<Name>Time Period</Name>
+						<ShortDescription>Number of period</ShortDescription>
+						<Type>Integer</Type>
+						<Range>
+							<Minimum>1</Minimum>
+							<Maximum>100000</Maximum>
+							<SuggestedStart>100000</SuggestedStart>
+							<SuggestedEnd>100000</SuggestedEnd>
+							<SuggestedIncrement>100000</SuggestedIncrement>
+						</Range>
+						<DefaultValue>30</DefaultValue>
+					</OptionalInputArgument>
+					<OptionalInputArgument>
+						<Name>Signal Period</Name>
+						<ShortDescription>Signal Period</ShortDescription>
+						<Type>Integer</Type>
+						<Range>
+							<Minimum>1</Minimum>
+							<Maximum>100000</Maximum>
+							<SuggestedStart>100000</SuggestedStart>
+							<SuggestedEnd>100000</SuggestedEnd>
+							<SuggestedIncrement>100000</SuggestedIncrement>
+						</Range>
+						<DefaultValue>3</DefaultValue>
+					</OptionalInputArgument>
+					<OptionalInputArgument>
+						<Name>MA Type</Name>
+						<ShortDescription>Type of Moving Average</ShortDescription>
+						<Type>MA Type</Type>
+						<DefaultValue>0</DefaultValue>
+					</OptionalInputArgument>
+				</OptionalInputArguments>
+			</Function>
+			<Function>
+				<Name>TA_KDJ_State</Name>
+				<Type>State</Type>
+				<ReturnValue>TA_Result</ReturnValue>
+				<SpecialInputArguments>
+					<SpecialInputArgument>
+						<Type>Pointer</Type>
+						<Name>state</Name>
+					</SpecialInputArgument>
+				</SpecialInputArguments>
+				<RequiredInputArguments>
+					<RequiredInputArgument>
+						<Type>Double</Type>
+						<Name>High</Name>
+					</RequiredInputArgument>
+					<RequiredInputArgument>
+						<Type>Double</Type>
+						<Name>Low</Name>
+					</RequiredInputArgument>
+					<RequiredInputArgument>
+						<Type>Double</Type>
+						<Name>Close</Name>
+					</RequiredInputArgument>
+				</RequiredInputArguments>
+				<OutputArguments>
+					<OutputArgument>
+						<Type>Double</Type>
+						<Name>outK</Name>
+						<Flags>
+							<Flag>Line</Flag>
+						</Flags>
+					</OutputArgument>
+					<OutputArgument>
+						<Type>Double</Type>
+						<Name>outD</Name>
+						<Flags>
+							<Flag>Line</Flag>
+						</Flags>
+					</OutputArgument>
+					<OutputArgument>
+						<Type>Double</Type>
+						<Name>outJ</Name>
+						<Flags>
+							<Flag>Line</Flag>
+						</Flags>
+					</OutputArgument>
+				</OutputArguments>
+			</Function>
+			<Function>
+				<Name>TA_KDJ_BatchState</Name>
+				<Type>BatchState</Type>
+				<ReturnValue>TA_Result</ReturnValue>
+				<SpecialInputArguments>
+					<SpecialInputArgument>
+						<Type>Pointer</Type>
+						<Name>state</Name>
+					</SpecialInputArgument>
+				</SpecialInputArguments>
+				<RequiredInputArguments>
+					<RequiredInputArgument>
+						<Type>Integer</Type>
+						<Name>startIdx</Name>
+					</RequiredInputArgument>
+					<RequiredInputArgument>
+						<Type>Integer</Type>
+						<Name>endIdx</Name>
+					</RequiredInputArgument>
+					<RequiredInputArgument>
+						<Type>Double</Type>
+						<Name>High</Name>
+					</RequiredInputArgument>
+					<RequiredInputArgument>
+						<Type>Double</Type>
+						<Name>Low</Name>
+					</RequiredInputArgument>
+					<RequiredInputArgument>
+						<Type>Double</Type>
+						<Name>Close</Name>
+					</RequiredInputArgument>
+				</RequiredInputArguments>
+				<OutputArguments>
+					<OutputArgument>
+						<Type>Pointer to Integer</Type>
+						<Name>outBegIdx</Name>
+					</OutputArgument>
+					<OutputArgument>
+						<Type>Pointer to Integer</Type>
+						<Name>outNBElement</Name>
+					</OutputArgument>
+					<OutputArgument>
+						<Type>Double Array</Type>
+						<Name>outK</Name>
+						<Flags>
+							<Flag>Line</Flag>
+						</Flags>
+					</OutputArgument>
+					<OutputArgument>
+						<Type>Double Array</Type>
+						<Name>outD</Name>
+						<Flags>
+							<Flag>Line</Flag>
+						</Flags>
+					</OutputArgument>
+					<OutputArgument>
+						<Type>Double Array</Type>
+						<Name>outJ</Name>
+						<Flags>
+							<Flag>Line</Flag>
+						</Flags>
+					</OutputArgument>
+				</OutputArguments>
+			</Function>
+			<Function>
+				<Name>TA_KDJ_StateFree</Name>
+				<Type>StateFree</Type>
+				<ReturnValue>TA_Result</ReturnValue>
+				<SpecialInputArguments>
+					<SpecialInputArgument>
+						<Type>Pointer to Pointer</Type>
+						<Name>state</Name>
+					</SpecialInputArgument>
+				</SpecialInputArguments>
+			</Function>
+			<Function>
+				<Name>TA_KDJ_StateLoad</Name>
+				<Type>StateLoad</Type>
+				<ReturnValue>TA_Result</ReturnValue>
+				<SpecialInputArguments>
+					<SpecialInputArgument>
+						<Type>Pointer to Pointer</Type>
+						<Name>state</Name>
+					</SpecialInputArgument>
+					<SpecialInputArgument>
+						<Type>Pointer to File</Type>
+						<Name>file</Name>
+					</SpecialInputArgument>
+				</SpecialInputArguments>
+				<OptionalInputArguments>
+					<OptionalInputArgument>
+						<Name>Time Period</Name>
+						<ShortDescription>Number of period</ShortDescription>
+						<Type>Integer</Type>
+						<Range>
+							<Minimum>1</Minimum>
+							<Maximum>100000</Maximum>
+							<SuggestedStart>100000</SuggestedStart>
+							<SuggestedEnd>100000</SuggestedEnd>
+							<SuggestedIncrement>100000</SuggestedIncrement>
+						</Range>
+						<DefaultValue>30</DefaultValue>
+					</OptionalInputArgument>
+					<OptionalInputArgument>
+						<Name>Signal Period</Name>
+						<ShortDescription>Signal Period</ShortDescription>
+						<Type>Integer</Type>
+						<Range>
+							<Minimum>1</Minimum>
+							<Maximum>100000</Maximum>
+							<SuggestedStart>100000</SuggestedStart>
+							<SuggestedEnd>100000</SuggestedEnd>
+							<SuggestedIncrement>100000</SuggestedIncrement>
+						</Range>
+						<DefaultValue>3</DefaultValue>
+					</OptionalInputArgument>
+					<OptionalInputArgument>
+						<Name>MA Type</Name>
+						<ShortDescription>Type of Moving Average</ShortDescription>
+						<Type>MA Type</Type>
+						<DefaultValue>0</DefaultValue>
+					</OptionalInputArgument>
+				</OptionalInputArguments>
+			</Function>
+			<Function>
+				<Name>TA_KDJ_StateSave</Name>
+				<Type>StateSave</Type>
+				<ReturnValue>TA_Result</ReturnValue>
+				<SpecialInputArguments>
+					<SpecialInputArgument>
+						<Type>Pointer</Type>
+						<Name>state</Name>
+					</SpecialInputArgument>
+					<SpecialInputArgument>
+						<Type>Pointer to File</Type>
+						<Name>file</Name>
+					</SpecialInputArgument>
+				</SpecialInputArguments>
+				<OptionalInputArguments>
+					<OptionalInputArgument>
+						<Name>Time Period</Name>
+						<ShortDescription>Number of period</ShortDescription>
+						<Type>Integer</Type>
+						<Range>
+							<Minimum>1</Minimum>
+							<Maximum>100000</Maximum>
+							<SuggestedStart>100000</SuggestedStart>
+							<SuggestedEnd>100000</SuggestedEnd>
+							<SuggestedIncrement>100000</SuggestedIncrement>
+						</Range>
+						<DefaultValue>30</DefaultValue>
+					</OptionalInputArgument>
+					<OptionalInputArgument>
+						<Name>Signal Period</Name>
+						<ShortDescription>Signal Period</ShortDescription>
+						<Type>Integer</Type>
+						<Range>
+							<Minimum>1</Minimum>
+							<Maximum>100000</Maximum>
+							<SuggestedStart>100000</SuggestedStart>
+							<SuggestedEnd>100000</SuggestedEnd>
+							<SuggestedIncrement>100000</SuggestedIncrement>
+						</Range>
+						<DefaultValue>3</DefaultValue>
+					</OptionalInputArgument>
+					<OptionalInputArgument>
+						<Name>MA Type</Name>
+						<ShortDescription>Type of Moving Average</ShortDescription>
+						<Type>MA Type</Type>
+						<DefaultValue>0</DefaultValue>
+					</OptionalInputArgument>
+				</OptionalInputArguments>
+			</Function>
+		</Functions>
+	</FinancialFunctionGroup>
+
+
+	<!-- KVO -->
+	<FinancialFunctionGroup>
+		<Abbreviation>KVO</Abbreviation>
+		<CamelCaseName>Kvo</CamelCaseName>
+		<ShortDescription>Klinger Volume Oscillator</ShortDescription>
+		<GroupId>Volatility Indicators</GroupId>
+		<Flags>
+			<Flag>Unstable Period</Flag>
+		</Flags>
+		<StateMemory>
+			<StateMemoryField>
+				<Type>Double</Type>
+				<Name>High</Name>
+			</StateMemoryField>
+			<StateMemoryField>
+				<Type>Double</Type>
+				<Name>Low</Name>
+			</StateMemoryField>
+			<StateMemoryField>
+				<Type>Double</Type>
+				<Name>Close</Name>
+			</StateMemoryField>
+			<StateMemoryField>
+				<Type>Double</Type>
+				<Name>Volume</Name>
+			</StateMemoryField>
+		</StateMemory>
+		<State>
+			<StateField>
+				<Type>Integer</Type>
+				<Name>mem_size</Name>
+			</StateField>
+			<StateField>
+				<Type>Integer</Type>
+				<Name>mem_index</Name>
+			</StateField>
+			<StateField>
+				<Type>Pointer</Type>
+				<Name>memory</Name>
+			</StateField>
+			<StateField>
+				<Type>Pointer</Type>
+				<Name>StateMAFast</Name>
+			</StateField>
+			<StateField>
+				<Type>Pointer</Type>
+				<Name>StateMASlow</Name>
+			</StateField>
+			<StateField>
+				<Type>Pointer</Type>
+				<Name>StateMASignal</Name>
+			</StateField>
+		</State>
+		<Functions>
+			<Function>
+				<Name>TA_KVO_Lookback</Name>
+				<Type>Lookback</Type>
+				<ReturnValue>Integer</ReturnValue>
+				<OptionalInputArguments>
+					<OptionalInputArgument>
+						<Name>Fast Period</Name>
+						<ShortDescription>Number of period for the fast MA</ShortDescription>
+						<Type>Integer</Type>
+						<Range>
+							<Minimum>2</Minimum>
+							<Maximum>100000</Maximum>
+							<SuggestedStart>100000</SuggestedStart>
+							<SuggestedEnd>100000</SuggestedEnd>
+							<SuggestedIncrement>100000</SuggestedIncrement>
+						</Range>
+						<DefaultValue>12</DefaultValue>
+					</OptionalInputArgument>
+					<OptionalInputArgument>
+						<Name>Slow Period</Name>
+						<ShortDescription>Number of period for the slow MA</ShortDescription>
+						<Type>Integer</Type>
+						<Range>
+							<Minimum>2</Minimum>
+							<Maximum>100000</Maximum>
+							<SuggestedStart>100000</SuggestedStart>
+							<SuggestedEnd>100000</SuggestedEnd>
+							<SuggestedIncrement>100000</SuggestedIncrement>
+						</Range>
+						<DefaultValue>26</DefaultValue>
+					</OptionalInputArgument>
+					<OptionalInputArgument>
+						<Name>Time Period</Name>
+						<ShortDescription>Number of period</ShortDescription>
+						<Type>Integer</Type>
+						<Range>
+							<Minimum>1</Minimum>
+							<Maximum>100000</Maximum>
+							<SuggestedStart>100000</SuggestedStart>
+							<SuggestedEnd>100000</SuggestedEnd>
+							<SuggestedIncrement>100000</SuggestedIncrement>
+						</Range>
+						<DefaultValue>10</DefaultValue>
+					</OptionalInputArgument>
+					<OptionalInputArgument>
+						<Name>MA Type</Name>
+						<ShortDescription>Type of Moving Average</ShortDescription>
+						<Type>MA Type</Type>
+						<DefaultValue>0</DefaultValue>
+					</OptionalInputArgument>
+				</OptionalInputArguments>
+			</Function>
+			<Function>
+				<Name>TA_KVO</Name>
+				<Type>Regular</Type>
+				<ReturnValue>TA_Result</ReturnValue>
+				<RequiredInputArguments>
+					<RequiredInputArgument>
+						<Type>Integer</Type>
+						<Name>startIdx</Name>
+					</RequiredInputArgument>
+					<RequiredInputArgument>
+						<Type>Integer</Type>
+						<Name>endIdx</Name>
+					</RequiredInputArgument>
+					<RequiredInputArgument>
+						<Type>Double</Type>
+						<Name>High</Name>
+					</RequiredInputArgument>
+					<RequiredInputArgument>
+						<Type>Double</Type>
+						<Name>Low</Name>
+					</RequiredInputArgument>
+					<RequiredInputArgument>
+						<Type>Double</Type>
+						<Name>Close</Name>
+					</RequiredInputArgument>
+					<RequiredInputArgument>
+						<Type>Double</Type>
+						<Name>Volume</Name>
+					</RequiredInputArgument>
+				</RequiredInputArguments>
+				<OptionalInputArguments>
+					<OptionalInputArgument>
+						<Name>Fast Period</Name>
+						<ShortDescription>Number of period for the fast MA</ShortDescription>
+						<Type>Integer</Type>
+						<Range>
+							<Minimum>2</Minimum>
+							<Maximum>100000</Maximum>
+							<SuggestedStart>100000</SuggestedStart>
+							<SuggestedEnd>100000</SuggestedEnd>
+							<SuggestedIncrement>100000</SuggestedIncrement>
+						</Range>
+						<DefaultValue>12</DefaultValue>
+					</OptionalInputArgument>
+					<OptionalInputArgument>
+						<Name>Slow Period</Name>
+						<ShortDescription>Number of period for the slow MA</ShortDescription>
+						<Type>Integer</Type>
+						<Range>
+							<Minimum>2</Minimum>
+							<Maximum>100000</Maximum>
+							<SuggestedStart>100000</SuggestedStart>
+							<SuggestedEnd>100000</SuggestedEnd>
+							<SuggestedIncrement>100000</SuggestedIncrement>
+						</Range>
+						<DefaultValue>26</DefaultValue>
+					</OptionalInputArgument>
+					<OptionalInputArgument>
+						<Name>Time Period</Name>
+						<ShortDescription>Number of period</ShortDescription>
+						<Type>Integer</Type>
+						<Range>
+							<Minimum>1</Minimum>
+							<Maximum>100000</Maximum>
+							<SuggestedStart>100000</SuggestedStart>
+							<SuggestedEnd>100000</SuggestedEnd>
+							<SuggestedIncrement>100000</SuggestedIncrement>
+						</Range>
+						<DefaultValue>10</DefaultValue>
+					</OptionalInputArgument>
+					<OptionalInputArgument>
+						<Name>MA Type</Name>
+						<ShortDescription>Type of Moving Average</ShortDescription>
+						<Type>MA Type</Type>
+						<DefaultValue>0</DefaultValue>
+					</OptionalInputArgument>
+				</OptionalInputArguments>
+				<OutputArguments>
+					<OutputArgument>
+						<Type>Pointer to Integer</Type>
+						<Name>outBegIdx</Name>
+					</OutputArgument>
+					<OutputArgument>
+						<Type>Pointer to Integer</Type>
+						<Name>outNBElement</Name>
+					</OutputArgument>
+					<OutputArgument>
+						<Type>Double Array</Type>
+						<Name>outKVO</Name>
+						<Flags>
+							<Flag>Line</Flag>
+						</Flags>
+					</OutputArgument>
+					<OutputArgument>
+						<Type>Double Array</Type>
+						<Name>outKVOSignal</Name>
+						<Flags>
+							<Flag>Line</Flag>
+						</Flags>
+					</OutputArgument>
+				</OutputArguments>
+			</Function>
+			<Function>
+				<Name>TA_KVO_StateInit</Name>
+				<Type>StateInit</Type>
+				<ReturnValue>TA_Result</ReturnValue>
+				<SpecialInputArguments>
+					<SpecialInputArgument>
+						<Type>Pointer to Pointer</Type>
+						<Name>state</Name>
+					</SpecialInputArgument>
+				</SpecialInputArguments>
+				<OptionalInputArguments>
+					<OptionalInputArgument>
+						<Name>Fast Period</Name>
+						<ShortDescription>Number of period for the fast MA</ShortDescription>
+						<Type>Integer</Type>
+						<Range>
+							<Minimum>2</Minimum>
+							<Maximum>100000</Maximum>
+							<SuggestedStart>100000</SuggestedStart>
+							<SuggestedEnd>100000</SuggestedEnd>
+							<SuggestedIncrement>100000</SuggestedIncrement>
+						</Range>
+						<DefaultValue>12</DefaultValue>
+					</OptionalInputArgument>
+					<OptionalInputArgument>
+						<Name>Slow Period</Name>
+						<ShortDescription>Number of period for the slow MA</ShortDescription>
+						<Type>Integer</Type>
+						<Range>
+							<Minimum>2</Minimum>
+							<Maximum>100000</Maximum>
+							<SuggestedStart>100000</SuggestedStart>
+							<SuggestedEnd>100000</SuggestedEnd>
+							<SuggestedIncrement>100000</SuggestedIncrement>
+						</Range>
+						<DefaultValue>26</DefaultValue>
+					</OptionalInputArgument>
+					<OptionalInputArgument>
+						<Name>Time Period</Name>
+						<ShortDescription>Number of period</ShortDescription>
+						<Type>Integer</Type>
+						<Range>
+							<Minimum>1</Minimum>
+							<Maximum>100000</Maximum>
+							<SuggestedStart>100000</SuggestedStart>
+							<SuggestedEnd>100000</SuggestedEnd>
+							<SuggestedIncrement>100000</SuggestedIncrement>
+						</Range>
+						<DefaultValue>10</DefaultValue>
+					</OptionalInputArgument>
+					<OptionalInputArgument>
+						<Name>MA Type</Name>
+						<ShortDescription>Type of Moving Average</ShortDescription>
+						<Type>MA Type</Type>
+						<DefaultValue>0</DefaultValue>
+					</OptionalInputArgument>
+				</OptionalInputArguments>
+			</Function>
+			<Function>
+				<Name>TA_KVO_State</Name>
+				<Type>State</Type>
+				<ReturnValue>TA_Result</ReturnValue>
+				<SpecialInputArguments>
+					<SpecialInputArgument>
+						<Type>Pointer</Type>
+						<Name>state</Name>
+					</SpecialInputArgument>
+				</SpecialInputArguments>
+				<RequiredInputArguments>
+					<RequiredInputArgument>
+						<Type>Double</Type>
+						<Name>High</Name>
+					</RequiredInputArgument>
+					<RequiredInputArgument>
+						<Type>Double</Type>
+						<Name>Low</Name>
+					</RequiredInputArgument>
+					<RequiredInputArgument>
+						<Type>Double</Type>
+						<Name>Close</Name>
+					</RequiredInputArgument>
+					<RequiredInputArgument>
+						<Type>Double</Type>
+						<Name>Volume</Name>
+					</RequiredInputArgument>
+				</RequiredInputArguments>
+				<OutputArguments>
+					<OutputArgument>
+						<Type>Double</Type>
+						<Name>outKVO</Name>
+						<Flags>
+							<Flag>Line</Flag>
+						</Flags>
+					</OutputArgument>
+					<OutputArgument>
+						<Type>Double</Type>
+						<Name>outKVOSignal</Name>
+						<Flags>
+							<Flag>Line</Flag>
+						</Flags>
+					</OutputArgument>
+				</OutputArguments>
+			</Function>
+			<Function>
+				<Name>TA_KVO_BatchState</Name>
+				<Type>BatchState</Type>
+				<ReturnValue>TA_Result</ReturnValue>
+				<SpecialInputArguments>
+					<SpecialInputArgument>
+						<Type>Pointer</Type>
+						<Name>state</Name>
+					</SpecialInputArgument>
+				</SpecialInputArguments>
+				<RequiredInputArguments>
+					<RequiredInputArgument>
+						<Type>Integer</Type>
+						<Name>startIdx</Name>
+					</RequiredInputArgument>
+					<RequiredInputArgument>
+						<Type>Integer</Type>
+						<Name>endIdx</Name>
+					</RequiredInputArgument>
+					<RequiredInputArgument>
+						<Type>Double</Type>
+						<Name>High</Name>
+					</RequiredInputArgument>
+					<RequiredInputArgument>
+						<Type>Double</Type>
+						<Name>Low</Name>
+					</RequiredInputArgument>
+					<RequiredInputArgument>
+						<Type>Double</Type>
+						<Name>Close</Name>
+					</RequiredInputArgument>
+					<RequiredInputArgument>
+						<Type>Double</Type>
+						<Name>Volume</Name>
+					</RequiredInputArgument>
+				</RequiredInputArguments>
+				<OutputArguments>
+					<OutputArgument>
+						<Type>Pointer to Integer</Type>
+						<Name>outBegIdx</Name>
+					</OutputArgument>
+					<OutputArgument>
+						<Type>Pointer to Integer</Type>
+						<Name>outNBElement</Name>
+					</OutputArgument>
+					<OutputArgument>
+						<Type>Double Array</Type>
+						<Name>outKVO</Name>
+						<Flags>
+							<Flag>Line</Flag>
+						</Flags>
+					</OutputArgument>
+					<OutputArgument>
+						<Type>Double Array</Type>
+						<Name>outKVOSignal</Name>
+						<Flags>
+							<Flag>Line</Flag>
+						</Flags>
+					</OutputArgument>
+				</OutputArguments>
+			</Function>
+			<Function>
+				<Name>TA_KVO_StateFree</Name>
+				<Type>StateFree</Type>
+				<ReturnValue>TA_Result</ReturnValue>
+				<SpecialInputArguments>
+					<SpecialInputArgument>
+						<Type>Pointer to Pointer</Type>
+						<Name>state</Name>
+					</SpecialInputArgument>
+				</SpecialInputArguments>
+			</Function>
+			<Function>
+				<Name>TA_KVO_StateLoad</Name>
+				<Type>StateLoad</Type>
+				<ReturnValue>TA_Result</ReturnValue>
+				<SpecialInputArguments>
+					<SpecialInputArgument>
+						<Type>Pointer to Pointer</Type>
+						<Name>state</Name>
+					</SpecialInputArgument>
+					<SpecialInputArgument>
+						<Type>Pointer to File</Type>
+						<Name>file</Name>
+					</SpecialInputArgument>
+				</SpecialInputArguments>
+				<OptionalInputArguments>
+					<OptionalInputArgument>
+						<Name>Fast Period</Name>
+						<ShortDescription>Number of period for the fast MA</ShortDescription>
+						<Type>Integer</Type>
+						<Range>
+							<Minimum>2</Minimum>
+							<Maximum>100000</Maximum>
+							<SuggestedStart>100000</SuggestedStart>
+							<SuggestedEnd>100000</SuggestedEnd>
+							<SuggestedIncrement>100000</SuggestedIncrement>
+						</Range>
+						<DefaultValue>12</DefaultValue>
+					</OptionalInputArgument>
+					<OptionalInputArgument>
+						<Name>Slow Period</Name>
+						<ShortDescription>Number of period for the slow MA</ShortDescription>
+						<Type>Integer</Type>
+						<Range>
+							<Minimum>2</Minimum>
+							<Maximum>100000</Maximum>
+							<SuggestedStart>100000</SuggestedStart>
+							<SuggestedEnd>100000</SuggestedEnd>
+							<SuggestedIncrement>100000</SuggestedIncrement>
+						</Range>
+						<DefaultValue>26</DefaultValue>
+					</OptionalInputArgument>
+					<OptionalInputArgument>
+						<Name>Time Period</Name>
+						<ShortDescription>Number of period</ShortDescription>
+						<Type>Integer</Type>
+						<Range>
+							<Minimum>1</Minimum>
+							<Maximum>100000</Maximum>
+							<SuggestedStart>100000</SuggestedStart>
+							<SuggestedEnd>100000</SuggestedEnd>
+							<SuggestedIncrement>100000</SuggestedIncrement>
+						</Range>
+						<DefaultValue>10</DefaultValue>
+					</OptionalInputArgument>
+					<OptionalInputArgument>
+						<Name>MA Type</Name>
+						<ShortDescription>Type of Moving Average</ShortDescription>
+						<Type>MA Type</Type>
+						<DefaultValue>0</DefaultValue>
+					</OptionalInputArgument>
+				</OptionalInputArguments>
+			</Function>
+			<Function>
+				<Name>TA_KVO_StateSave</Name>
+				<Type>StateSave</Type>
+				<ReturnValue>TA_Result</ReturnValue>
+				<SpecialInputArguments>
+					<SpecialInputArgument>
+						<Type>Pointer</Type>
+						<Name>state</Name>
+					</SpecialInputArgument>
+					<SpecialInputArgument>
+						<Type>Pointer to File</Type>
+						<Name>file</Name>
+					</SpecialInputArgument>
+				</SpecialInputArguments>
+				<OptionalInputArguments>
+					<OptionalInputArgument>
+						<Name>Fast Period</Name>
+						<ShortDescription>Number of period for the fast MA</ShortDescription>
+						<Type>Integer</Type>
+						<Range>
+							<Minimum>2</Minimum>
+							<Maximum>100000</Maximum>
+							<SuggestedStart>100000</SuggestedStart>
+							<SuggestedEnd>100000</SuggestedEnd>
+							<SuggestedIncrement>100000</SuggestedIncrement>
+						</Range>
+						<DefaultValue>12</DefaultValue>
+					</OptionalInputArgument>
+					<OptionalInputArgument>
+						<Name>Slow Period</Name>
+						<ShortDescription>Number of period for the slow MA</ShortDescription>
+						<Type>Integer</Type>
+						<Range>
+							<Minimum>2</Minimum>
+							<Maximum>100000</Maximum>
+							<SuggestedStart>100000</SuggestedStart>
+							<SuggestedEnd>100000</SuggestedEnd>
+							<SuggestedIncrement>100000</SuggestedIncrement>
+						</Range>
+						<DefaultValue>26</DefaultValue>
+					</OptionalInputArgument>
+					<OptionalInputArgument>
+						<Name>Time Period</Name>
+						<ShortDescription>Number of period</ShortDescription>
+						<Type>Integer</Type>
+						<Range>
+							<Minimum>1</Minimum>
+							<Maximum>100000</Maximum>
+							<SuggestedStart>100000</SuggestedStart>
+							<SuggestedEnd>100000</SuggestedEnd>
+							<SuggestedIncrement>100000</SuggestedIncrement>
+						</Range>
+						<DefaultValue>10</DefaultValue>
+					</OptionalInputArgument>
+					<OptionalInputArgument>
+						<Name>MA Type</Name>
+						<ShortDescription>Type of Moving Average</ShortDescription>
+						<Type>MA Type</Type>
+						<DefaultValue>0</DefaultValue>
 					</OptionalInputArgument>
 				</OptionalInputArguments>
 			</Function>
@@ -37641,6 +41541,1029 @@
 	</FinancialFunctionGroup>
 
 
+	<!-- REDK_EVEREX -->
+	<FinancialFunctionGroup>
+		<Abbreviation>REDK_EVEREX</Abbreviation>
+		<CamelCaseName>RedkEverex</CamelCaseName>
+		<ShortDescription>RedK EVEREX - Effort Versus Results Explorer</ShortDescription>
+		<GroupId>Overlap Studies</GroupId>
+		<StateMemory>
+			<StateMemoryField>
+				<Type>Double</Type>
+				<Name>Open</Name>
+			</StateMemoryField>
+			<StateMemoryField>
+				<Type>Double</Type>
+				<Name>High</Name>
+			</StateMemoryField>
+			<StateMemoryField>
+				<Type>Double</Type>
+				<Name>Low</Name>
+			</StateMemoryField>
+			<StateMemoryField>
+				<Type>Double</Type>
+				<Name>Close</Name>
+			</StateMemoryField>
+			<StateMemoryField>
+				<Type>Double</Type>
+				<Name>Volume</Name>
+			</StateMemoryField>
+		</StateMemory>
+		<State>
+			<StateField>
+				<Type>Integer</Type>
+				<Name>mem_size</Name>
+			</StateField>
+			<StateField>
+				<Type>Integer</Type>
+				<Name>mem_index</Name>
+			</StateField>
+			<StateField>
+				<Type>Pointer</Type>
+				<Name>memory</Name>
+			</StateField>
+			<StateField>
+				<Type>Pointer</Type>
+				<Name>StateVolMA</Name>
+			</StateField>
+			<StateField>
+				<Type>Pointer</Type>
+				<Name>StateBarSpreadMA</Name>
+			</StateField>
+			<StateField>
+				<Type>Pointer</Type>
+				<Name>StateSrcShiftMA</Name>
+			</StateField>
+			<StateField>
+				<Type>Pointer</Type>
+				<Name>StateBullMA</Name>
+			</StateField>
+			<StateField>
+				<Type>Pointer</Type>
+				<Name>StateBearMA</Name>
+			</StateField>
+			<StateField>
+				<Type>Pointer</Type>
+				<Name>StateRrofMA</Name>
+			</StateField>
+			<StateField>
+				<Type>Pointer</Type>
+				<Name>StateRrofSmootMA</Name>
+			</StateField>
+			<StateField>
+				<Type>Pointer</Type>
+				<Name>StateSignalMA</Name>
+			</StateField>
+			<StateField>
+				<Type>Pointer</Type>
+				<Name>StateBiasBullMA</Name>
+			</StateField>
+			<StateField>
+				<Type>Pointer</Type>
+				<Name>StateBiasBearMA</Name>
+			</StateField>
+			<StateField>
+				<Type>Pointer</Type>
+				<Name>StateBiasSmoothMA</Name>
+			</StateField>
+			<StateField>
+				<Type>Pointer</Type>
+				<Name>StateBullSmoothWMA</Name>
+			</StateField>
+			<StateField>
+				<Type>Pointer</Type>
+				<Name>StateBearSmoothWMA</Name>
+			</StateField>
+			<StateField>
+				<Type>Pointer</Type>
+				<Name>StateBullMax</Name>
+			</StateField>
+			<StateField>
+				<Type>Pointer</Type>
+				<Name>StateBearMin</Name>
+			</StateField>
+			<StateField>
+				<Type>Pointer</Type>
+				<Name>StateMinPriceN</Name>
+			</StateField>
+			<StateField>
+				<Type>Pointer</Type>
+				<Name>StateMaxNPrice</Name>
+			</StateField>
+			<StateField>
+				<Type>Pointer</Type>
+				<Name>StateMinVolN</Name>
+			</StateField>
+			<StateField>
+				<Type>Pointer</Type>
+				<Name>StateMaxNVol</Name>
+			</StateField>
+		</State>
+		<Functions>
+			<Function>
+				<Name>TA_REDK_EVEREX_Lookback</Name>
+				<Type>Lookback</Type>
+				<ReturnValue>Integer</ReturnValue>
+				<OptionalInputArguments>
+					<OptionalInputArgument>
+						<Name>Time Period</Name>
+						<ShortDescription>Number of period</ShortDescription>
+						<Type>Integer</Type>
+						<Range>
+							<Minimum>1</Minimum>
+							<Maximum>100000</Maximum>
+							<SuggestedStart>100000</SuggestedStart>
+							<SuggestedEnd>100000</SuggestedEnd>
+							<SuggestedIncrement>100000</SuggestedIncrement>
+						</Range>
+						<DefaultValue>30</DefaultValue>
+					</OptionalInputArgument>
+					<OptionalInputArgument>
+						<Name>MA Type</Name>
+						<ShortDescription>Type of Moving Average</ShortDescription>
+						<Type>MA Type</Type>
+						<DefaultValue>0</DefaultValue>
+					</OptionalInputArgument>
+					<OptionalInputArgument>
+						<Name>Rate of Flow Period</Name>
+						<ShortDescription>Rate of Flow Period</ShortDescription>
+						<Type>Integer</Type>
+						<Range>
+							<Minimum>1</Minimum>
+							<Maximum>100000</Maximum>
+							<SuggestedStart>100000</SuggestedStart>
+							<SuggestedEnd>100000</SuggestedEnd>
+							<SuggestedIncrement>100000</SuggestedIncrement>
+						</Range>
+						<DefaultValue>10</DefaultValue>
+					</OptionalInputArgument>
+					<OptionalInputArgument>
+						<Name>ROF MA Type</Name>
+						<ShortDescription>Type of ROF Moving Average</ShortDescription>
+						<Type>MA Type</Type>
+						<DefaultValue>2</DefaultValue>
+					</OptionalInputArgument>
+					<OptionalInputArgument>
+						<Name>Rate of Flow Period</Name>
+						<ShortDescription>Rate of Flow Smooth</ShortDescription>
+						<Type>Double</Type>
+						<Range>
+							<Minimum>0.000000e+0</Minimum>
+							<Maximum>3.000000e+37</Maximum>
+							<Precision>0</Precision>
+							<SuggestedStart>0.000000e+0</SuggestedStart>
+							<SuggestedEnd>0.000000e+0</SuggestedEnd>
+							<SuggestedIncrement>0.000000e+0</SuggestedIncrement>
+						</Range>
+						<DefaultValue>3.000000e+0</DefaultValue>
+					</OptionalInputArgument>
+					<OptionalInputArgument>
+						<Name>Signal Period</Name>
+						<ShortDescription>Signal Period</ShortDescription>
+						<Type>Integer</Type>
+						<Range>
+							<Minimum>1</Minimum>
+							<Maximum>100000</Maximum>
+							<SuggestedStart>100000</SuggestedStart>
+							<SuggestedEnd>100000</SuggestedEnd>
+							<SuggestedIncrement>100000</SuggestedIncrement>
+						</Range>
+						<DefaultValue>5</DefaultValue>
+					</OptionalInputArgument>
+					<OptionalInputArgument>
+						<Name>Signal MA Type</Name>
+						<ShortDescription>Type of Signal Moving Average</ShortDescription>
+						<Type>MA Type</Type>
+						<DefaultValue>2</DefaultValue>
+					</OptionalInputArgument>
+					<OptionalInputArgument>
+						<Name>Bias Period</Name>
+						<ShortDescription>Bias Period</ShortDescription>
+						<Type>Integer</Type>
+						<Range>
+							<Minimum>1</Minimum>
+							<Maximum>100000</Maximum>
+							<SuggestedStart>100000</SuggestedStart>
+							<SuggestedEnd>100000</SuggestedEnd>
+							<SuggestedIncrement>100000</SuggestedIncrement>
+						</Range>
+						<DefaultValue>30</DefaultValue>
+					</OptionalInputArgument>
+					<OptionalInputArgument>
+						<Name>Bias MA Type</Name>
+						<ShortDescription>Type of Bias Moving Average</ShortDescription>
+						<Type>MA Type</Type>
+						<DefaultValue>2</DefaultValue>
+					</OptionalInputArgument>
+				</OptionalInputArguments>
+			</Function>
+			<Function>
+				<Name>TA_REDK_EVEREX</Name>
+				<Type>Regular</Type>
+				<ReturnValue>TA_Result</ReturnValue>
+				<RequiredInputArguments>
+					<RequiredInputArgument>
+						<Type>Integer</Type>
+						<Name>startIdx</Name>
+					</RequiredInputArgument>
+					<RequiredInputArgument>
+						<Type>Integer</Type>
+						<Name>endIdx</Name>
+					</RequiredInputArgument>
+					<RequiredInputArgument>
+						<Type>Double</Type>
+						<Name>Open</Name>
+					</RequiredInputArgument>
+					<RequiredInputArgument>
+						<Type>Double</Type>
+						<Name>High</Name>
+					</RequiredInputArgument>
+					<RequiredInputArgument>
+						<Type>Double</Type>
+						<Name>Low</Name>
+					</RequiredInputArgument>
+					<RequiredInputArgument>
+						<Type>Double</Type>
+						<Name>Close</Name>
+					</RequiredInputArgument>
+					<RequiredInputArgument>
+						<Type>Double</Type>
+						<Name>Volume</Name>
+					</RequiredInputArgument>
+				</RequiredInputArguments>
+				<OptionalInputArguments>
+					<OptionalInputArgument>
+						<Name>Time Period</Name>
+						<ShortDescription>Number of period</ShortDescription>
+						<Type>Integer</Type>
+						<Range>
+							<Minimum>1</Minimum>
+							<Maximum>100000</Maximum>
+							<SuggestedStart>100000</SuggestedStart>
+							<SuggestedEnd>100000</SuggestedEnd>
+							<SuggestedIncrement>100000</SuggestedIncrement>
+						</Range>
+						<DefaultValue>30</DefaultValue>
+					</OptionalInputArgument>
+					<OptionalInputArgument>
+						<Name>MA Type</Name>
+						<ShortDescription>Type of Moving Average</ShortDescription>
+						<Type>MA Type</Type>
+						<DefaultValue>0</DefaultValue>
+					</OptionalInputArgument>
+					<OptionalInputArgument>
+						<Name>Rate of Flow Period</Name>
+						<ShortDescription>Rate of Flow Period</ShortDescription>
+						<Type>Integer</Type>
+						<Range>
+							<Minimum>1</Minimum>
+							<Maximum>100000</Maximum>
+							<SuggestedStart>100000</SuggestedStart>
+							<SuggestedEnd>100000</SuggestedEnd>
+							<SuggestedIncrement>100000</SuggestedIncrement>
+						</Range>
+						<DefaultValue>10</DefaultValue>
+					</OptionalInputArgument>
+					<OptionalInputArgument>
+						<Name>ROF MA Type</Name>
+						<ShortDescription>Type of ROF Moving Average</ShortDescription>
+						<Type>MA Type</Type>
+						<DefaultValue>2</DefaultValue>
+					</OptionalInputArgument>
+					<OptionalInputArgument>
+						<Name>Rate of Flow Period</Name>
+						<ShortDescription>Rate of Flow Smooth</ShortDescription>
+						<Type>Double</Type>
+						<Range>
+							<Minimum>0.000000e+0</Minimum>
+							<Maximum>3.000000e+37</Maximum>
+							<Precision>0</Precision>
+							<SuggestedStart>0.000000e+0</SuggestedStart>
+							<SuggestedEnd>0.000000e+0</SuggestedEnd>
+							<SuggestedIncrement>0.000000e+0</SuggestedIncrement>
+						</Range>
+						<DefaultValue>3.000000e+0</DefaultValue>
+					</OptionalInputArgument>
+					<OptionalInputArgument>
+						<Name>Signal Period</Name>
+						<ShortDescription>Signal Period</ShortDescription>
+						<Type>Integer</Type>
+						<Range>
+							<Minimum>1</Minimum>
+							<Maximum>100000</Maximum>
+							<SuggestedStart>100000</SuggestedStart>
+							<SuggestedEnd>100000</SuggestedEnd>
+							<SuggestedIncrement>100000</SuggestedIncrement>
+						</Range>
+						<DefaultValue>5</DefaultValue>
+					</OptionalInputArgument>
+					<OptionalInputArgument>
+						<Name>Signal MA Type</Name>
+						<ShortDescription>Type of Signal Moving Average</ShortDescription>
+						<Type>MA Type</Type>
+						<DefaultValue>2</DefaultValue>
+					</OptionalInputArgument>
+					<OptionalInputArgument>
+						<Name>Bias Period</Name>
+						<ShortDescription>Bias Period</ShortDescription>
+						<Type>Integer</Type>
+						<Range>
+							<Minimum>1</Minimum>
+							<Maximum>100000</Maximum>
+							<SuggestedStart>100000</SuggestedStart>
+							<SuggestedEnd>100000</SuggestedEnd>
+							<SuggestedIncrement>100000</SuggestedIncrement>
+						</Range>
+						<DefaultValue>30</DefaultValue>
+					</OptionalInputArgument>
+					<OptionalInputArgument>
+						<Name>Bias MA Type</Name>
+						<ShortDescription>Type of Bias Moving Average</ShortDescription>
+						<Type>MA Type</Type>
+						<DefaultValue>2</DefaultValue>
+					</OptionalInputArgument>
+				</OptionalInputArguments>
+				<OutputArguments>
+					<OutputArgument>
+						<Type>Pointer to Integer</Type>
+						<Name>outBegIdx</Name>
+					</OutputArgument>
+					<OutputArgument>
+						<Type>Pointer to Integer</Type>
+						<Name>outNBElement</Name>
+					</OutputArgument>
+					<OutputArgument>
+						<Type>Double Array</Type>
+						<Name>outVolNorm</Name>
+						<Flags>
+							<Flag>Line</Flag>
+						</Flags>
+					</OutputArgument>
+					<OutputArgument>
+						<Type>Double Array</Type>
+						<Name>outPriceNorm</Name>
+						<Flags>
+							<Flag>Line</Flag>
+						</Flags>
+					</OutputArgument>
+					<OutputArgument>
+						<Type>Double Array</Type>
+						<Name>outFlow</Name>
+						<Flags>
+							<Flag>Line</Flag>
+						</Flags>
+					</OutputArgument>
+					<OutputArgument>
+						<Type>Double Array</Type>
+						<Name>outBullAvg</Name>
+						<Flags>
+							<Flag>Line</Flag>
+						</Flags>
+					</OutputArgument>
+					<OutputArgument>
+						<Type>Double Array</Type>
+						<Name>outBearAvg</Name>
+						<Flags>
+							<Flag>Line</Flag>
+						</Flags>
+					</OutputArgument>
+					<OutputArgument>
+						<Type>Double Array</Type>
+						<Name>outRROF</Name>
+						<Flags>
+							<Flag>Line</Flag>
+						</Flags>
+					</OutputArgument>
+					<OutputArgument>
+						<Type>Double Array</Type>
+						<Name>outRROFSmooth</Name>
+						<Flags>
+							<Flag>Line</Flag>
+						</Flags>
+					</OutputArgument>
+					<OutputArgument>
+						<Type>Double Array</Type>
+						<Name>outSignal</Name>
+						<Flags>
+							<Flag>Line</Flag>
+						</Flags>
+					</OutputArgument>
+					<OutputArgument>
+						<Type>Double Array</Type>
+						<Name>outBiasSentiment</Name>
+						<Flags>
+							<Flag>Line</Flag>
+						</Flags>
+					</OutputArgument>
+					<OutputArgument>
+						<Type>Double Array</Type>
+						<Name>outBiasSentimentSmooth</Name>
+						<Flags>
+							<Flag>Line</Flag>
+						</Flags>
+					</OutputArgument>
+					<OutputArgument>
+						<Type>Double Array</Type>
+						<Name>outEvRatio</Name>
+						<Flags>
+							<Flag>Line</Flag>
+						</Flags>
+					</OutputArgument>
+					<OutputArgument>
+						<Type>Integer Array</Type>
+						<Name>outFlowUp</Name>
+						<Flags>
+							<Flag>Line</Flag>
+						</Flags>
+					</OutputArgument>
+				</OutputArguments>
+			</Function>
+			<Function>
+				<Name>TA_REDK_EVEREX_StateInit</Name>
+				<Type>StateInit</Type>
+				<ReturnValue>TA_Result</ReturnValue>
+				<SpecialInputArguments>
+					<SpecialInputArgument>
+						<Type>Pointer to Pointer</Type>
+						<Name>state</Name>
+					</SpecialInputArgument>
+				</SpecialInputArguments>
+				<OptionalInputArguments>
+					<OptionalInputArgument>
+						<Name>Time Period</Name>
+						<ShortDescription>Number of period</ShortDescription>
+						<Type>Integer</Type>
+						<Range>
+							<Minimum>1</Minimum>
+							<Maximum>100000</Maximum>
+							<SuggestedStart>100000</SuggestedStart>
+							<SuggestedEnd>100000</SuggestedEnd>
+							<SuggestedIncrement>100000</SuggestedIncrement>
+						</Range>
+						<DefaultValue>30</DefaultValue>
+					</OptionalInputArgument>
+					<OptionalInputArgument>
+						<Name>MA Type</Name>
+						<ShortDescription>Type of Moving Average</ShortDescription>
+						<Type>MA Type</Type>
+						<DefaultValue>0</DefaultValue>
+					</OptionalInputArgument>
+					<OptionalInputArgument>
+						<Name>Rate of Flow Period</Name>
+						<ShortDescription>Rate of Flow Period</ShortDescription>
+						<Type>Integer</Type>
+						<Range>
+							<Minimum>1</Minimum>
+							<Maximum>100000</Maximum>
+							<SuggestedStart>100000</SuggestedStart>
+							<SuggestedEnd>100000</SuggestedEnd>
+							<SuggestedIncrement>100000</SuggestedIncrement>
+						</Range>
+						<DefaultValue>10</DefaultValue>
+					</OptionalInputArgument>
+					<OptionalInputArgument>
+						<Name>ROF MA Type</Name>
+						<ShortDescription>Type of ROF Moving Average</ShortDescription>
+						<Type>MA Type</Type>
+						<DefaultValue>2</DefaultValue>
+					</OptionalInputArgument>
+					<OptionalInputArgument>
+						<Name>Rate of Flow Period</Name>
+						<ShortDescription>Rate of Flow Smooth</ShortDescription>
+						<Type>Double</Type>
+						<Range>
+							<Minimum>0.000000e+0</Minimum>
+							<Maximum>3.000000e+37</Maximum>
+							<Precision>0</Precision>
+							<SuggestedStart>0.000000e+0</SuggestedStart>
+							<SuggestedEnd>0.000000e+0</SuggestedEnd>
+							<SuggestedIncrement>0.000000e+0</SuggestedIncrement>
+						</Range>
+						<DefaultValue>3.000000e+0</DefaultValue>
+					</OptionalInputArgument>
+					<OptionalInputArgument>
+						<Name>Signal Period</Name>
+						<ShortDescription>Signal Period</ShortDescription>
+						<Type>Integer</Type>
+						<Range>
+							<Minimum>1</Minimum>
+							<Maximum>100000</Maximum>
+							<SuggestedStart>100000</SuggestedStart>
+							<SuggestedEnd>100000</SuggestedEnd>
+							<SuggestedIncrement>100000</SuggestedIncrement>
+						</Range>
+						<DefaultValue>5</DefaultValue>
+					</OptionalInputArgument>
+					<OptionalInputArgument>
+						<Name>Signal MA Type</Name>
+						<ShortDescription>Type of Signal Moving Average</ShortDescription>
+						<Type>MA Type</Type>
+						<DefaultValue>2</DefaultValue>
+					</OptionalInputArgument>
+					<OptionalInputArgument>
+						<Name>Bias Period</Name>
+						<ShortDescription>Bias Period</ShortDescription>
+						<Type>Integer</Type>
+						<Range>
+							<Minimum>1</Minimum>
+							<Maximum>100000</Maximum>
+							<SuggestedStart>100000</SuggestedStart>
+							<SuggestedEnd>100000</SuggestedEnd>
+							<SuggestedIncrement>100000</SuggestedIncrement>
+						</Range>
+						<DefaultValue>30</DefaultValue>
+					</OptionalInputArgument>
+					<OptionalInputArgument>
+						<Name>Bias MA Type</Name>
+						<ShortDescription>Type of Bias Moving Average</ShortDescription>
+						<Type>MA Type</Type>
+						<DefaultValue>2</DefaultValue>
+					</OptionalInputArgument>
+				</OptionalInputArguments>
+			</Function>
+			<Function>
+				<Name>TA_REDK_EVEREX_State</Name>
+				<Type>State</Type>
+				<ReturnValue>TA_Result</ReturnValue>
+				<SpecialInputArguments>
+					<SpecialInputArgument>
+						<Type>Pointer</Type>
+						<Name>state</Name>
+					</SpecialInputArgument>
+				</SpecialInputArguments>
+				<RequiredInputArguments>
+					<RequiredInputArgument>
+						<Type>Double</Type>
+						<Name>Open</Name>
+					</RequiredInputArgument>
+					<RequiredInputArgument>
+						<Type>Double</Type>
+						<Name>High</Name>
+					</RequiredInputArgument>
+					<RequiredInputArgument>
+						<Type>Double</Type>
+						<Name>Low</Name>
+					</RequiredInputArgument>
+					<RequiredInputArgument>
+						<Type>Double</Type>
+						<Name>Close</Name>
+					</RequiredInputArgument>
+					<RequiredInputArgument>
+						<Type>Double</Type>
+						<Name>Volume</Name>
+					</RequiredInputArgument>
+				</RequiredInputArguments>
+				<OutputArguments>
+					<OutputArgument>
+						<Type>Double</Type>
+						<Name>outVolNorm</Name>
+						<Flags>
+							<Flag>Line</Flag>
+						</Flags>
+					</OutputArgument>
+					<OutputArgument>
+						<Type>Double</Type>
+						<Name>outPriceNorm</Name>
+						<Flags>
+							<Flag>Line</Flag>
+						</Flags>
+					</OutputArgument>
+					<OutputArgument>
+						<Type>Double</Type>
+						<Name>outFlow</Name>
+						<Flags>
+							<Flag>Line</Flag>
+						</Flags>
+					</OutputArgument>
+					<OutputArgument>
+						<Type>Double</Type>
+						<Name>outBullAvg</Name>
+						<Flags>
+							<Flag>Line</Flag>
+						</Flags>
+					</OutputArgument>
+					<OutputArgument>
+						<Type>Double</Type>
+						<Name>outBearAvg</Name>
+						<Flags>
+							<Flag>Line</Flag>
+						</Flags>
+					</OutputArgument>
+					<OutputArgument>
+						<Type>Double</Type>
+						<Name>outRROF</Name>
+						<Flags>
+							<Flag>Line</Flag>
+						</Flags>
+					</OutputArgument>
+					<OutputArgument>
+						<Type>Double</Type>
+						<Name>outRROFSmooth</Name>
+						<Flags>
+							<Flag>Line</Flag>
+						</Flags>
+					</OutputArgument>
+					<OutputArgument>
+						<Type>Double</Type>
+						<Name>outSignal</Name>
+						<Flags>
+							<Flag>Line</Flag>
+						</Flags>
+					</OutputArgument>
+					<OutputArgument>
+						<Type>Double</Type>
+						<Name>outBiasSentiment</Name>
+						<Flags>
+							<Flag>Line</Flag>
+						</Flags>
+					</OutputArgument>
+					<OutputArgument>
+						<Type>Double</Type>
+						<Name>outBiasSentimentSmooth</Name>
+						<Flags>
+							<Flag>Line</Flag>
+						</Flags>
+					</OutputArgument>
+					<OutputArgument>
+						<Type>Double</Type>
+						<Name>outEvRatio</Name>
+						<Flags>
+							<Flag>Line</Flag>
+						</Flags>
+					</OutputArgument>
+					<OutputArgument>
+						<Type>Integer</Type>
+						<Name>outFlowUp</Name>
+						<Flags>
+							<Flag>Line</Flag>
+						</Flags>
+					</OutputArgument>
+				</OutputArguments>
+			</Function>
+			<Function>
+				<Name>TA_REDK_EVEREX_BatchState</Name>
+				<Type>BatchState</Type>
+				<ReturnValue>TA_Result</ReturnValue>
+				<SpecialInputArguments>
+					<SpecialInputArgument>
+						<Type>Pointer</Type>
+						<Name>state</Name>
+					</SpecialInputArgument>
+				</SpecialInputArguments>
+				<RequiredInputArguments>
+					<RequiredInputArgument>
+						<Type>Integer</Type>
+						<Name>startIdx</Name>
+					</RequiredInputArgument>
+					<RequiredInputArgument>
+						<Type>Integer</Type>
+						<Name>endIdx</Name>
+					</RequiredInputArgument>
+					<RequiredInputArgument>
+						<Type>Double</Type>
+						<Name>Open</Name>
+					</RequiredInputArgument>
+					<RequiredInputArgument>
+						<Type>Double</Type>
+						<Name>High</Name>
+					</RequiredInputArgument>
+					<RequiredInputArgument>
+						<Type>Double</Type>
+						<Name>Low</Name>
+					</RequiredInputArgument>
+					<RequiredInputArgument>
+						<Type>Double</Type>
+						<Name>Close</Name>
+					</RequiredInputArgument>
+					<RequiredInputArgument>
+						<Type>Double</Type>
+						<Name>Volume</Name>
+					</RequiredInputArgument>
+				</RequiredInputArguments>
+				<OutputArguments>
+					<OutputArgument>
+						<Type>Pointer to Integer</Type>
+						<Name>outBegIdx</Name>
+					</OutputArgument>
+					<OutputArgument>
+						<Type>Pointer to Integer</Type>
+						<Name>outNBElement</Name>
+					</OutputArgument>
+					<OutputArgument>
+						<Type>Double Array</Type>
+						<Name>outVolNorm</Name>
+						<Flags>
+							<Flag>Line</Flag>
+						</Flags>
+					</OutputArgument>
+					<OutputArgument>
+						<Type>Double Array</Type>
+						<Name>outPriceNorm</Name>
+						<Flags>
+							<Flag>Line</Flag>
+						</Flags>
+					</OutputArgument>
+					<OutputArgument>
+						<Type>Double Array</Type>
+						<Name>outFlow</Name>
+						<Flags>
+							<Flag>Line</Flag>
+						</Flags>
+					</OutputArgument>
+					<OutputArgument>
+						<Type>Double Array</Type>
+						<Name>outBullAvg</Name>
+						<Flags>
+							<Flag>Line</Flag>
+						</Flags>
+					</OutputArgument>
+					<OutputArgument>
+						<Type>Double Array</Type>
+						<Name>outBearAvg</Name>
+						<Flags>
+							<Flag>Line</Flag>
+						</Flags>
+					</OutputArgument>
+					<OutputArgument>
+						<Type>Double Array</Type>
+						<Name>outRROF</Name>
+						<Flags>
+							<Flag>Line</Flag>
+						</Flags>
+					</OutputArgument>
+					<OutputArgument>
+						<Type>Double Array</Type>
+						<Name>outRROFSmooth</Name>
+						<Flags>
+							<Flag>Line</Flag>
+						</Flags>
+					</OutputArgument>
+					<OutputArgument>
+						<Type>Double Array</Type>
+						<Name>outSignal</Name>
+						<Flags>
+							<Flag>Line</Flag>
+						</Flags>
+					</OutputArgument>
+					<OutputArgument>
+						<Type>Double Array</Type>
+						<Name>outBiasSentiment</Name>
+						<Flags>
+							<Flag>Line</Flag>
+						</Flags>
+					</OutputArgument>
+					<OutputArgument>
+						<Type>Double Array</Type>
+						<Name>outBiasSentimentSmooth</Name>
+						<Flags>
+							<Flag>Line</Flag>
+						</Flags>
+					</OutputArgument>
+					<OutputArgument>
+						<Type>Double Array</Type>
+						<Name>outEvRatio</Name>
+						<Flags>
+							<Flag>Line</Flag>
+						</Flags>
+					</OutputArgument>
+					<OutputArgument>
+						<Type>Integer Array</Type>
+						<Name>outFlowUp</Name>
+						<Flags>
+							<Flag>Line</Flag>
+						</Flags>
+					</OutputArgument>
+				</OutputArguments>
+			</Function>
+			<Function>
+				<Name>TA_REDK_EVEREX_StateFree</Name>
+				<Type>StateFree</Type>
+				<ReturnValue>TA_Result</ReturnValue>
+				<SpecialInputArguments>
+					<SpecialInputArgument>
+						<Type>Pointer to Pointer</Type>
+						<Name>state</Name>
+					</SpecialInputArgument>
+				</SpecialInputArguments>
+			</Function>
+			<Function>
+				<Name>TA_REDK_EVEREX_StateLoad</Name>
+				<Type>StateLoad</Type>
+				<ReturnValue>TA_Result</ReturnValue>
+				<SpecialInputArguments>
+					<SpecialInputArgument>
+						<Type>Pointer to Pointer</Type>
+						<Name>state</Name>
+					</SpecialInputArgument>
+					<SpecialInputArgument>
+						<Type>Pointer to File</Type>
+						<Name>file</Name>
+					</SpecialInputArgument>
+				</SpecialInputArguments>
+				<OptionalInputArguments>
+					<OptionalInputArgument>
+						<Name>Time Period</Name>
+						<ShortDescription>Number of period</ShortDescription>
+						<Type>Integer</Type>
+						<Range>
+							<Minimum>1</Minimum>
+							<Maximum>100000</Maximum>
+							<SuggestedStart>100000</SuggestedStart>
+							<SuggestedEnd>100000</SuggestedEnd>
+							<SuggestedIncrement>100000</SuggestedIncrement>
+						</Range>
+						<DefaultValue>30</DefaultValue>
+					</OptionalInputArgument>
+					<OptionalInputArgument>
+						<Name>MA Type</Name>
+						<ShortDescription>Type of Moving Average</ShortDescription>
+						<Type>MA Type</Type>
+						<DefaultValue>0</DefaultValue>
+					</OptionalInputArgument>
+					<OptionalInputArgument>
+						<Name>Rate of Flow Period</Name>
+						<ShortDescription>Rate of Flow Period</ShortDescription>
+						<Type>Integer</Type>
+						<Range>
+							<Minimum>1</Minimum>
+							<Maximum>100000</Maximum>
+							<SuggestedStart>100000</SuggestedStart>
+							<SuggestedEnd>100000</SuggestedEnd>
+							<SuggestedIncrement>100000</SuggestedIncrement>
+						</Range>
+						<DefaultValue>10</DefaultValue>
+					</OptionalInputArgument>
+					<OptionalInputArgument>
+						<Name>ROF MA Type</Name>
+						<ShortDescription>Type of ROF Moving Average</ShortDescription>
+						<Type>MA Type</Type>
+						<DefaultValue>2</DefaultValue>
+					</OptionalInputArgument>
+					<OptionalInputArgument>
+						<Name>Rate of Flow Period</Name>
+						<ShortDescription>Rate of Flow Smooth</ShortDescription>
+						<Type>Double</Type>
+						<Range>
+							<Minimum>0.000000e+0</Minimum>
+							<Maximum>3.000000e+37</Maximum>
+							<Precision>0</Precision>
+							<SuggestedStart>0.000000e+0</SuggestedStart>
+							<SuggestedEnd>0.000000e+0</SuggestedEnd>
+							<SuggestedIncrement>0.000000e+0</SuggestedIncrement>
+						</Range>
+						<DefaultValue>3.000000e+0</DefaultValue>
+					</OptionalInputArgument>
+					<OptionalInputArgument>
+						<Name>Signal Period</Name>
+						<ShortDescription>Signal Period</ShortDescription>
+						<Type>Integer</Type>
+						<Range>
+							<Minimum>1</Minimum>
+							<Maximum>100000</Maximum>
+							<SuggestedStart>100000</SuggestedStart>
+							<SuggestedEnd>100000</SuggestedEnd>
+							<SuggestedIncrement>100000</SuggestedIncrement>
+						</Range>
+						<DefaultValue>5</DefaultValue>
+					</OptionalInputArgument>
+					<OptionalInputArgument>
+						<Name>Signal MA Type</Name>
+						<ShortDescription>Type of Signal Moving Average</ShortDescription>
+						<Type>MA Type</Type>
+						<DefaultValue>2</DefaultValue>
+					</OptionalInputArgument>
+					<OptionalInputArgument>
+						<Name>Bias Period</Name>
+						<ShortDescription>Bias Period</ShortDescription>
+						<Type>Integer</Type>
+						<Range>
+							<Minimum>1</Minimum>
+							<Maximum>100000</Maximum>
+							<SuggestedStart>100000</SuggestedStart>
+							<SuggestedEnd>100000</SuggestedEnd>
+							<SuggestedIncrement>100000</SuggestedIncrement>
+						</Range>
+						<DefaultValue>30</DefaultValue>
+					</OptionalInputArgument>
+					<OptionalInputArgument>
+						<Name>Bias MA Type</Name>
+						<ShortDescription>Type of Bias Moving Average</ShortDescription>
+						<Type>MA Type</Type>
+						<DefaultValue>2</DefaultValue>
+					</OptionalInputArgument>
+				</OptionalInputArguments>
+			</Function>
+			<Function>
+				<Name>TA_REDK_EVEREX_StateSave</Name>
+				<Type>StateSave</Type>
+				<ReturnValue>TA_Result</ReturnValue>
+				<SpecialInputArguments>
+					<SpecialInputArgument>
+						<Type>Pointer</Type>
+						<Name>state</Name>
+					</SpecialInputArgument>
+					<SpecialInputArgument>
+						<Type>Pointer to File</Type>
+						<Name>file</Name>
+					</SpecialInputArgument>
+				</SpecialInputArguments>
+				<OptionalInputArguments>
+					<OptionalInputArgument>
+						<Name>Time Period</Name>
+						<ShortDescription>Number of period</ShortDescription>
+						<Type>Integer</Type>
+						<Range>
+							<Minimum>1</Minimum>
+							<Maximum>100000</Maximum>
+							<SuggestedStart>100000</SuggestedStart>
+							<SuggestedEnd>100000</SuggestedEnd>
+							<SuggestedIncrement>100000</SuggestedIncrement>
+						</Range>
+						<DefaultValue>30</DefaultValue>
+					</OptionalInputArgument>
+					<OptionalInputArgument>
+						<Name>MA Type</Name>
+						<ShortDescription>Type of Moving Average</ShortDescription>
+						<Type>MA Type</Type>
+						<DefaultValue>0</DefaultValue>
+					</OptionalInputArgument>
+					<OptionalInputArgument>
+						<Name>Rate of Flow Period</Name>
+						<ShortDescription>Rate of Flow Period</ShortDescription>
+						<Type>Integer</Type>
+						<Range>
+							<Minimum>1</Minimum>
+							<Maximum>100000</Maximum>
+							<SuggestedStart>100000</SuggestedStart>
+							<SuggestedEnd>100000</SuggestedEnd>
+							<SuggestedIncrement>100000</SuggestedIncrement>
+						</Range>
+						<DefaultValue>10</DefaultValue>
+					</OptionalInputArgument>
+					<OptionalInputArgument>
+						<Name>ROF MA Type</Name>
+						<ShortDescription>Type of ROF Moving Average</ShortDescription>
+						<Type>MA Type</Type>
+						<DefaultValue>2</DefaultValue>
+					</OptionalInputArgument>
+					<OptionalInputArgument>
+						<Name>Rate of Flow Period</Name>
+						<ShortDescription>Rate of Flow Smooth</ShortDescription>
+						<Type>Double</Type>
+						<Range>
+							<Minimum>0.000000e+0</Minimum>
+							<Maximum>3.000000e+37</Maximum>
+							<Precision>0</Precision>
+							<SuggestedStart>0.000000e+0</SuggestedStart>
+							<SuggestedEnd>0.000000e+0</SuggestedEnd>
+							<SuggestedIncrement>0.000000e+0</SuggestedIncrement>
+						</Range>
+						<DefaultValue>3.000000e+0</DefaultValue>
+					</OptionalInputArgument>
+					<OptionalInputArgument>
+						<Name>Signal Period</Name>
+						<ShortDescription>Signal Period</ShortDescription>
+						<Type>Integer</Type>
+						<Range>
+							<Minimum>1</Minimum>
+							<Maximum>100000</Maximum>
+							<SuggestedStart>100000</SuggestedStart>
+							<SuggestedEnd>100000</SuggestedEnd>
+							<SuggestedIncrement>100000</SuggestedIncrement>
+						</Range>
+						<DefaultValue>5</DefaultValue>
+					</OptionalInputArgument>
+					<OptionalInputArgument>
+						<Name>Signal MA Type</Name>
+						<ShortDescription>Type of Signal Moving Average</ShortDescription>
+						<Type>MA Type</Type>
+						<DefaultValue>2</DefaultValue>
+					</OptionalInputArgument>
+					<OptionalInputArgument>
+						<Name>Bias Period</Name>
+						<ShortDescription>Bias Period</ShortDescription>
+						<Type>Integer</Type>
+						<Range>
+							<Minimum>1</Minimum>
+							<Maximum>100000</Maximum>
+							<SuggestedStart>100000</SuggestedStart>
+							<SuggestedEnd>100000</SuggestedEnd>
+							<SuggestedIncrement>100000</SuggestedIncrement>
+						</Range>
+						<DefaultValue>30</DefaultValue>
+					</OptionalInputArgument>
+					<OptionalInputArgument>
+						<Name>Bias MA Type</Name>
+						<ShortDescription>Type of Bias Moving Average</ShortDescription>
+						<Type>MA Type</Type>
+						<DefaultValue>2</DefaultValue>
+					</OptionalInputArgument>
+				</OptionalInputArguments>
+			</Function>
+		</Functions>
+	</FinancialFunctionGroup>
+
+
 	<!-- ROC -->
 	<FinancialFunctionGroup>
 		<Abbreviation>ROC</Abbreviation>
@@ -42407,7 +47330,7 @@
 			</StateField>
 			<StateField>
 				<Type>Pointer</Type>
-				<Name>stateSTOCHF</Name>
+				<Name>stateSTOCH</Name>
 			</StateField>
 		</State>
 		<Functions>
@@ -43304,6 +48227,425 @@
 							<SuggestedIncrement>100000</SuggestedIncrement>
 						</Range>
 						<DefaultValue>30</DefaultValue>
+					</OptionalInputArgument>
+				</OptionalInputArguments>
+			</Function>
+		</Functions>
+	</FinancialFunctionGroup>
+
+
+	<!-- SUPERTREND -->
+	<FinancialFunctionGroup>
+		<Abbreviation>SUPERTREND</Abbreviation>
+		<CamelCaseName>SuperTrend</CamelCaseName>
+		<ShortDescription>Supertrend</ShortDescription>
+		<GroupId>Overlap Studies</GroupId>
+		<StateMemory>
+			<StateMemoryField>
+				<Type>Double</Type>
+				<Name>High</Name>
+			</StateMemoryField>
+			<StateMemoryField>
+				<Type>Double</Type>
+				<Name>Low</Name>
+			</StateMemoryField>
+			<StateMemoryField>
+				<Type>Double</Type>
+				<Name>Close</Name>
+			</StateMemoryField>
+		</StateMemory>
+		<State>
+			<StateField>
+				<Type>Integer</Type>
+				<Name>mem_size</Name>
+			</StateField>
+			<StateField>
+				<Type>Integer</Type>
+				<Name>mem_index</Name>
+			</StateField>
+			<StateField>
+				<Type>Pointer</Type>
+				<Name>memory</Name>
+			</StateField>
+			<StateField>
+				<Type>Pointer</Type>
+				<Name>StateATR</Name>
+			</StateField>
+			<StateField>
+				<Type>Double</Type>
+				<Name>multiplier</Name>
+			</StateField>
+		</State>
+		<Functions>
+			<Function>
+				<Name>TA_SUPERTREND_Lookback</Name>
+				<Type>Lookback</Type>
+				<ReturnValue>Integer</ReturnValue>
+				<OptionalInputArguments>
+					<OptionalInputArgument>
+						<Name>Time Period</Name>
+						<ShortDescription>Number of period</ShortDescription>
+						<Type>Integer</Type>
+						<Range>
+							<Minimum>1</Minimum>
+							<Maximum>100000</Maximum>
+							<SuggestedStart>100000</SuggestedStart>
+							<SuggestedEnd>100000</SuggestedEnd>
+							<SuggestedIncrement>100000</SuggestedIncrement>
+						</Range>
+						<DefaultValue>14</DefaultValue>
+					</OptionalInputArgument>
+					<OptionalInputArgument>
+						<Name>Modifier</Name>
+						<ShortDescription>SuperTrend Modifier</ShortDescription>
+						<Type>Double</Type>
+						<Range>
+							<Minimum>0.000000e+0</Minimum>
+							<Maximum>3.000000e+37</Maximum>
+							<Precision>0</Precision>
+							<SuggestedStart>0.000000e+0</SuggestedStart>
+							<SuggestedEnd>0.000000e+0</SuggestedEnd>
+							<SuggestedIncrement>0.000000e+0</SuggestedIncrement>
+						</Range>
+						<DefaultValue>3.000000e+0</DefaultValue>
+					</OptionalInputArgument>
+				</OptionalInputArguments>
+			</Function>
+			<Function>
+				<Name>TA_SUPERTREND</Name>
+				<Type>Regular</Type>
+				<ReturnValue>TA_Result</ReturnValue>
+				<RequiredInputArguments>
+					<RequiredInputArgument>
+						<Type>Integer</Type>
+						<Name>startIdx</Name>
+					</RequiredInputArgument>
+					<RequiredInputArgument>
+						<Type>Integer</Type>
+						<Name>endIdx</Name>
+					</RequiredInputArgument>
+					<RequiredInputArgument>
+						<Type>Double</Type>
+						<Name>High</Name>
+					</RequiredInputArgument>
+					<RequiredInputArgument>
+						<Type>Double</Type>
+						<Name>Low</Name>
+					</RequiredInputArgument>
+					<RequiredInputArgument>
+						<Type>Double</Type>
+						<Name>Close</Name>
+					</RequiredInputArgument>
+				</RequiredInputArguments>
+				<OptionalInputArguments>
+					<OptionalInputArgument>
+						<Name>Time Period</Name>
+						<ShortDescription>Number of period</ShortDescription>
+						<Type>Integer</Type>
+						<Range>
+							<Minimum>1</Minimum>
+							<Maximum>100000</Maximum>
+							<SuggestedStart>100000</SuggestedStart>
+							<SuggestedEnd>100000</SuggestedEnd>
+							<SuggestedIncrement>100000</SuggestedIncrement>
+						</Range>
+						<DefaultValue>14</DefaultValue>
+					</OptionalInputArgument>
+					<OptionalInputArgument>
+						<Name>Modifier</Name>
+						<ShortDescription>SuperTrend Modifier</ShortDescription>
+						<Type>Double</Type>
+						<Range>
+							<Minimum>0.000000e+0</Minimum>
+							<Maximum>3.000000e+37</Maximum>
+							<Precision>0</Precision>
+							<SuggestedStart>0.000000e+0</SuggestedStart>
+							<SuggestedEnd>0.000000e+0</SuggestedEnd>
+							<SuggestedIncrement>0.000000e+0</SuggestedIncrement>
+						</Range>
+						<DefaultValue>3.000000e+0</DefaultValue>
+					</OptionalInputArgument>
+				</OptionalInputArguments>
+				<OutputArguments>
+					<OutputArgument>
+						<Type>Pointer to Integer</Type>
+						<Name>outBegIdx</Name>
+					</OutputArgument>
+					<OutputArgument>
+						<Type>Pointer to Integer</Type>
+						<Name>outNBElement</Name>
+					</OutputArgument>
+					<OutputArgument>
+						<Type>Integer Array</Type>
+						<Name>outTrend</Name>
+						<Flags>
+							<Flag>Line</Flag>
+						</Flags>
+					</OutputArgument>
+					<OutputArgument>
+						<Type>Double Array</Type>
+						<Name>outUpperBand</Name>
+						<Flags>
+							<Flag>Line</Flag>
+						</Flags>
+					</OutputArgument>
+					<OutputArgument>
+						<Type>Double Array</Type>
+						<Name>outLowerBand</Name>
+						<Flags>
+							<Flag>Line</Flag>
+						</Flags>
+					</OutputArgument>
+				</OutputArguments>
+			</Function>
+			<Function>
+				<Name>TA_SUPERTREND_StateInit</Name>
+				<Type>StateInit</Type>
+				<ReturnValue>TA_Result</ReturnValue>
+				<SpecialInputArguments>
+					<SpecialInputArgument>
+						<Type>Pointer to Pointer</Type>
+						<Name>state</Name>
+					</SpecialInputArgument>
+				</SpecialInputArguments>
+				<OptionalInputArguments>
+					<OptionalInputArgument>
+						<Name>Time Period</Name>
+						<ShortDescription>Number of period</ShortDescription>
+						<Type>Integer</Type>
+						<Range>
+							<Minimum>1</Minimum>
+							<Maximum>100000</Maximum>
+							<SuggestedStart>100000</SuggestedStart>
+							<SuggestedEnd>100000</SuggestedEnd>
+							<SuggestedIncrement>100000</SuggestedIncrement>
+						</Range>
+						<DefaultValue>14</DefaultValue>
+					</OptionalInputArgument>
+					<OptionalInputArgument>
+						<Name>Modifier</Name>
+						<ShortDescription>SuperTrend Modifier</ShortDescription>
+						<Type>Double</Type>
+						<Range>
+							<Minimum>0.000000e+0</Minimum>
+							<Maximum>3.000000e+37</Maximum>
+							<Precision>0</Precision>
+							<SuggestedStart>0.000000e+0</SuggestedStart>
+							<SuggestedEnd>0.000000e+0</SuggestedEnd>
+							<SuggestedIncrement>0.000000e+0</SuggestedIncrement>
+						</Range>
+						<DefaultValue>3.000000e+0</DefaultValue>
+					</OptionalInputArgument>
+				</OptionalInputArguments>
+			</Function>
+			<Function>
+				<Name>TA_SUPERTREND_State</Name>
+				<Type>State</Type>
+				<ReturnValue>TA_Result</ReturnValue>
+				<SpecialInputArguments>
+					<SpecialInputArgument>
+						<Type>Pointer</Type>
+						<Name>state</Name>
+					</SpecialInputArgument>
+				</SpecialInputArguments>
+				<RequiredInputArguments>
+					<RequiredInputArgument>
+						<Type>Double</Type>
+						<Name>High</Name>
+					</RequiredInputArgument>
+					<RequiredInputArgument>
+						<Type>Double</Type>
+						<Name>Low</Name>
+					</RequiredInputArgument>
+					<RequiredInputArgument>
+						<Type>Double</Type>
+						<Name>Close</Name>
+					</RequiredInputArgument>
+				</RequiredInputArguments>
+				<OutputArguments>
+					<OutputArgument>
+						<Type>Integer</Type>
+						<Name>outTrend</Name>
+						<Flags>
+							<Flag>Line</Flag>
+						</Flags>
+					</OutputArgument>
+					<OutputArgument>
+						<Type>Double</Type>
+						<Name>outUpperBand</Name>
+						<Flags>
+							<Flag>Line</Flag>
+						</Flags>
+					</OutputArgument>
+					<OutputArgument>
+						<Type>Double</Type>
+						<Name>outLowerBand</Name>
+						<Flags>
+							<Flag>Line</Flag>
+						</Flags>
+					</OutputArgument>
+				</OutputArguments>
+			</Function>
+			<Function>
+				<Name>TA_SUPERTREND_BatchState</Name>
+				<Type>BatchState</Type>
+				<ReturnValue>TA_Result</ReturnValue>
+				<SpecialInputArguments>
+					<SpecialInputArgument>
+						<Type>Pointer</Type>
+						<Name>state</Name>
+					</SpecialInputArgument>
+				</SpecialInputArguments>
+				<RequiredInputArguments>
+					<RequiredInputArgument>
+						<Type>Integer</Type>
+						<Name>startIdx</Name>
+					</RequiredInputArgument>
+					<RequiredInputArgument>
+						<Type>Integer</Type>
+						<Name>endIdx</Name>
+					</RequiredInputArgument>
+					<RequiredInputArgument>
+						<Type>Double</Type>
+						<Name>High</Name>
+					</RequiredInputArgument>
+					<RequiredInputArgument>
+						<Type>Double</Type>
+						<Name>Low</Name>
+					</RequiredInputArgument>
+					<RequiredInputArgument>
+						<Type>Double</Type>
+						<Name>Close</Name>
+					</RequiredInputArgument>
+				</RequiredInputArguments>
+				<OutputArguments>
+					<OutputArgument>
+						<Type>Pointer to Integer</Type>
+						<Name>outBegIdx</Name>
+					</OutputArgument>
+					<OutputArgument>
+						<Type>Pointer to Integer</Type>
+						<Name>outNBElement</Name>
+					</OutputArgument>
+					<OutputArgument>
+						<Type>Integer Array</Type>
+						<Name>outTrend</Name>
+						<Flags>
+							<Flag>Line</Flag>
+						</Flags>
+					</OutputArgument>
+					<OutputArgument>
+						<Type>Double Array</Type>
+						<Name>outUpperBand</Name>
+						<Flags>
+							<Flag>Line</Flag>
+						</Flags>
+					</OutputArgument>
+					<OutputArgument>
+						<Type>Double Array</Type>
+						<Name>outLowerBand</Name>
+						<Flags>
+							<Flag>Line</Flag>
+						</Flags>
+					</OutputArgument>
+				</OutputArguments>
+			</Function>
+			<Function>
+				<Name>TA_SUPERTREND_StateFree</Name>
+				<Type>StateFree</Type>
+				<ReturnValue>TA_Result</ReturnValue>
+				<SpecialInputArguments>
+					<SpecialInputArgument>
+						<Type>Pointer to Pointer</Type>
+						<Name>state</Name>
+					</SpecialInputArgument>
+				</SpecialInputArguments>
+			</Function>
+			<Function>
+				<Name>TA_SUPERTREND_StateLoad</Name>
+				<Type>StateLoad</Type>
+				<ReturnValue>TA_Result</ReturnValue>
+				<SpecialInputArguments>
+					<SpecialInputArgument>
+						<Type>Pointer to Pointer</Type>
+						<Name>state</Name>
+					</SpecialInputArgument>
+					<SpecialInputArgument>
+						<Type>Pointer to File</Type>
+						<Name>file</Name>
+					</SpecialInputArgument>
+				</SpecialInputArguments>
+				<OptionalInputArguments>
+					<OptionalInputArgument>
+						<Name>Time Period</Name>
+						<ShortDescription>Number of period</ShortDescription>
+						<Type>Integer</Type>
+						<Range>
+							<Minimum>1</Minimum>
+							<Maximum>100000</Maximum>
+							<SuggestedStart>100000</SuggestedStart>
+							<SuggestedEnd>100000</SuggestedEnd>
+							<SuggestedIncrement>100000</SuggestedIncrement>
+						</Range>
+						<DefaultValue>14</DefaultValue>
+					</OptionalInputArgument>
+					<OptionalInputArgument>
+						<Name>Modifier</Name>
+						<ShortDescription>SuperTrend Modifier</ShortDescription>
+						<Type>Double</Type>
+						<Range>
+							<Minimum>0.000000e+0</Minimum>
+							<Maximum>3.000000e+37</Maximum>
+							<Precision>0</Precision>
+							<SuggestedStart>0.000000e+0</SuggestedStart>
+							<SuggestedEnd>0.000000e+0</SuggestedEnd>
+							<SuggestedIncrement>0.000000e+0</SuggestedIncrement>
+						</Range>
+						<DefaultValue>3.000000e+0</DefaultValue>
+					</OptionalInputArgument>
+				</OptionalInputArguments>
+			</Function>
+			<Function>
+				<Name>TA_SUPERTREND_StateSave</Name>
+				<Type>StateSave</Type>
+				<ReturnValue>TA_Result</ReturnValue>
+				<SpecialInputArguments>
+					<SpecialInputArgument>
+						<Type>Pointer</Type>
+						<Name>state</Name>
+					</SpecialInputArgument>
+					<SpecialInputArgument>
+						<Type>Pointer to File</Type>
+						<Name>file</Name>
+					</SpecialInputArgument>
+				</SpecialInputArguments>
+				<OptionalInputArguments>
+					<OptionalInputArgument>
+						<Name>Time Period</Name>
+						<ShortDescription>Number of period</ShortDescription>
+						<Type>Integer</Type>
+						<Range>
+							<Minimum>1</Minimum>
+							<Maximum>100000</Maximum>
+							<SuggestedStart>100000</SuggestedStart>
+							<SuggestedEnd>100000</SuggestedEnd>
+							<SuggestedIncrement>100000</SuggestedIncrement>
+						</Range>
+						<DefaultValue>14</DefaultValue>
+					</OptionalInputArgument>
+					<OptionalInputArgument>
+						<Name>Modifier</Name>
+						<ShortDescription>SuperTrend Modifier</ShortDescription>
+						<Type>Double</Type>
+						<Range>
+							<Minimum>0.000000e+0</Minimum>
+							<Maximum>3.000000e+37</Maximum>
+							<Precision>0</Precision>
+							<SuggestedStart>0.000000e+0</SuggestedStart>
+							<SuggestedEnd>0.000000e+0</SuggestedEnd>
+							<SuggestedIncrement>0.000000e+0</SuggestedIncrement>
+						</Range>
+						<DefaultValue>3.000000e+0</DefaultValue>
 					</OptionalInputArgument>
 				</OptionalInputArguments>
 			</Function>
@@ -46499,6 +51841,1323 @@
 							<SuggestedIncrement>2.000000e-1</SuggestedIncrement>
 						</Range>
 						<DefaultValue>1.000000e+0</DefaultValue>
+					</OptionalInputArgument>
+				</OptionalInputArguments>
+			</Function>
+		</Functions>
+	</FinancialFunctionGroup>
+
+
+	<!-- VP -->
+	<FinancialFunctionGroup>
+		<Abbreviation>VP</Abbreviation>
+		<CamelCaseName>Vp</CamelCaseName>
+		<ShortDescription>Volume Profile</ShortDescription>
+		<GroupId>Volume Indicators</GroupId>
+		<StateMemory>
+			<StateMemoryField>
+				<Type>Double</Type>
+				<Name>Close</Name>
+			</StateMemoryField>
+			<StateMemoryField>
+				<Type>Double</Type>
+				<Name>Volume</Name>
+			</StateMemoryField>
+		</StateMemory>
+		<State>
+			<StateField>
+				<Type>Integer</Type>
+				<Name>mem_size</Name>
+			</StateField>
+			<StateField>
+				<Type>Integer</Type>
+				<Name>mem_index</Name>
+			</StateField>
+			<StateField>
+				<Type>Pointer</Type>
+				<Name>memory</Name>
+			</StateField>
+			<StateField>
+				<Type>Pointer</Type>
+				<Name>stateMINMAX</Name>
+			</StateField>
+			<StateField>
+				<Type>Pointer</Type>
+				<Name>stateSumVolume</Name>
+			</StateField>
+			<StateField>
+				<Type>Pointer</Type>
+				<Name>stateSumUpVolume</Name>
+			</StateField>
+			<StateField>
+				<Type>Pointer</Type>
+				<Name>stateSumDownVolume</Name>
+			</StateField>
+		</State>
+		<Functions>
+			<Function>
+				<Name>TA_VP_Lookback</Name>
+				<Type>Lookback</Type>
+				<ReturnValue>Integer</ReturnValue>
+				<OptionalInputArguments>
+					<OptionalInputArgument>
+						<Name>Time Period</Name>
+						<ShortDescription>Number of period</ShortDescription>
+						<Type>Integer</Type>
+						<Range>
+							<Minimum>1</Minimum>
+							<Maximum>100000</Maximum>
+							<SuggestedStart>100000</SuggestedStart>
+							<SuggestedEnd>100000</SuggestedEnd>
+							<SuggestedIncrement>100000</SuggestedIncrement>
+						</Range>
+						<DefaultValue>30</DefaultValue>
+					</OptionalInputArgument>
+					<OptionalInputArgument>
+						<Name>Width</Name>
+						<ShortDescription>Width</ShortDescription>
+						<Type>Integer</Type>
+						<Range>
+							<Minimum>1</Minimum>
+							<Maximum>100000</Maximum>
+							<SuggestedStart>100000</SuggestedStart>
+							<SuggestedEnd>100000</SuggestedEnd>
+							<SuggestedIncrement>100000</SuggestedIncrement>
+						</Range>
+						<DefaultValue>10</DefaultValue>
+					</OptionalInputArgument>
+				</OptionalInputArguments>
+			</Function>
+			<Function>
+				<Name>TA_VP</Name>
+				<Type>Regular</Type>
+				<ReturnValue>TA_Result</ReturnValue>
+				<RequiredInputArguments>
+					<RequiredInputArgument>
+						<Type>Integer</Type>
+						<Name>startIdx</Name>
+					</RequiredInputArgument>
+					<RequiredInputArgument>
+						<Type>Integer</Type>
+						<Name>endIdx</Name>
+					</RequiredInputArgument>
+					<RequiredInputArgument>
+						<Type>Double</Type>
+						<Name>Close</Name>
+					</RequiredInputArgument>
+					<RequiredInputArgument>
+						<Type>Double</Type>
+						<Name>Volume</Name>
+					</RequiredInputArgument>
+				</RequiredInputArguments>
+				<OptionalInputArguments>
+					<OptionalInputArgument>
+						<Name>Time Period</Name>
+						<ShortDescription>Number of period</ShortDescription>
+						<Type>Integer</Type>
+						<Range>
+							<Minimum>1</Minimum>
+							<Maximum>100000</Maximum>
+							<SuggestedStart>100000</SuggestedStart>
+							<SuggestedEnd>100000</SuggestedEnd>
+							<SuggestedIncrement>100000</SuggestedIncrement>
+						</Range>
+						<DefaultValue>30</DefaultValue>
+					</OptionalInputArgument>
+					<OptionalInputArgument>
+						<Name>Width</Name>
+						<ShortDescription>Width</ShortDescription>
+						<Type>Integer</Type>
+						<Range>
+							<Minimum>1</Minimum>
+							<Maximum>100000</Maximum>
+							<SuggestedStart>100000</SuggestedStart>
+							<SuggestedEnd>100000</SuggestedEnd>
+							<SuggestedIncrement>100000</SuggestedIncrement>
+						</Range>
+						<DefaultValue>10</DefaultValue>
+					</OptionalInputArgument>
+				</OptionalInputArguments>
+				<OutputArguments>
+					<OutputArgument>
+						<Type>Pointer to Integer</Type>
+						<Name>outBegIdx</Name>
+					</OutputArgument>
+					<OutputArgument>
+						<Type>Pointer to Integer</Type>
+						<Name>outNBElement</Name>
+					</OutputArgument>
+					<OutputArgument>
+						<Type>Double Array</Type>
+						<Name>outPoc</Name>
+						<Flags>
+							<Flag>Line</Flag>
+						</Flags>
+					</OutputArgument>
+					<OutputArgument>
+						<Type>Double Array</Type>
+						<Name>outValueAreaHigh</Name>
+						<Flags>
+							<Flag>Line</Flag>
+						</Flags>
+					</OutputArgument>
+					<OutputArgument>
+						<Type>Double Array</Type>
+						<Name>outValueAreaLow</Name>
+						<Flags>
+							<Flag>Line</Flag>
+						</Flags>
+					</OutputArgument>
+					<OutputArgument>
+						<Type>Double Array</Type>
+						<Name>outReal</Name>
+						<Flags>
+							<Flag>Line</Flag>
+						</Flags>
+					</OutputArgument>
+					<OutputArgument>
+						<Type>Integer Array</Type>
+						<Name>outInteger</Name>
+						<Flags>
+							<Flag>Line</Flag>
+						</Flags>
+					</OutputArgument>
+				</OutputArguments>
+			</Function>
+			<Function>
+				<Name>TA_VP_StateInit</Name>
+				<Type>StateInit</Type>
+				<ReturnValue>TA_Result</ReturnValue>
+				<SpecialInputArguments>
+					<SpecialInputArgument>
+						<Type>Pointer to Pointer</Type>
+						<Name>state</Name>
+					</SpecialInputArgument>
+				</SpecialInputArguments>
+				<OptionalInputArguments>
+					<OptionalInputArgument>
+						<Name>Time Period</Name>
+						<ShortDescription>Number of period</ShortDescription>
+						<Type>Integer</Type>
+						<Range>
+							<Minimum>1</Minimum>
+							<Maximum>100000</Maximum>
+							<SuggestedStart>100000</SuggestedStart>
+							<SuggestedEnd>100000</SuggestedEnd>
+							<SuggestedIncrement>100000</SuggestedIncrement>
+						</Range>
+						<DefaultValue>30</DefaultValue>
+					</OptionalInputArgument>
+					<OptionalInputArgument>
+						<Name>Width</Name>
+						<ShortDescription>Width</ShortDescription>
+						<Type>Integer</Type>
+						<Range>
+							<Minimum>1</Minimum>
+							<Maximum>100000</Maximum>
+							<SuggestedStart>100000</SuggestedStart>
+							<SuggestedEnd>100000</SuggestedEnd>
+							<SuggestedIncrement>100000</SuggestedIncrement>
+						</Range>
+						<DefaultValue>10</DefaultValue>
+					</OptionalInputArgument>
+				</OptionalInputArguments>
+			</Function>
+			<Function>
+				<Name>TA_VP_State</Name>
+				<Type>State</Type>
+				<ReturnValue>TA_Result</ReturnValue>
+				<SpecialInputArguments>
+					<SpecialInputArgument>
+						<Type>Pointer</Type>
+						<Name>state</Name>
+					</SpecialInputArgument>
+				</SpecialInputArguments>
+				<RequiredInputArguments>
+					<RequiredInputArgument>
+						<Type>Double</Type>
+						<Name>Close</Name>
+					</RequiredInputArgument>
+					<RequiredInputArgument>
+						<Type>Double</Type>
+						<Name>Volume</Name>
+					</RequiredInputArgument>
+				</RequiredInputArguments>
+				<OutputArguments>
+					<OutputArgument>
+						<Type>Double</Type>
+						<Name>outPoc</Name>
+						<Flags>
+							<Flag>Line</Flag>
+						</Flags>
+					</OutputArgument>
+					<OutputArgument>
+						<Type>Double</Type>
+						<Name>outValueAreaHigh</Name>
+						<Flags>
+							<Flag>Line</Flag>
+						</Flags>
+					</OutputArgument>
+					<OutputArgument>
+						<Type>Double</Type>
+						<Name>outValueAreaLow</Name>
+						<Flags>
+							<Flag>Line</Flag>
+						</Flags>
+					</OutputArgument>
+					<OutputArgument>
+						<Type>Double</Type>
+						<Name>outReal</Name>
+						<Flags>
+							<Flag>Line</Flag>
+						</Flags>
+					</OutputArgument>
+					<OutputArgument>
+						<Type>Integer</Type>
+						<Name>outInteger</Name>
+						<Flags>
+							<Flag>Line</Flag>
+						</Flags>
+					</OutputArgument>
+				</OutputArguments>
+			</Function>
+			<Function>
+				<Name>TA_VP_BatchState</Name>
+				<Type>BatchState</Type>
+				<ReturnValue>TA_Result</ReturnValue>
+				<SpecialInputArguments>
+					<SpecialInputArgument>
+						<Type>Pointer</Type>
+						<Name>state</Name>
+					</SpecialInputArgument>
+				</SpecialInputArguments>
+				<RequiredInputArguments>
+					<RequiredInputArgument>
+						<Type>Integer</Type>
+						<Name>startIdx</Name>
+					</RequiredInputArgument>
+					<RequiredInputArgument>
+						<Type>Integer</Type>
+						<Name>endIdx</Name>
+					</RequiredInputArgument>
+					<RequiredInputArgument>
+						<Type>Double</Type>
+						<Name>Close</Name>
+					</RequiredInputArgument>
+					<RequiredInputArgument>
+						<Type>Double</Type>
+						<Name>Volume</Name>
+					</RequiredInputArgument>
+				</RequiredInputArguments>
+				<OutputArguments>
+					<OutputArgument>
+						<Type>Pointer to Integer</Type>
+						<Name>outBegIdx</Name>
+					</OutputArgument>
+					<OutputArgument>
+						<Type>Pointer to Integer</Type>
+						<Name>outNBElement</Name>
+					</OutputArgument>
+					<OutputArgument>
+						<Type>Double Array</Type>
+						<Name>outPoc</Name>
+						<Flags>
+							<Flag>Line</Flag>
+						</Flags>
+					</OutputArgument>
+					<OutputArgument>
+						<Type>Double Array</Type>
+						<Name>outValueAreaHigh</Name>
+						<Flags>
+							<Flag>Line</Flag>
+						</Flags>
+					</OutputArgument>
+					<OutputArgument>
+						<Type>Double Array</Type>
+						<Name>outValueAreaLow</Name>
+						<Flags>
+							<Flag>Line</Flag>
+						</Flags>
+					</OutputArgument>
+					<OutputArgument>
+						<Type>Double Array</Type>
+						<Name>outReal</Name>
+						<Flags>
+							<Flag>Line</Flag>
+						</Flags>
+					</OutputArgument>
+					<OutputArgument>
+						<Type>Integer Array</Type>
+						<Name>outInteger</Name>
+						<Flags>
+							<Flag>Line</Flag>
+						</Flags>
+					</OutputArgument>
+				</OutputArguments>
+			</Function>
+			<Function>
+				<Name>TA_VP_StateFree</Name>
+				<Type>StateFree</Type>
+				<ReturnValue>TA_Result</ReturnValue>
+				<SpecialInputArguments>
+					<SpecialInputArgument>
+						<Type>Pointer to Pointer</Type>
+						<Name>state</Name>
+					</SpecialInputArgument>
+				</SpecialInputArguments>
+			</Function>
+			<Function>
+				<Name>TA_VP_StateLoad</Name>
+				<Type>StateLoad</Type>
+				<ReturnValue>TA_Result</ReturnValue>
+				<SpecialInputArguments>
+					<SpecialInputArgument>
+						<Type>Pointer to Pointer</Type>
+						<Name>state</Name>
+					</SpecialInputArgument>
+					<SpecialInputArgument>
+						<Type>Pointer to File</Type>
+						<Name>file</Name>
+					</SpecialInputArgument>
+				</SpecialInputArguments>
+				<OptionalInputArguments>
+					<OptionalInputArgument>
+						<Name>Time Period</Name>
+						<ShortDescription>Number of period</ShortDescription>
+						<Type>Integer</Type>
+						<Range>
+							<Minimum>1</Minimum>
+							<Maximum>100000</Maximum>
+							<SuggestedStart>100000</SuggestedStart>
+							<SuggestedEnd>100000</SuggestedEnd>
+							<SuggestedIncrement>100000</SuggestedIncrement>
+						</Range>
+						<DefaultValue>30</DefaultValue>
+					</OptionalInputArgument>
+					<OptionalInputArgument>
+						<Name>Width</Name>
+						<ShortDescription>Width</ShortDescription>
+						<Type>Integer</Type>
+						<Range>
+							<Minimum>1</Minimum>
+							<Maximum>100000</Maximum>
+							<SuggestedStart>100000</SuggestedStart>
+							<SuggestedEnd>100000</SuggestedEnd>
+							<SuggestedIncrement>100000</SuggestedIncrement>
+						</Range>
+						<DefaultValue>10</DefaultValue>
+					</OptionalInputArgument>
+				</OptionalInputArguments>
+			</Function>
+			<Function>
+				<Name>TA_VP_StateSave</Name>
+				<Type>StateSave</Type>
+				<ReturnValue>TA_Result</ReturnValue>
+				<SpecialInputArguments>
+					<SpecialInputArgument>
+						<Type>Pointer</Type>
+						<Name>state</Name>
+					</SpecialInputArgument>
+					<SpecialInputArgument>
+						<Type>Pointer to File</Type>
+						<Name>file</Name>
+					</SpecialInputArgument>
+				</SpecialInputArguments>
+				<OptionalInputArguments>
+					<OptionalInputArgument>
+						<Name>Time Period</Name>
+						<ShortDescription>Number of period</ShortDescription>
+						<Type>Integer</Type>
+						<Range>
+							<Minimum>1</Minimum>
+							<Maximum>100000</Maximum>
+							<SuggestedStart>100000</SuggestedStart>
+							<SuggestedEnd>100000</SuggestedEnd>
+							<SuggestedIncrement>100000</SuggestedIncrement>
+						</Range>
+						<DefaultValue>30</DefaultValue>
+					</OptionalInputArgument>
+					<OptionalInputArgument>
+						<Name>Width</Name>
+						<ShortDescription>Width</ShortDescription>
+						<Type>Integer</Type>
+						<Range>
+							<Minimum>1</Minimum>
+							<Maximum>100000</Maximum>
+							<SuggestedStart>100000</SuggestedStart>
+							<SuggestedEnd>100000</SuggestedEnd>
+							<SuggestedIncrement>100000</SuggestedIncrement>
+						</Range>
+						<DefaultValue>10</DefaultValue>
+					</OptionalInputArgument>
+				</OptionalInputArguments>
+			</Function>
+		</Functions>
+	</FinancialFunctionGroup>
+
+
+	<!-- VROC -->
+	<FinancialFunctionGroup>
+		<Abbreviation>VROC</Abbreviation>
+		<CamelCaseName>Vroc</CamelCaseName>
+		<ShortDescription>Volume Rate of Change</ShortDescription>
+		<GroupId>Volume Indicators</GroupId>
+		<StateMemory>
+			<StateMemoryField>
+				<Type>Double</Type>
+				<Name>inReal</Name>
+			</StateMemoryField>
+		</StateMemory>
+		<State>
+			<StateField>
+				<Type>Integer</Type>
+				<Name>mem_size</Name>
+			</StateField>
+			<StateField>
+				<Type>Integer</Type>
+				<Name>mem_index</Name>
+			</StateField>
+			<StateField>
+				<Type>Pointer</Type>
+				<Name>memory</Name>
+			</StateField>
+		</State>
+		<Functions>
+			<Function>
+				<Name>TA_VROC_Lookback</Name>
+				<Type>Lookback</Type>
+				<ReturnValue>Integer</ReturnValue>
+				<OptionalInputArguments>
+					<OptionalInputArgument>
+						<Name>Time Period</Name>
+						<ShortDescription>Number of period</ShortDescription>
+						<Type>Integer</Type>
+						<Range>
+							<Minimum>1</Minimum>
+							<Maximum>100000</Maximum>
+							<SuggestedStart>100000</SuggestedStart>
+							<SuggestedEnd>100000</SuggestedEnd>
+							<SuggestedIncrement>100000</SuggestedIncrement>
+						</Range>
+						<DefaultValue>10</DefaultValue>
+					</OptionalInputArgument>
+				</OptionalInputArguments>
+			</Function>
+			<Function>
+				<Name>TA_VROC</Name>
+				<Type>Regular</Type>
+				<ReturnValue>TA_Result</ReturnValue>
+				<RequiredInputArguments>
+					<RequiredInputArgument>
+						<Type>Integer</Type>
+						<Name>startIdx</Name>
+					</RequiredInputArgument>
+					<RequiredInputArgument>
+						<Type>Integer</Type>
+						<Name>endIdx</Name>
+					</RequiredInputArgument>
+					<RequiredInputArgument>
+						<Type>Double Array</Type>
+						<Name>inReal</Name>
+					</RequiredInputArgument>
+				</RequiredInputArguments>
+				<OptionalInputArguments>
+					<OptionalInputArgument>
+						<Name>Time Period</Name>
+						<ShortDescription>Number of period</ShortDescription>
+						<Type>Integer</Type>
+						<Range>
+							<Minimum>1</Minimum>
+							<Maximum>100000</Maximum>
+							<SuggestedStart>100000</SuggestedStart>
+							<SuggestedEnd>100000</SuggestedEnd>
+							<SuggestedIncrement>100000</SuggestedIncrement>
+						</Range>
+						<DefaultValue>10</DefaultValue>
+					</OptionalInputArgument>
+				</OptionalInputArguments>
+				<OutputArguments>
+					<OutputArgument>
+						<Type>Pointer to Integer</Type>
+						<Name>outBegIdx</Name>
+					</OutputArgument>
+					<OutputArgument>
+						<Type>Pointer to Integer</Type>
+						<Name>outNBElement</Name>
+					</OutputArgument>
+					<OutputArgument>
+						<Type>Double Array</Type>
+						<Name>outReal</Name>
+						<Flags>
+							<Flag>Line</Flag>
+						</Flags>
+					</OutputArgument>
+				</OutputArguments>
+			</Function>
+			<Function>
+				<Name>TA_VROC_StateInit</Name>
+				<Type>StateInit</Type>
+				<ReturnValue>TA_Result</ReturnValue>
+				<SpecialInputArguments>
+					<SpecialInputArgument>
+						<Type>Pointer to Pointer</Type>
+						<Name>state</Name>
+					</SpecialInputArgument>
+				</SpecialInputArguments>
+				<OptionalInputArguments>
+					<OptionalInputArgument>
+						<Name>Time Period</Name>
+						<ShortDescription>Number of period</ShortDescription>
+						<Type>Integer</Type>
+						<Range>
+							<Minimum>1</Minimum>
+							<Maximum>100000</Maximum>
+							<SuggestedStart>100000</SuggestedStart>
+							<SuggestedEnd>100000</SuggestedEnd>
+							<SuggestedIncrement>100000</SuggestedIncrement>
+						</Range>
+						<DefaultValue>10</DefaultValue>
+					</OptionalInputArgument>
+				</OptionalInputArguments>
+			</Function>
+			<Function>
+				<Name>TA_VROC_State</Name>
+				<Type>State</Type>
+				<ReturnValue>TA_Result</ReturnValue>
+				<SpecialInputArguments>
+					<SpecialInputArgument>
+						<Type>Pointer</Type>
+						<Name>state</Name>
+					</SpecialInputArgument>
+				</SpecialInputArguments>
+				<RequiredInputArguments>
+					<RequiredInputArgument>
+						<Type>Double</Type>
+						<Name>inReal</Name>
+					</RequiredInputArgument>
+				</RequiredInputArguments>
+				<OutputArguments>
+					<OutputArgument>
+						<Type>Double</Type>
+						<Name>outReal</Name>
+						<Flags>
+							<Flag>Line</Flag>
+						</Flags>
+					</OutputArgument>
+				</OutputArguments>
+			</Function>
+			<Function>
+				<Name>TA_VROC_BatchState</Name>
+				<Type>BatchState</Type>
+				<ReturnValue>TA_Result</ReturnValue>
+				<SpecialInputArguments>
+					<SpecialInputArgument>
+						<Type>Pointer</Type>
+						<Name>state</Name>
+					</SpecialInputArgument>
+				</SpecialInputArguments>
+				<RequiredInputArguments>
+					<RequiredInputArgument>
+						<Type>Integer</Type>
+						<Name>startIdx</Name>
+					</RequiredInputArgument>
+					<RequiredInputArgument>
+						<Type>Integer</Type>
+						<Name>endIdx</Name>
+					</RequiredInputArgument>
+					<RequiredInputArgument>
+						<Type>Double Array</Type>
+						<Name>inReal</Name>
+					</RequiredInputArgument>
+				</RequiredInputArguments>
+				<OutputArguments>
+					<OutputArgument>
+						<Type>Pointer to Integer</Type>
+						<Name>outBegIdx</Name>
+					</OutputArgument>
+					<OutputArgument>
+						<Type>Pointer to Integer</Type>
+						<Name>outNBElement</Name>
+					</OutputArgument>
+					<OutputArgument>
+						<Type>Double Array</Type>
+						<Name>outReal</Name>
+						<Flags>
+							<Flag>Line</Flag>
+						</Flags>
+					</OutputArgument>
+				</OutputArguments>
+			</Function>
+			<Function>
+				<Name>TA_VROC_StateFree</Name>
+				<Type>StateFree</Type>
+				<ReturnValue>TA_Result</ReturnValue>
+				<SpecialInputArguments>
+					<SpecialInputArgument>
+						<Type>Pointer to Pointer</Type>
+						<Name>state</Name>
+					</SpecialInputArgument>
+				</SpecialInputArguments>
+			</Function>
+			<Function>
+				<Name>TA_VROC_StateLoad</Name>
+				<Type>StateLoad</Type>
+				<ReturnValue>TA_Result</ReturnValue>
+				<SpecialInputArguments>
+					<SpecialInputArgument>
+						<Type>Pointer to Pointer</Type>
+						<Name>state</Name>
+					</SpecialInputArgument>
+					<SpecialInputArgument>
+						<Type>Pointer to File</Type>
+						<Name>file</Name>
+					</SpecialInputArgument>
+				</SpecialInputArguments>
+				<OptionalInputArguments>
+					<OptionalInputArgument>
+						<Name>Time Period</Name>
+						<ShortDescription>Number of period</ShortDescription>
+						<Type>Integer</Type>
+						<Range>
+							<Minimum>1</Minimum>
+							<Maximum>100000</Maximum>
+							<SuggestedStart>100000</SuggestedStart>
+							<SuggestedEnd>100000</SuggestedEnd>
+							<SuggestedIncrement>100000</SuggestedIncrement>
+						</Range>
+						<DefaultValue>10</DefaultValue>
+					</OptionalInputArgument>
+				</OptionalInputArguments>
+			</Function>
+			<Function>
+				<Name>TA_VROC_StateSave</Name>
+				<Type>StateSave</Type>
+				<ReturnValue>TA_Result</ReturnValue>
+				<SpecialInputArguments>
+					<SpecialInputArgument>
+						<Type>Pointer</Type>
+						<Name>state</Name>
+					</SpecialInputArgument>
+					<SpecialInputArgument>
+						<Type>Pointer to File</Type>
+						<Name>file</Name>
+					</SpecialInputArgument>
+				</SpecialInputArguments>
+				<OptionalInputArguments>
+					<OptionalInputArgument>
+						<Name>Time Period</Name>
+						<ShortDescription>Number of period</ShortDescription>
+						<Type>Integer</Type>
+						<Range>
+							<Minimum>1</Minimum>
+							<Maximum>100000</Maximum>
+							<SuggestedStart>100000</SuggestedStart>
+							<SuggestedEnd>100000</SuggestedEnd>
+							<SuggestedIncrement>100000</SuggestedIncrement>
+						</Range>
+						<DefaultValue>10</DefaultValue>
+					</OptionalInputArgument>
+				</OptionalInputArguments>
+			</Function>
+		</Functions>
+	</FinancialFunctionGroup>
+
+
+	<!-- VWAP -->
+	<FinancialFunctionGroup>
+		<Abbreviation>VWAP</Abbreviation>
+		<CamelCaseName>Vwap</CamelCaseName>
+		<ShortDescription>Volume Weighted Average Price</ShortDescription>
+		<GroupId>Volume Indicators</GroupId>
+		<StateMemory>
+			<StateMemoryField>
+				<Type>Double</Type>
+				<Name>High</Name>
+			</StateMemoryField>
+			<StateMemoryField>
+				<Type>Double</Type>
+				<Name>Low</Name>
+			</StateMemoryField>
+			<StateMemoryField>
+				<Type>Double</Type>
+				<Name>Close</Name>
+			</StateMemoryField>
+			<StateMemoryField>
+				<Type>Double</Type>
+				<Name>Volume</Name>
+			</StateMemoryField>
+		</StateMemory>
+		<State>
+			<StateField>
+				<Type>Integer</Type>
+				<Name>mem_size</Name>
+			</StateField>
+			<StateField>
+				<Type>Integer</Type>
+				<Name>mem_index</Name>
+			</StateField>
+			<StateField>
+				<Type>Pointer</Type>
+				<Name>memory</Name>
+			</StateField>
+			<StateField>
+				<Type>Pointer</Type>
+				<Name>StateSumTPV</Name>
+			</StateField>
+			<StateField>
+				<Type>Pointer</Type>
+				<Name>StateSumVolume</Name>
+			</StateField>
+		</State>
+		<Functions>
+			<Function>
+				<Name>TA_VWAP_Lookback</Name>
+				<Type>Lookback</Type>
+				<ReturnValue>Integer</ReturnValue>
+				<OptionalInputArguments>
+					<OptionalInputArgument>
+						<Name>Time Period</Name>
+						<ShortDescription>Number of period</ShortDescription>
+						<Type>Integer</Type>
+						<Range>
+							<Minimum>1</Minimum>
+							<Maximum>100000</Maximum>
+							<SuggestedStart>100000</SuggestedStart>
+							<SuggestedEnd>100000</SuggestedEnd>
+							<SuggestedIncrement>100000</SuggestedIncrement>
+						</Range>
+						<DefaultValue>10</DefaultValue>
+					</OptionalInputArgument>
+				</OptionalInputArguments>
+			</Function>
+			<Function>
+				<Name>TA_VWAP</Name>
+				<Type>Regular</Type>
+				<ReturnValue>TA_Result</ReturnValue>
+				<RequiredInputArguments>
+					<RequiredInputArgument>
+						<Type>Integer</Type>
+						<Name>startIdx</Name>
+					</RequiredInputArgument>
+					<RequiredInputArgument>
+						<Type>Integer</Type>
+						<Name>endIdx</Name>
+					</RequiredInputArgument>
+					<RequiredInputArgument>
+						<Type>Double</Type>
+						<Name>High</Name>
+					</RequiredInputArgument>
+					<RequiredInputArgument>
+						<Type>Double</Type>
+						<Name>Low</Name>
+					</RequiredInputArgument>
+					<RequiredInputArgument>
+						<Type>Double</Type>
+						<Name>Close</Name>
+					</RequiredInputArgument>
+					<RequiredInputArgument>
+						<Type>Double</Type>
+						<Name>Volume</Name>
+					</RequiredInputArgument>
+				</RequiredInputArguments>
+				<OptionalInputArguments>
+					<OptionalInputArgument>
+						<Name>Time Period</Name>
+						<ShortDescription>Number of period</ShortDescription>
+						<Type>Integer</Type>
+						<Range>
+							<Minimum>1</Minimum>
+							<Maximum>100000</Maximum>
+							<SuggestedStart>100000</SuggestedStart>
+							<SuggestedEnd>100000</SuggestedEnd>
+							<SuggestedIncrement>100000</SuggestedIncrement>
+						</Range>
+						<DefaultValue>10</DefaultValue>
+					</OptionalInputArgument>
+				</OptionalInputArguments>
+				<OutputArguments>
+					<OutputArgument>
+						<Type>Pointer to Integer</Type>
+						<Name>outBegIdx</Name>
+					</OutputArgument>
+					<OutputArgument>
+						<Type>Pointer to Integer</Type>
+						<Name>outNBElement</Name>
+					</OutputArgument>
+					<OutputArgument>
+						<Type>Double Array</Type>
+						<Name>outReal</Name>
+						<Flags>
+							<Flag>Line</Flag>
+						</Flags>
+					</OutputArgument>
+				</OutputArguments>
+			</Function>
+			<Function>
+				<Name>TA_VWAP_StateInit</Name>
+				<Type>StateInit</Type>
+				<ReturnValue>TA_Result</ReturnValue>
+				<SpecialInputArguments>
+					<SpecialInputArgument>
+						<Type>Pointer to Pointer</Type>
+						<Name>state</Name>
+					</SpecialInputArgument>
+				</SpecialInputArguments>
+				<OptionalInputArguments>
+					<OptionalInputArgument>
+						<Name>Time Period</Name>
+						<ShortDescription>Number of period</ShortDescription>
+						<Type>Integer</Type>
+						<Range>
+							<Minimum>1</Minimum>
+							<Maximum>100000</Maximum>
+							<SuggestedStart>100000</SuggestedStart>
+							<SuggestedEnd>100000</SuggestedEnd>
+							<SuggestedIncrement>100000</SuggestedIncrement>
+						</Range>
+						<DefaultValue>10</DefaultValue>
+					</OptionalInputArgument>
+				</OptionalInputArguments>
+			</Function>
+			<Function>
+				<Name>TA_VWAP_State</Name>
+				<Type>State</Type>
+				<ReturnValue>TA_Result</ReturnValue>
+				<SpecialInputArguments>
+					<SpecialInputArgument>
+						<Type>Pointer</Type>
+						<Name>state</Name>
+					</SpecialInputArgument>
+				</SpecialInputArguments>
+				<RequiredInputArguments>
+					<RequiredInputArgument>
+						<Type>Double</Type>
+						<Name>High</Name>
+					</RequiredInputArgument>
+					<RequiredInputArgument>
+						<Type>Double</Type>
+						<Name>Low</Name>
+					</RequiredInputArgument>
+					<RequiredInputArgument>
+						<Type>Double</Type>
+						<Name>Close</Name>
+					</RequiredInputArgument>
+					<RequiredInputArgument>
+						<Type>Double</Type>
+						<Name>Volume</Name>
+					</RequiredInputArgument>
+				</RequiredInputArguments>
+				<OutputArguments>
+					<OutputArgument>
+						<Type>Double</Type>
+						<Name>outReal</Name>
+						<Flags>
+							<Flag>Line</Flag>
+						</Flags>
+					</OutputArgument>
+				</OutputArguments>
+			</Function>
+			<Function>
+				<Name>TA_VWAP_BatchState</Name>
+				<Type>BatchState</Type>
+				<ReturnValue>TA_Result</ReturnValue>
+				<SpecialInputArguments>
+					<SpecialInputArgument>
+						<Type>Pointer</Type>
+						<Name>state</Name>
+					</SpecialInputArgument>
+				</SpecialInputArguments>
+				<RequiredInputArguments>
+					<RequiredInputArgument>
+						<Type>Integer</Type>
+						<Name>startIdx</Name>
+					</RequiredInputArgument>
+					<RequiredInputArgument>
+						<Type>Integer</Type>
+						<Name>endIdx</Name>
+					</RequiredInputArgument>
+					<RequiredInputArgument>
+						<Type>Double</Type>
+						<Name>High</Name>
+					</RequiredInputArgument>
+					<RequiredInputArgument>
+						<Type>Double</Type>
+						<Name>Low</Name>
+					</RequiredInputArgument>
+					<RequiredInputArgument>
+						<Type>Double</Type>
+						<Name>Close</Name>
+					</RequiredInputArgument>
+					<RequiredInputArgument>
+						<Type>Double</Type>
+						<Name>Volume</Name>
+					</RequiredInputArgument>
+				</RequiredInputArguments>
+				<OutputArguments>
+					<OutputArgument>
+						<Type>Pointer to Integer</Type>
+						<Name>outBegIdx</Name>
+					</OutputArgument>
+					<OutputArgument>
+						<Type>Pointer to Integer</Type>
+						<Name>outNBElement</Name>
+					</OutputArgument>
+					<OutputArgument>
+						<Type>Double Array</Type>
+						<Name>outReal</Name>
+						<Flags>
+							<Flag>Line</Flag>
+						</Flags>
+					</OutputArgument>
+				</OutputArguments>
+			</Function>
+			<Function>
+				<Name>TA_VWAP_StateFree</Name>
+				<Type>StateFree</Type>
+				<ReturnValue>TA_Result</ReturnValue>
+				<SpecialInputArguments>
+					<SpecialInputArgument>
+						<Type>Pointer to Pointer</Type>
+						<Name>state</Name>
+					</SpecialInputArgument>
+				</SpecialInputArguments>
+			</Function>
+			<Function>
+				<Name>TA_VWAP_StateLoad</Name>
+				<Type>StateLoad</Type>
+				<ReturnValue>TA_Result</ReturnValue>
+				<SpecialInputArguments>
+					<SpecialInputArgument>
+						<Type>Pointer to Pointer</Type>
+						<Name>state</Name>
+					</SpecialInputArgument>
+					<SpecialInputArgument>
+						<Type>Pointer to File</Type>
+						<Name>file</Name>
+					</SpecialInputArgument>
+				</SpecialInputArguments>
+				<OptionalInputArguments>
+					<OptionalInputArgument>
+						<Name>Time Period</Name>
+						<ShortDescription>Number of period</ShortDescription>
+						<Type>Integer</Type>
+						<Range>
+							<Minimum>1</Minimum>
+							<Maximum>100000</Maximum>
+							<SuggestedStart>100000</SuggestedStart>
+							<SuggestedEnd>100000</SuggestedEnd>
+							<SuggestedIncrement>100000</SuggestedIncrement>
+						</Range>
+						<DefaultValue>10</DefaultValue>
+					</OptionalInputArgument>
+				</OptionalInputArguments>
+			</Function>
+			<Function>
+				<Name>TA_VWAP_StateSave</Name>
+				<Type>StateSave</Type>
+				<ReturnValue>TA_Result</ReturnValue>
+				<SpecialInputArguments>
+					<SpecialInputArgument>
+						<Type>Pointer</Type>
+						<Name>state</Name>
+					</SpecialInputArgument>
+					<SpecialInputArgument>
+						<Type>Pointer to File</Type>
+						<Name>file</Name>
+					</SpecialInputArgument>
+				</SpecialInputArguments>
+				<OptionalInputArguments>
+					<OptionalInputArgument>
+						<Name>Time Period</Name>
+						<ShortDescription>Number of period</ShortDescription>
+						<Type>Integer</Type>
+						<Range>
+							<Minimum>1</Minimum>
+							<Maximum>100000</Maximum>
+							<SuggestedStart>100000</SuggestedStart>
+							<SuggestedEnd>100000</SuggestedEnd>
+							<SuggestedIncrement>100000</SuggestedIncrement>
+						</Range>
+						<DefaultValue>10</DefaultValue>
+					</OptionalInputArgument>
+				</OptionalInputArguments>
+			</Function>
+		</Functions>
+	</FinancialFunctionGroup>
+
+
+	<!-- VWMA -->
+	<FinancialFunctionGroup>
+		<Abbreviation>VWMA</Abbreviation>
+		<CamelCaseName>Vwma</CamelCaseName>
+		<ShortDescription>Volume Weighted Moving Average</ShortDescription>
+		<GroupId>Volume Indicators</GroupId>
+		<StateMemory>
+			<StateMemoryField>
+				<Type>Double</Type>
+				<Name>inReal</Name>
+			</StateMemoryField>
+		</StateMemory>
+		<State>
+			<StateField>
+				<Type>Integer</Type>
+				<Name>mem_size</Name>
+			</StateField>
+			<StateField>
+				<Type>Integer</Type>
+				<Name>mem_index</Name>
+			</StateField>
+			<StateField>
+				<Type>Pointer</Type>
+				<Name>memory</Name>
+			</StateField>
+			<StateField>
+				<Type>Double</Type>
+				<Name>periodSum</Name>
+			</StateField>
+			<StateField>
+				<Type>Double</Type>
+				<Name>periodSub</Name>
+			</StateField>
+			<StateField>
+				<Type>Double</Type>
+				<Name>divider</Name>
+			</StateField>
+		</State>
+		<Functions>
+			<Function>
+				<Name>TA_VWMA_Lookback</Name>
+				<Type>Lookback</Type>
+				<ReturnValue>Integer</ReturnValue>
+				<OptionalInputArguments>
+					<OptionalInputArgument>
+						<Name>Time Period</Name>
+						<ShortDescription>Number of period</ShortDescription>
+						<Type>Integer</Type>
+						<Range>
+							<Minimum>1</Minimum>
+							<Maximum>100000</Maximum>
+							<SuggestedStart>100000</SuggestedStart>
+							<SuggestedEnd>100000</SuggestedEnd>
+							<SuggestedIncrement>100000</SuggestedIncrement>
+						</Range>
+						<DefaultValue>30</DefaultValue>
+					</OptionalInputArgument>
+				</OptionalInputArguments>
+			</Function>
+			<Function>
+				<Name>TA_VWMA</Name>
+				<Type>Regular</Type>
+				<ReturnValue>TA_Result</ReturnValue>
+				<RequiredInputArguments>
+					<RequiredInputArgument>
+						<Type>Integer</Type>
+						<Name>startIdx</Name>
+					</RequiredInputArgument>
+					<RequiredInputArgument>
+						<Type>Integer</Type>
+						<Name>endIdx</Name>
+					</RequiredInputArgument>
+					<RequiredInputArgument>
+						<Type>Double Array</Type>
+						<Name>inReal</Name>
+					</RequiredInputArgument>
+				</RequiredInputArguments>
+				<OptionalInputArguments>
+					<OptionalInputArgument>
+						<Name>Time Period</Name>
+						<ShortDescription>Number of period</ShortDescription>
+						<Type>Integer</Type>
+						<Range>
+							<Minimum>1</Minimum>
+							<Maximum>100000</Maximum>
+							<SuggestedStart>100000</SuggestedStart>
+							<SuggestedEnd>100000</SuggestedEnd>
+							<SuggestedIncrement>100000</SuggestedIncrement>
+						</Range>
+						<DefaultValue>30</DefaultValue>
+					</OptionalInputArgument>
+				</OptionalInputArguments>
+				<OutputArguments>
+					<OutputArgument>
+						<Type>Pointer to Integer</Type>
+						<Name>outBegIdx</Name>
+					</OutputArgument>
+					<OutputArgument>
+						<Type>Pointer to Integer</Type>
+						<Name>outNBElement</Name>
+					</OutputArgument>
+					<OutputArgument>
+						<Type>Double Array</Type>
+						<Name>outReal</Name>
+						<Flags>
+							<Flag>Line</Flag>
+						</Flags>
+					</OutputArgument>
+				</OutputArguments>
+			</Function>
+			<Function>
+				<Name>TA_VWMA_StateInit</Name>
+				<Type>StateInit</Type>
+				<ReturnValue>TA_Result</ReturnValue>
+				<SpecialInputArguments>
+					<SpecialInputArgument>
+						<Type>Pointer to Pointer</Type>
+						<Name>state</Name>
+					</SpecialInputArgument>
+				</SpecialInputArguments>
+				<OptionalInputArguments>
+					<OptionalInputArgument>
+						<Name>Time Period</Name>
+						<ShortDescription>Number of period</ShortDescription>
+						<Type>Integer</Type>
+						<Range>
+							<Minimum>1</Minimum>
+							<Maximum>100000</Maximum>
+							<SuggestedStart>100000</SuggestedStart>
+							<SuggestedEnd>100000</SuggestedEnd>
+							<SuggestedIncrement>100000</SuggestedIncrement>
+						</Range>
+						<DefaultValue>30</DefaultValue>
+					</OptionalInputArgument>
+				</OptionalInputArguments>
+			</Function>
+			<Function>
+				<Name>TA_VWMA_State</Name>
+				<Type>State</Type>
+				<ReturnValue>TA_Result</ReturnValue>
+				<SpecialInputArguments>
+					<SpecialInputArgument>
+						<Type>Pointer</Type>
+						<Name>state</Name>
+					</SpecialInputArgument>
+				</SpecialInputArguments>
+				<RequiredInputArguments>
+					<RequiredInputArgument>
+						<Type>Double</Type>
+						<Name>inReal</Name>
+					</RequiredInputArgument>
+				</RequiredInputArguments>
+				<OutputArguments>
+					<OutputArgument>
+						<Type>Double</Type>
+						<Name>outReal</Name>
+						<Flags>
+							<Flag>Line</Flag>
+						</Flags>
+					</OutputArgument>
+				</OutputArguments>
+			</Function>
+			<Function>
+				<Name>TA_VWMA_BatchState</Name>
+				<Type>BatchState</Type>
+				<ReturnValue>TA_Result</ReturnValue>
+				<SpecialInputArguments>
+					<SpecialInputArgument>
+						<Type>Pointer</Type>
+						<Name>state</Name>
+					</SpecialInputArgument>
+				</SpecialInputArguments>
+				<RequiredInputArguments>
+					<RequiredInputArgument>
+						<Type>Integer</Type>
+						<Name>startIdx</Name>
+					</RequiredInputArgument>
+					<RequiredInputArgument>
+						<Type>Integer</Type>
+						<Name>endIdx</Name>
+					</RequiredInputArgument>
+					<RequiredInputArgument>
+						<Type>Double Array</Type>
+						<Name>inReal</Name>
+					</RequiredInputArgument>
+				</RequiredInputArguments>
+				<OutputArguments>
+					<OutputArgument>
+						<Type>Pointer to Integer</Type>
+						<Name>outBegIdx</Name>
+					</OutputArgument>
+					<OutputArgument>
+						<Type>Pointer to Integer</Type>
+						<Name>outNBElement</Name>
+					</OutputArgument>
+					<OutputArgument>
+						<Type>Double Array</Type>
+						<Name>outReal</Name>
+						<Flags>
+							<Flag>Line</Flag>
+						</Flags>
+					</OutputArgument>
+				</OutputArguments>
+			</Function>
+			<Function>
+				<Name>TA_VWMA_StateFree</Name>
+				<Type>StateFree</Type>
+				<ReturnValue>TA_Result</ReturnValue>
+				<SpecialInputArguments>
+					<SpecialInputArgument>
+						<Type>Pointer to Pointer</Type>
+						<Name>state</Name>
+					</SpecialInputArgument>
+				</SpecialInputArguments>
+			</Function>
+			<Function>
+				<Name>TA_VWMA_StateLoad</Name>
+				<Type>StateLoad</Type>
+				<ReturnValue>TA_Result</ReturnValue>
+				<SpecialInputArguments>
+					<SpecialInputArgument>
+						<Type>Pointer to Pointer</Type>
+						<Name>state</Name>
+					</SpecialInputArgument>
+					<SpecialInputArgument>
+						<Type>Pointer to File</Type>
+						<Name>file</Name>
+					</SpecialInputArgument>
+				</SpecialInputArguments>
+				<OptionalInputArguments>
+					<OptionalInputArgument>
+						<Name>Time Period</Name>
+						<ShortDescription>Number of period</ShortDescription>
+						<Type>Integer</Type>
+						<Range>
+							<Minimum>1</Minimum>
+							<Maximum>100000</Maximum>
+							<SuggestedStart>100000</SuggestedStart>
+							<SuggestedEnd>100000</SuggestedEnd>
+							<SuggestedIncrement>100000</SuggestedIncrement>
+						</Range>
+						<DefaultValue>30</DefaultValue>
+					</OptionalInputArgument>
+				</OptionalInputArguments>
+			</Function>
+			<Function>
+				<Name>TA_VWMA_StateSave</Name>
+				<Type>StateSave</Type>
+				<ReturnValue>TA_Result</ReturnValue>
+				<SpecialInputArguments>
+					<SpecialInputArgument>
+						<Type>Pointer</Type>
+						<Name>state</Name>
+					</SpecialInputArgument>
+					<SpecialInputArgument>
+						<Type>Pointer to File</Type>
+						<Name>file</Name>
+					</SpecialInputArgument>
+				</SpecialInputArguments>
+				<OptionalInputArguments>
+					<OptionalInputArgument>
+						<Name>Time Period</Name>
+						<ShortDescription>Number of period</ShortDescription>
+						<Type>Integer</Type>
+						<Range>
+							<Minimum>1</Minimum>
+							<Maximum>100000</Maximum>
+							<SuggestedStart>100000</SuggestedStart>
+							<SuggestedEnd>100000</SuggestedEnd>
+							<SuggestedIncrement>100000</SuggestedIncrement>
+						</Range>
+						<DefaultValue>30</DefaultValue>
 					</OptionalInputArgument>
 				</OptionalInputArguments>
 			</Function>

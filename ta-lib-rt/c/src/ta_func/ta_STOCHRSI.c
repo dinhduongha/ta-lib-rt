@@ -861,8 +861,10 @@ TA_RetCode retCode;
 /* Generated */  #endif 
 /* Generated */    VALUE_HANDLE_DEREF_TO_ZERO(outBegIdx);
 /* Generated */    VALUE_HANDLE_DEREF_TO_ZERO(outNBElement);
-/* Generated */    lookbackSTOCH  = LOOKBACK_CALL(STOCH)( optInFastK_Period, optInFastK_Period, optInFastD_MAType, optInFastD_Period, optInFastD_MAType );
+/* Generated */    lookbackSTOCH  = LOOKBACK_CALL(STOCH)( optInTimePeriod, optInFastK_Period, optInFastD_MAType, optInFastD_Period, optInFastD_MAType );
+/* Generated */    if (lookbackSTOCH < 0) return ENUM_VALUE(RetCode,TA_BAD_PARAM,BadParam);
 /* Generated */    lookbackTotal   = LOOKBACK_CALL(RSI)( optInTimePeriod ) + lookbackSTOCH;
+/* Generated */    if (lookbackTotal < 0) return ENUM_VALUE(RetCode,TA_BAD_PARAM,BadParam);
 /* Generated */    if( startIdx < lookbackTotal )
 /* Generated */       startIdx = lookbackTotal;
 /* Generated */    if( startIdx > endIdx )
@@ -893,10 +895,10 @@ TA_RetCode retCode;
 /* Generated */                                           tempRSIBuffer,
 /* Generated */                                           tempRSIBuffer,
 /* Generated */                                           tempRSIBuffer,
-                                                          optInTimePeriod,
+/* Generated */                                           optInTimePeriod,
 /* Generated */                                           optInFastK_Period,
 /* Generated */                                           optInFastD_MAType,
-                                                          optInFastD_Period,
+/* Generated */                                           optInFastD_Period,
 /* Generated */                                           optInFastD_MAType,
 /* Generated */                                           VALUE_HANDLE_OUT(outBegIdx2),
 /* Generated */                                           outNBElement,

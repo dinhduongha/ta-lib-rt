@@ -945,6 +945,78 @@ TA_RetCode TA_ATR_StateLoad( struct TA_ATR_State** _state,
 
 
 /*
+ * TA_ATRP - Average True Range Percent
+ * 
+ * Input  = High, Low, Close
+ * Output = double
+ * 
+ * Optional Parameters
+ * -------------------
+ * optInTimePeriod:(From 1 to 100000)
+ *    Number of period
+ * 
+ * 
+ */
+TA_RetCode TA_ATRP( int           START_IDX,
+                    int           END_IDX,
+                    const double *IN_ARRAY /* inHigh */,
+                    const double *IN_ARRAY /* inLow */,
+                    const double *IN_ARRAY /* inClose */,
+                    int           OPT_INT /* optInTimePeriod */, /* From 1 to 100000 */
+                    int          *BEG_IDX,
+                    int          *OUT_SIZE,
+                    double       *OUT_ARRAY /* outReal */ );
+
+int TA_ATRP_Lookback( int           optInTimePeriod );  /* From 1 to 100000 */
+
+
+struct TA_ATRP_Data {
+                    double       inHigh;
+                    double       inLow;
+                    double       inClose;
+                    };
+struct TA_ATRP_State {
+                     size_t mem_size;
+                     size_t mem_index;
+                     struct TA_ATRP_Data* memory;
+                     void*        StateATR;
+                     int           optInTimePeriod; /* From 1 to 100000 */
+                     };
+
+
+TA_RetCode TA_ATRP_StateInit( struct TA_ATRP_State** _state,
+                            int           optInTimePeriod );  /* From 1 to 100000 */
+
+
+TA_RetCode TA_ATRP_State( struct TA_ATRP_State* _state,
+                        const double inHigh,
+                        const double inLow,
+                        const double inClose,
+                        double        *outReal );
+
+TA_RetCode TA_ATRP_BatchState( struct TA_ATRP_State* _state,
+                             int startIdx,
+                             int endIdx,
+                             const double inHigh[],
+                             const double inLow[],
+                             const double inClose[],
+                             int          *outBegIdx,
+                             int          *outNBElement,
+                             double        outReal[] );
+
+TA_RetCode TA_ATRP_StateFree( struct TA_ATRP_State** _state );
+
+
+TA_RetCode TA_ATRP_StateSave( struct TA_ATRP_State* _state,
+                            FILE* _file );
+
+
+TA_RetCode TA_ATRP_StateLoad( struct TA_ATRP_State** _state,
+                            FILE* _file );
+
+
+
+/*
  * TA_AVGPRICE - Average Price
  * 
  * Input  = Open, High, Low, Close
@@ -5906,6 +5978,174 @@ TA_RetCode TA_CEIL_StateLoad( struct TA_CEIL_State** _state,
 
 
 /*
+ * TA_CKSP - Chande Kroll Stop
+ * 
+ * Input  = High, Low, Close
+ * Output = double, double
+ * 
+ * Optional Parameters
+ * -------------------
+ * optInTimePeriod:(From 1 to 100000)
+ *    Number of period
+ * 
+ * optInCkspPeriod:(From 1 to 100000)
+ *    Cksp Sampling Period
+ * 
+ * optInScalar:(From TA_REAL_MIN to TA_REAL_MAX)
+ *    scalar
+ * 
+ * 
+ */
+TA_RetCode TA_CKSP( int           START_IDX,
+                    int           END_IDX,
+                    const double *IN_ARRAY /* inHigh */,
+                    const double *IN_ARRAY /* inLow */,
+                    const double *IN_ARRAY /* inClose */,
+                    int           OPT_INT /* optInTimePeriod */, /* From 1 to 100000 */
+                    int           OPT_INT /* optInCkspPeriod */, /* From 1 to 100000 */
+                    double        OPT_REAL /* optInScalar */, /* From TA_REAL_MIN to TA_REAL_MAX */
+                    int          *BEG_IDX,
+                    int          *OUT_SIZE,
+                    double       *OUT_ARRAY /* outLongStop */,
+                    double       *OUT_ARRAY /* outShortStop */ );
+
+int TA_CKSP_Lookback( int           optInTimePeriod, /* From 1 to 100000 */
+                    int           optInCkspPeriod, /* From 1 to 100000 */
+                    double        optInScalar );  /* From TA_REAL_MIN to TA_REAL_MAX */
+
+
+struct TA_CKSP_Data {
+                    double       inHigh;
+                    double       inLow;
+                    double       inClose;
+                    };
+struct TA_CKSP_State {
+                     size_t mem_size;
+                     size_t mem_index;
+                     struct TA_CKSP_Data* memory;
+                     void*        StateATR;
+                     void*        StateMINMAX;
+                     int           optInTimePeriod; /* From 1 to 100000 */
+                     int           optInCkspPeriod; /* From 1 to 100000 */
+                     double        optInScalar; /* From TA_REAL_MIN to TA_REAL_MAX */
+                     };
+
+
+TA_RetCode TA_CKSP_StateInit( struct TA_CKSP_State** _state,
+                            int           optInTimePeriod, /* From 1 to 100000 */
+                            int           optInCkspPeriod, /* From 1 to 100000 */
+                            double        optInScalar );  /* From TA_REAL_MIN to TA_REAL_MAX */
+
+
+TA_RetCode TA_CKSP_State( struct TA_CKSP_State* _state,
+                        const double inHigh,
+                        const double inLow,
+                        const double inClose,
+                        double        *outLongStop,
+                        double        *outShortStop );
+
+TA_RetCode TA_CKSP_BatchState( struct TA_CKSP_State* _state,
+                             int startIdx,
+                             int endIdx,
+                             const double inHigh[],
+                             const double inLow[],
+                             const double inClose[],
+                             int          *outBegIdx,
+                             int          *outNBElement,
+                             double        outLongStop[],
+                             double        outShortStop[] );
+
+TA_RetCode TA_CKSP_StateFree( struct TA_CKSP_State** _state );
+
+
+TA_RetCode TA_CKSP_StateSave( struct TA_CKSP_State* _state,
+                            FILE* _file );
+
+
+TA_RetCode TA_CKSP_StateLoad( struct TA_CKSP_State** _state,
+                            FILE* _file );
+
+
+
+/*
+ * TA_CMF - Chaikin Money Flow
+ * 
+ * Input  = High, Low, Close, Volume
+ * Output = double
+ * 
+ * Optional Parameters
+ * -------------------
+ * optInTimePeriod:(From 1 to 100000)
+ *    Number of period
+ * 
+ * 
+ */
+TA_RetCode TA_CMF( int           START_IDX,
+                   int           END_IDX,
+                   const double *IN_ARRAY /* inHigh */,
+                   const double *IN_ARRAY /* inLow */,
+                   const double *IN_ARRAY /* inClose */,
+                   const double *IN_ARRAY /* inVolume */,
+                   int           OPT_INT /* optInTimePeriod */, /* From 1 to 100000 */
+                   int          *BEG_IDX,
+                   int          *OUT_SIZE,
+                   double       *OUT_ARRAY /* outReal */ );
+
+int TA_CMF_Lookback( int           optInTimePeriod );  /* From 1 to 100000 */
+
+
+struct TA_CMF_Data {
+                   double       inHigh;
+                   double       inLow;
+                   double       inClose;
+                   double       inVolume;
+                   };
+struct TA_CMF_State {
+                    size_t mem_size;
+                    size_t mem_index;
+                    struct TA_CMF_Data* memory;
+                    void*        StateADL;
+                    void*        StateSumMFV;
+                    void*        StateSumVol;
+                    int           optInTimePeriod; /* From 1 to 100000 */
+                    };
+
+
+TA_RetCode TA_CMF_StateInit( struct TA_CMF_State** _state,
+                           int           optInTimePeriod );  /* From 1 to 100000 */
+
+
+TA_RetCode TA_CMF_State( struct TA_CMF_State* _state,
+                       const double inHigh,
+                       const double inLow,
+                       const double inClose,
+                       const double inVolume,
+                       double        *outReal );
+
+TA_RetCode TA_CMF_BatchState( struct TA_CMF_State* _state,
+                            int startIdx,
+                            int endIdx,
+                            const double inHigh[],
+                            const double inLow[],
+                            const double inClose[],
+                            const double inVolume[],
+                            int          *outBegIdx,
+                            int          *outNBElement,
+                            double        outReal[] );
+
+TA_RetCode TA_CMF_StateFree( struct TA_CMF_State** _state );
+
+
+TA_RetCode TA_CMF_StateSave( struct TA_CMF_State* _state,
+                           FILE* _file );
+
+
+TA_RetCode TA_CMF_StateLoad( struct TA_CMF_State** _state,
+                           FILE* _file );
+
+
+
+/*
  * TA_CMO - Chande Momentum Oscillator
  * 
  * Input  = double
@@ -6421,6 +6661,94 @@ TA_RetCode TA_EMA_StateLoad( struct TA_EMA_State** _state,
 
 
 /*
+ * TA_EOM - Ease of Movement
+ * 
+ * Input  = High, Low, Close, Volume
+ * Output = double
+ * 
+ * Optional Parameters
+ * -------------------
+ * optInTimePeriod:(From 1 to 100000)
+ *    Number of period
+ * 
+ * optInMAType:
+ *    Type of Moving Average
+ * 
+ * optInDivisor:(From 1 to 100000)
+ *    Divisor
+ * 
+ * 
+ */
+TA_RetCode TA_EOM( int           START_IDX,
+                   int           END_IDX,
+                   const double *IN_ARRAY /* inHigh */,
+                   const double *IN_ARRAY /* inLow */,
+                   const double *IN_ARRAY /* inClose */,
+                   const double *IN_ARRAY /* inVolume */,
+                   int           OPT_INT /* optInTimePeriod */, /* From 1 to 100000 */
+                   TA_MAType     OPT_MATYPE /* optInMAType */,                   int           OPT_INT /* optInDivisor */, /* From 1 to 100000 */
+                   int          *BEG_IDX,
+                   int          *OUT_SIZE,
+                   double       *OUT_ARRAY /* outReal */ );
+
+int TA_EOM_Lookback( int           optInTimePeriod, /* From 1 to 100000 */
+                   TA_MAType     optInMAType,                   int           optInDivisor );  /* From 1 to 100000 */
+
+
+struct TA_EOM_Data {
+                   double       inHigh;
+                   double       inLow;
+                   double       inClose;
+                   double       inVolume;
+                   };
+struct TA_EOM_State {
+                    size_t mem_size;
+                    size_t mem_index;
+                    struct TA_EOM_Data* memory;
+                    void*        StateSMA;
+                    double       prevHigh;
+                    double       prevLow;
+                    int           optInTimePeriod; /* From 1 to 100000 */
+                    TA_MAType     optInMAType;                    int           optInDivisor; /* From 1 to 100000 */
+                    };
+
+
+TA_RetCode TA_EOM_StateInit( struct TA_EOM_State** _state,
+                           int           optInTimePeriod, /* From 1 to 100000 */
+                           TA_MAType     optInMAType,                           int           optInDivisor );  /* From 1 to 100000 */
+
+
+TA_RetCode TA_EOM_State( struct TA_EOM_State* _state,
+                       const double inHigh,
+                       const double inLow,
+                       const double inClose,
+                       const double inVolume,
+                       double        *outReal );
+
+TA_RetCode TA_EOM_BatchState( struct TA_EOM_State* _state,
+                            int startIdx,
+                            int endIdx,
+                            const double inHigh[],
+                            const double inLow[],
+                            const double inClose[],
+                            const double inVolume[],
+                            int          *outBegIdx,
+                            int          *outNBElement,
+                            double        outReal[] );
+
+TA_RetCode TA_EOM_StateFree( struct TA_EOM_State** _state );
+
+
+TA_RetCode TA_EOM_StateSave( struct TA_EOM_State* _state,
+                           FILE* _file );
+
+
+TA_RetCode TA_EOM_StateLoad( struct TA_EOM_State** _state,
+                           FILE* _file );
+
+
+
+/*
  * TA_EXP - Vector Arithmetic Exp
  * 
  * Input  = double
@@ -6525,6 +6853,185 @@ TA_RetCode TA_FLOOR_StateSave( struct TA_FLOOR_State* _state,
 
 TA_RetCode TA_FLOOR_StateLoad( struct TA_FLOOR_State** _state,
                              FILE* _file );
+
+
+
+/*
+ * TA_HA - Heikin Ashi
+ * 
+ * Input  = Open, High, Low, Close
+ * Output = double, double, double, double
+ * 
+ * Optional Parameters
+ * -------------------
+ * optInTimePeriod:(From 1 to 100000)
+ *    Number of period
+ * 
+ * 
+ */
+TA_RetCode TA_HA( int           START_IDX,
+                  int           END_IDX,
+                  const double *IN_ARRAY /* inOpen */,
+                  const double *IN_ARRAY /* inHigh */,
+                  const double *IN_ARRAY /* inLow */,
+                  const double *IN_ARRAY /* inClose */,
+                  int           OPT_INT /* optInTimePeriod */, /* From 1 to 100000 */
+                  int          *BEG_IDX,
+                  int          *OUT_SIZE,
+                  double       *OUT_ARRAY /* outOpen */,
+                  double       *OUT_ARRAY /* outHigh */,
+                  double       *OUT_ARRAY /* outLow */,
+                  double       *OUT_ARRAY /* outClose */ );
+
+int TA_HA_Lookback( int           optInTimePeriod );  /* From 1 to 100000 */
+
+
+struct TA_HA_Data {
+                  double       inOpen;
+                  double       inHigh;
+                  double       inLow;
+                  double       inClose;
+                  };
+struct TA_HA_State {
+                   size_t mem_size;
+                   size_t mem_index;
+                   struct TA_HA_Data* memory;
+                   double        prevOpen;
+                   double        prevClose;
+                   int           optInTimePeriod; /* From 1 to 100000 */
+                   };
+
+
+TA_RetCode TA_HA_StateInit( struct TA_HA_State** _state,
+                          int           optInTimePeriod );  /* From 1 to 100000 */
+
+
+TA_RetCode TA_HA_State( struct TA_HA_State* _state,
+                      const double inOpen,
+                      const double inHigh,
+                      const double inLow,
+                      const double inClose,
+                      double        *outOpen,
+                      double        *outHigh,
+                      double        *outLow,
+                      double        *outClose );
+
+TA_RetCode TA_HA_BatchState( struct TA_HA_State* _state,
+                           int startIdx,
+                           int endIdx,
+                           const double inOpen[],
+                           const double inHigh[],
+                           const double inLow[],
+                           const double inClose[],
+                           int          *outBegIdx,
+                           int          *outNBElement,
+                           double        outOpen[],
+                           double        outHigh[],
+                           double        outLow[],
+                           double        outClose[] );
+
+TA_RetCode TA_HA_StateFree( struct TA_HA_State** _state );
+
+
+TA_RetCode TA_HA_StateSave( struct TA_HA_State* _state,
+                          FILE* _file );
+
+
+TA_RetCode TA_HA_StateLoad( struct TA_HA_State** _state,
+                          FILE* _file );
+
+
+
+/*
+ * TA_HA_SMO - Heikin Ashi Smooth
+ * 
+ * Input  = Open, High, Low, Close
+ * Output = double, double, double, double
+ * 
+ * Optional Parameters
+ * -------------------
+ * optInTimePeriod:(From 1 to 100000)
+ *    Number of period
+ * 
+ * optInMAType:
+ *    Type of Moving Average
+ * 
+ * 
+ */
+TA_RetCode TA_HA_SMO( int           START_IDX,
+                      int           END_IDX,
+                      const double *IN_ARRAY /* inOpen */,
+                      const double *IN_ARRAY /* inHigh */,
+                      const double *IN_ARRAY /* inLow */,
+                      const double *IN_ARRAY /* inClose */,
+                      int           OPT_INT /* optInTimePeriod */, /* From 1 to 100000 */
+                      TA_MAType     OPT_MATYPE /* optInMAType */,                      int          *BEG_IDX,
+                      int          *OUT_SIZE,
+                      double       *OUT_ARRAY /* outRealOpen */,
+                      double       *OUT_ARRAY /* outRealHigh */,
+                      double       *OUT_ARRAY /* outRealLow */,
+                      double       *OUT_ARRAY /* outRealClose */ );
+
+int TA_HA_SMO_Lookback( int           optInTimePeriod, /* From 1 to 100000 */
+                      TA_MAType     optInMAType ); 
+
+struct TA_HA_SMO_Data {
+                      double       inOpen;
+                      double       inHigh;
+                      double       inLow;
+                      double       inClose;
+                      };
+struct TA_HA_SMO_State {
+                       size_t mem_size;
+                       size_t mem_index;
+                       struct TA_HA_SMO_Data* memory;
+                       void*        stateMAOpen;
+                       void*        stateMAHigh;
+                       void*        stateMALow;
+                       void*        stateMAClose;
+                       double       prevOpen;
+                       double       prevClose;
+                       int           optInTimePeriod; /* From 1 to 100000 */
+                       TA_MAType     optInMAType;                       };
+
+
+TA_RetCode TA_HA_SMO_StateInit( struct TA_HA_SMO_State** _state,
+                              int           optInTimePeriod, /* From 1 to 100000 */
+                              TA_MAType     optInMAType ); 
+
+TA_RetCode TA_HA_SMO_State( struct TA_HA_SMO_State* _state,
+                          const double inOpen,
+                          const double inHigh,
+                          const double inLow,
+                          const double inClose,
+                          double        *outRealOpen,
+                          double        *outRealHigh,
+                          double        *outRealLow,
+                          double        *outRealClose );
+
+TA_RetCode TA_HA_SMO_BatchState( struct TA_HA_SMO_State* _state,
+                               int startIdx,
+                               int endIdx,
+                               const double inOpen[],
+                               const double inHigh[],
+                               const double inLow[],
+                               const double inClose[],
+                               int          *outBegIdx,
+                               int          *outNBElement,
+                               double        outRealOpen[],
+                               double        outRealHigh[],
+                               double        outRealLow[],
+                               double        outRealClose[] );
+
+TA_RetCode TA_HA_SMO_StateFree( struct TA_HA_SMO_State** _state );
+
+
+TA_RetCode TA_HA_SMO_StateSave( struct TA_HA_SMO_State* _state,
+                              FILE* _file );
+
+
+TA_RetCode TA_HA_SMO_StateLoad( struct TA_HA_SMO_State** _state,
+                              FILE* _file );
 
 
 
@@ -7006,6 +7513,114 @@ TA_RetCode TA_HT_TRENDMODE_StateLoad( struct TA_HT_TRENDMODE_State** _state,
 
 
 /*
+ * TA_ICHIMOKU - Ichimoku Cloud
+ * 
+ * Input  = High, Low, Close
+ * Output = double, double, double, double, double
+ * 
+ * Optional Parameters
+ * -------------------
+ * optInConversionPeriod:(From 1 to 100000)
+ *    Conversion Tenkan Period
+ * 
+ * optInBasePeriod:(From 1 to 100000)
+ *    Base Kijun Period
+ * 
+ * optInSpanPeriod:(From 1 to 100000)
+ *    Span Senkou Period
+ * 
+ * optInChikouPeriod:(From 1 to 100000)
+ *    Chikou Period
+ * 
+ * 
+ */
+TA_RetCode TA_ICHIMOKU( int           START_IDX,
+                        int           END_IDX,
+                        const double *IN_ARRAY /* inHigh */,
+                        const double *IN_ARRAY /* inLow */,
+                        const double *IN_ARRAY /* inClose */,
+                        int           OPT_INT /* optInConversionPeriod */, /* From 1 to 100000 */
+                        int           OPT_INT /* optInBasePeriod */, /* From 1 to 100000 */
+                        int           OPT_INT /* optInSpanPeriod */, /* From 1 to 100000 */
+                        int           OPT_INT /* optInChikouPeriod */, /* From 1 to 100000 */
+                        int          *BEG_IDX,
+                        int          *OUT_SIZE,
+                        double       *OUT_ARRAY /* outTenkan */,
+                        double       *OUT_ARRAY /* outKijun */,
+                        double       *OUT_ARRAY /* outSenkouSpanA */,
+                        double       *OUT_ARRAY /* outSenkouSpanB */,
+                        double       *OUT_ARRAY /* outChikouSpan */ );
+
+int TA_ICHIMOKU_Lookback( int           optInConversionPeriod, /* From 1 to 100000 */
+                        int           optInBasePeriod, /* From 1 to 100000 */
+                        int           optInSpanPeriod, /* From 1 to 100000 */
+                        int           optInChikouPeriod );  /* From 1 to 100000 */
+
+
+struct TA_ICHIMOKU_Data {
+                        double       inHigh;
+                        double       inLow;
+                        double       inClose;
+                        };
+struct TA_ICHIMOKU_State {
+                         size_t mem_size;
+                         size_t mem_index;
+                         struct TA_ICHIMOKU_Data* memory;
+                         int          conversionPeriod;
+                         int          basePeriod;
+                         int          spanPeriod;
+                         int          displacement;
+                         int           optInConversionPeriod; /* From 1 to 100000 */
+                         int           optInBasePeriod; /* From 1 to 100000 */
+                         int           optInSpanPeriod; /* From 1 to 100000 */
+                         int           optInChikouPeriod; /* From 1 to 100000 */
+                         };
+
+
+TA_RetCode TA_ICHIMOKU_StateInit( struct TA_ICHIMOKU_State** _state,
+                                int           optInConversionPeriod, /* From 1 to 100000 */
+                                int           optInBasePeriod, /* From 1 to 100000 */
+                                int           optInSpanPeriod, /* From 1 to 100000 */
+                                int           optInChikouPeriod );  /* From 1 to 100000 */
+
+
+TA_RetCode TA_ICHIMOKU_State( struct TA_ICHIMOKU_State* _state,
+                            const double inHigh,
+                            const double inLow,
+                            const double inClose,
+                            double        *outTenkan,
+                            double        *outKijun,
+                            double        *outSenkouSpanA,
+                            double        *outSenkouSpanB,
+                            double        *outChikouSpan );
+
+TA_RetCode TA_ICHIMOKU_BatchState( struct TA_ICHIMOKU_State* _state,
+                                 int startIdx,
+                                 int endIdx,
+                                 const double inHigh[],
+                                 const double inLow[],
+                                 const double inClose[],
+                                 int          *outBegIdx,
+                                 int          *outNBElement,
+                                 double        outTenkan[],
+                                 double        outKijun[],
+                                 double        outSenkouSpanA[],
+                                 double        outSenkouSpanB[],
+                                 double        outChikouSpan[] );
+
+TA_RetCode TA_ICHIMOKU_StateFree( struct TA_ICHIMOKU_State** _state );
+
+
+TA_RetCode TA_ICHIMOKU_StateSave( struct TA_ICHIMOKU_State* _state,
+                                FILE* _file );
+
+
+TA_RetCode TA_ICHIMOKU_StateLoad( struct TA_ICHIMOKU_State** _state,
+                                FILE* _file );
+
+
+
+/*
  * TA_IMI - Intraday Momentum Index
  * 
  * Input  = Open, Close
@@ -7138,6 +7753,193 @@ TA_RetCode TA_KAMA_StateSave( struct TA_KAMA_State* _state,
 
 TA_RetCode TA_KAMA_StateLoad( struct TA_KAMA_State** _state,
                             FILE* _file );
+
+
+
+/*
+ * TA_KDJ - KDJ indicator
+ * 
+ * Input  = High, Low, Close
+ * Output = double, double, double
+ * 
+ * Optional Parameters
+ * -------------------
+ * optInTimePeriod:(From 1 to 100000)
+ *    Number of period
+ * 
+ * optInSignalPeriod:(From 1 to 100000)
+ *    Signal Period
+ * 
+ * optInMAType:
+ *    Type of Moving Average
+ * 
+ * 
+ */
+TA_RetCode TA_KDJ( int           START_IDX,
+                   int           END_IDX,
+                   const double *IN_ARRAY /* inHigh */,
+                   const double *IN_ARRAY /* inLow */,
+                   const double *IN_ARRAY /* inClose */,
+                   int           OPT_INT /* optInTimePeriod */, /* From 1 to 100000 */
+                   int           OPT_INT /* optInSignalPeriod */, /* From 1 to 100000 */
+                   TA_MAType     OPT_MATYPE /* optInMAType */,                   int          *BEG_IDX,
+                   int          *OUT_SIZE,
+                   double       *OUT_ARRAY /* outK */,
+                   double       *OUT_ARRAY /* outD */,
+                   double       *OUT_ARRAY /* outJ */ );
+
+int TA_KDJ_Lookback( int           optInTimePeriod, /* From 1 to 100000 */
+                   int           optInSignalPeriod, /* From 1 to 100000 */
+                   TA_MAType     optInMAType ); 
+
+struct TA_KDJ_Data {
+                   double       inHigh;
+                   double       inLow;
+                   double       inClose;
+                   };
+struct TA_KDJ_State {
+                    size_t mem_size;
+                    size_t mem_index;
+                    struct TA_KDJ_Data* memory;
+                    void*        stateMAFastK;
+                    void*        stateMASlowD;
+                    int           optInTimePeriod; /* From 1 to 100000 */
+                    int           optInSignalPeriod; /* From 1 to 100000 */
+                    TA_MAType     optInMAType;                    };
+
+
+TA_RetCode TA_KDJ_StateInit( struct TA_KDJ_State** _state,
+                           int           optInTimePeriod, /* From 1 to 100000 */
+                           int           optInSignalPeriod, /* From 1 to 100000 */
+                           TA_MAType     optInMAType ); 
+
+TA_RetCode TA_KDJ_State( struct TA_KDJ_State* _state,
+                       const double inHigh,
+                       const double inLow,
+                       const double inClose,
+                       double        *outK,
+                       double        *outD,
+                       double        *outJ );
+
+TA_RetCode TA_KDJ_BatchState( struct TA_KDJ_State* _state,
+                            int startIdx,
+                            int endIdx,
+                            const double inHigh[],
+                            const double inLow[],
+                            const double inClose[],
+                            int          *outBegIdx,
+                            int          *outNBElement,
+                            double        outK[],
+                            double        outD[],
+                            double        outJ[] );
+
+TA_RetCode TA_KDJ_StateFree( struct TA_KDJ_State** _state );
+
+
+TA_RetCode TA_KDJ_StateSave( struct TA_KDJ_State* _state,
+                           FILE* _file );
+
+
+TA_RetCode TA_KDJ_StateLoad( struct TA_KDJ_State** _state,
+                           FILE* _file );
+
+
+
+/*
+ * TA_KVO - Klinger Volume Oscillator
+ * 
+ * Input  = High, Low, Close, Volume
+ * Output = double, double
+ * 
+ * Optional Parameters
+ * -------------------
+ * optInFastPeriod:(From 2 to 100000)
+ *    Number of period for the fast MA
+ * 
+ * optInSlowPeriod:(From 2 to 100000)
+ *    Number of period for the slow MA
+ * 
+ * optInTimePeriod:(From 1 to 100000)
+ *    Number of period
+ * 
+ * optInMAType:
+ *    Type of Moving Average
+ * 
+ * 
+ */
+TA_RetCode TA_KVO( int           START_IDX,
+                   int           END_IDX,
+                   const double *IN_ARRAY /* inHigh */,
+                   const double *IN_ARRAY /* inLow */,
+                   const double *IN_ARRAY /* inClose */,
+                   const double *IN_ARRAY /* inVolume */,
+                   int           OPT_INT /* optInFastPeriod */, /* From 2 to 100000 */
+                   int           OPT_INT /* optInSlowPeriod */, /* From 2 to 100000 */
+                   int           OPT_INT /* optInTimePeriod */, /* From 1 to 100000 */
+                   TA_MAType     OPT_MATYPE /* optInMAType */,                   int          *BEG_IDX,
+                   int          *OUT_SIZE,
+                   double       *OUT_ARRAY /* outKVO */,
+                   double       *OUT_ARRAY /* outKVOSignal */ );
+
+int TA_KVO_Lookback( int           optInFastPeriod, /* From 2 to 100000 */
+                   int           optInSlowPeriod, /* From 2 to 100000 */
+                   int           optInTimePeriod, /* From 1 to 100000 */
+                   TA_MAType     optInMAType ); 
+
+struct TA_KVO_Data {
+                   double       inHigh;
+                   double       inLow;
+                   double       inClose;
+                   double       inVolume;
+                   };
+struct TA_KVO_State {
+                    size_t mem_size;
+                    size_t mem_index;
+                    struct TA_KVO_Data* memory;
+                    void*        StateMAFast;
+                    void*        StateMASlow;
+                    void*        StateMASignal;
+                    int           optInFastPeriod; /* From 2 to 100000 */
+                    int           optInSlowPeriod; /* From 2 to 100000 */
+                    int           optInTimePeriod; /* From 1 to 100000 */
+                    TA_MAType     optInMAType;                    };
+
+
+TA_RetCode TA_KVO_StateInit( struct TA_KVO_State** _state,
+                           int           optInFastPeriod, /* From 2 to 100000 */
+                           int           optInSlowPeriod, /* From 2 to 100000 */
+                           int           optInTimePeriod, /* From 1 to 100000 */
+                           TA_MAType     optInMAType ); 
+
+TA_RetCode TA_KVO_State( struct TA_KVO_State* _state,
+                       const double inHigh,
+                       const double inLow,
+                       const double inClose,
+                       const double inVolume,
+                       double        *outKVO,
+                       double        *outKVOSignal );
+
+TA_RetCode TA_KVO_BatchState( struct TA_KVO_State* _state,
+                            int startIdx,
+                            int endIdx,
+                            const double inHigh[],
+                            const double inLow[],
+                            const double inClose[],
+                            const double inVolume[],
+                            int          *outBegIdx,
+                            int          *outNBElement,
+                            double        outKVO[],
+                            double        outKVOSignal[] );
+
+TA_RetCode TA_KVO_StateFree( struct TA_KVO_State** _state );
+
+
+TA_RetCode TA_KVO_StateSave( struct TA_KVO_State* _state,
+                           FILE* _file );
+
+
+TA_RetCode TA_KVO_StateLoad( struct TA_KVO_State** _state,
+                           FILE* _file );
 
 
 
@@ -9480,6 +10282,177 @@ TA_RetCode TA_PVT_StateLoad( struct TA_PVT_State** _state,
 
 
 /*
+ * TA_REDK_EVEREX - RedK EVEREX - Effort Versus Results Explorer
+ * 
+ * Input  = Open, High, Low, Close, Volume
+ * Output = double, double, double, double, double, double, double, double, double, double, double, int
+ * 
+ * Optional Parameters
+ * -------------------
+ * optInTimePeriod:(From 1 to 100000)
+ *    Number of period
+ * 
+ * optInMAType:
+ *    Type of Moving Average
+ * 
+ * optInRofPeriod:(From 1 to 100000)
+ *    Rate of Flow Period
+ * 
+ * optInRofMAType:
+ *    Type of ROF Moving Average
+ * 
+ * optInRofSmooth:(From 0 to TA_REAL_MAX)
+ *    Rate of Flow Smooth
+ * 
+ * optInSignalPeriod:(From 1 to 100000)
+ *    Signal Period
+ * 
+ * optInSignalMAType:
+ *    Type of Signal Moving Average
+ * 
+ * optInBiasPeriod:(From 1 to 100000)
+ *    Bias Period
+ * 
+ * optInBiasMAType:
+ *    Type of Bias Moving Average
+ * 
+ * 
+ */
+TA_RetCode TA_REDK_EVEREX( int           START_IDX,
+                           int           END_IDX,
+                           const double *IN_ARRAY /* inOpen */,
+                           const double *IN_ARRAY /* inHigh */,
+                           const double *IN_ARRAY /* inLow */,
+                           const double *IN_ARRAY /* inClose */,
+                           const double *IN_ARRAY /* inVolume */,
+                           int           OPT_INT /* optInTimePeriod */, /* From 1 to 100000 */
+                           TA_MAType     OPT_MATYPE /* optInMAType */,                           int           OPT_INT /* optInRofPeriod */, /* From 1 to 100000 */
+                           TA_MAType     OPT_MATYPE /* optInRofMAType */,                           double        OPT_REAL /* optInRofSmooth */, /* From 0 to TA_REAL_MAX */
+                           int           OPT_INT /* optInSignalPeriod */, /* From 1 to 100000 */
+                           TA_MAType     OPT_MATYPE /* optInSignalMAType */,                           int           OPT_INT /* optInBiasPeriod */, /* From 1 to 100000 */
+                           TA_MAType     OPT_MATYPE /* optInBiasMAType */,                           int          *BEG_IDX,
+                           int          *OUT_SIZE,
+                           double       *OUT_ARRAY /* outVolNorm */,
+                           double       *OUT_ARRAY /* outPriceNorm */,
+                           double       *OUT_ARRAY /* outFlow */,
+                           double       *OUT_ARRAY /* outBullAvg */,
+                           double       *OUT_ARRAY /* outBearAvg */,
+                           double       *OUT_ARRAY /* outRROF */,
+                           double       *OUT_ARRAY /* outRROFSmooth */,
+                           double       *OUT_ARRAY /* outSignal */,
+                           double       *OUT_ARRAY /* outBiasSentiment */,
+                           double       *OUT_ARRAY /* outBiasSentimentSmooth */,
+                           double       *OUT_ARRAY /* outEvRatio */,
+                           int          *OUT_ARRAY /* outFlowUp */ );
+
+int TA_REDK_EVEREX_Lookback( int           optInTimePeriod, /* From 1 to 100000 */
+                           TA_MAType     optInMAType,                           int           optInRofPeriod, /* From 1 to 100000 */
+                           TA_MAType     optInRofMAType,                           double        optInRofSmooth, /* From 0 to TA_REAL_MAX */
+                           int           optInSignalPeriod, /* From 1 to 100000 */
+                           TA_MAType     optInSignalMAType,                           int           optInBiasPeriod, /* From 1 to 100000 */
+                           TA_MAType     optInBiasMAType ); 
+
+struct TA_REDK_EVEREX_Data {
+                           double       inOpen;
+                           double       inHigh;
+                           double       inLow;
+                           double       inClose;
+                           double       inVolume;
+                           };
+struct TA_REDK_EVEREX_State {
+                            size_t mem_size;
+                            size_t mem_index;
+                            struct TA_REDK_EVEREX_Data* memory;
+                            void*        StateVolMA;
+                            void*        StateBarSpreadMA;
+                            void*        StateSrcShiftMA;
+                            void*        StateBullMA;
+                            void*        StateBearMA;
+                            void*        StateRrofMA;
+                            void*        StateRrofSmootMA;
+                            void*        StateSignalMA;
+                            void*        StateBiasBullMA;
+                            void*        StateBiasBearMA;
+                            void*        StateBiasSmoothMA;
+                            void*        StateBullSmoothWMA;
+                            void*        StateBearSmoothWMA;
+                            void*        StateBullMax;
+                            void*        StateBearMin;
+                            void*        StateMinPriceN;
+                            void*        StateMaxNPrice;
+                            void*        StateMinVolN;
+                            void*        StateMaxNVol;
+                            int           optInTimePeriod; /* From 1 to 100000 */
+                            TA_MAType     optInMAType;                            int           optInRofPeriod; /* From 1 to 100000 */
+                            TA_MAType     optInRofMAType;                            double        optInRofSmooth; /* From 0 to TA_REAL_MAX */
+                            int           optInSignalPeriod; /* From 1 to 100000 */
+                            TA_MAType     optInSignalMAType;                            int           optInBiasPeriod; /* From 1 to 100000 */
+                            TA_MAType     optInBiasMAType;                            };
+
+
+TA_RetCode TA_REDK_EVEREX_StateInit( struct TA_REDK_EVEREX_State** _state,
+                                   int           optInTimePeriod, /* From 1 to 100000 */
+                                   TA_MAType     optInMAType,                                   int           optInRofPeriod, /* From 1 to 100000 */
+                                   TA_MAType     optInRofMAType,                                   double        optInRofSmooth, /* From 0 to TA_REAL_MAX */
+                                   int           optInSignalPeriod, /* From 1 to 100000 */
+                                   TA_MAType     optInSignalMAType,                                   int           optInBiasPeriod, /* From 1 to 100000 */
+                                   TA_MAType     optInBiasMAType ); 
+
+TA_RetCode TA_REDK_EVEREX_State( struct TA_REDK_EVEREX_State* _state,
+                               const double inOpen,
+                               const double inHigh,
+                               const double inLow,
+                               const double inClose,
+                               const double inVolume,
+                               double        *outVolNorm,
+                               double        *outPriceNorm,
+                               double        *outFlow,
+                               double        *outBullAvg,
+                               double        *outBearAvg,
+                               double        *outRROF,
+                               double        *outRROFSmooth,
+                               double        *outSignal,
+                               double        *outBiasSentiment,
+                               double        *outBiasSentimentSmooth,
+                               double        *outEvRatio,
+                               int           *outFlowUp );
+
+TA_RetCode TA_REDK_EVEREX_BatchState( struct TA_REDK_EVEREX_State* _state,
+                                    int startIdx,
+                                    int endIdx,
+                                    const double inOpen[],
+                                    const double inHigh[],
+                                    const double inLow[],
+                                    const double inClose[],
+                                    const double inVolume[],
+                                    int          *outBegIdx,
+                                    int          *outNBElement,
+                                    double        outVolNorm[],
+                                    double        outPriceNorm[],
+                                    double        outFlow[],
+                                    double        outBullAvg[],
+                                    double        outBearAvg[],
+                                    double        outRROF[],
+                                    double        outRROFSmooth[],
+                                    double        outSignal[],
+                                    double        outBiasSentiment[],
+                                    double        outBiasSentimentSmooth[],
+                                    double        outEvRatio[],
+                                    int           outFlowUp[] );
+
+TA_RetCode TA_REDK_EVEREX_StateFree( struct TA_REDK_EVEREX_State** _state );
+
+
+TA_RetCode TA_REDK_EVEREX_StateSave( struct TA_REDK_EVEREX_State* _state,
+                                   FILE* _file );
+
+
+TA_RetCode TA_REDK_EVEREX_StateLoad( struct TA_REDK_EVEREX_State** _state,
+                                   FILE* _file );
+
+
+
+/*
  * TA_ROC - Rate of change : ((price/prevPrice)-1)*100
  * 
  * Input  = double
@@ -10539,7 +11512,7 @@ struct TA_STOCHRSI_State {
                          size_t mem_index;
                          struct TA_STOCHRSI_Data* memory;
                          void*        stateRSI;
-                         void*        stateSTOCHF;
+                         void*        stateSTOCH;
                          int           optInTimePeriod; /* From 2 to 100000 */
                          int           optInFastK_Period; /* From 1 to 100000 */
                          int           optInFastD_Period; /* From 1 to 100000 */
@@ -10697,6 +11670,92 @@ TA_RetCode TA_SUM_StateSave( struct TA_SUM_State* _state,
 
 TA_RetCode TA_SUM_StateLoad( struct TA_SUM_State** _state,
                            FILE* _file );
+
+
+
+/*
+ * TA_SUPERTREND - Supertrend
+ * 
+ * Input  = High, Low, Close
+ * Output = int, double, double
+ * 
+ * Optional Parameters
+ * -------------------
+ * optInTimePeriod:(From 1 to 100000)
+ *    Number of period
+ * 
+ * optInModifier:(From 0 to TA_REAL_MAX)
+ *    SuperTrend Modifier
+ * 
+ * 
+ */
+TA_RetCode TA_SUPERTREND( int           START_IDX,
+                          int           END_IDX,
+                          const double *IN_ARRAY /* inHigh */,
+                          const double *IN_ARRAY /* inLow */,
+                          const double *IN_ARRAY /* inClose */,
+                          int           OPT_INT /* optInTimePeriod */, /* From 1 to 100000 */
+                          double        OPT_REAL /* optInModifier */, /* From 0 to TA_REAL_MAX */
+                          int          *BEG_IDX,
+                          int          *OUT_SIZE,
+                          int          *OUT_ARRAY /* outTrend */,
+                          double       *OUT_ARRAY /* outUpperBand */,
+                          double       *OUT_ARRAY /* outLowerBand */ );
+
+int TA_SUPERTREND_Lookback( int           optInTimePeriod, /* From 1 to 100000 */
+                          double        optInModifier );  /* From 0 to TA_REAL_MAX */
+
+
+struct TA_SUPERTREND_Data {
+                          double       inHigh;
+                          double       inLow;
+                          double       inClose;
+                          };
+struct TA_SUPERTREND_State {
+                           size_t mem_size;
+                           size_t mem_index;
+                           struct TA_SUPERTREND_Data* memory;
+                           void*        StateATR;
+                           double       multiplier;
+                           int           optInTimePeriod; /* From 1 to 100000 */
+                           double        optInModifier; /* From 0 to TA_REAL_MAX */
+                           };
+
+
+TA_RetCode TA_SUPERTREND_StateInit( struct TA_SUPERTREND_State** _state,
+                                  int           optInTimePeriod, /* From 1 to 100000 */
+                                  double        optInModifier );  /* From 0 to TA_REAL_MAX */
+
+
+TA_RetCode TA_SUPERTREND_State( struct TA_SUPERTREND_State* _state,
+                              const double inHigh,
+                              const double inLow,
+                              const double inClose,
+                              int           *outTrend,
+                              double        *outUpperBand,
+                              double        *outLowerBand );
+
+TA_RetCode TA_SUPERTREND_BatchState( struct TA_SUPERTREND_State* _state,
+                                   int startIdx,
+                                   int endIdx,
+                                   const double inHigh[],
+                                   const double inLow[],
+                                   const double inClose[],
+                                   int          *outBegIdx,
+                                   int          *outNBElement,
+                                   int           outTrend[],
+                                   double        outUpperBand[],
+                                   double        outLowerBand[] );
+
+TA_RetCode TA_SUPERTREND_StateFree( struct TA_SUPERTREND_State** _state );
+
+
+TA_RetCode TA_SUPERTREND_StateSave( struct TA_SUPERTREND_State* _state,
+                                  FILE* _file );
+
+
+TA_RetCode TA_SUPERTREND_StateLoad( struct TA_SUPERTREND_State** _state,
+                                  FILE* _file );
 
 
 
@@ -11450,6 +12509,302 @@ TA_RetCode TA_VAR_StateSave( struct TA_VAR_State* _state,
 
 TA_RetCode TA_VAR_StateLoad( struct TA_VAR_State** _state,
                            FILE* _file );
+
+
+
+/*
+ * TA_VP - Volume Profile
+ * 
+ * Input  = Close, Volume
+ * Output = double, double, double, double, int
+ * 
+ * Optional Parameters
+ * -------------------
+ * optInTimePeriod:(From 1 to 100000)
+ *    Number of period
+ * 
+ * optInVpWidth:(From 1 to 100000)
+ *    Width
+ * 
+ * 
+ */
+TA_RetCode TA_VP( int           START_IDX,
+                  int           END_IDX,
+                  const double *IN_ARRAY /* inClose */,
+                  const double *IN_ARRAY /* inVolume */,
+                  int           OPT_INT /* optInTimePeriod */, /* From 1 to 100000 */
+                  int           OPT_INT /* optInVpWidth */, /* From 1 to 100000 */
+                  int          *BEG_IDX,
+                  int          *OUT_SIZE,
+                  double       *OUT_ARRAY /* outPoc */,
+                  double       *OUT_ARRAY /* outValueAreaHigh */,
+                  double       *OUT_ARRAY /* outValueAreaLow */,
+                  double       *OUT_ARRAY /* outReal */,
+                  int          *OUT_ARRAY /* outInteger */ );
+
+int TA_VP_Lookback( int           optInTimePeriod, /* From 1 to 100000 */
+                  int           optInVpWidth );  /* From 1 to 100000 */
+
+
+struct TA_VP_Data {
+                  double       inClose;
+                  double       inVolume;
+                  };
+struct TA_VP_State {
+                   size_t mem_size;
+                   size_t mem_index;
+                   struct TA_VP_Data* memory;
+                   void*        stateMINMAX;
+                   void*        stateSumVolume;
+                   void*        stateSumUpVolume;
+                   void*        stateSumDownVolume;
+                   int           optInTimePeriod; /* From 1 to 100000 */
+                   int           optInVpWidth; /* From 1 to 100000 */
+                   };
+
+
+TA_RetCode TA_VP_StateInit( struct TA_VP_State** _state,
+                          int           optInTimePeriod, /* From 1 to 100000 */
+                          int           optInVpWidth );  /* From 1 to 100000 */
+
+
+TA_RetCode TA_VP_State( struct TA_VP_State* _state,
+                      const double inClose,
+                      const double inVolume,
+                      double        *outPoc,
+                      double        *outValueAreaHigh,
+                      double        *outValueAreaLow,
+                      double        *outReal,
+                      int           *outInteger );
+
+TA_RetCode TA_VP_BatchState( struct TA_VP_State* _state,
+                           int startIdx,
+                           int endIdx,
+                           const double inClose[],
+                           const double inVolume[],
+                           int          *outBegIdx,
+                           int          *outNBElement,
+                           double        outPoc[],
+                           double        outValueAreaHigh[],
+                           double        outValueAreaLow[],
+                           double        outReal[],
+                           int           outInteger[] );
+
+TA_RetCode TA_VP_StateFree( struct TA_VP_State** _state );
+
+
+TA_RetCode TA_VP_StateSave( struct TA_VP_State* _state,
+                          FILE* _file );
+
+
+TA_RetCode TA_VP_StateLoad( struct TA_VP_State** _state,
+                          FILE* _file );
+
+
+
+/*
+ * TA_VROC - Volume Rate of Change
+ * 
+ * Input  = double
+ * Output = double
+ * 
+ * Optional Parameters
+ * -------------------
+ * optInTimePeriod:(From 1 to 100000)
+ *    Number of period
+ * 
+ * 
+ */
+TA_RetCode TA_VROC( int           START_IDX,
+                    int           END_IDX,
+                    const double *IN_ARRAY /* inReal */,
+                    int           OPT_INT /* optInTimePeriod */, /* From 1 to 100000 */
+                    int          *BEG_IDX,
+                    int          *OUT_SIZE,
+                    double       *OUT_ARRAY /* outReal */ );
+
+int TA_VROC_Lookback( int           optInTimePeriod );  /* From 1 to 100000 */
+
+
+struct TA_VROC_Data {
+                    double       inReal;
+                    };
+struct TA_VROC_State {
+                     size_t mem_size;
+                     size_t mem_index;
+                     struct TA_VROC_Data* memory;
+                     int           optInTimePeriod; /* From 1 to 100000 */
+                     };
+
+
+TA_RetCode TA_VROC_StateInit( struct TA_VROC_State** _state,
+                            int           optInTimePeriod );  /* From 1 to 100000 */
+
+
+TA_RetCode TA_VROC_State( struct TA_VROC_State* _state,
+                        const double inReal,
+                        double        *outReal );
+
+TA_RetCode TA_VROC_BatchState( struct TA_VROC_State* _state,
+                             int startIdx,
+                             int endIdx,
+                             const double inReal[],
+                             int          *outBegIdx,
+                             int          *outNBElement,
+                             double        outReal[] );
+
+TA_RetCode TA_VROC_StateFree( struct TA_VROC_State** _state );
+
+
+TA_RetCode TA_VROC_StateSave( struct TA_VROC_State* _state,
+                            FILE* _file );
+
+
+TA_RetCode TA_VROC_StateLoad( struct TA_VROC_State** _state,
+                            FILE* _file );
+
+
+
+/*
+ * TA_VWAP - Volume Weighted Average Price
+ * 
+ * Input  = High, Low, Close, Volume
+ * Output = double
+ * 
+ * Optional Parameters
+ * -------------------
+ * optInTimePeriod:(From 1 to 100000)
+ *    Number of period
+ * 
+ * 
+ */
+TA_RetCode TA_VWAP( int           START_IDX,
+                    int           END_IDX,
+                    const double *IN_ARRAY /* inHigh */,
+                    const double *IN_ARRAY /* inLow */,
+                    const double *IN_ARRAY /* inClose */,
+                    const double *IN_ARRAY /* inVolume */,
+                    int           OPT_INT /* optInTimePeriod */, /* From 1 to 100000 */
+                    int          *BEG_IDX,
+                    int          *OUT_SIZE,
+                    double       *OUT_ARRAY /* outReal */ );
+
+int TA_VWAP_Lookback( int           optInTimePeriod );  /* From 1 to 100000 */
+
+
+struct TA_VWAP_Data {
+                    double       inHigh;
+                    double       inLow;
+                    double       inClose;
+                    double       inVolume;
+                    };
+struct TA_VWAP_State {
+                     size_t mem_size;
+                     size_t mem_index;
+                     struct TA_VWAP_Data* memory;
+                     void*        StateSumTPV;
+                     void*        StateSumVolume;
+                     int           optInTimePeriod; /* From 1 to 100000 */
+                     };
+
+
+TA_RetCode TA_VWAP_StateInit( struct TA_VWAP_State** _state,
+                            int           optInTimePeriod );  /* From 1 to 100000 */
+
+
+TA_RetCode TA_VWAP_State( struct TA_VWAP_State* _state,
+                        const double inHigh,
+                        const double inLow,
+                        const double inClose,
+                        const double inVolume,
+                        double        *outReal );
+
+TA_RetCode TA_VWAP_BatchState( struct TA_VWAP_State* _state,
+                             int startIdx,
+                             int endIdx,
+                             const double inHigh[],
+                             const double inLow[],
+                             const double inClose[],
+                             const double inVolume[],
+                             int          *outBegIdx,
+                             int          *outNBElement,
+                             double        outReal[] );
+
+TA_RetCode TA_VWAP_StateFree( struct TA_VWAP_State** _state );
+
+
+TA_RetCode TA_VWAP_StateSave( struct TA_VWAP_State* _state,
+                            FILE* _file );
+
+
+TA_RetCode TA_VWAP_StateLoad( struct TA_VWAP_State** _state,
+                            FILE* _file );
+
+
+
+/*
+ * TA_VWMA - Volume Weighted Moving Average
+ * 
+ * Input  = double
+ * Output = double
+ * 
+ * Optional Parameters
+ * -------------------
+ * optInTimePeriod:(From 1 to 100000)
+ *    Number of period
+ * 
+ * 
+ */
+TA_RetCode TA_VWMA( int           START_IDX,
+                    int           END_IDX,
+                    const double *IN_ARRAY /* inReal */,
+                    int           OPT_INT /* optInTimePeriod */, /* From 1 to 100000 */
+                    int          *BEG_IDX,
+                    int          *OUT_SIZE,
+                    double       *OUT_ARRAY /* outReal */ );
+
+int TA_VWMA_Lookback( int           optInTimePeriod );  /* From 1 to 100000 */
+
+
+struct TA_VWMA_Data {
+                    double       inReal;
+                    };
+struct TA_VWMA_State {
+                     size_t mem_size;
+                     size_t mem_index;
+                     struct TA_VWMA_Data* memory;
+                     double       periodSum;
+                     double       periodSub;
+                     double       divider;
+                     int           optInTimePeriod; /* From 1 to 100000 */
+                     };
+
+
+TA_RetCode TA_VWMA_StateInit( struct TA_VWMA_State** _state,
+                            int           optInTimePeriod );  /* From 1 to 100000 */
+
+
+TA_RetCode TA_VWMA_State( struct TA_VWMA_State* _state,
+                        const double inReal,
+                        double        *outReal );
+
+TA_RetCode TA_VWMA_BatchState( struct TA_VWMA_State* _state,
+                             int startIdx,
+                             int endIdx,
+                             const double inReal[],
+                             int          *outBegIdx,
+                             int          *outNBElement,
+                             double        outReal[] );
+
+TA_RetCode TA_VWMA_StateFree( struct TA_VWMA_State** _state );
+
+
+TA_RetCode TA_VWMA_StateSave( struct TA_VWMA_State* _state,
+                            FILE* _file );
+
+
+TA_RetCode TA_VWMA_StateLoad( struct TA_VWMA_State** _state,
+                            FILE* _file );
 
 
 
