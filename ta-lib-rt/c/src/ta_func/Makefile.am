@@ -106,6 +106,7 @@ libta_func_la_SOURCES = ta_utility.c \
 	ta_HT_SINE.c /
 	ta_HT_TRENDLINE.c /
 	ta_HT_TRENDMODE.c /
+	ta_ICHIMOKU.c /
 	ta_IMI.c /
 	ta_KDJ.c /
 	ta_KVO.c /
